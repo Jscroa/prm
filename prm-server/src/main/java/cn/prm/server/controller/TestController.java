@@ -10,11 +10,11 @@ public class TestController {
 
 	@RequestMapping(value="/a")
 	public String a(){
-		return "test";
+		return "test/a";
 	}
 	@RequestMapping(value="/b")
 	@ResponseBody
 	public String b(){
-		return "test";
+		return "test/b";
 	}
 }
