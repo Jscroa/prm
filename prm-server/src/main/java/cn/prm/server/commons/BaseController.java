@@ -21,7 +21,15 @@ public abstract class BaseController {
 	 */
 	protected void clearCurrUser(HttpServletRequest request){
 		HttpSession session = request.getSession(true);
-		session.removeAttribute(SESSION.LOGIN_USER);
+		CurrUser currUser = null;
+		try {
+			currUser = getCurrUser(request);
+		} catch (SessionException e) {
+		}
+		if(currUser!=null){
+			session.removeAttribute(SESSION.LOGIN_USER);
+			log.info("用户："+currUser.getName()+"("+currUser.getGuid()+") 已注销");			
+		}
 	}
 	
 	/**
