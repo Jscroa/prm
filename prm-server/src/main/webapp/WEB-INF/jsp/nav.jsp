@@ -12,12 +12,12 @@
 			String userName = (String) request.getAttribute("userName");
 			if ((userName == null) || ("".equals(userName))) {
 		%>
-				<li><a href="logout">注销</a></li>
+		<li><a href="logout">注销</a></li>
 		<%
 			} else {
 		%>
-				<li><a href="#"><%=userName %></a></li>
-				<li><a href="logout">注销</a></li>
+		<li><a href="#"><%=userName%></a></li>
+		<li><a href="logout">注销</a></li>
 		<%
 			}
 		%>
