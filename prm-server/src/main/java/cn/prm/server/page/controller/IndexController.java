@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.prm.server.annotation.NeedLogin;
 import cn.prm.server.bean.CurrUser;
@@ -29,4 +30,18 @@ public class IndexController extends BaseController {
 	public String login(String ticket) {
 		return "login";
 	}
+
+	@RequestMapping("/head")
+	public ModelAndView head(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("nav");
+		try {
+			CurrUser currUser = getCurrUser(request);
+			mav.addObject("userName", currUser.getName());
+		} catch (SessionException e) {
+			
+		}
+		return mav;
+	}
+
 }
