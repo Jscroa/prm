@@ -36,4 +36,5 @@ public class Constants {
 		public static final int STATUS_ACTIVE = 100;
 		public static final int STATUS_INACTIVE = 200;
 	}
+	
 }

@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 
@@ -12,15 +13,23 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/"><span
-				class="glyphicon glyphicon-plane" aria-hidden="true"></span>&nbsp;PRM</a>
+			<a class="navbar-brand" href="/" style="font-style: oblique;"><span
+				class="glyphicon glyphicon-plane" aria-hidden="true"></span>&nbsp;PRM
+				机票预订管理系统</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-
+				<%
+					List<String> navs = (List<String>) (request.getAttribute("navs"));
+					for (String nav : navs) {
+				%>
+				<li><a href="#"><%=nav%></a></li>
+				<%
+					}
+				%>
 				<li><a href="#">Link</a></li>
 				<li><a href="#">Link</a></li>
 				<li><a href="#">Link</a></li>

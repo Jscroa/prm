@@ -36,6 +36,7 @@ public class IndexController extends BaseController {
 		}
 		mav.setViewName("index");
 		mavHelper.with(mav, "userName", currUser.getName());
+		mavHelper.withNav(mav);
 		return mav;
 
 	}
