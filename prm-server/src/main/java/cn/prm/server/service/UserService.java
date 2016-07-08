@@ -28,10 +28,11 @@ public class UserService {
 	public CurrUser login(UserLoginForm form) throws BusinessException{
 		List<Account> list = accountDao.find(form.getEmail(), form.getPassword());
 		
-		if(list==null){
+		if(list==null || list.size()==0){
 			throw new BusinessException("用户名或密码错误");
 		}
-		if(list.size()!=1) {
+
+		if(list.size()>1) {
 			throw new BusinessException("服务器数据发生错误");
 		}
 		Account account = list.get(0);

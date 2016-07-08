@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.Constants.SESSION;
-import cn.prm.server.exception.SessionException;
 
 public abstract class BaseController {
 	
@@ -21,11 +20,7 @@ public abstract class BaseController {
 	 */
 	protected void clearCurrUser(HttpServletRequest request){
 		HttpSession session = request.getSession(true);
-		CurrUser currUser = null;
-		try {
-			currUser = getCurrUser(request);
-		} catch (SessionException e) {
-		}
+		CurrUser currUser = getCurrUser(request);
 		if(currUser!=null){
 			session.removeAttribute(SESSION.LOGIN_USER);
 			log.info("用户："+currUser.getName()+"("+currUser.getGuid()+") 已注销");			
@@ -52,14 +47,11 @@ public abstract class BaseController {
 	 * @return
 	 * @throws SessionException
 	 */
-	protected CurrUser getCurrUser(HttpServletRequest request) throws SessionException{
+	protected CurrUser getCurrUser(HttpServletRequest request){
 		HttpSession session = request.getSession(false);
 		CurrUser currUser = null;
 		if(session!=null){
 			currUser = (CurrUser) session.getAttribute(SESSION.LOGIN_USER);
-		}
-		if(currUser==null){
-			throw new SessionException("未获取到登录信息");
 		}
 		return currUser;
 	}
