@@ -4,7 +4,7 @@ plane reserve manager
 
 ### 1 环境&工具
 > jdk 1.7  
-> MySQL 5.6  
+> MySQL 5.7  
 > Tomcat 7  
 > STS 3.7.3  
 
