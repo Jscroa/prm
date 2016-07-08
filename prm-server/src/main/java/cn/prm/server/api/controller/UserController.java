@@ -12,39 +12,49 @@ import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.BaseController;
 import cn.prm.server.commons.Constants.RESPONSE_CODE;
 import cn.prm.server.dto.BaseDto;
+import cn.prm.server.exception.BusinessException;
 import cn.prm.server.form.UserLoginForm;
 import cn.prm.server.form.UserRegisterForm;
 import cn.prm.server.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")
-public class UserController extends BaseController{
+public class UserController extends BaseController {
 
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@RequestMapping("/login")
-	public Object login(HttpServletRequest request,UserLoginForm form){
-		CurrUser user = userService.login(form);
-		setCurrUser(request, user);
-		
-		return new BaseDto(RESPONSE_CODE.CODE_SUCCESS,"登录成功");
+	public Object login(HttpServletRequest request, UserLoginForm form) {
+		try {
+			CurrUser currUser = userService.login(form);
+			setCurrUser(request, currUser);
+			log.info(currUser.getName() + "(" + currUser.getGuid() + ") 登陆成功");
+			return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "登录成功");
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
+		}
 	}
-	
+
 	@RequestMapping("/logout")
-	public Object logout(HttpServletRequest request){
+	public Object logout(HttpServletRequest request) {
 		clearCurrUser(request);
-		
-		return new BaseDto(RESPONSE_CODE.CODE_SUCCESS,"注销成功");
+		return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "注销成功");
 	}
-	
+
 	@RequestMapping("/register")
-	public Object register(HttpServletRequest request,UserRegisterForm form){
-		CurrUser currUser = userService.register(form);
-		setCurrUser(request, currUser);
-		
-		return new BaseDto(RESPONSE_CODE.CODE_SUCCESS,"注册成功");
+	public Object register(HttpServletRequest request, UserRegisterForm form) {
+		try {
+			CurrUser currUser = userService.register(form);
+			setCurrUser(request, currUser);
+			log.info(currUser.getName() + "(" + currUser.getGuid() + ") 注册成功");
+			return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "注册成功");
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
+		}
 	}
 }

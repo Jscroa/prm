@@ -7,28 +7,19 @@
 
 <!-- css -->
 <link href="/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/prm-nav.css" rel="stylesheet">
 
 <!-- js -->
 <script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 
-<style type="text/css">
-</style>
-
-<title>PRM</title>
+<title>404</title>
 </head>
-<body>
-	<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
-	<div class="jumbotron">
-		<div class="container">
-
-			<h1>欢迎</h1>
-			<p>...</p>
-			<p>
-				<a class="btn btn-primary btn-lg" href="#" role="button">更多</a>
-			</p>
-		</div>
+<body class="jumbotron">
+	<div class="container">
+		<h1>404 Not Found!</h1>
+		<p>
+			<a class="btn btn-link btn-lg" href="/" role="button">返回首页</a>
+		</p>
 	</div>
 </body>
 </html>
