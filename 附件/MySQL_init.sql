@@ -35,7 +35,7 @@ DROP TABLE IF EXISTS `t_acc_group`;
 CREATE TABLE `t_acc_group` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS `t_acc_tip`;
 CREATE TABLE `t_acc_tip` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -96,7 +96,7 @@ DROP TABLE IF EXISTS `t_acc_to_group`;
 CREATE TABLE `t_acc_to_group` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -128,7 +128,7 @@ DROP TABLE IF EXISTS `t_acc_to_msg`;
 CREATE TABLE `t_acc_to_msg` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -162,7 +162,7 @@ DROP TABLE IF EXISTS `t_acc_to_tip`;
 CREATE TABLE `t_acc_to_tip` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -194,7 +194,7 @@ DROP TABLE IF EXISTS `t_account`;
 CREATE TABLE `t_account` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -202,12 +202,14 @@ CREATE TABLE `t_account` (
   `create_time` timestamp NULL DEFAULT NULL,
   `modify_time` timestamp NULL DEFAULT NULL,
   `acc` varchar(45) DEFAULT NULL,
-  `pwd` varchar(45) DEFAULT NULL,
-  `phone` varchar(45) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
+  `pwd` varchar(45) NOT NULL,
+  `phone` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
   `sex` tinyint(4) DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
-  PRIMARY KEY (`guid`)
+  PRIMARY KEY (`guid`),
+  UNIQUE KEY `phone_UNIQUE` (`phone`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='账户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -230,7 +232,7 @@ DROP TABLE IF EXISTS `t_address`;
 CREATE TABLE `t_address` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -261,7 +263,7 @@ DROP TABLE IF EXISTS `t_contact`;
 CREATE TABLE `t_contact` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -291,7 +293,7 @@ DROP TABLE IF EXISTS `t_country`;
 CREATE TABLE `t_country` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -323,7 +325,7 @@ DROP TABLE IF EXISTS `t_custom`;
 CREATE TABLE `t_custom` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -355,7 +357,7 @@ DROP TABLE IF EXISTS `t_custom_to_addr`;
 CREATE TABLE `t_custom_to_addr` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -387,7 +389,7 @@ DROP TABLE IF EXISTS `t_custom_to_contact`;
 CREATE TABLE `t_custom_to_contact` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -419,7 +421,7 @@ DROP TABLE IF EXISTS `t_custom_to_psg`;
 CREATE TABLE `t_custom_to_psg` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -451,7 +453,7 @@ DROP TABLE IF EXISTS `t_group_to_custom`;
 CREATE TABLE `t_group_to_custom` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -483,7 +485,7 @@ DROP TABLE IF EXISTS `t_msg_type`;
 CREATE TABLE `t_msg_type` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -514,7 +516,7 @@ DROP TABLE IF EXISTS `t_order_item`;
 CREATE TABLE `t_order_item` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -546,7 +548,7 @@ DROP TABLE IF EXISTS `t_order_type`;
 CREATE TABLE `t_order_type` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -576,7 +578,7 @@ DROP TABLE IF EXISTS `t_passenger`;
 CREATE TABLE `t_passenger` (
   `guid` varchar(45) NOT NULL,
   `std_name` varchar(45) DEFAULT NULL,
-  `stdcode` int(11) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `memo` varchar(200) DEFAULT NULL,
   `create_user` varchar(45) DEFAULT NULL,
@@ -608,4 +610,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-04 17:44:04
+-- Dump completed on 2016-07-08 14:57:43
