@@ -13,7 +13,9 @@
 <title>PRM</title>
 </head>
 <body>
+<div>
 	<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
+</div>
 
 </body>
 </html>

@@ -1,4 +1,3 @@
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 
@@ -13,8 +12,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/" style="font-style: oblique;"><span
-				class="glyphicon glyphicon-plane" aria-hidden="true"></span>&nbsp;PRM
+			<a class="navbar-brand" href="/" style="font-style: oblique;">&nbsp;PRM
 				机票预订管理系统</a>
 		</div>
 
@@ -22,20 +20,11 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<%
-					List<String> navs = (List<String>) (request.getAttribute("navs"));
-					for (String nav : navs) {
-				%>
-				<li><a href="#"><%=nav%></a></li>
-				<%
-					}
-				%>
-				<li><a href="#">Link</a></li>
-				<li><a href="#">Link</a></li>
-				<li><a href="#">Link</a></li>
-				<li><a href="#">Link</a></li>
-				<li><a href="#">Link</a></li>
-
+				<li><a href="/order">订单管理</a></li>
+				<li><a href="/custom">客户管理</a></li>
+				<li><a href="/center">个人中心</a></li>
+				<li><a href="/message">消息</a></li>
+				<li><a href="/setting">系统设置</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%
@@ -48,10 +37,10 @@
 					aria-expanded="false"><strong><%=userName%></strong> <span
 						class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">个人中心</a></li>
+						<li><a href="/center">个人中心</a></li>
 						<!-- <li role="separator" class="divider"></li> -->
-						<li><a href="#">消息</a></li>
-						<li><a href="#">系统设置</a></li>
+						<li><a href="/message">消息</a></li>
+						<li><a href="/setting">系统设置</a></li>
 						<li><a href="/logout">注销</a></li>
 					</ul></li>
 				<%
@@ -64,8 +53,9 @@
 	</div>
 	<!-- /.container-fluid -->
 </nav>
-<ol class="breadcrumb">
-	<li><a href="#">Home</a></li>
+<ol class="breadcrumb" id="breadcrumb">
+	<li><a href="/"><span class="glyphicon glyphicon-home"
+			aria-hidden="true"></span></a></li>
 	<li><a href="#">Library</a></li>
 	<li class="active">Data</li>
 </ol>

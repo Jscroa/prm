@@ -2,9 +2,6 @@ package cn.prm.server.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 public class Account extends BaseEntity implements Serializable {
 	
 	private String acc;

@@ -7,67 +7,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.prm.server.annotation.NeedLogin;
 import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.BaseController;
 import cn.prm.server.commons.MAVHelper;
 
 @Controller
-@RequestMapping()
-public class IndexController extends BaseController {
-
+@RequestMapping("/custom")
+public class CustomController extends BaseController {
+	
 	@Autowired
 	private MAVHelper mavHelper;
 
-	/**
-	 * 主页
-	 * 
-	 * @param request
-	 * @return
-	 */
 	@RequestMapping({ "", "/index" })
-	public ModelAndView index(HttpServletRequest request) {
+	public ModelAndView index(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		CurrUser currUser = getCurrUser(request);
 		if(currUser==null){
 			mav.setViewName("redirect:/login");
 			return mav;
 		}
-		mav.setViewName("index");
+		mav.setViewName("custom");
 		mavHelper.withUserName(mav, currUser.getName());
 		return mav;
-
 	}
-
-	/**
-	 * 登陆
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
-
-	/**
-	 * 注销
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/logout")
-	public String logout(HttpServletRequest request) {
-		clearCurrUser(request);
-		return "redirect:/";
-	}
-
-	/**
-	 * 注册
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/register")
-	public String register() {
-		return "register";
-	}
-
 }

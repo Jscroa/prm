@@ -14,6 +14,5 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
-
 </body>
 </html>

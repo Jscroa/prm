@@ -9,9 +9,9 @@
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- js -->
-<script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-<script src="//cdn.bootcss.com/angular.js/1.5.7/angular.min.js"></script>
+<script src="/js/angular.min.js"></script>
 <script src="/js/ng-config.js"></script>
 
 <style type="text/css">

@@ -37,4 +37,8 @@ public class Constants {
 		public static final int STATUS_INACTIVE = 200;
 	}
 	
+	public static class MAV_KEYS{
+		public static final String USER_NAME = "userName";
+	}
+	
 }
