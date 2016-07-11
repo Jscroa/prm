@@ -7,9 +7,6 @@
 
 <%@include file="/WEB-INF/jsp/components/base.jsp"%>
 
-<style type="text/css">
-</style>
-
 <title>PRM</title>
 </head>
 <body>
@@ -22,19 +19,13 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="span2">
-							<ul class="nav nav-pills nav-stacked">
-								<li class="active"><a href="#" data-toggle="tab">Home</a></li>
-								<li><a href="#ddd1" data-toggle="tab">Tutorials</a></li>
-								<li><a href="#ddd2" data-toggle="tab">Practice Editor </a></li>
-								<li><a href="#" data-toggle="tab">Gallery</a></li>
-								<li><a href="#" data-toggle="tab">Contact</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
+				<ul class="nav nav-pills nav-stacked">
+					<li class="active"><a href="#" data-toggle="tab">Home</a></li>
+					<li><a href="#ddd1" data-toggle="tab">Tutorials</a></li>
+					<li><a href="#ddd2" data-toggle="tab">Practice Editor </a></li>
+					<li><a href="#" data-toggle="tab">Gallery</a></li>
+					<li><a href="#" data-toggle="tab">Contact</a></li>
+				</ul>
 			</div>
 
 			<div class="col-md-10">

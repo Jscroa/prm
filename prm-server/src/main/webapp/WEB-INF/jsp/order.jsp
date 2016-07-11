@@ -22,6 +22,42 @@
 			$('#nav_order').addClass('active');
 		</script>
 	</div>
-	<p>订单管理</p>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="active"><a href="#ddd1" data-toggle="tab">全部</a></li>
+					<li><a href="#ddd2" data-toggle="tab">已付款</a></li>
+					<li><a href="#ddd3" data-toggle="tab">未付款</a></li>
+				</ul>
+			</div>
+			<div class="col-md-10">
+			<div class="container-fluid tab-content">
+			<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>asd</th>
+					<th>asd</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>111</td>
+					<td>111</td>
+				</tr>
+				<tr>
+					<td>111</td>
+					<td>111</td>
+				</tr>
+				<tr>
+					<td>111</td>
+					<td>111</td>
+				</tr>
+			</tbody>
+			</table>
+			</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
