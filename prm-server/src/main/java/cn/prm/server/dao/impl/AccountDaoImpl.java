@@ -9,14 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import cn.prm.server.commons.Constants;
 import cn.prm.server.dao.IAccountDao;
 import cn.prm.server.entity.Account;
-import cn.prm.server.exception.BusinessException;
 
 @Repository
 public class AccountDaoImpl implements IAccountDao {
@@ -28,9 +26,6 @@ public class AccountDaoImpl implements IAccountDao {
 
 	@Override
 	public Account extract(ResultSet rs) throws SQLException, DataAccessException {
-		if (rs == null) {
-			return null;
-		}
 		Account account = new Account();
 		account.setGuid(rs.getString("guid"));
 		account.setStdName(rs.getString("std_name"));
@@ -79,13 +74,13 @@ public class AccountDaoImpl implements IAccountDao {
 	@Override
 	public void delete(final String id) {
 		String sql = "delete from t_account where guid=?";
-		jdbcTemplate.update(sql, new PreparedStatementSetter(){
+		jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
 			@Override
 			public void setValues(PreparedStatement pst) throws SQLException {
 				pst.setString(1, id);
 			}
-			
+
 		});
 	}
 
@@ -175,5 +170,5 @@ public class AccountDaoImpl implements IAccountDao {
 				});
 		return list;
 	}
-	
+
 }

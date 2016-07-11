@@ -17,22 +17,22 @@ import cn.prm.server.exception.BusinessException;
 import cn.prm.server.form.UserLoginForm;
 import cn.prm.server.form.UserRegisterForm;
 
-@Service(value="userService")
+@Service(value = "userService")
 public class UserService {
 
 	private static final Logger log = LoggerFactory.getLogger(UserService.class);
-	
+
 	@Autowired
 	IAccountDao accountDao;
-	
-	public CurrUser login(UserLoginForm form) throws BusinessException{
+
+	public CurrUser login(UserLoginForm form) throws BusinessException {
 		List<Account> list = accountDao.find(form.getEmail(), form.getPassword());
-		
-		if(list==null || list.size()==0){
+
+		if (list == null || list.size() == 0) {
 			throw new BusinessException("用户名或密码错误");
 		}
 
-		if(list.size()>1) {
+		if (list.size() > 1) {
 			throw new BusinessException("服务器数据发生错误");
 		}
 		Account account = list.get(0);
@@ -41,19 +41,19 @@ public class UserService {
 		user.setName(account.getStdName());
 		return user;
 	}
-	
+
 	public CurrUser register(UserRegisterForm form) throws BusinessException {
-		
+
 		List<Account> list1 = accountDao.findByEmail(form.getEmail());
-		if(list1 != null && list1.size()>0){
+		if (list1 != null && list1.size() > 0) {
 			throw new BusinessException("该邮箱已注册");
 		}
-		
+
 		List<Account> list2 = accountDao.findByPhone(form.getPhone());
-		if(list2 != null && list2.size()>0){
+		if (list2 != null && list2.size() > 0) {
 			throw new BusinessException("该手机号已注册");
 		}
-		
+
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		Account account = new Account();
 		account.setGuid(UUIDUtil.randomUUID());
@@ -68,8 +68,8 @@ public class UserService {
 		CurrUser user = new CurrUser();
 		user.setGuid(account.getGuid());
 		user.setName(account.getStdName());
-		log.info("注册 -> "+account.getStdName());
+		log.info("注册 -> " + account.getStdName());
 		return user;
 	}
-	
+
 }

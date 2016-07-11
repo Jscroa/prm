@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ErrorController implements org.springframework.boot.autoconfigure.web.ErrorController {
 
 	@Override
-	@RequestMapping(value="/error")
+	@RequestMapping(value = "/error")
 	public String getErrorPath() {
 		return "error/404";
 	}

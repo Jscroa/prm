@@ -13,21 +13,21 @@ import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.Constants.SESSION;
 
 public class LoginInterceptor implements HandlerInterceptor {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(LoginInterceptor.class);
-	
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		HttpSession session = request.getSession(false);
 		CurrUser currUser = null;
-		if(session!=null){
+		if (session != null) {
 			currUser = (CurrUser) session.getAttribute(SESSION.LOGIN_USER);
 		}
-		if(currUser==null){
+		if (currUser == null) {
 			response.sendRedirect("/login");
 			log.info(">>> LoginInterceptor >>> false");
 			return false;
-		}else{
+		} else {
 			log.info(">>> LoginInterceptor >>> true");
 			return true;
 		}
@@ -37,11 +37,11 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
 			throws Exception {
 	}
-	
+
 	@Override
 	public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
 			throws Exception {
-		
+
 	}
 
 }

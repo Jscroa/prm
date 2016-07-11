@@ -8,15 +8,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class ApplicationConfigurer extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LoginInterceptor())
-		.addPathPatterns("/**")
-		.excludePathPatterns("/error")
-		.excludePathPatterns("/api/user/login")
-		.excludePathPatterns("/api/user/logout")
-		.excludePathPatterns("/api/user/register")
-		.excludePathPatterns("/login")
-		.excludePathPatterns("/logout")
-		.excludePathPatterns("/register");
+		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/error")
+				.excludePathPatterns("/api/user/login").excludePathPatterns("/api/user/logout")
+				.excludePathPatterns("/api/user/register").excludePathPatterns("/login").excludePathPatterns("/logout")
+				.excludePathPatterns("/register");
 		super.addInterceptors(registry);
 	}
 }

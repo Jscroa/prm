@@ -14,15 +14,15 @@ import cn.prm.server.commons.MAVHelper;
 @Controller
 @RequestMapping("/custom")
 public class CustomController extends BaseController {
-	
+
 	@Autowired
 	private MAVHelper mavHelper;
 
 	@RequestMapping({ "", "/index" })
-	public ModelAndView index(HttpServletRequest request){
+	public ModelAndView index(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		CurrUser currUser = getCurrUser(request);
-		if(currUser==null){
+		if (currUser == null) {
 			mav.setViewName("redirect:/login");
 			return mav;
 		}

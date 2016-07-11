@@ -1,6 +1,6 @@
 package cn.prm.server.exception;
 
-public class BusinessException extends Exception{
+public class BusinessException extends Exception {
 
 	public BusinessException() {
 		super();

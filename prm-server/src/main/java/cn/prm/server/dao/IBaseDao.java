@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.springframework.dao.DataAccessException;
 
 public interface IBaseDao<T> {
-	
+
 	public T extract(ResultSet rs) throws SQLException, DataAccessException;
 
 	public void add(T t);
