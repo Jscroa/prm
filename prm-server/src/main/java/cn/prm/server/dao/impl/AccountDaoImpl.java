@@ -77,13 +77,42 @@ public class AccountDaoImpl implements IAccountDao {
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(final String id) {
+		String sql = "delete from t_account where guid=?";
+		jdbcTemplate.update(sql, new PreparedStatementSetter(){
 
+			@Override
+			public void setValues(PreparedStatement pst) throws SQLException {
+				pst.setString(1, id);
+			}
+			
+		});
 	}
 
 	@Override
-	public void modify(Account t) {
+	public void modify(final Account t) {
+		String sql = "update t_account set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,acc=?,pwd=?,phone=?,email=?,sex=?,age=? where guid=?";
+		jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
+			@Override
+			public void setValues(PreparedStatement pst) throws SQLException {
+				pst.setString(1, t.getStdName());
+				pst.setObject(2, t.getStdCode());
+				pst.setObject(3, t.getStatus());
+				pst.setString(4, t.getMemo());
+				pst.setString(5, t.getCreateUser());
+				pst.setString(6, t.getModifyUser());
+				pst.setTimestamp(7, t.getCreateTime());
+				pst.setTimestamp(8, t.getModifyTime());
+				pst.setString(9, t.getAcc());
+				pst.setString(10, t.getPwd());
+				pst.setString(11, t.getPhone());
+				pst.setString(12, t.getEmail());
+				pst.setObject(13, t.getSex());
+				pst.setObject(14, t.getAge());
+				pst.setString(15, t.getGuid());
+			}
+		});
 	}
 
 	@Override
