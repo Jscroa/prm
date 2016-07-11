@@ -13,9 +13,42 @@
 <title>PRM</title>
 </head>
 <body>
-<div>
-	<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
-</div>
+	<div>
+		<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
+		<script type="text/javascript">
+			$('#nav_message').addClass('active');
+		</script>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="span2">
+							<ul class="nav nav-pills nav-stacked">
+								<li class="active"><a href="#" data-toggle="tab">Home</a></li>
+								<li><a href="#ddd1" data-toggle="tab">Tutorials</a></li>
+								<li><a href="#ddd2" data-toggle="tab">Practice Editor </a></li>
+								<li><a href="#" data-toggle="tab">Gallery</a></li>
+								<li><a href="#" data-toggle="tab">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 
+			<div class="col-md-10">
+				<div class="container-fluid tab-content">
+					<div class="tab-pane fade in active" id="ddd1">
+						<p>ddd1</p>
+					</div>
+					<div class="tab-pane fade" id="ddd2">
+						<p>ddd2</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
 </body>
 </html>

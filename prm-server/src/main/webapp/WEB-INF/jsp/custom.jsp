@@ -13,9 +13,12 @@
 <title>PRM</title>
 </head>
 <body>
-<div>
-	<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
-</div>
-
+	<div>
+		<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
+		<script type="text/javascript">
+			$('#nav_custom').addClass('active');
+		</script>
+	</div>
+	<p>客户管理</p>
 </body>
 </html>

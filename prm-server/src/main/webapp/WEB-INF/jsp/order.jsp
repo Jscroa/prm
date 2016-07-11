@@ -7,15 +7,21 @@
 
 <%@include file="/WEB-INF/jsp/components/base.jsp"%>
 
+<link href="/css/bootstrap-table.css" rel="stylesheet">
+<script src="/js/bootstrap-table.js"></script>
+
 <style type="text/css">
 </style>
 
 <title>PRM</title>
 </head>
 <body>
-<div>
-	<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
-</div>
-
+	<div>
+		<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
+		<script type="text/javascript">
+			$('#nav_order').addClass('active');
+		</script>
+	</div>
+	<p>订单管理</p>
 </body>
 </html>
