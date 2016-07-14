@@ -4,6 +4,7 @@
 
 <!-- css -->
 <link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/prm.css" rel="stylesheet">
 <link href="/css/prm-nav.css" rel="stylesheet">
 
 <!-- js -->

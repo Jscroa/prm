@@ -7,6 +7,7 @@
 
 <!-- css -->
 <link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/prm.css" rel="stylesheet">
 
 <!-- js -->
 <script src="/js/jquery.min.js"></script>
@@ -15,28 +16,18 @@
 <script src="/js/ng-config.js"></script>
 
 <style type="text/css">
+/* 
 body {
 	background: url("/img/bg.jpg") no-repeat;
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
 }
-
-.login_panel {
-	width: 500px;
-	position: absolute;
-	left: 15%;
-	top: 15%;
-	/* opacity: 0.8; */
-	-moz-box-shadow: 2px 2px 50px #000000;
-	-webkit-box-shadow: 2px 2px 50px #000000;
-	box-shadow: 2px 2px 50px #000000;
-}
+ */
 
 .panel-heading {
 	/* font-weight: bold; */
 	font-size: x-large;
-	font-style: oblique;
 }
 
 .form-control>.ng-invalid {
@@ -48,96 +39,118 @@ body {
 <title>PRM</title>
 </head>
 <body>
-	<div class="panel panel-primary login_panel" ng-app="loginApp"
-		ng-controller="loginCtrl">
-		<div class="panel-heading">
-			<strong>快速登录&nbsp;PRM</strong>
-		</div>
-		<div class="panel-body">
-			<div class="alert alert-danger" ng-show="error || incomplete" role="alert"><p><strong>验证不通过：</strong>{{checkMsg}}</p></div>
-			<form class="form-horizontal" name="login_form" onSubmit="return false;">
-				<div class="form-group">
-					<label for="inputEmail" class="col-sm-3 control-label">邮箱：</label>
-					<div class="col-sm-9">
-						<input type="email" name="email" required class="form-control"
-							placeholder="Email" ng-model="email" id="inputEmail" required>
+
+
+	<div class="container" style="margin-top: 5%">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<div class="panel panel-default" ng-app="loginApp"
+					ng-controller="loginCtrl">
+					<div class="panel-heading">
+						快速登录&nbsp;PRM
 					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputPassword" class="col-sm-3 control-label">密码：</label>
-					<div class="col-sm-9">
-						<input type="password" name="password" required
-							class="form-control" placeholder="Password" ng-model="password"
-							id="inputPassword" required>
+					<div class="panel-body">
+						<div class="alert alert-danger" ng-show="error || incomplete"
+							role="alert">
+							<p>
+								<strong>验证不通过：</strong>{{checkMsg}}
+							</p>
+						</div>
+						<form class="form-horizontal" name="login_form"
+							onSubmit="return false;">
+							<div class="form-group">
+								<label for="inputEmail" class="col-sm-3 control-label">邮箱：</label>
+								<div class="col-sm-9">
+									<input type="email" name="email" required class="form-control"
+										placeholder="Email" ng-model="email" id="inputEmail" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputPassword" class="col-sm-3 control-label">密码：</label>
+								<div class="col-sm-9">
+									<input type="password" name="password" required
+										class="form-control" placeholder="Password"
+										ng-model="password" id="inputPassword" required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-12">
+									<button class="form-control btn btn-primary" ng-click="login();">登&nbsp;&nbsp;录</button>
+									
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<a class="form-control btn btn-default" href="/register" role="button">注册新账号</a>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 
-				<div class="form-group">
-					<div class="col-sm-offset-3 col-sm-9">
-						<button class="btn btn-primary" ng-click="login();">登&nbsp;&nbsp;录</button>
-						<button class="btn btn-link"><a href="/register">注册新账号</a></button>
-					</div>
-				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 
+
+
+
 	<script type="text/javascript">
-	
-		angular
-		.module('loginApp', [],function($httpProvider) {ngHttpConfig($httpProvider);})
-		.controller('loginCtrl',
-				function($scope,$http) {
-					$scope.email = '';
-					$scope.password = '';
+		angular.module('loginApp', [], function($httpProvider) {
+			ngHttpConfig($httpProvider);
+		}).controller('loginCtrl', function($scope, $http) {
+			$scope.email = '';
+			$scope.password = '';
 
-					$scope.checkMsg = '';
-					$scope.error = false;
-					$scope.incomplete = false;
+			$scope.checkMsg = '';
+			$scope.error = false;
+			$scope.incomplete = false;
 
-					$scope.check = function() {
-						$scope.error = false;
-						$scope.incomplete = false;
-						if (!$scope.email) {
-							$scope.incomplete = true;
-							$scope.checkMsg = '邮箱格式不正确';
+			$scope.check = function() {
+				$scope.error = false;
+				$scope.incomplete = false;
+				if (!$scope.email) {
+					$scope.incomplete = true;
+					$scope.checkMsg = '邮箱格式不正确';
+					return;
+				}
+				if (!$scope.password) {
+					$scope.incomplete = true;
+					$scope.checkMsg = '密码不能为空';
+					return;
+				}
+				if ($scope.login_form.email.$invalid) {
+					$scope.error = true;
+					$scope.checkMsg = '不是正确的邮箱格式';
+					return;
+				}
+			};
+			$scope.login = function() {
+				$scope.check();
+				if ($scope.error || $scope.incomplete) {
+					return;
+				}
+				$http.post('/api/user/login', {
+					email : $scope.email,
+					password : $scope.password
+				}).success(function(data) {
+					if (data) {
+						if (data.code == 100) {
+							window.location.href = '/';
 							return;
-						}
-						if (!$scope.password) {
-							$scope.incomplete = true;
-							$scope.checkMsg = '密码不能为空';
-							return;
-						}
-						if ($scope.login_form.email.$invalid) {
+						} else {
 							$scope.error = true;
-							$scope.checkMsg = '不是正确的邮箱格式';
-							return;
+							$scope.checkMsg = data.msg;
 						}
-					};
-					$scope.login = function() {
-						$scope.check();
-						if ($scope.error || $scope.incomplete) {
-							return;
-						}
-						$http.post('/api/user/login',{
-							email : $scope.email,
-							password : $scope.password
-						}).success(function(data){
-							if (data) {
-								if (data.code == 100) {
-									window.location.href = '/';
-									return;
-								}else{
-									$scope.error = true;
-									$scope.checkMsg = data.msg;
-								}
-							}else{
-								$scope.error = true;
-								$scope.checkMsg = '服务器未响应';
-							}
-						});
-					};
+					} else {
+						$scope.error = true;
+						$scope.checkMsg = '服务器未响应';
+					}
 				});
+			};
+		});
 	</script>
 </body>
 </html>
