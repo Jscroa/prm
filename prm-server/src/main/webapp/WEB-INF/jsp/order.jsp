@@ -26,36 +26,17 @@
 		<div class="row">
 			<div class="col-md-2">
 				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#ddd1" data-toggle="tab">全部</a></li>
-					<li><a href="#ddd2" data-toggle="tab">已付款</a></li>
-					<li><a href="#ddd3" data-toggle="tab">未付款</a></li>
+					<li class="active"><a href="#all" data-toggle="tab">全部</a></li>
+					<li><a href="#paid" data-toggle="tab">已付款</a></li>
+					<li><a href="#unpay" data-toggle="tab">未付款</a></li>
 				</ul>
 			</div>
 			<div class="col-md-10">
-			<div class="container-fluid tab-content">
-			<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>asd</th>
-					<th>asd</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>111</td>
-					<td>111</td>
-				</tr>
-				<tr>
-					<td>111</td>
-					<td>111</td>
-				</tr>
-				<tr>
-					<td>111</td>
-					<td>111</td>
-				</tr>
-			</tbody>
-			</table>
-			</div>
+				<div class="container-fluid tab-content">
+					<div id="all" class="tab-pane fade in active">全部</div>
+					<div id="paid" class="tab-pane fade">已付款</div>
+					<div id="unpay" class="tab-pane fade">未付款</div>
+				</div>
 			</div>
 		</div>
 	</div>
