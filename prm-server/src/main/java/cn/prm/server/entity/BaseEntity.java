@@ -1,9 +1,15 @@
 package cn.prm.server.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class BaseEntity {
+public class BaseEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6353267447084825951L;
+	
 	protected String guid;
 	protected String stdName;
 	protected Integer stdCode;

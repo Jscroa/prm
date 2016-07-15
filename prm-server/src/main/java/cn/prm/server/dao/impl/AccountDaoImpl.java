@@ -51,22 +51,22 @@ public class AccountDaoImpl implements IAccountDao {
 		jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
 			@Override
-			public void setValues(PreparedStatement pst) throws SQLException {
-				pst.setString(1, t.getGuid());
-				pst.setString(2, t.getStdName());
-				pst.setObject(3, t.getStdCode());
-				pst.setObject(4, t.getStatus());
-				pst.setString(5, t.getMemo());
-				pst.setString(6, t.getCreateUser());
-				pst.setString(7, t.getModifyUser());
-				pst.setTimestamp(8, t.getCreateTime());
-				pst.setTimestamp(9, t.getModifyTime());
-				pst.setString(10, t.getAcc());
-				pst.setString(11, t.getPwd());
-				pst.setString(12, t.getPhone());
-				pst.setString(13, t.getEmail());
-				pst.setObject(14, t.getSex());
-				pst.setObject(15, t.getAge());
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, t.getGuid());
+				ps.setString(2, t.getStdName());
+				ps.setObject(3, t.getStdCode());
+				ps.setObject(4, t.getStatus());
+				ps.setString(5, t.getMemo());
+				ps.setString(6, t.getCreateUser());
+				ps.setString(7, t.getModifyUser());
+				ps.setTimestamp(8, t.getCreateTime());
+				ps.setTimestamp(9, t.getModifyTime());
+				ps.setString(10, t.getAcc());
+				ps.setString(11, t.getPwd());
+				ps.setString(12, t.getPhone());
+				ps.setString(13, t.getEmail());
+				ps.setObject(14, t.getSex());
+				ps.setObject(15, t.getAge());
 			}
 		});
 	}
@@ -90,22 +90,22 @@ public class AccountDaoImpl implements IAccountDao {
 		jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
 			@Override
-			public void setValues(PreparedStatement pst) throws SQLException {
-				pst.setString(1, t.getStdName());
-				pst.setObject(2, t.getStdCode());
-				pst.setObject(3, t.getStatus());
-				pst.setString(4, t.getMemo());
-				pst.setString(5, t.getCreateUser());
-				pst.setString(6, t.getModifyUser());
-				pst.setTimestamp(7, t.getCreateTime());
-				pst.setTimestamp(8, t.getModifyTime());
-				pst.setString(9, t.getAcc());
-				pst.setString(10, t.getPwd());
-				pst.setString(11, t.getPhone());
-				pst.setString(12, t.getEmail());
-				pst.setObject(13, t.getSex());
-				pst.setObject(14, t.getAge());
-				pst.setString(15, t.getGuid());
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, t.getStdName());
+				ps.setObject(2, t.getStdCode());
+				ps.setObject(3, t.getStatus());
+				ps.setString(4, t.getMemo());
+				ps.setString(5, t.getCreateUser());
+				ps.setString(6, t.getModifyUser());
+				ps.setTimestamp(7, t.getCreateTime());
+				ps.setTimestamp(8, t.getModifyTime());
+				ps.setString(9, t.getAcc());
+				ps.setString(10, t.getPwd());
+				ps.setString(11, t.getPhone());
+				ps.setString(12, t.getEmail());
+				ps.setObject(13, t.getSex());
+				ps.setObject(14, t.getAge());
+				ps.setString(15, t.getGuid());
 			}
 		});
 	}

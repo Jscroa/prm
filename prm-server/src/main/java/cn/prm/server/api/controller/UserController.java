@@ -53,7 +53,6 @@ public class UserController extends BaseController {
 			log.info(currUser.getName() + "(" + currUser.getGuid() + ") 注册成功");
 			return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "注册成功");
 		} catch (BusinessException e) {
-			e.printStackTrace();
 			return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
 		}
 	}

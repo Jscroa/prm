@@ -7,11 +7,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.Constants;
 import cn.prm.server.commons.UUIDUtil;
+import cn.prm.server.dao.IAccGroupDao;
+import cn.prm.server.dao.IAccToGroupDao;
 import cn.prm.server.dao.IAccountDao;
+import cn.prm.server.entity.AccGroup;
+import cn.prm.server.entity.AccToGroup;
 import cn.prm.server.entity.Account;
 import cn.prm.server.exception.BusinessException;
 import cn.prm.server.form.UserLoginForm;
@@ -24,6 +29,10 @@ public class UserService {
 
 	@Autowired
 	IAccountDao accountDao;
+	@Autowired
+	IAccGroupDao accGroupDao;
+	@Autowired
+	IAccToGroupDao accToGroupDao;
 
 	public CurrUser login(UserLoginForm form) throws BusinessException {
 		List<Account> list = accountDao.find(form.getEmail(), form.getPassword());
@@ -42,8 +51,8 @@ public class UserService {
 		return user;
 	}
 
+	@Transactional(rollbackFor = Exception.class)
 	public CurrUser register(UserRegisterForm form) throws BusinessException {
-
 		List<Account> list1 = accountDao.findByEmail(form.getEmail());
 		if (list1 != null && list1.size() > 0) {
 			throw new BusinessException("该邮箱已注册");
@@ -65,6 +74,24 @@ public class UserService {
 		account.setCreateTime(now);
 		account.setModifyTime(now);
 		accountDao.add(account);
+
+		AccGroup accGroup = new AccGroup();
+		accGroup.setGuid(UUIDUtil.randomUUID());
+		accGroup.setIsPrivate(true);
+		accGroup.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+		accGroup.setCreateTime(now);
+		accGroup.setModifyTime(now);
+		accGroupDao.add(accGroup);
+
+		AccToGroup accToGroup = new AccToGroup();
+		accToGroup.setGuid(UUIDUtil.randomUUID());
+		accToGroup.setAccId(account.getGuid());
+		accToGroup.setGroupId(accGroup.getGuid());
+		accToGroup.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+		accToGroup.setCreateTime(now);
+		accToGroup.setModifyTime(now);
+		accToGroupDao.add(accToGroup);
+
 		CurrUser user = new CurrUser();
 		user.setGuid(account.getGuid());
 		user.setName(account.getStdName());

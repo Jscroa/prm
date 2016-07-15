@@ -2,6 +2,11 @@ package cn.prm.server.exception;
 
 public class BusinessException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9122660397178348279L;
+
 	public BusinessException() {
 		super();
 	}

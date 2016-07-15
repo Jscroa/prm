@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class Account extends BaseEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2962316124468998852L;
+	
 	private String acc;
 	private String pwd;
 	private String phone;

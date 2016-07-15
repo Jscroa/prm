@@ -55,7 +55,7 @@ body {
 						<div class="alert alert-danger" ng-show="error || incomplete"
 							role="alert">
 							<p>
-								<strong>验证不通过：</strong>{{checkMsg}}
+								<strong>错误：</strong>{{checkMsg}}
 							</p>
 						</div>
 						<form class="form-horizontal" name="register_form"
@@ -206,6 +206,9 @@ body {
 						$scope.error = true;
 						$scope.checkMsg = '服务器未响应';
 					}
+				}).error(function(){
+					$scope.error = true;
+					$scope.checkMsg = '服务器发生错误';
 				});
 
 			};
