@@ -14,6 +14,8 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
-
+	<div>
+		<legend id="theme-legend"> 主页 </legend>
+	</div>
 </body>
 </html>

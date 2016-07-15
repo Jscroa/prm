@@ -33,9 +33,21 @@
 			</div>
 			<div class="col-md-10">
 				<div class="container-fluid tab-content">
-					<div id="all" class="tab-pane fade in active">全部</div>
-					<div id="paid" class="tab-pane fade">已付款</div>
-					<div id="unpay" class="tab-pane fade">未付款</div>
+					<div id="all" class="tab-pane fade in active">
+						<div>
+							<legend id="theme-legend">全部</legend>
+						</div>
+					</div>
+					<div id="paid" class="tab-pane fade">
+						<div>
+							<legend id="theme-legend">已付款</legend>
+						</div>
+					</div>
+					<div id="unpay" class="tab-pane fade">
+						<div>
+							<legend id="theme-legend">未付款</legend>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

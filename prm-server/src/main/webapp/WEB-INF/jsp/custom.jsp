@@ -19,6 +19,6 @@
 			$('#nav_custom').addClass('active');
 		</script>
 	</div>
-	<p>客户管理</p>
+	<div class="container-fluid">客户管理</div>
 </body>
 </html>

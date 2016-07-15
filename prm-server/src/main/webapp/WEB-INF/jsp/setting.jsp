@@ -19,6 +19,6 @@
 			$('#nav_setting').addClass('active');
 		</script>
 	</div>
-	<p>系统设置</p>
+	<div class="container-fluid">系统设置</div>
 </body>
 </html>

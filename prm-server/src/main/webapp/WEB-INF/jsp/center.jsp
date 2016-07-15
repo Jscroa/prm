@@ -19,6 +19,6 @@
 			$('#nav_center').addClass('active');
 		</script>
 	</div>
-	<p>个人中心</p>
+	<div class="container-fluid">个人中心</div>
 </body>
 </html>
