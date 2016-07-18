@@ -13,8 +13,13 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import cn.prm.server.commons.Constants;
+import cn.prm.server.commons.Constants.DB_STATUS;
+import cn.prm.server.dao.IAccGroupDao;
 import cn.prm.server.dao.IAccToGroupDao;
+import cn.prm.server.dao.IAccountDao;
+import cn.prm.server.entity.AccGroup;
 import cn.prm.server.entity.AccToGroup;
+import cn.prm.server.entity.Account;
 
 @Repository
 public class AccToGroupDaoImpl implements IAccToGroupDao {
@@ -23,6 +28,12 @@ public class AccToGroupDaoImpl implements IAccToGroupDao {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	IAccGroupDao accGroupDao;
+	
+	@Autowired
+	IAccountDao accountDao;
 
 	@Override
 	public AccToGroup extract(ResultSet rs) throws SQLException, DataAccessException {
@@ -102,7 +113,7 @@ public class AccToGroupDaoImpl implements IAccToGroupDao {
 	@Override
 	public AccToGroup get(String id) {
 		String sql = "select " + COLS + " from t_acc_to_group where guid=?";
-		List<AccToGroup> list = jdbcTemplate.query(sql, new Object[] { id, Constants.DB_STATUS.STATUS_ACTIVE },
+		List<AccToGroup> list = jdbcTemplate.query(sql, new Object[] { id },
 				new RowMapper<AccToGroup>() {
 
 					@Override
@@ -116,4 +127,49 @@ public class AccToGroupDaoImpl implements IAccToGroupDao {
 		return null;
 	}
 
+	@Override
+	public List<AccGroup> getGroups(String accId){
+		String sql = "select t2.* from t_acc_to_group t1 left join t_acc_group t2 on t2.guid=t1.group_id where t1.acc_id=? and t1.status=? and t2.status=?";
+		List<AccGroup> list = jdbcTemplate.query(sql, new Object[]{accId,DB_STATUS.STATUS_ACTIVE,DB_STATUS.STATUS_ACTIVE},new RowMapper<AccGroup>(){
+
+			@Override
+			public AccGroup mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return accGroupDao.extract(rs);
+			}
+			
+		});
+		return list;
+	}
+	
+	@Override
+	public List<Account> getAccounts(String groupId) {
+		String sql = "select t2.* from t_acc_to_group t1 left join t_account t2 on t2.guid=t2.acc_id where t1.group_id=? and t1.status=? and t2.status=?";
+		List<Account> list = jdbcTemplate.query(sql,new Object[]{groupId,DB_STATUS.STATUS_ACTIVE,DB_STATUS.STATUS_ACTIVE}, new RowMapper<Account>(){
+
+			@Override
+			public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return accountDao.extract(rs);
+			}
+			
+		});
+		return list;
+	}
+	
+	@Override
+	public AccToGroup get(String accId, String groupId) {
+		String sql = "select "+COLS+" from t_acc_to_group where acc_id=? and group_id=? and status=?";
+		List<AccToGroup> list = jdbcTemplate.query(sql, new Object[] { accId,groupId,DB_STATUS.STATUS_ACTIVE },
+				new RowMapper<AccToGroup>() {
+
+					@Override
+					public AccToGroup mapRow(ResultSet rs, int rowNum) throws SQLException {
+						return extract(rs);
+					}
+				});
+		if (list != null && list.size() == 1) {
+			return list.get(0);
+		}
+		return null;
+	}
+	
 }
