@@ -29,6 +29,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/login")
 	public Object login(HttpServletRequest request, UserLoginForm form) {
 		try {
+			log.info("email:"+form.getEmail()+" 准备登陆");
 			CurrUser currUser = userService.login(form);
 			setCurrUser(request, currUser);
 			log.info(currUser.getName() + "(" + currUser.getGuid() + ") 登陆成功");
@@ -50,8 +51,8 @@ public class UserController extends BaseController {
 		try {
 			CurrUser currUser = userService.register(form);
 			setCurrUser(request, currUser);
-			log.info(currUser.getName() + "(" + currUser.getGuid() + ") 注册成功");
-			return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "注册成功");
+			log.info(currUser.getName() + "(" + currUser.getGuid() + ") 注销成功");
+			return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "注销成功");
 		} catch (BusinessException e) {
 			return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
 		}

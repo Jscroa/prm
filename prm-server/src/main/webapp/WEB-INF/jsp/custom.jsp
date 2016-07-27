@@ -19,6 +19,8 @@
 			$('#nav_custom').addClass('active');
 		</script>
 	</div>
-	<div class="container-fluid">客户管理</div>
+	<div class="container-fluid">
+	<%@include file="/WEB-INF/jsp/components/custom/custom.jsp"%>
+	</div>
 </body>
 </html>

@@ -63,7 +63,7 @@ body {
 							<div class="form-group">
 								<label for="inputUserName" class="col-sm-3 control-label">账户名：</label>
 								<div class="col-sm-9">
-									<input name="userName" required class="form-control"
+									<input name="userName" class="form-control"
 										placeholder="User Name" ng-model="userName" id="inputUserName"
 										required>
 								</div>
@@ -72,7 +72,7 @@ body {
 							<div class="form-group">
 								<label for="inputEmail" class="col-sm-3 control-label">邮箱：</label>
 								<div class="col-sm-9">
-									<input type="email" name="email" required class="form-control"
+									<input type="email" name="email" class="form-control"
 										placeholder="Email" ng-model="email" id="inputEmail" required>
 								</div>
 							</div>

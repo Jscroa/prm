@@ -25,10 +25,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 		}
 		if (currUser == null) {
 			response.sendRedirect("/login");
-			log.info(">>> LoginInterceptor >>> false");
 			return false;
 		} else {
-			log.info(">>> LoginInterceptor >>> true");
 			return true;
 		}
 	}

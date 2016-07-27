@@ -19,6 +19,34 @@
 			$('#nav_center').addClass('active');
 		</script>
 	</div>
-	<div class="container-fluid">个人中心</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2">
+				<ul class="nav nav-pills nav-stacked">
+					<li class="active"><a href="#basic-info" data-toggle="tab">基本信息</a></li>
+					<li><a href="#acc-group" data-toggle="tab">账户组</a></li>
+					<li><a href="#unpay" data-toggle="tab">未付款</a></li>
+				</ul>
+			</div>
+			<div class="col-md-10">
+				<div class="container-fluid tab-content">
+					<div id="basic-info" class="tab-pane fade in active">
+						<div>
+							<legend id="theme-legend">基本信息</legend>
+						</div>
+					</div>
+					<div id="acc-group" class="tab-pane fade">
+						<%@include file="/WEB-INF/jsp/components/center/acc-group.jsp"%>
+					</div>
+					<div id="unpay" class="tab-pane fade">
+						<div>
+							<legend id="theme-legend">未付款</legend>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
 </body>
 </html>

@@ -62,14 +62,14 @@ body {
 							<div class="form-group">
 								<label for="inputEmail" class="col-sm-3 control-label">邮箱：</label>
 								<div class="col-sm-9">
-									<input type="email" name="email" required class="form-control"
+									<input type="email" name="email" class="form-control"
 										placeholder="Email" ng-model="email" id="inputEmail" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPassword" class="col-sm-3 control-label">密码：</label>
 								<div class="col-sm-9">
-									<input type="password" name="password" required
+									<input type="password" name="password"
 										class="form-control" placeholder="Password"
 										ng-model="password" id="inputPassword" required>
 								</div>

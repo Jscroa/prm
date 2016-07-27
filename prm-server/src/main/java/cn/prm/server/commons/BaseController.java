@@ -38,7 +38,7 @@ public abstract class BaseController {
 		if (currUser == null) {
 			return;
 		}
-		log.info("用户：" + currUser.getName() + "(" + currUser.getGuid() + ") 已登录");
+		log.info("用户：" + currUser.getName() + "(" + currUser.getGuid() + ") 正在登陆");
 		session.setAttribute(SESSION.LOGIN_USER, currUser);
 	}
 
