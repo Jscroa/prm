@@ -12,38 +12,38 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import cn.prm.server.dao.ICountryDao;
-import cn.prm.server.entity.Country;
+import cn.prm.server.dao.ICustomDao;
+import cn.prm.server.entity.Custom;
 
 @Repository
-public class CountryDaoImpl implements ICountryDao {
+public class CustomDaoImpl implements ICustomDao {
 
-	private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time,en_name,cn_name";
-
+	private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time,sex,age";
+	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-
+	
 	@Override
-	public Country extract(ResultSet rs) throws SQLException, DataAccessException {
-		Country country = new Country();
-		country.setGuid(rs.getString("guid"));
-		country.setStdName(rs.getString("std_name"));
-		country.setStdCode(rs.getInt("std_code"));
-		country.setStatus(rs.getInt("status"));
-		country.setMemo(rs.getString("memo"));
-		country.setCreateUser(rs.getString("create_user"));
-		country.setModifyUser(rs.getString("modify_user"));
-		country.setCreateTime(rs.getTimestamp("create_time"));
-		country.setModifyTime(rs.getTimestamp("modify_time"));
-		country.setEnName(rs.getString("en_name"));
-		country.setCnName(rs.getString("cn_name"));
-		return country;
+	public Custom extract(ResultSet rs) throws SQLException, DataAccessException {
+		Custom custom = new Custom();
+		custom.setGuid(rs.getString("guid"));
+		custom.setStdName(rs.getString("std_name"));
+		custom.setStdCode(rs.getInt("std_code"));
+		custom.setStatus(rs.getInt("status"));
+		custom.setMemo(rs.getString("memo"));
+		custom.setCreateUser(rs.getString("create_user"));
+		custom.setModifyUser(rs.getString("modify_user"));
+		custom.setCreateTime(rs.getTimestamp("create_time"));
+		custom.setModifyTime(rs.getTimestamp("modify_time"));
+		custom.setSex(rs.getBoolean("sex"));
+		custom.setAge(rs.getInt("age"));
+		return custom;
 	}
 
 	@Override
-	public void add(final Country t) {
-		String sql = "insert into t_country(" + COLS + ") values(?,?,?,?,?,?,?,?,?,?,?)";
-		jdbcTemplate.update(sql, new PreparedStatementSetter() {
+	public void add(final Custom t) {
+		String sql = "insert into t_custom(" + COLS + ") values(?,?,?,?,?,?,?,?,?,?,?)";
+		jdbcTemplate.update(sql,new PreparedStatementSetter(){
 
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
@@ -56,16 +56,16 @@ public class CountryDaoImpl implements ICountryDao {
 				ps.setString(7, t.getModifyUser());
 				ps.setTimestamp(8, t.getCreateTime());
 				ps.setTimestamp(9, t.getModifyTime());
-				ps.setString(10, t.getEnName());
-				ps.setString(11, t.getCnName());
+				ps.setBoolean(10, t.getSex());
+				ps.setInt(11, t.getAge());
 			}
-
+			
 		});
 	}
 
 	@Override
 	public void delete(final String id) {
-		String sql = "delete from t_country where guid=?";
+		String sql = "delete from t_custom where guid=?";
 		jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
 			@Override
@@ -77,8 +77,8 @@ public class CountryDaoImpl implements ICountryDao {
 	}
 
 	@Override
-	public void modify(final Country t) {
-		String sql = "update t_country set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,en_name=?,cn_name=? where guid=?";
+	public void modify(final Custom t) {
+		String sql = "update t_custom set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,sex=?,age=? where guid=?";
 		jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
 			@Override
@@ -91,20 +91,20 @@ public class CountryDaoImpl implements ICountryDao {
 				ps.setString(6, t.getModifyUser());
 				ps.setTimestamp(7, t.getCreateTime());
 				ps.setTimestamp(8, t.getModifyTime());
-				ps.setString(9, t.getEnName());
-				ps.setString(10, t.getCnName());
+				ps.setBoolean(9, t.getSex());
+				ps.setInt(10, t.getAge());
 				ps.setString(11, t.getGuid());
 			}
 		});
 	}
 
 	@Override
-	public Country get(String id) {
-		String sql = "select " + COLS + " from t_country where guid=?";
-		List<Country> list = jdbcTemplate.query(sql, new Object[] { id }, new RowMapper<Country>() {
+	public Custom get(String id) {
+		String sql = "select " + COLS + " from t_custom where guid=?";
+		List<Custom> list = jdbcTemplate.query(sql, new Object[] { id }, new RowMapper<Custom>() {
 
 			@Override
-			public Country mapRow(ResultSet rs, int rowNum) throws SQLException {
+			public Custom mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return extract(rs);
 			}
 		});
