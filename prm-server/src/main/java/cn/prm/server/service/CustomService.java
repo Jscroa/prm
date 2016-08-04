@@ -36,7 +36,7 @@ public class CustomService {
 	@Autowired
 	ICustomToContactDao customToContactDao;
 	
-	public PageDto<CustomDto> page(int page,int size) throws BusinessException{
+	public PageDto<CustomDto> page(String order,int offset,int limit) throws BusinessException{
 		//TODO page
 		throw new BusinessException("");
 //		return null;

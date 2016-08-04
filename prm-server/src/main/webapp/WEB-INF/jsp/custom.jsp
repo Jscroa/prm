@@ -7,6 +7,9 @@
 
 <%@include file="/WEB-INF/jsp/components/base.jsp"%>
 
+<link href="/css/bootstrap-table.css" rel="stylesheet">
+<script src="/js/bootstrap-table.js"></script>
+<script src="/js/bootstrap-table-zh-CN.js"></script>
 <style type="text/css">
 </style>
 

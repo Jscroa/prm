@@ -2,20 +2,27 @@ package cn.prm.server.form;
 
 public class PageBaseForm {
 
-	private int page;
-	private int size;
+	private String order;
+	private int offset;
+	private int limit;
 	
-	public int getPage() {
-		return page;
+	public String getOrder() {
+		return order;
 	}
-	public void setPage(int page) {
-		this.page = page;
+	public void setOrder(String order) {
+		this.order = order;
 	}
-	public int getSize() {
-		return size;
+	public int getOffset() {
+		return offset;
 	}
-	public void setSize(int size) {
-		this.size = size;
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+	public int getLimit() {
+		return limit;
+	}
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 	
 }

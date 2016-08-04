@@ -31,7 +31,7 @@ public class CustomApiController extends BaseController {
 	@RequestMapping("/list")
 	public Object list(HttpServletRequest request,PageBaseForm form){
 		try{
-			PageDto<CustomDto> page = customService.page(form.getPage(), form.getSize());
+			PageDto<CustomDto> page = customService.page(form.getOrder(),form.getOffset(),form.getLimit());
 			page.setCode(RESPONSE_CODE.CODE_SUCCESS);
 			return page;
 		}catch (BusinessException e) {

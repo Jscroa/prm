@@ -84,7 +84,7 @@ public class CustomToContactDaoImpl implements ICustomToContactDao {
 
 	@Override
 	public void modify(final CustomToContact t) {
-		String sql = "update t_acc_to_group set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,custom_id=?,contact_id=? where guid=?";
+		String sql = "update t_custom_to_contact set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,custom_id=?,contact_id=? where guid=?";
 		jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
 			@Override
@@ -123,7 +123,7 @@ public class CustomToContactDaoImpl implements ICustomToContactDao {
 
 	@Override
 	public List<Contact> getContacts(String customId) {
-		String sql = "select t2.* from t_custom_to_contact t1 left join t_contact t2 on t2.guid=t1.contact_id where t1.acc_id=? and t1.status=? and t2.status=?";
+		String sql = "select t2.* from t_custom_to_contact t1 left join t_contact t2 on t2.guid=t1.contact_id where t1.custom_id=? and t1.status=? and t2.status=?";
 		List<Contact> list = jdbcTemplate.query(sql, new Object[]{customId,DB_STATUS.STATUS_ACTIVE,DB_STATUS.STATUS_ACTIVE},new RowMapper<Contact>(){
 
 			@Override
