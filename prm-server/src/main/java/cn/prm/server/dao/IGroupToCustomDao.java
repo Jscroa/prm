@@ -7,5 +7,7 @@ import cn.prm.server.entity.GroupToCustom;
 
 public interface IGroupToCustomDao extends IBaseDao<GroupToCustom> {
 
-	public List<Custom> getCustoms(String groupId);
+	public int getCustomCount(String groupId);
+	public List<Custom> getCustoms(String groupId,int offset,int limit);
+	
 }

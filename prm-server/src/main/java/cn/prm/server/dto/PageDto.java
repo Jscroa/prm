@@ -3,7 +3,7 @@ package cn.prm.server.dto;
 public class PageDto<T> extends ListDto<T> {
 	
 	private int currentPage;
-	private int totalPage;
+	private int total;
 	
 	public int getCurrentPage() {
 		return currentPage;
@@ -11,11 +11,11 @@ public class PageDto<T> extends ListDto<T> {
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
-	public int getTotalPage() {
-		return totalPage;
+	public int getTotal() {
+		return total;
 	}
-	public void setTotalPage(int totalPage) {
-		this.totalPage = totalPage;
+	public void setTotal(int total) {
+		this.total = total;
 	}
 	
 }

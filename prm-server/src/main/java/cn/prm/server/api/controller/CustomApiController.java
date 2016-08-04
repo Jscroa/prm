@@ -31,7 +31,11 @@ public class CustomApiController extends BaseController {
 	@RequestMapping("/list")
 	public Object list(HttpServletRequest request,PageBaseForm form){
 		try{
-			PageDto<CustomDto> page = customService.page(form.getOrder(),form.getOffset(),form.getLimit());
+			CurrUser currUser = getCurrUser(request);
+			if (currUser == null) {
+				return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
+			}
+			PageDto<CustomDto> page = customService.getPrivateCustoms(currUser, form.getOrder(), form.getOffset(), form.getLimit());
 			page.setCode(RESPONSE_CODE.CODE_SUCCESS);
 			return page;
 		}catch (BusinessException e) {
@@ -42,12 +46,13 @@ public class CustomApiController extends BaseController {
 	
 	@RequestMapping("/add")
 	public Object add(HttpServletRequest request, CustomForm form) {
+		form.setAge(1);
 		try {
 			CurrUser currUser = getCurrUser(request);
 			if (currUser == null) {
 				return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
 			}
-			customService.add(currUser, form);
+			customService.addPrivateCustom(currUser, form);
 			return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "添加成功");
 		} catch (BusinessException e) {
 			e.printStackTrace();

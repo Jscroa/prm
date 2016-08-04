@@ -142,7 +142,7 @@ public class AccToGroupDaoImpl implements IAccToGroupDao {
 	
 	@Override
 	public List<Account> getAccounts(String groupId) {
-		String sql = "select t2.* from t_acc_to_group t1 left join t_account t2 on t2.guid=t2.acc_id where t1.group_id=? and t1.status=? and t2.status=?";
+		String sql = "select t2.* from t_acc_to_group t1 left join t_account t2 on t2.guid=t1.acc_id where t1.group_id=? and t1.status=? and t2.status=?";
 		List<Account> list = jdbcTemplate.query(sql,new Object[]{groupId,DB_STATUS.STATUS_ACTIVE,DB_STATUS.STATUS_ACTIVE}, new RowMapper<Account>(){
 
 			@Override

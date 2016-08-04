@@ -24,13 +24,13 @@ import cn.prm.server.entity.GroupToCustom;
 public class GroupToCustomDaoImpl implements IGroupToCustomDao {
 
 	private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time,group_id,custom_id";
-	
+
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
+
 	@Autowired
 	ICustomDao customDao;
-	
+
 	@Override
 	public GroupToCustom extract(ResultSet rs) throws SQLException, DataAccessException {
 		GroupToCustom groupToCustom = new GroupToCustom();
@@ -50,7 +50,7 @@ public class GroupToCustomDaoImpl implements IGroupToCustomDao {
 	@Override
 	public void add(final GroupToCustom t) {
 		String sql = "insert into t_group_to_custom(" + COLS + ") values(?,?,?,?,?,?,?,?,?,?,?)";
-		jdbcTemplate.update(sql,new PreparedStatementSetter(){
+		jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
@@ -66,7 +66,7 @@ public class GroupToCustomDaoImpl implements IGroupToCustomDao {
 				ps.setString(10, t.getGroupId());
 				ps.setString(11, t.getCustomId());
 			}
-			
+
 		});
 	}
 
@@ -108,14 +108,13 @@ public class GroupToCustomDaoImpl implements IGroupToCustomDao {
 	@Override
 	public GroupToCustom get(String id) {
 		String sql = "select " + COLS + " from t_group_to_custom where guid=?";
-		List<GroupToCustom> list = jdbcTemplate.query(sql, new Object[] { id },
-				new RowMapper<GroupToCustom>() {
+		List<GroupToCustom> list = jdbcTemplate.query(sql, new Object[] { id }, new RowMapper<GroupToCustom>() {
 
-					@Override
-					public GroupToCustom mapRow(ResultSet rs, int rowNum) throws SQLException {
-						return extract(rs);
-					}
-				});
+			@Override
+			public GroupToCustom mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return extract(rs);
+			}
+		});
 		if (list != null && list.size() == 1) {
 			return list.get(0);
 		}
@@ -123,16 +122,35 @@ public class GroupToCustomDaoImpl implements IGroupToCustomDao {
 	}
 
 	@Override
-	public List<Custom> getCustoms(String groupId) {
-		String sql = "select t2.* from t_group_to_custom t1 left join t_custom t2 on t2.guid=t1.custom_id where t1.group_id=? and t1.status=? and t2.status=?";
-		List<Custom> list = jdbcTemplate.query(sql, new Object[]{groupId,DB_STATUS.STATUS_ACTIVE,DB_STATUS.STATUS_ACTIVE},new RowMapper<Custom>(){
+	public int getCustomCount(String groupId) {
+		String sql = "select count(*) from t_group_to_custom t1 left join t_custom t2 on t2.guid=t1.custom_id where t1.group_id=? and t1.status=? and t2.status=?";
+		List<Integer> list = jdbcTemplate.query(sql,
+				new Object[] { groupId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE }, new RowMapper<Integer>() {
 
-			@Override
-			public Custom mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return customDao.extract(rs);
-			}
-			
-		});
+					@Override
+					public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+						return rs.getInt(1);
+					}
+
+				});
+		if (list != null && list.size() == 1) {
+			return list.get(0);
+		}
+		return 0;
+	}
+
+	@Override
+	public List<Custom> getCustoms(String groupId,int limit,int offset) {
+		String sql = "select t2.* from t_group_to_custom t1 left join t_custom t2 on t2.guid=t1.custom_id where t1.group_id=? and t1.status=? and t2.status=?";
+		List<Custom> list = jdbcTemplate.query(sql,
+				new Object[] { groupId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE }, new RowMapper<Custom>() {
+
+					@Override
+					public Custom mapRow(ResultSet rs, int rowNum) throws SQLException {
+						return customDao.extract(rs);
+					}
+
+				});
 		return list;
 	}
 

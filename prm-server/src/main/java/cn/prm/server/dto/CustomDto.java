@@ -2,11 +2,20 @@ package cn.prm.server.dto;
 
 public class CustomDto {
 
+	private String id;
 	private String name;
 	private String addr;
 	private String phone;
 	private String email;
+	private String weixin;
+	private String qq;
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -30,6 +39,18 @@ public class CustomDto {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getWeixin() {
+		return weixin;
+	}
+	public void setWeixin(String weixin) {
+		this.weixin = weixin;
+	}
+	public String getQq() {
+		return qq;
+	}
+	public void setQq(String qq) {
+		this.qq = qq;
 	}
 	
 }
