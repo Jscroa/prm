@@ -31,6 +31,7 @@ public class Constants {
 	public static class RESPONSE_CODE {
 		public static final int CODE_SUCCESS = 100;
 		public static final int CODE_FAILURE = 200;
+		public static final int CODE_NEED_LOGIN = 300;
 
 	}
 

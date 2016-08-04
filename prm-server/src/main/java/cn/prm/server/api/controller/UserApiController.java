@@ -19,9 +19,9 @@ import cn.prm.server.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")
-public class UserController extends BaseController {
+public class UserApiController extends BaseController {
 
-	private static final Logger log = LoggerFactory.getLogger(UserController.class);
+	private static final Logger log = LoggerFactory.getLogger(UserApiController.class);
 
 	@Autowired
 	UserService userService;

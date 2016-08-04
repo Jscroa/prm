@@ -1,6 +1,8 @@
 package cn.prm.server.service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +11,12 @@ import org.springframework.stereotype.Service;
 
 import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.Constants;
+import cn.prm.server.commons.Constants.DB_STATUS;
 import cn.prm.server.commons.UUIDUtil;
 import cn.prm.server.dao.ICountryDao;
+import cn.prm.server.dto.CountryDto;
+import cn.prm.server.dto.ListDto;
+import cn.prm.server.dto.PageDto;
 import cn.prm.server.entity.Country;
 import cn.prm.server.exception.BusinessException;
 import cn.prm.server.form.CountryForm;
@@ -54,5 +60,25 @@ public class CountryService {
 		country.setEnName(enName);
 		country.setCnName(cnName);
 		countryDao.add(country);
+	}
+	
+	public ListDto<CountryDto> getAll(){
+		List<Country> countries = countryDao.getByStatus(DB_STATUS.STATUS_ACTIVE);
+		ListDto<CountryDto> list = new ListDto<>();
+		if(countries==null || countries.size()==0){
+			return list;
+		}
+		List<CountryDto> dtos = new ArrayList<>();
+		for (int i = 0; i < countries.size(); i++) {
+			Country country = countries.get(i);
+			CountryDto dto = new CountryDto();
+			dto.setId(country.getGuid());
+			dto.setEnName(country.getEnName());
+			dto.setCnName(country.getCnName());
+			dto.setShortName(country.getStdName());
+			dtos.add(dto);
+		}
+		list.setData(dtos);
+		return list;
 	}
 }

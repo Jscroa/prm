@@ -12,7 +12,10 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import cn.prm.server.commons.Constants.DB_STATUS;
+import cn.prm.server.dao.IContactDao;
 import cn.prm.server.dao.ICustomToContactDao;
+import cn.prm.server.entity.Contact;
 import cn.prm.server.entity.CustomToContact;
 
 @Repository
@@ -22,6 +25,9 @@ public class CustomToContactDaoImpl implements ICustomToContactDao {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	IContactDao contactDao;
 	
 	@Override
 	public CustomToContact extract(ResultSet rs) throws SQLException, DataAccessException {
@@ -113,6 +119,20 @@ public class CustomToContactDaoImpl implements ICustomToContactDao {
 			return list.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public List<Contact> getContacts(String customId) {
+		String sql = "select t2.* from t_custom_to_contact t1 left join t_contact t2 on t2.guid=t1.contact_id where t1.acc_id=? and t1.status=? and t2.status=?";
+		List<Contact> list = jdbcTemplate.query(sql, new Object[]{customId,DB_STATUS.STATUS_ACTIVE,DB_STATUS.STATUS_ACTIVE},new RowMapper<Contact>(){
+
+			@Override
+			public Contact mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return contactDao.extract(rs);
+			}
+			
+		});
+		return list;
 	}
 
 }

@@ -1,6 +1,7 @@
 package cn.prm.server.service;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +11,13 @@ import org.springframework.stereotype.Service;
 import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.Constants;
 import cn.prm.server.commons.Constants.CONTACT_TYPE;
+import cn.prm.server.commons.Constants.DB_STATUS;
 import cn.prm.server.commons.UUIDUtil;
 import cn.prm.server.dao.IContactDao;
 import cn.prm.server.dao.ICustomDao;
 import cn.prm.server.dao.ICustomToContactDao;
+import cn.prm.server.dto.CustomDto;
+import cn.prm.server.dto.PageDto;
 import cn.prm.server.entity.Contact;
 import cn.prm.server.entity.Custom;
 import cn.prm.server.entity.CustomToContact;
@@ -31,6 +35,12 @@ public class CustomService {
 	IContactDao contactDao;
 	@Autowired
 	ICustomToContactDao customToContactDao;
+	
+	public PageDto<CustomDto> page(int page,int size) throws BusinessException{
+		//TODO page
+		throw new BusinessException("");
+//		return null;
+	}
 	
 	public void add(CurrUser currUser, CustomForm form) throws BusinessException{
 		//TODO 非空验证
@@ -106,6 +116,20 @@ public class CustomService {
 			customToContact.setModifyUser(currUser.getGuid());
 			customToContactDao.add(customToContact);
 		}
+	}
+	
+	public void delete(CurrUser currUser,String id) throws BusinessException{
+		if(id==null || "".equals(id)){
+			throw new BusinessException("未指定要删除的客户");
+		}
+		Custom custom = customDao.get(id);
+		if(custom==null){
+			throw new BusinessException("没有此客户");
+		}
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		custom.setStatus(DB_STATUS.STATUS_INACTIVE);
+		custom.setModifyTime(now);
+		custom.setModifyUser(currUser.getGuid());
 	}
 	
 }

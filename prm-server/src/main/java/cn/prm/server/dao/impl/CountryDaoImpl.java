@@ -114,4 +114,17 @@ public class CountryDaoImpl implements ICountryDao {
 		return null;
 	}
 
+	@Override
+	public List<Country> getByStatus(int status) {
+		String sql = "select " + COLS + " from t_country where status=?";
+		List<Country> list = jdbcTemplate.query(sql, new Object[] { status }, new RowMapper<Country>() {
+
+			@Override
+			public Country mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return extract(rs);
+			}
+		});
+		return list;
+	}
+
 }
