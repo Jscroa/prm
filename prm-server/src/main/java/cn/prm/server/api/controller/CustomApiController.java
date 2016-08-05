@@ -37,7 +37,7 @@ public class CustomApiController extends BaseController {
 			}
 			PageDto<CustomDto> page = customService.getPrivateCustoms(currUser, form.getOrder(), form.getOffset(), form.getLimit());
 			page.setCode(RESPONSE_CODE.CODE_SUCCESS);
-			return page;
+			return page.getData();
 		}catch (BusinessException e) {
 			e.printStackTrace();
 			return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
