@@ -46,7 +46,7 @@ public class CustomService {
 	IGroupToCustomDao groupToCustomDao;
 	
 	public PageDto<CustomDto> getPrivateCustoms(CurrUser currUser, String order, int offset, int limit) throws BusinessException{
-		//TODO page
+		//TODO page分页没做
 		List<AccGroup> groups = accToGroupDao.getGroups(currUser.getGuid());
 		if(groups==null || groups.size()==0){
 			throw new BusinessException("数据错误");
@@ -87,9 +87,9 @@ public class CustomService {
 		}
 		
 		PageDto<CustomDto> page = new PageDto<>();
-		page.setData(dtos);
+		page.setRows(dtos);
 		page.setTotal(total);
-		page.setCurrentPage(offset/limit +1);
+		page.setPage(offset/limit +1);
 		return page;
 	}
 	
