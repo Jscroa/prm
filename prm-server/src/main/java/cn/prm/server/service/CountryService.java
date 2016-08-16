@@ -78,7 +78,7 @@ public class CountryService {
 			dto.setShortName(country.getStdName());
 			dtos.add(dto);
 		}
-		list.setData(dtos);
+		list.setRows(dtos);
 		return list;
 	}
 }

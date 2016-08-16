@@ -11,6 +11,7 @@
 <script src="/js/jquery.form.js"></script>
 <script src="/js/bootstrap-table.js"></script>
 <script src="/js/bootstrap-table-zh-CN.js"></script>
+<script src="/js/bs-config.js"></script>
 <style type="text/css">
 </style>
 
@@ -23,7 +24,8 @@
 			$('#nav_custom').addClass('active');
 		</script>
 	</div>
-	<div class="container-fluid">
+	<div class="container">
+	<!-- <div class="container-fluid"> -->
 	<%@include file="/WEB-INF/jsp/components/custom/custom.jsp"%>
 	</div>
 </body>

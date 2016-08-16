@@ -2,10 +2,17 @@ package cn.prm.server.form;
 
 public class PageBaseForm {
 
+	private String search;
 	private String order;
 	private int offset;
 	private int limit;
 	
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
 	public String getOrder() {
 		return order;
 	}

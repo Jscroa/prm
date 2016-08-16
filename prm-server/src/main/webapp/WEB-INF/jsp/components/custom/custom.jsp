@@ -2,76 +2,192 @@
 	pageEncoding="utf-8"%>
 
 <script type="text/javascript">
-	$(function() {
-		loadData();
-	});
-
-	function loadData() {
-
-		var $table = $('#custom_table');
-		
-		$table.bootstrapTable({
-			/* url : '/api/custom/list', */
-			/* dataType : "json", */
-			pagination : true,
-			singleSelect : false,
-			search : true,
-			data:[{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"f4bd52d2e5314f7dbeafa86dd94df665","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e7d03943a3104b639205ea6bee39849b","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"4c4d68c626db4c5dac1a15be7c98e0c0","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"d6262435f6544a458961e00211bfc737","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"a22d014a5ffe4cb583a8e68acf476c66","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null},{"id":"e82ea97c6f084d938453b9d94dfe1076","name":"自己","addr":null,"phone":"18917222258","email":"yyao.sss8@gmail.com","weixin":null,"qq":null}],
-			/* sidePagination : "server", */
-			columns : [ {
-				title : '姓名',
-				field : 'name',
-				align : 'center',
-				valign : 'middle'
-			}, {
-				title : '手机',
-				field : 'phone',
-				align : 'center',
-				valign : 'middle'
-			}, {
-				title : '邮箱',
-				field : 'email',
-				align : 'center',
-				valign : 'middle'
-			}, {
-				title : '地址',
-				field : 'addr',
-				align : 'center',
-				valign : 'middle'
-			} ]
-		});
-		
-	}
 	
-	function addCustom(){
+	var _customTableConfig = new TableConfig(
+			'/api/custom/list',
+			[
+					{
+						checkbox : true, // 使用复选框
+						field : 'state',
+						align : 'center',
+						valign : 'middle'
+					},
+					{
+						title : '姓名',
+						field : 'name',
+						align : 'left',
+						valign : 'middle',
+						formatter : function(value, row, index) {
+							var str = '<a href="#">' + value + '</a>';
+							return value;
+						}
+					},
+					{
+						title : '手机',
+						field : 'phone',
+						align : 'left',
+						valign : 'middle'
+					},
+					{
+						title : 'QQ',
+						field : 'qq',
+						align : 'left',
+						valign : 'middle'
+					},
+					{
+						title : '微信',
+						field : 'weixin',
+						align : 'left',
+						valign : 'middle'
+					},
+					{
+						title : '邮箱',
+						field : 'email',
+						align : 'left',
+						valign : 'middle',
+						formatter : function(value, row, index) {
+							var str = '<a href="#">' + value + '</a>';
+							return value;
+						}
+					},
+					{
+						title : '地址',
+						field : 'addr',
+						align : 'left',
+						valign : 'middle'
+					},
+					{
+						title : '操作',
+						field : 'id',
+						align : 'center',
+						valign : 'middle',
+						formatter : function(value, row, index) {
+							var a = '<button class="btn btn-link btn-sm" onclick="modifyCustom('
+									+ value
+									+ ')"><span class="glyphicon glyphicon-edit"></span>编辑</button>';
+							return a;
+						}
+					} ]);
+
+	var controller = {
+		loadData : function() {
+			$('#custom_table').bootstrapTable(_customTableConfig);
+		}
+	};
+
+	function clickAdd() {
+
+	}
+
+	function clickModify(id) {
+
+	}
+
+	function addCustom() {
 		$('#custom_form').ajaxSubmit({
-			url:'/api/custom/add',
-			 type: 'post',
-			 dataType : "json",
-			 data: $("#form1").serialize(),
-			 success: function(data){
-				 if(data){
-					 if (data.code == 100) {
-						 console.log('ok');
-					 }else{
-						 console.log(data.msg);
-					 }
-				 }else{
-					 console.log("服务器未响应");
-				 }
-			 }
+			url : '/api/custom/add',
+			type : 'post',
+			dataType : 'json',
+			data : $("#form1").serialize(),
+			success : function(data) {
+				if (data) {
+					if (data.code == 100) {
+						toastr.success('添加成功');
+						$('#custom_form')[0].reset();
+						$('#dia-custom').modal('hide');
+						$('#custom_table').bootstrapTable('refresh');
+					} else {
+						toastr.warning(data.code + ':' + data.msg);
+					}
+				} else {
+					toastr.warning('服务器未响应');
+				}
+			}
 		});
 	}
+
+	function delCustoms() {
+		var selects = $('#custom_table').bootstrapTable('getSelections');
+		if (selects.length == 0) {
+			toastr.warning('未选中任何数据');
+			return;
+		}
+		var ids = new Array();
+		for ( var i in selects) {
+			var select = selects[i];
+			ids[i] = select.id;
+
+		}
+		delCustom(ids, 0);
+	}
+	// 递归删除
+	function delCustom(ids, index) {
+		if (index<0 || index >= ids.length) {
+			toastr.success('ok');
+			$('#custom_table').bootstrapTable('refresh');
+		} else {
+			$.ajax({
+				url : '/api/custom/del',
+				type : 'post',
+				dataType : 'json',
+				data : {
+					id : ids[index]
+				},
+				success : function(data) {
+					if (data) {
+						if (data.code == 100) {
+							// 成功
+							toastr.success('id -> ' + ids[index] + ' 删除成功!');
+							delCustom(ids, index + 1);
+						} else {
+							toastr.warning(data.code + ':' + data.msg);
+							delCustom(ids, index + 1);
+							// 询问是否继续
+						}
+					} else {
+						// 未响应
+						toastr.warning('id -> ' + ids[index] + ' 未响应!');
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					toastr.error(XMLHttpRequest.status);
+				}
+			});
+		}
+	}
+
+	function modifyCustom(value) {
+
+	}
+
+	function saveCustom() {
+
+	}
+
+	$(function() {
+		controller.loadData();
+	});
 </script>
 
-<div>
-	<legend id="theme-legend">客户管理</legend>
-</div>
-<button class="btn btn-primary" data-toggle="modal"
-	data-target="#dia-custom">添加</button>
-<button class="btn btn-danger">删除</button>
 
-<table id="custom_table"></table>
+<legend id="theme-legend" class="text-default">
+	<span class="glyphicon glyphicon-tags">&nbsp;</span>客户管理
+</legend>
+
+<div class="btn-toolbar" role="toolbar" id="custom-table-toolbar">
+	<div class="btn-group" role="group">
+		<button class="btn btn-primary" data-toggle="modal"
+			data-target="#dia-custom">
+			<span class="glyphicon glyphicon-plus"></span>添加
+		</button>
+		<button class="btn btn-danger" onclick="delCustoms()">
+			<span class="glyphicon glyphicon-minus"></span>删除
+		</button>
+	</div>
+	<div id="select-control-group" class="btn-group" role="group"></div>
+</div>
+
+<table id="custom_table" class="table table-condensed"></table>
 
 <!-- 添加窗口 -->
 <div class="modal fade" id="dia-custom" tabindex="-1" role="dialog"

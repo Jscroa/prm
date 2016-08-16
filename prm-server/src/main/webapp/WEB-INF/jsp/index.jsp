@@ -14,8 +14,11 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
-	<div>
-		<legend id="theme-legend"> 主页 </legend>
+	<div class="container-fluid">
+		<div class="jumbotron">
+			<h1>Hello!</h1>
+			<p>This is the index page!</p>
+		</div>
 	</div>
 </body>
 </html>

@@ -45,12 +45,13 @@ public class CustomService {
 	@Autowired
 	IGroupToCustomDao groupToCustomDao;
 	
-	public PageDto<CustomDto> getPrivateCustoms(CurrUser currUser, String order, int offset, int limit) throws BusinessException{
-		//TODO page
+	public PageDto<CustomDto> getPrivateCustoms(CurrUser currUser, String search, String order, int offset, int limit) throws BusinessException{
+		// 获取当前登录账号的用户组
 		List<AccGroup> groups = accToGroupDao.getGroups(currUser.getGuid());
 		if(groups==null || groups.size()==0){
 			throw new BusinessException("数据错误");
 		}
+		// 获取私有用户组
 		AccGroup group = null;
 		for (AccGroup accGroup : groups) {
 			if(accGroup.getIsPrivate()){
@@ -61,8 +62,9 @@ public class CustomService {
 		if(group == null){
 			throw new BusinessException("数据错误");
 		}
-		int total = groupToCustomDao.getCustomCount(group.getGuid());
-		List<Custom> customs = groupToCustomDao.getCustoms(group.getGuid(),offset,limit);
+		// 私有用户组的客户
+		List<Custom> customs = groupToCustomDao.getCustoms(group.getGuid(),search,offset,limit);
+		int total = groupToCustomDao.getCustomCount();
 		List<CustomDto> dtos = new ArrayList<>();
 		for (Custom custom : customs) {
 			CustomDto dto = new CustomDto();
@@ -87,9 +89,9 @@ public class CustomService {
 		}
 		
 		PageDto<CustomDto> page = new PageDto<>();
-		page.setData(dtos);
+		page.setRows(dtos);
 		page.setTotal(total);
-		page.setCurrentPage(offset/limit +1);
+		page.setPage(offset/limit +1);
 		return page;
 	}
 	
@@ -206,10 +208,14 @@ public class CustomService {
 		if(custom==null){
 			throw new BusinessException("没有此客户");
 		}
+		if(custom.getStatus()==DB_STATUS.STATUS_INACTIVE){
+			throw new BusinessException("该客户已删除");
+		}
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		custom.setStatus(DB_STATUS.STATUS_INACTIVE);
 		custom.setModifyTime(now);
 		custom.setModifyUser(currUser.getGuid());
+		customDao.modify(custom);
 	}
 	
 }

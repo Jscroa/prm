@@ -2,14 +2,14 @@ package cn.prm.server.dto;
 
 public class PageDto<T> extends ListDto<T> {
 	
-	private int currentPage;
+	private int page;
 	private int total;
 	
-	public int getCurrentPage() {
-		return currentPage;
+	public int getPage() {
+		return page;
 	}
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
+	public void setPage(int page) {
+		this.page = page;
 	}
 	public int getTotal() {
 		return total;

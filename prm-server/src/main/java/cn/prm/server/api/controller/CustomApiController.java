@@ -35,9 +35,9 @@ public class CustomApiController extends BaseController {
 			if (currUser == null) {
 				return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
 			}
-			PageDto<CustomDto> page = customService.getPrivateCustoms(currUser, form.getOrder(), form.getOffset(), form.getLimit());
+			PageDto<CustomDto> page = customService.getPrivateCustoms(currUser, form.getSearch(), form.getOrder(), form.getOffset(), form.getLimit());
 			page.setCode(RESPONSE_CODE.CODE_SUCCESS);
-			return page.getData();
+			return page;
 		}catch (BusinessException e) {
 			e.printStackTrace();
 			return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
@@ -74,4 +74,5 @@ public class CustomApiController extends BaseController {
 			return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
 		}
 	}
+	
 }
