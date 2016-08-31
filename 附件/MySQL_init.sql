@@ -333,7 +333,7 @@ CREATE TABLE `t_custom` (
   `create_time` timestamp NULL DEFAULT NULL,
   `modify_time` timestamp NULL DEFAULT NULL,
   `sex` tinyint(4) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户表';
 /*!40101 SET character_set_client = @saved_cs_client */;

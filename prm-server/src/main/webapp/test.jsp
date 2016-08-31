@@ -54,6 +54,7 @@ $(function(){
 	
 </script>
 <body>
+<div class="container">
 	<h1>test</h1>
 	
 	<fieldset>
@@ -84,6 +85,6 @@ $(function(){
 	</form>
 	<button onclick="getFormKVs();">查看</button>
 	</fieldset>
-	
+	</div>
 </body>
 </html>

@@ -1,12 +1,16 @@
 package cn.prm.server.form;
 
+import java.sql.Date;
+
 public class CustomForm {
 
 	private String name;
 	private Boolean sex;
-	private Integer age;
+	private String birthday;
 	private String phone;
 	private String email;
+	private String qq;
+	private String weixin;
 	private String addr;
 	
 	public String getName() {
@@ -21,11 +25,11 @@ public class CustomForm {
 	public void setSex(Boolean sex) {
 		this.sex = sex;
 	}
-	public Integer getAge() {
-		return age;
+	public String getBirthday() {
+		return birthday;
 	}
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
 	}
 	public String getPhone() {
 		return phone;
@@ -38,6 +42,18 @@ public class CustomForm {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getQq() {
+		return qq;
+	}
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+	public String getWeixin() {
+		return weixin;
+	}
+	public void setWeixin(String weixin) {
+		this.weixin = weixin;
 	}
 	public String getAddr() {
 		return addr;

@@ -18,7 +18,7 @@ import cn.prm.server.entity.Custom;
 @Repository
 public class CustomDaoImpl implements ICustomDao {
 
-	private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time,sex,age";
+	private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time,sex,birthday";
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -36,7 +36,7 @@ public class CustomDaoImpl implements ICustomDao {
 		custom.setCreateTime(rs.getTimestamp("create_time"));
 		custom.setModifyTime(rs.getTimestamp("modify_time"));
 		custom.setSex(rs.getBoolean("sex"));
-		custom.setAge(rs.getInt("age"));
+		custom.setBirthday(rs.getDate("birthday"));
 		return custom;
 	}
 
@@ -57,7 +57,7 @@ public class CustomDaoImpl implements ICustomDao {
 				ps.setTimestamp(8, t.getCreateTime());
 				ps.setTimestamp(9, t.getModifyTime());
 				ps.setBoolean(10, t.getSex());
-				ps.setInt(11, t.getAge());
+				ps.setDate(11, t.getBirthday());
 			}
 			
 		});
@@ -78,7 +78,7 @@ public class CustomDaoImpl implements ICustomDao {
 
 	@Override
 	public void modify(final Custom t) {
-		String sql = "update t_custom set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,sex=?,age=? where guid=?";
+		String sql = "update t_custom set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,sex=?,birthday=? where guid=?";
 		jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
 			@Override
@@ -92,7 +92,7 @@ public class CustomDaoImpl implements ICustomDao {
 				ps.setTimestamp(7, t.getCreateTime());
 				ps.setTimestamp(8, t.getModifyTime());
 				ps.setBoolean(9, t.getSex());
-				ps.setInt(10, t.getAge());
+				ps.setDate(10, t.getBirthday());
 				ps.setString(11, t.getGuid());
 			}
 		});

@@ -2,7 +2,6 @@
 	pageEncoding="utf-8"%>
 
 <script type="text/javascript">
-	
 	var _customTableConfig = new TableConfig(
 			'/api/custom/list',
 			[
@@ -49,12 +48,6 @@
 							var str = '<a href="#">' + value + '</a>';
 							return value;
 						}
-					},
-					{
-						title : '地址',
-						field : 'addr',
-						align : 'left',
-						valign : 'middle'
 					},
 					{
 						title : '操作',
@@ -122,7 +115,7 @@
 	}
 	// 递归删除
 	function delCustom(ids, index) {
-		if (index<0 || index >= ids.length) {
+		if (index < 0 || ids.length <= index) {
 			toastr.success('ok');
 			$('#custom_table').bootstrapTable('refresh');
 		} else {
@@ -166,6 +159,10 @@
 
 	$(function() {
 		controller.loadData();
+		$('.datepicker').datepicker({
+			language: "zh-CN",
+			format: "yyyy年mm月dd日"
+		});
 	});
 </script>
 
@@ -244,10 +241,37 @@
 					</div>
 
 					<div class="form-group">
+						<label for="inputQQ" class="col-sm-3 control-label">QQ：</label>
+						<div class="col-sm-9">
+							<input type="text" name="qq" class="form-control"
+								placeholder="QQ" id="inputQQ" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputWeiXin" class="col-sm-3 control-label">微信：</label>
+						<div class="col-sm-9">
+							<input type="text" name="weixin" class="form-control"
+								placeholder="WeiXin" id="inputWeiXin" required>
+						</div>
+					</div>
+
+					<div class="form-group">
 						<label for="inputAddr" class="col-sm-3 control-label">地址：</label>
 						<div class="col-sm-9">
 							<input type="text" name="addr" class="form-control"
 								placeholder="Address" id="inputAddr" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputBirthday" class="col-sm-3 control-label">出生年月：</label>
+						<div class="col-sm-9">
+						<div class="input-group">
+							<input name="birthday" class="datepicker form-control"
+								placeholder="Birthday" id="inputBirthday" required>
+								<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+						</div>
 						</div>
 					</div>
 

@@ -106,7 +106,7 @@ public class CustomToContactDaoImpl implements ICustomToContactDao {
 
 	@Override
 	public CustomToContact get(String id) {
-		String sql = "select " + COLS + " from t_acc_to_group where guid=?";
+		String sql = "select " + COLS + " from t_custom_to_contact where guid=?";
 		List<CustomToContact> list = jdbcTemplate.query(sql, new Object[] { id },
 				new RowMapper<CustomToContact>() {
 

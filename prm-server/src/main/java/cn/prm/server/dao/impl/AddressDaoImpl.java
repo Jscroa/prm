@@ -12,36 +12,36 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import cn.prm.server.dao.IContactDao;
+import cn.prm.server.dao.IAddressDao;
+import cn.prm.server.entity.Address;
 import cn.prm.server.entity.Contact;
-import cn.prm.server.entity.Custom;
 
 @Repository
-public class ContactDaoImpl implements IContactDao{
+public class AddressDaoImpl implements IAddressDao{
 
 	private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time";
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-
+	
 	@Override
-	public Contact extract(ResultSet rs) throws SQLException, DataAccessException {
-		Contact contact = new Contact();
-		contact.setGuid(rs.getString("guid"));
-		contact.setStdName(rs.getString("std_name"));
-		contact.setStdCode(rs.getInt("std_code"));
-		contact.setStatus(rs.getInt("status"));
-		contact.setMemo(rs.getString("memo"));
-		contact.setCreateUser(rs.getString("create_user"));
-		contact.setModifyUser(rs.getString("modify_user"));
-		contact.setCreateTime(rs.getTimestamp("create_time"));
-		contact.setModifyTime(rs.getTimestamp("modify_time"));
-		return contact;
+	public Address extract(ResultSet rs) throws SQLException, DataAccessException {
+		Address address = new Address();
+		address.setGuid(rs.getString("guid"));
+		address.setStdName(rs.getString("std_name"));
+		address.setStdCode(rs.getInt("std_code"));
+		address.setStatus(rs.getInt("status"));
+		address.setMemo(rs.getString("memo"));
+		address.setCreateUser(rs.getString("create_user"));
+		address.setModifyUser(rs.getString("modify_user"));
+		address.setCreateTime(rs.getTimestamp("create_time"));
+		address.setModifyTime(rs.getTimestamp("modify_time"));
+		return address;
 	}
 
 	@Override
-	public void add(final Contact t) {
-		String sql = "insert into t_contact(" + COLS + ") values(?,?,?,?,?,?,?,?,?)";
+	public void add(final Address t) {
+		String sql = "insert into t_address(" + COLS + ") values(?,?,?,?,?,?,?,?,?)";
 		jdbcTemplate.update(sql,new PreparedStatementSetter(){
 
 			@Override
@@ -62,7 +62,7 @@ public class ContactDaoImpl implements IContactDao{
 
 	@Override
 	public void delete(final String id) {
-		String sql = "delete from t_contact where guid=?";
+		String sql = "delete from t_address where guid=?";
 		jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
 			@Override
@@ -74,8 +74,8 @@ public class ContactDaoImpl implements IContactDao{
 	}
 
 	@Override
-	public void modify(final Contact t) {
-		String sql = "update t_contact set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=? where guid=?";
+	public void modify(final Address t) {
+		String sql = "update t_address set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=? where guid=?";
 		jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
 			@Override
@@ -94,12 +94,12 @@ public class ContactDaoImpl implements IContactDao{
 	}
 
 	@Override
-	public Contact get(String id) {
-		String sql = "select " + COLS + " from t_contact where guid=?";
-		List<Contact> list = jdbcTemplate.query(sql, new Object[] { id }, new RowMapper<Contact>() {
+	public Address get(String id) {
+		String sql = "select " + COLS + " from t_address where guid=?";
+		List<Address> list = jdbcTemplate.query(sql, new Object[] { id }, new RowMapper<Address>() {
 
 			@Override
-			public Contact mapRow(ResultSet rs, int rowNum) throws SQLException {
+			public Address mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return extract(rs);
 			}
 		});
@@ -108,6 +108,5 @@ public class ContactDaoImpl implements IContactDao{
 		}
 		return null;
 	}
-	
 
 }

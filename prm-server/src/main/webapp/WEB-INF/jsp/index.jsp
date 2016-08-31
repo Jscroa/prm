@@ -14,10 +14,13 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
-	<div class="container-fluid">
+	<div class="container">
+	<!-- <div class="container-fluid"> -->
 		<div class="jumbotron">
 			<h1>Hello!</h1>
 			<p>This is the index page!</p>
+			<p><a href="/test.jsp"><small>test</small></a></p>
+		<p><a href="/test_baidumap.jsp"><small>test baidu map</small></a></p>
 		</div>
 	</div>
 </body>

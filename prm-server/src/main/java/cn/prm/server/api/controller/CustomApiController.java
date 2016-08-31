@@ -46,7 +46,6 @@ public class CustomApiController extends BaseController {
 	
 	@RequestMapping("/add")
 	public Object add(HttpServletRequest request, CustomForm form) {
-		form.setAge(1);
 		try {
 			CurrUser currUser = getCurrUser(request);
 			if (currUser == null) {

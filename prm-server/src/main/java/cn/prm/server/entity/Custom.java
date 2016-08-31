@@ -1,6 +1,7 @@
 package cn.prm.server.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class Custom extends BaseEntity implements Serializable {
 
@@ -10,7 +11,7 @@ public class Custom extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 4800415409041691492L;
 	
 	private Boolean sex;
-	private Integer age;
+	private Date birthday;
 	
 	public Boolean getSex() {
 		return sex;
@@ -18,11 +19,11 @@ public class Custom extends BaseEntity implements Serializable {
 	public void setSex(Boolean sex) {
 		this.sex = sex;
 	}
-	public Integer getAge() {
-		return age;
+	public Date getBirthday() {
+		return birthday;
 	}
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 	
 }
