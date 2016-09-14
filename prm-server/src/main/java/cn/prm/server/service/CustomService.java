@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.Constants;
@@ -81,6 +82,7 @@ public class CustomService {
 			CustomDto dto = new CustomDto();
 			dto.setId(custom.getGuid());
 			dto.setName(custom.getStdName());
+			// 获取联系方式列表
 			List<Contact> contacts = customToContactDao.getContacts(custom.getGuid());
 			
 			if(contacts!=null && contacts.size()>0){
@@ -107,6 +109,7 @@ public class CustomService {
 		return page;
 	}
 	
+	@Transactional
 	public void addPrivateCustom(CurrUser currUser, CustomForm form) throws BusinessException{
 		
 		if(form.getName()==null || "".equals(form.getName())){

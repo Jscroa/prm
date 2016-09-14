@@ -2,65 +2,73 @@
 	pageEncoding="utf-8"%>
 
 <script type="text/javascript">
-	var _customTableConfig = new TableConfig(
-			'/api/custom/list',
-			[
-					{
-						checkbox : true, // 使用复选框
-						field : 'state',
-						align : 'center',
-						valign : 'middle'
-					},
-					{
-						title : '姓名',
-						field : 'name',
-						align : 'left',
-						valign : 'middle',
-						formatter : function(value, row, index) {
-							var str = '<a href="#">' + value + '</a>';
-							return value;
-						}
-					},
-					{
-						title : '手机',
-						field : 'phone',
-						align : 'left',
-						valign : 'middle'
-					},
-					{
-						title : 'QQ',
-						field : 'qq',
-						align : 'left',
-						valign : 'middle'
-					},
-					{
-						title : '微信',
-						field : 'weixin',
-						align : 'left',
-						valign : 'middle'
-					},
-					{
-						title : '邮箱',
-						field : 'email',
-						align : 'left',
-						valign : 'middle',
-						formatter : function(value, row, index) {
-							var str = '<a href="#">' + value + '</a>';
-							return value;
-						}
-					},
-					{
-						title : '操作',
-						field : 'id',
-						align : 'center',
-						valign : 'middle',
-						formatter : function(value, row, index) {
-							var a = '<button class="btn btn-link btn-sm" onclick="modifyCustom('
-									+ value
-									+ ')"><span class="glyphicon glyphicon-edit"></span>编辑</button>';
-							return a;
-						}
-					} ]);
+	var _customTableConfig = new TableConfig('/api/custom/list','#custom-table-toolbar', [
+			{
+				checkbox : true, // 使用复选框
+				field : 'state',
+				align : 'center',
+				valign : 'middle'
+			},
+			{
+				title : '姓名',
+				field : 'name',
+				align : 'left',
+				valign : 'middle',
+				formatter : function(value, row, index) {
+					var str = '<a href="#">' + value + '</a>';
+					return value;
+				}
+			},
+			{
+				title : '手机',
+				field : 'phone',
+				align : 'left',
+				valign : 'middle'
+			},
+			{
+				title : 'QQ',
+				field : 'qq',
+				align : 'left',
+				valign : 'middle'
+			},
+			{
+				title : '微信',
+				field : 'weixin',
+				align : 'left',
+				valign : 'middle'
+			},
+			{
+				title : '邮箱',
+				field : 'email',
+				align : 'left',
+				valign : 'middle',
+				formatter : function(value, row, index) {
+					var str = '<a href="#">' + value + '</a>';
+					return value;
+				}
+			},
+			{
+				title : '操作',
+				field : 'id',
+				align : 'center',
+				valign : 'middle',
+				formatter : function(value, row, index) {
+
+					return [
+							'<button class="btn btn-primary btn-sm" onclick="modifyCustom('
+									+ value + ')">',
+							'<span class="glyphicon glyphicon-map-marker">',
+							'</span>',
+							'&nbsp;地址管理',
+							'</button>',
+							'&nbsp;&nbsp;',
+							'<button class="btn btn-primary btn-sm" onclick="modifyCustom('
+									+ value + ')">',
+							'<span class="glyphicon glyphicon-edit">',
+							'</span>', '&nbsp;编辑',
+							'</button>' ].join('');
+				}
+			} ]);
 
 	var controller = {
 		loadData : function() {
@@ -69,7 +77,8 @@
 	};
 
 	function clickAdd() {
-
+		$('#custom_form')[0].reset();
+		$('#dia-custom').modal('show');
 	}
 
 	function clickModify(id) {
@@ -103,6 +112,9 @@
 		var selects = $('#custom_table').bootstrapTable('getSelections');
 		if (selects.length == 0) {
 			toastr.warning('未选中任何数据');
+			return;
+		}
+		if (!confirm('确定删除选中的' + selects.length + '条数据？')) {
 			return;
 		}
 		var ids = new Array();
@@ -160,8 +172,8 @@
 	$(function() {
 		controller.loadData();
 		$('.datepicker').datepicker({
-			language: "zh-CN",
-			format: "yyyy年mm月dd日"
+			language : "zh-CN",
+			format : "yyyy年mm月dd日"
 		});
 	});
 </script>
@@ -174,11 +186,11 @@
 <div class="btn-toolbar" role="toolbar" id="custom-table-toolbar">
 	<div class="btn-group" role="group">
 		<button class="btn btn-primary" data-toggle="modal"
-			data-target="#dia-custom">
-			<span class="glyphicon glyphicon-plus"></span>添加
+			onclick="clickAdd();">
+			<span class="glyphicon glyphicon-plus"></span>&nbsp;添加
 		</button>
 		<button class="btn btn-danger" onclick="delCustoms()">
-			<span class="glyphicon glyphicon-minus"></span>删除
+			<span class="glyphicon glyphicon-minus"></span>&nbsp;删除
 		</button>
 	</div>
 	<div id="select-control-group" class="btn-group" role="group"></div>
@@ -267,11 +279,12 @@
 					<div class="form-group">
 						<label for="inputBirthday" class="col-sm-3 control-label">出生年月：</label>
 						<div class="col-sm-9">
-						<div class="input-group">
-							<input name="birthday" class="datepicker form-control"
-								placeholder="Birthday" id="inputBirthday" required>
-								<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-						</div>
+							<div class="input-group">
+								<input name="birthday" class="datepicker form-control"
+									placeholder="Birthday" id="inputBirthday" required> <span
+									class="input-group-addon" id="basic-addon1"><span
+									class="glyphicon glyphicon-calendar"></span></span>
+							</div>
 						</div>
 					</div>
 

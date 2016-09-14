@@ -17,6 +17,14 @@
 <script src="/js/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="/js/bs-config.js"></script>
 <style type="text/css">
+.table thead tr {
+	background-color: #494949;
+	color: #CCCCCC;
+}
+
+.table thead tr :HOVER {
+	color: #FFFFFF;
+}
 </style>
 
 <title>PRM</title>
@@ -28,9 +36,8 @@
 			$('#nav_custom').addClass('active');
 		</script>
 	</div>
-	<div class="container">
-	<!-- <div class="container-fluid"> -->
-	<%@include file="/WEB-INF/jsp/components/custom/custom.jsp"%>
+	<div class="container-fluid">
+		<%@include file="/WEB-INF/jsp/components/custom/custom.jsp"%>
 	</div>
 </body>
 </html>

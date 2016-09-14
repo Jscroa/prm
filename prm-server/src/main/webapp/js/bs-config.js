@@ -1,8 +1,8 @@
-function TableConfig(url,columns){
+function TableConfig(url,toolbar,columns){
 		this.url = url;
 		this.columns = columns;
 		this.dataType = 'json'; // 数据格式
-		this.toolbar = '#custom-table-toolbar'; // 工具栏
+		this.toolbar = toolbar; // 工具栏
 		this.cache = false; // 关闭缓存
 		this.sortable = false; // 是否启用排序
 		this.pagination = true; // 分页
@@ -22,7 +22,7 @@ function TableConfig(url,columns){
 				strclass = '';
 			}
 			return {
-				classes : strclass
+				classes : ''
 			};
 		};
 		
