@@ -15,13 +15,32 @@
 <body>
 	<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
 	<div class="container">
-	<!-- <div class="container-fluid"> -->
+		<!-- <div class="container-fluid"> -->
 		<div class="jumbotron">
 			<h1>Hello!</h1>
 			<p>This is the index page!</p>
-			<p><a href="/test.jsp"><small>test</small></a></p>
-		<p><a href="/test_baidumap.jsp"><small>test baidu map</small></a></p>
+			<p>
+				<a href="/test.jsp"><small>test</small></a>
+			</p>
+			<p>
+				<a href="/test_baidumap.jsp"><small>test baidu map</small></a>
+			</p>
+			<button class="btn btn-default" onclick="initCountry();">初始化国家</button>
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+function initCountry(){
+	$.ajax({
+		url:'/api/country/init',
+		type:'post',
+		success:function(data){
+			alert(data.msg);
+		},
+		error(e1,e2,e3){
+			alert('失败'+e1+e2+e3);
+		}
+	});
+}
+</script>
 </html>

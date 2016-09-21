@@ -18,6 +18,12 @@
 <script src="/js/bootstrap-datepicker.min.js"></script>
 <script src="/js/bootstrap-datepicker.zh-CN.min.js"></script>
 
+<style type="text/css">
+legend{
+color: blue;
+}
+</style>
+
 <script type="text/javascript">
 $(function(){
 	$('.datepicker').datepicker({
@@ -27,7 +33,7 @@ $(function(){
 });
 </script>
 
-<title>Insert title here</title>
+<title>prm-test</title>
 </head>
 <script type="text/javascript">
 	// local storage
@@ -48,9 +54,42 @@ $(function(){
 	function getFormKVs(){
 		var form = $('#form1')
 		console.log(form.serializeArray());
+		
 	}
 	// ! form
 	
+	// fifo
+	function fifoTest(){
+		var log = $('#fifoLog');
+		log.html('');
+		var a = new Array();
+		log.append('<p>'+a+'</p>');
+		log.append('<p>入列</p>');
+		a.unshift(1);
+		log.append('<p>'+a+'</p>');
+		a.unshift(2);
+		log.append('<p>'+a+'</p>');
+		a.unshift(3);
+		log.append('<p>'+a+'</p>');
+		a.unshift(4);
+		log.append('<p>'+a+'</p>');
+		a.unshift(5);
+		log.append('<p>'+a+'</p>');
+		log.append('<p>出列</p>');
+		log.append('<p>'+a+'</p>');
+		a.pop();
+		log.append('<p>'+a+'</p>');
+		a.pop();
+		log.append('<p>'+a+'</p>');
+		a.pop();
+		log.append('<p>'+a+'</p>');
+		a.pop();
+		log.append('<p>'+a+'</p>');
+		a.pop();
+		log.append('<p>'+a+'</p>');
+		console.log('=========================');
+	}
+	// ! fifo
 	
 </script>
 <body>
@@ -83,7 +122,13 @@ $(function(){
 			<option value="1003">1003</option>
 		</select>
 	</form>
-	<button onclick="getFormKVs();">查看</button>
+	<button onclick="getFormKVs();">查看</button><label id="formLook"></label>
+	</fieldset>
+	<fieldset>
+	<legend>队列测试</legend>
+	<button onclick="fifoTest();">开始</button>
+	<div id="fifoLog" style="background-color:white; height: 200px; overflow: auto;">
+	</div>
 	</fieldset>
 	</div>
 </body>
