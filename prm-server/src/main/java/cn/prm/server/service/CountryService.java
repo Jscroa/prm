@@ -21,6 +21,14 @@ import cn.prm.server.entity.Country;
 import cn.prm.server.exception.BusinessException;
 import cn.prm.server.form.CountryForm;
 
+/**
+ * @Title: CountryService.java
+ * @Package: cn.prm.server.service
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:40:31
+ * @version v1.0
+ */
 @Service(value = "countryService")
 public class CountryService {
 	
@@ -29,6 +37,14 @@ public class CountryService {
 	@Autowired
 	ICountryDao countryDao;
 	
+	/** 
+	 * @Title: createCountry 
+	 * @Description: 
+	 * @param currUser
+	 * @param form
+	 * @throws BusinessException
+	 * @throws 
+	 */
 	public void createCountry(CurrUser currUser, CountryForm form) throws BusinessException{
 		String stdName = form.getStdName();
 		String enName = form.getEnName();
@@ -62,6 +78,12 @@ public class CountryService {
 		countryDao.add(country);
 	}
 	
+	/** 
+	 * @Title: getAll 
+	 * @Description: 
+	 * @return
+	 * @throws 
+	 */
 	public ListDto<CountryDto> getAll(){
 		List<Country> countries = countryDao.getByStatus(DB_STATUS.STATUS_ACTIVE,"en_name asc");
 		ListDto<CountryDto> list = new ListDto<>();

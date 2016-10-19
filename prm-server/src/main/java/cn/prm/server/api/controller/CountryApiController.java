@@ -18,6 +18,15 @@ import cn.prm.server.exception.BusinessException;
 import cn.prm.server.form.CountryForm;
 import cn.prm.server.service.CountryService;
 
+/**
+ * 
+ * @Title: CountryApiController.java
+ * @Package: cn.prm.server.api.controller
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午4:56:25
+ * @version v1.0
+ */
 @RestController
 @RequestMapping("/api/country")
 public class CountryApiController extends BaseController {
@@ -27,6 +36,14 @@ public class CountryApiController extends BaseController {
 	@Autowired
 	CountryService countryService;
 
+	/**
+	 * 
+	 * @Title: init 
+	 * @Description: 
+	 * @param request
+	 * @return
+	 * @throws
+	 */
 	@RequestMapping("/init")
 	public Object init(HttpServletRequest request) {
 		CurrUser currUser = getCurrUser(request);
@@ -63,6 +80,13 @@ public class CountryApiController extends BaseController {
 		return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, res);
 	}
 
+	/**
+	 * 
+	 * @Title: list 
+	 * @Description: 
+	 * @return
+	 * @throws
+	 */
 	@RequestMapping("/list")
 	public ListDto<CountryDto> list() {
 		ListDto<CountryDto> list = countryService.getAll();

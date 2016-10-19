@@ -20,6 +20,14 @@ import cn.prm.server.entity.Custom;
 import cn.prm.server.entity.CustomToContact;
 import cn.prm.server.entity.GroupToCustom;
 
+/**
+ * @Title: GroupToCustomDaoImpl.java
+ * @Package: cn.prm.server.dao.impl
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:29:55
+ * @version v1.0
+ */
 @Repository
 public class GroupToCustomDaoImpl implements IGroupToCustomDao {
 

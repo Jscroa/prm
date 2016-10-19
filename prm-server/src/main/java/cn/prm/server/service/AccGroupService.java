@@ -20,6 +20,14 @@ import cn.prm.server.entity.Account;
 import cn.prm.server.exception.BusinessException;
 import cn.prm.server.form.AccGroupForm;
 
+/**
+ * @Title: AccGroupService.java
+ * @Package: cn.prm.server.service
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:40:15
+ * @version v1.0
+ */
 @Service(value = "accGroupService")
 public class AccGroupService {
 
@@ -30,6 +38,14 @@ public class AccGroupService {
 	@Autowired
 	IAccToGroupDao accToGroupDao;
 
+	/** 
+	 * @Title: createGroup 
+	 * @Description: 
+	 * @param currUser
+	 * @param form
+	 * @throws BusinessException
+	 * @throws 
+	 */
 	public void createGroup(CurrUser currUser, AccGroupForm form) throws BusinessException {
 		String groupName = form.getGroupName();
 		if (groupName == null || "".equals(groupName)) {
@@ -59,6 +75,15 @@ public class AccGroupService {
 		accToGroupDao.add(accToGroup);
 	}
 
+	/** 
+	 * @Title: addAcc 
+	 * @Description: 
+	 * @param currUser
+	 * @param groupId
+	 * @param accIds
+	 * @throws BusinessException
+	 * @throws 
+	 */
 	public void addAcc(CurrUser currUser, String groupId, List<String> accIds) throws BusinessException {
 		if (groupId == null || "".equals(groupId)) {
 			throw new BusinessException("未指定账户组");
@@ -81,11 +106,26 @@ public class AccGroupService {
 		}
 	}
 
+	/** 
+	 * @Title: getGroupList 
+	 * @Description: 
+	 * @param currUser
+	 * @return
+	 * @throws 
+	 */
 	public List<AccGroup> getGroupList(CurrUser currUser) {
 		List<AccGroup> list = accToGroupDao.getGroups(currUser.getGuid());
 		return list;
 	}
 
+	/** 
+	 * @Title: getAccountList 
+	 * @Description: 
+	 * @param currUser
+	 * @param groupId
+	 * @return
+	 * @throws 
+	 */
 	public List<Account> getAccountList(CurrUser currUser, String groupId) {
 		AccToGroup accToGroup = accToGroupDao.get(currUser.getGuid(), groupId);
 		if(accToGroup==null){

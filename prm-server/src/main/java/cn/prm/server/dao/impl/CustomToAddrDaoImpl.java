@@ -20,6 +20,14 @@ import cn.prm.server.entity.Contact;
 import cn.prm.server.entity.CustomToAddr;
 import cn.prm.server.entity.CustomToContact;
 
+/**
+ * @Title: CustomToAddrDaoImpl.java
+ * @Package: cn.prm.server.dao.impl
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:30:00
+ * @version v1.0
+ */
 @Repository
 public class CustomToAddrDaoImpl implements ICustomToAddrDao {
 

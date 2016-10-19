@@ -11,12 +11,27 @@ import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.BaseController;
 import cn.prm.server.commons.MAVHelper;
 
+/**
+ * @Title: SettingController.java
+ * @Package: cn.prm.server.page.controller
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:42:39
+ * @version v1.0
+ */
 @Controller
 @RequestMapping("/setting")
 public class SettingController extends BaseController {
 	@Autowired
 	private MAVHelper mavHelper;
 
+	/** 
+	 * @Title: index 
+	 * @Description: 
+	 * @param request
+	 * @return
+	 * @throws 
+	 */
 	@RequestMapping({ "", "/index" })
 	public ModelAndView index(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();

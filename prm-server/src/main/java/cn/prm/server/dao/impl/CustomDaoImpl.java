@@ -15,6 +15,14 @@ import org.springframework.stereotype.Repository;
 import cn.prm.server.dao.ICustomDao;
 import cn.prm.server.entity.Custom;
 
+/**
+ * @Title: CustomDaoImpl.java
+ * @Package: cn.prm.server.dao.impl
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:29:43
+ * @version v1.0
+ */
 @Repository
 public class CustomDaoImpl implements ICustomDao {
 

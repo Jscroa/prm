@@ -9,14 +9,25 @@ import org.slf4j.LoggerFactory;
 import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.Constants.SESSION;
 
+/**
+ * 
+ * @Title: BaseController.java
+ * @Package: cn.prm.server.commons
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:21:48
+ * @version v1.0
+ */
 public abstract class BaseController {
 
 	private static final Logger log = LoggerFactory.getLogger(BaseController.class);
 
 	/**
-	 * 清除登录信息
 	 * 
+	 * @Title: clearCurrUser 
+	 * @Description: 清除登录信息
 	 * @param request
+	 * @throws
 	 */
 	protected void clearCurrUser(HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
@@ -28,10 +39,12 @@ public abstract class BaseController {
 	}
 
 	/**
-	 * 设置当前用户
 	 * 
+	 * @Title: setCurrUser 
+	 * @Description: 设置当前用户
 	 * @param request
 	 * @param currUser
+	 * @throws
 	 */
 	protected void setCurrUser(HttpServletRequest request, CurrUser currUser) {
 		HttpSession session = request.getSession(true);
@@ -43,11 +56,12 @@ public abstract class BaseController {
 	}
 
 	/**
-	 * 获取当前用户
 	 * 
+	 * @Title: getCurrUser 
+	 * @Description: 获取当前用户
 	 * @param request
 	 * @return
-	 * @throws SessionException
+	 * @throws
 	 */
 	protected CurrUser getCurrUser(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);

@@ -16,6 +16,14 @@ import cn.prm.server.commons.Constants;
 import cn.prm.server.dao.IAccountDao;
 import cn.prm.server.entity.Account;
 
+/**
+ * @Title: AccountDaoImpl.java
+ * @Package: cn.prm.server.dao.impl
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:29:22
+ * @version v1.0
+ */
 @Repository
 public class AccountDaoImpl implements IAccountDao {
 

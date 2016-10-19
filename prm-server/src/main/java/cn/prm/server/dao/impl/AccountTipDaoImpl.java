@@ -17,6 +17,14 @@ import cn.prm.server.dao.IAccountTipDao;
 import cn.prm.server.entity.Account;
 import cn.prm.server.entity.AccountTip;
 
+/**
+ * @Title: AccountTipDaoImpl.java
+ * @Package: cn.prm.server.dao.impl
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:29:26
+ * @version v1.0
+ */
 @Repository
 public class AccountTipDaoImpl implements IAccountTipDao {
 

@@ -16,6 +16,14 @@ import cn.prm.server.dao.IAddressDao;
 import cn.prm.server.entity.Address;
 import cn.prm.server.entity.Contact;
 
+/**
+ * @Title: AddressDaoImpl.java
+ * @Package: cn.prm.server.dao.impl
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:29:34
+ * @version v1.0
+ */
 @Repository
 public class AddressDaoImpl implements IAddressDao{
 

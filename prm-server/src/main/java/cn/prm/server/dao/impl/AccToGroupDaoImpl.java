@@ -20,6 +20,14 @@ import cn.prm.server.entity.AccGroup;
 import cn.prm.server.entity.AccToGroup;
 import cn.prm.server.entity.Account;
 
+/**
+ * @Title: AccToGroupDaoImpl.java
+ * @Package: cn.prm.server.dao.impl
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:29:30
+ * @version v1.0
+ */
 @Repository
 public class AccToGroupDaoImpl implements IAccToGroupDao {
 

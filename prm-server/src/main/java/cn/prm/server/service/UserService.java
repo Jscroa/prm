@@ -22,6 +22,14 @@ import cn.prm.server.exception.BusinessException;
 import cn.prm.server.form.UserLoginForm;
 import cn.prm.server.form.UserRegisterForm;
 
+/**
+ * @Title: UserService.java
+ * @Package: cn.prm.server.service
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:40:55
+ * @version v1.0
+ */
 @Service(value = "userService")
 public class UserService {
 
@@ -34,6 +42,14 @@ public class UserService {
 	@Autowired
 	IAccToGroupDao accToGroupDao;
 
+	/** 
+	 * @Title: login 
+	 * @Description: 
+	 * @param form
+	 * @return
+	 * @throws BusinessException
+	 * @throws 
+	 */
 	public CurrUser login(UserLoginForm form) throws BusinessException {
 		List<Account> list = accountDao.find(form.getEmail(), form.getPassword());
 
@@ -51,6 +67,14 @@ public class UserService {
 		return user;
 	}
 
+	/** 
+	 * @Title: register 
+	 * @Description: 
+	 * @param form
+	 * @return
+	 * @throws BusinessException
+	 * @throws 
+	 */
 	@Transactional(rollbackFor = Exception.class)
 	public CurrUser register(UserRegisterForm form) throws BusinessException {
 		List<Account> list1 = accountDao.findByEmail(form.getEmail());

@@ -19,6 +19,15 @@ import cn.prm.server.form.CustomForm;
 import cn.prm.server.form.PageBaseForm;
 import cn.prm.server.service.CustomService;
 
+/**
+ * 
+ * @Title: CustomApiController.java
+ * @Package: cn.prm.server.api.controller
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:19:41
+ * @version v1.0
+ */
 @RestController
 @RequestMapping("/api/custom")
 public class CustomApiController extends BaseController {
@@ -28,6 +37,15 @@ public class CustomApiController extends BaseController {
 	@Autowired
 	CustomService customService;
 
+	/**
+	 * 
+	 * @Title: list 
+	 * @Description: 
+	 * @param request
+	 * @param form
+	 * @return
+	 * @throws
+	 */
 	@RequestMapping("/list")
 	public Object list(HttpServletRequest request,PageBaseForm form){
 		try{
@@ -44,6 +62,15 @@ public class CustomApiController extends BaseController {
 		}
 	}
 	
+	/**
+	 * 
+	 * @Title: add 
+	 * @Description: 
+	 * @param request
+	 * @param form
+	 * @return
+	 * @throws
+	 */
 	@RequestMapping("/add")
 	public Object add(HttpServletRequest request, CustomForm form) {
 		try {
@@ -59,6 +86,15 @@ public class CustomApiController extends BaseController {
 		}
 	}
 
+	/**
+	 * 
+	 * @Title: delete 
+	 * @Description: 
+	 * @param request
+	 * @param id
+	 * @return
+	 * @throws
+	 */
 	@RequestMapping("/del")
 	public Object delete(HttpServletRequest request, String id) {
 		try {

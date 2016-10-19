@@ -37,6 +37,14 @@ import cn.prm.server.entity.GroupToCustom;
 import cn.prm.server.exception.BusinessException;
 import cn.prm.server.form.CustomForm;
 
+/**
+ * @Title: CustomService.java
+ * @Package: cn.prm.server.service
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:40:39
+ * @version v1.0
+ */
 @Service(value = "customService")
 public class CustomService {
 	
@@ -57,6 +65,18 @@ public class CustomService {
 	@Autowired
 	ICustomToAddrDao customToAddrDao;
 	
+	/** 
+	 * @Title: getPrivateCustoms 
+	 * @Description: 
+	 * @param currUser
+	 * @param search
+	 * @param order
+	 * @param offset
+	 * @param limit
+	 * @return
+	 * @throws BusinessException
+	 * @throws 
+	 */
 	public PageDto<CustomDto> getPrivateCustoms(CurrUser currUser, String search, String order, int offset, int limit) throws BusinessException{
 		// 获取当前登录账号的用户组
 		List<AccGroup> groups = accToGroupDao.getGroups(currUser.getGuid());
@@ -109,6 +129,14 @@ public class CustomService {
 		return page;
 	}
 	
+	/** 
+	 * @Title: addPrivateCustom 
+	 * @Description: 
+	 * @param currUser
+	 * @param form
+	 * @throws BusinessException
+	 * @throws 
+	 */
 	@Transactional
 	public void addPrivateCustom(CurrUser currUser, CustomForm form) throws BusinessException{
 		
@@ -309,6 +337,14 @@ public class CustomService {
 		}
 	}
 	
+	/** 
+	 * @Title: delete 
+	 * @Description: 
+	 * @param currUser
+	 * @param id
+	 * @throws BusinessException
+	 * @throws 
+	 */
 	public void delete(CurrUser currUser,String id) throws BusinessException{
 		if(id==null || "".equals(id)){
 			throw new BusinessException("未指定要删除的客户");

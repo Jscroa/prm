@@ -16,6 +16,14 @@ import cn.prm.server.commons.Constants;
 import cn.prm.server.dao.IAccGroupDao;
 import cn.prm.server.entity.AccGroup;
 
+/**
+ * @Title: AccGroupDaoImpl.java
+ * @Package: cn.prm.server.dao.impl
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:29:13
+ * @version v1.0
+ */
 @Repository
 public class AccGroupDaoImpl implements IAccGroupDao {
 

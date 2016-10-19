@@ -17,6 +17,15 @@ import cn.prm.server.form.UserLoginForm;
 import cn.prm.server.form.UserRegisterForm;
 import cn.prm.server.service.UserService;
 
+/**
+ * 
+ * @Title: UserApiController.java
+ * @Package: cn.prm.server.api.controller
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:20:07
+ * @version v1.0
+ */
 @RestController
 @RequestMapping("/api/user")
 public class UserApiController extends BaseController {
@@ -26,6 +35,15 @@ public class UserApiController extends BaseController {
 	@Autowired
 	UserService userService;
 
+	/**
+	 * 
+	 * @Title: login 
+	 * @Description: 
+	 * @param request
+	 * @param form
+	 * @return
+	 * @throws
+	 */
 	@RequestMapping("/login")
 	public Object login(HttpServletRequest request, UserLoginForm form) {
 		try {
@@ -40,12 +58,29 @@ public class UserApiController extends BaseController {
 		}
 	}
 
+	/**
+	 * 
+	 * @Title: logout 
+	 * @Description: 
+	 * @param request
+	 * @return
+	 * @throws
+	 */
 	@RequestMapping("/logout")
 	public Object logout(HttpServletRequest request) {
 		clearCurrUser(request);
 		return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "注销成功");
 	}
 
+	/**
+	 * 
+	 * @Title: register 
+	 * @Description: 
+	 * @param request
+	 * @param form
+	 * @return
+	 * @throws
+	 */
 	@RequestMapping("/register")
 	public Object register(HttpServletRequest request, UserRegisterForm form) {
 		try {

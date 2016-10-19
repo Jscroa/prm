@@ -16,6 +16,14 @@ import cn.prm.server.dao.IContactDao;
 import cn.prm.server.entity.Contact;
 import cn.prm.server.entity.Custom;
 
+/**
+ * @Title: ContactDaoImpl.java
+ * @Package: cn.prm.server.dao.impl
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:29:38
+ * @version v1.0
+ */
 @Repository
 public class ContactDaoImpl implements IContactDao{
 

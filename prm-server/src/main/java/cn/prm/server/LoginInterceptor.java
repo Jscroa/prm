@@ -12,6 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.Constants.SESSION;
 
+/**
+ * @Title: LoginInterceptor.java
+ * @Package: cn.prm.server
+ * @Description:
+ * @author yyao
+ * @date 2016年10月19日 下午5:39:55
+ * @version v1.0
+ */
 public class LoginInterceptor implements HandlerInterceptor {
 
 	private static final Logger log = LoggerFactory.getLogger(LoginInterceptor.class);
