@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.Constants;
 import cn.prm.server.commons.Constants.DB_STATUS;
-import cn.prm.server.commons.UUIDUtil;
 import cn.prm.server.dao.ICountryDao;
+import cn.prm.server.commons.UUIDUtil;
 import cn.prm.server.dto.CountryDto;
 import cn.prm.server.dto.ListDto;
 import cn.prm.server.dto.PageDto;
@@ -63,7 +63,7 @@ public class CountryService {
 	}
 	
 	public ListDto<CountryDto> getAll(){
-		List<Country> countries = countryDao.getByStatus(DB_STATUS.STATUS_ACTIVE);
+		List<Country> countries = countryDao.getByStatus(DB_STATUS.STATUS_ACTIVE,"en_name asc");
 		ListDto<CountryDto> list = new ListDto<>();
 		if(countries==null || countries.size()==0){
 			return list;

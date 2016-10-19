@@ -104,17 +104,16 @@ body {
 							</div>
 
 							<div class="form-group">
-								<div class="col-sm-12">
-									<button class=" form-control btn btn-primary"
+								<div class="col-sm-6">
+									<button class=" form-control btn btn-success"
 										ng-click="register();">确认提交</button>
 								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-12">
+								<div class="col-sm-6">
 									<a class="form-control btn btn-default" href="/login"
 										role="button">登&nbsp;&nbsp;陆</a>
 								</div>
 							</div>
+							
 						</form>
 					</div>
 				</div>

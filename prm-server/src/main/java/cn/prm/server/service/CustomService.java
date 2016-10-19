@@ -17,7 +17,6 @@ import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.Constants;
 import cn.prm.server.commons.Constants.CONTACT_TYPE;
 import cn.prm.server.commons.Constants.DB_STATUS;
-import cn.prm.server.commons.UUIDUtil;
 import cn.prm.server.dao.IAccToGroupDao;
 import cn.prm.server.dao.IAddressDao;
 import cn.prm.server.dao.IContactDao;
@@ -25,6 +24,7 @@ import cn.prm.server.dao.ICustomDao;
 import cn.prm.server.dao.ICustomToAddrDao;
 import cn.prm.server.dao.ICustomToContactDao;
 import cn.prm.server.dao.IGroupToCustomDao;
+import cn.prm.server.commons.UUIDUtil;
 import cn.prm.server.dto.CustomDto;
 import cn.prm.server.dto.PageDto;
 import cn.prm.server.entity.AccGroup;
@@ -125,11 +125,14 @@ public class CustomService {
 		custom.setSex(form.getSex());
 		
 		Date birthday = null;
-		try {
-			java.util.Date bir = new SimpleDateFormat("yyyy年MM月dd日").parse(form.getBirthday());
-			birthday = new Date(bir.getTime());
-		} catch (ParseException e) {
-			throw new BusinessException("出生年月格式错误");
+		String birthdayStr = form.getBirthday();
+		if(birthdayStr!=null && !"".equals(birthdayStr)){
+			try {
+				java.util.Date bir = new SimpleDateFormat("yyyy年MM月dd日").parse(form.getBirthday());
+				birthday = new Date(bir.getTime());
+			} catch (ParseException e) {
+				throw new BusinessException("出生年月格式错误");
+			}
 		}
 		custom.setBirthday(birthday);
 		custom.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);

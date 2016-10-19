@@ -22,7 +22,7 @@ function TableConfig(url,toolbar,columns){
 				strclass = '';
 			}
 			return {
-				classes : ''
+				classes : '' // 不变色
 			};
 		};
 		

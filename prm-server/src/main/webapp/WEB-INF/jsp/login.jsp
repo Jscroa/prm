@@ -63,7 +63,7 @@ body {
 								<label for="inputEmail" class="col-sm-3 control-label">邮箱：</label>
 								<div class="col-sm-9">
 									<input type="email" name="email" class="form-control"
-										placeholder="Email" ng-model="email" id="inputEmail" required>
+										placeholder="Email" ng-model="email" id="inputEmail" required />
 								</div>
 							</div>
 							<div class="form-group">
@@ -71,21 +71,21 @@ body {
 								<div class="col-sm-9">
 									<input type="password" name="password"
 										class="form-control" placeholder="Password"
-										ng-model="password" id="inputPassword" required>
+										ng-model="password" id="inputPassword" required />
 								</div>
 							</div>
 
 							<div class="form-group">
-								<div class="col-sm-12">
-									<button class="form-control btn btn-primary" ng-click="login();">登&nbsp;&nbsp;录</button>
-									
+								<div class="col-sm-6">
+									<button class="form-control btn btn-success"
+										ng-click="login();">登&nbsp;&nbsp;录</button>
+								</div>
+								<div class="col-sm-6">
+									<a class="form-control btn btn-default" href="/register"
+										role="button">注册新账号</a>
 								</div>
 							</div>
-							<div class="form-group">
-								<div class="col-sm-12">
-									<a class="form-control btn btn-default" href="/register" role="button">注册新账号</a>
-								</div>
-							</div>
+							
 						</form>
 					</div>
 				</div>

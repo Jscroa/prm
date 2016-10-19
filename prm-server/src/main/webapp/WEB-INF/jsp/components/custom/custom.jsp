@@ -89,6 +89,7 @@
 		$('#custom_form').ajaxSubmit({
 			url : '/api/custom/add',
 			type : 'post',
+			async : false,
 			dataType : 'json',
 			data : $("#form1").serialize(),
 			success : function(data) {
@@ -104,6 +105,9 @@
 				} else {
 					toastr.warning('服务器未响应');
 				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				toastr.error(XMLHttpRequest.status);
 			}
 		});
 	}
@@ -184,7 +188,7 @@
 </legend>
 
 <div class="btn-toolbar" role="toolbar" id="custom-table-toolbar">
-	<div class="btn-group" role="group">
+	<!-- <div class="btn-group" role="group"> -->
 		<button class="btn btn-primary" data-toggle="modal"
 			onclick="clickAdd();">
 			<span class="glyphicon glyphicon-plus"></span>&nbsp;添加
@@ -192,11 +196,11 @@
 		<button class="btn btn-danger" onclick="delCustoms()">
 			<span class="glyphicon glyphicon-minus"></span>&nbsp;删除
 		</button>
-	</div>
+	<!-- </div> -->
 	<div id="select-control-group" class="btn-group" role="group"></div>
 </div>
 
-<table id="custom_table" class="table table-condensed"></table>
+<table id="custom_table" class="table"></table>
 
 <!-- 添加窗口 -->
 <div class="modal fade" id="dia-custom" tabindex="-1" role="dialog"

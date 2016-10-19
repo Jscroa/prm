@@ -6,5 +6,5 @@ import cn.prm.server.entity.Country;
 
 public interface ICountryDao extends IBaseDao<Country> {
 
-	List<Country> getByStatus(int status);
+	List<Country> getByStatus(int status,String order);
 }
