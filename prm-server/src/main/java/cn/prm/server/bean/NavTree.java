@@ -3,10 +3,13 @@ package cn.prm.server.bean;
 import java.util.List;
 
 /**
- * 导航栏树结构
  * 
+ * @Title: NavTree.java
+ * @Package: cn.prm.server.bean
+ * @Description: 导航栏树结构
  * @author yyao
- *
+ * @date 2016年10月19日 下午6:19:11
+ * @version v1.0
  */
 public class NavTree {
 

@@ -21,7 +21,7 @@ import cn.prm.server.service.UserService;
  * 
  * @Title: UserApiController.java
  * @Package: cn.prm.server.api.controller
- * @Description:
+ * @Description: 关于账户的数据接口
  * @author yyao
  * @date 2016年10月19日 下午5:20:07
  * @version v1.0
@@ -38,7 +38,7 @@ public class UserApiController extends BaseController {
 	/**
 	 * 
 	 * @Title: login 
-	 * @Description: 
+	 * @Description: 登录
 	 * @param request
 	 * @param form
 	 * @return
@@ -61,7 +61,7 @@ public class UserApiController extends BaseController {
 	/**
 	 * 
 	 * @Title: logout 
-	 * @Description: 
+	 * @Description: 注销
 	 * @param request
 	 * @return
 	 * @throws
@@ -75,7 +75,7 @@ public class UserApiController extends BaseController {
 	/**
 	 * 
 	 * @Title: register 
-	 * @Description: 
+	 * @Description: 注册
 	 * @param request
 	 * @param form
 	 * @return

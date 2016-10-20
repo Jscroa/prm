@@ -23,7 +23,7 @@ import cn.prm.server.service.CustomService;
  * 
  * @Title: CustomApiController.java
  * @Package: cn.prm.server.api.controller
- * @Description:
+ * @Description: 关于客户的数据接口
  * @author yyao
  * @date 2016年10月19日 下午5:19:41
  * @version v1.0
@@ -40,7 +40,7 @@ public class CustomApiController extends BaseController {
 	/**
 	 * 
 	 * @Title: list 
-	 * @Description: 
+	 * @Description: 当前登录账户下的私有客户
 	 * @param request
 	 * @param form
 	 * @return
@@ -53,6 +53,9 @@ public class CustomApiController extends BaseController {
 			if (currUser == null) {
 				return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
 			}
+			
+			form.checkFields();
+			
 			PageDto<CustomDto> page = customService.getPrivateCustoms(currUser, form.getSearch(), form.getOrder(), form.getOffset(), form.getLimit());
 			page.setCode(RESPONSE_CODE.CODE_SUCCESS);
 			return page;
@@ -65,7 +68,7 @@ public class CustomApiController extends BaseController {
 	/**
 	 * 
 	 * @Title: add 
-	 * @Description: 
+	 * @Description: 在当前登录的账户下添加私有客户
 	 * @param request
 	 * @param form
 	 * @return
@@ -89,7 +92,7 @@ public class CustomApiController extends BaseController {
 	/**
 	 * 
 	 * @Title: delete 
-	 * @Description: 
+	 * @Description: 在当前登录的账户下删除私有客户
 	 * @param request
 	 * @param id
 	 * @return

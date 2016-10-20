@@ -22,7 +22,7 @@ import cn.prm.server.service.CountryService;
  * 
  * @Title: CountryApiController.java
  * @Package: cn.prm.server.api.controller
- * @Description:
+ * @Description: 关于国家的数据接口
  * @author yyao
  * @date 2016年10月19日 下午4:56:25
  * @version v1.0
@@ -39,7 +39,7 @@ public class CountryApiController extends BaseController {
 	/**
 	 * 
 	 * @Title: init 
-	 * @Description: 
+	 * @Description: 国家数据初始化
 	 * @param request
 	 * @return
 	 * @throws
@@ -83,7 +83,7 @@ public class CountryApiController extends BaseController {
 	/**
 	 * 
 	 * @Title: list 
-	 * @Description: 
+	 * @Description: 列出所有国家
 	 * @return
 	 * @throws
 	 */
