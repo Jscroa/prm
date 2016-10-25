@@ -12,36 +12,35 @@ import cn.prm.server.commons.BaseController;
 import cn.prm.server.commons.MAVHelper;
 
 /**
- * @Title: CenterController.java
- * @Package: cn.prm.server.page.controller
- * @Description:
- * @author yyao
- * @date 2016年10月19日 下午5:41:07
- * @version v1.0
+ * @Title: CenterController.java<br>
+ * @Package: cn.prm.server.page.controller<br>
+ * @Description: <br>
+ * @author yyao<br>
+ * @date 2016年10月19日 下午5:41:07<br>
+ * @version v1.0<br>
  */
 @Controller
 @RequestMapping("/center")
 public class CenterController extends BaseController {
-	@Autowired
-	private MAVHelper mavHelper;
+    @Autowired
+    private MAVHelper mavHelper;
 
-	/** 
-	 * @Title: index 
-	 * @Description: 
-	 * @param request
-	 * @return
-	 * @throws 
-	 */
-	@RequestMapping({ "", "/index" })
-	public ModelAndView index(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
-		CurrUser currUser = getCurrUser(request);
-		if (currUser == null) {
-			mav.setViewName("redirect:/login");
-			return mav;
-		}
-		mav.setViewName("center");
-		mavHelper.withUserName(mav, currUser.getName());
-		return mav;
-	}
+    /**
+     * @Title: index<br>
+     * @Description: <br>
+     * @param request
+     * @return
+     */
+    @RequestMapping({ "", "/index" })
+    public ModelAndView index(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        CurrUser currUser = getCurrUser(request);
+        if (currUser == null) {
+            mav.setViewName("redirect:/login");
+            return mav;
+        }
+        mav.setViewName("center");
+        mavHelper.withUserName(mav, currUser.getName());
+        return mav;
+    }
 }

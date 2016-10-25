@@ -21,118 +21,114 @@ import cn.prm.server.exception.BusinessException;
 import cn.prm.server.form.AccGroupForm;
 
 /**
- * @Title: AccGroupService.java
- * @Package: cn.prm.server.service
- * @Description:
- * @author yyao
- * @date 2016年10月19日 下午5:40:15
- * @version v1.0
+ * @Title: AccGroupService.java<br>
+ * @Package: cn.prm.server.service<br>
+ * @Description: <br>
+ * @author yyao<br>
+ * @date 2016年10月19日 下午5:40:15<br>
+ * @version v1.0<br>
  */
 @Service(value = "accGroupService")
 public class AccGroupService {
 
-	private static final Logger log = LoggerFactory.getLogger(AccGroupService.class);
+    private static final Logger log = LoggerFactory.getLogger(AccGroupService.class);
 
-	@Autowired
-	IAccGroupDao accGroupDao;
-	@Autowired
-	IAccToGroupDao accToGroupDao;
+    @Autowired
+    IAccGroupDao                accGroupDao;
+    @Autowired
+    IAccToGroupDao              accToGroupDao;
 
-	/** 
-	 * @Title: createGroup 
-	 * @Description: 
-	 * @param currUser
-	 * @param form
-	 * @throws BusinessException
-	 * @throws 
-	 */
-	public void createGroup(CurrUser currUser, AccGroupForm form) throws BusinessException {
-		String groupName = form.getGroupName();
-		if (groupName == null || "".equals(groupName)) {
-			throw new BusinessException("组名不能为空");
-		}
-		Timestamp now = new Timestamp(System.currentTimeMillis());
-		AccGroup accGroup = new AccGroup();
-		accGroup.setGuid(UUIDUtil.randomUUID());
-		accGroup.setIsPrivate(false);
-		accGroup.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-		accGroup.setStdName(form.getGroupName());
-		accGroup.setCreateTime(now);
-		accGroup.setModifyTime(now);
-		accGroup.setCreateUser(currUser.getGuid());
-		accGroup.setModifyUser(currUser.getGuid());
-		accGroupDao.add(accGroup);
+    /**
+     * @Title: createGroup<br>
+     * @Description: <br>
+     * @param currUser
+     * @param form
+     * @throws BusinessException
+     */
+    public void createGroup(CurrUser currUser, AccGroupForm form) throws BusinessException {
+        String groupName = form.getGroupName();
+        if (groupName == null || "".equals(groupName)) {
+            throw new BusinessException("组名不能为空");
+        }
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        AccGroup accGroup = new AccGroup();
+        accGroup.setGuid(UUIDUtil.randomUUID());
+        accGroup.setIsPrivate(false);
+        accGroup.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+        accGroup.setStdName(form.getGroupName());
+        accGroup.setCreateTime(now);
+        accGroup.setModifyTime(now);
+        accGroup.setCreateUser(currUser.getGuid());
+        accGroup.setModifyUser(currUser.getGuid());
+        accGroupDao.add(accGroup);
 
-		AccToGroup accToGroup = new AccToGroup();
-		accToGroup.setGuid(UUIDUtil.randomUUID());
-		accToGroup.setAccId(currUser.getGuid());
-		accToGroup.setGroupId(accGroup.getGuid());
-		accToGroup.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-		accToGroup.setCreateTime(now);
-		accToGroup.setModifyTime(now);
-		accToGroup.setCreateUser(currUser.getGuid());
-		accToGroup.setModifyUser(currUser.getGuid());
-		accToGroupDao.add(accToGroup);
-	}
+        AccToGroup accToGroup = new AccToGroup();
+        accToGroup.setGuid(UUIDUtil.randomUUID());
+        accToGroup.setAccId(currUser.getGuid());
+        accToGroup.setGroupId(accGroup.getGuid());
+        accToGroup.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+        accToGroup.setCreateTime(now);
+        accToGroup.setModifyTime(now);
+        accToGroup.setCreateUser(currUser.getGuid());
+        accToGroup.setModifyUser(currUser.getGuid());
+        accToGroupDao.add(accToGroup);
+    }
 
-	/** 
-	 * @Title: addAcc 
-	 * @Description: 
-	 * @param currUser
-	 * @param groupId
-	 * @param accIds
-	 * @throws BusinessException
-	 * @throws 
-	 */
-	public void addAcc(CurrUser currUser, String groupId, List<String> accIds) throws BusinessException {
-		if (groupId == null || "".equals(groupId)) {
-			throw new BusinessException("未指定账户组");
-		}
-		if (accIds == null || accIds.size() == 0) {
-			return;
-		}
-		Timestamp now = new Timestamp(System.currentTimeMillis());
-		for (int i = 0; i < accIds.size(); i++) {
-			AccToGroup accToGroup = new AccToGroup();
-			accToGroup.setGuid(UUIDUtil.randomUUID());
-			accToGroup.setAccId(accIds.get(i));
-			accToGroup.setGroupId(groupId);
-			accToGroup.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-			accToGroup.setCreateTime(now);
-			accToGroup.setModifyTime(now);
-			accToGroup.setCreateUser(currUser.getGuid());
-			accToGroup.setModifyUser(currUser.getGuid());
-			accToGroupDao.add(accToGroup);
-		}
-	}
+    /**
+     * @Title: addAcc<br>
+     * @Description: <br>
+     * @param currUser
+     * @param groupId
+     * @param accIds
+     * @throws BusinessException
+     */
+    public void addAcc(CurrUser currUser, String groupId, List<String> accIds) throws BusinessException {
+        if (groupId == null || "".equals(groupId)) {
+            throw new BusinessException("未指定账户组");
+        }
+        if (accIds == null || accIds.size() == 0) {
+            return;
+        }
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        for (int i = 0; i < accIds.size(); i++) {
+            AccToGroup accToGroup = new AccToGroup();
+            accToGroup.setGuid(UUIDUtil.randomUUID());
+            accToGroup.setAccId(accIds.get(i));
+            accToGroup.setGroupId(groupId);
+            accToGroup.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+            accToGroup.setCreateTime(now);
+            accToGroup.setModifyTime(now);
+            accToGroup.setCreateUser(currUser.getGuid());
+            accToGroup.setModifyUser(currUser.getGuid());
+            accToGroupDao.add(accToGroup);
+        }
+    }
 
-	/** 
-	 * @Title: getGroupList 
-	 * @Description: 
-	 * @param currUser
-	 * @return
-	 * @throws 
-	 */
-	public List<AccGroup> getGroupList(CurrUser currUser) {
-		List<AccGroup> list = accToGroupDao.getGroups(currUser.getGuid());
-		return list;
-	}
+    /**
+     * @Title: getGroupList<br>
+     * @Description: <br>
+     * @param currUser
+     * @return
+     */
+    public List<AccGroup> getGroupList(CurrUser currUser) {
+        List<AccGroup> list = accToGroupDao.getGroups(currUser.getGuid());
+        return list;
+    }
 
-	/** 
-	 * @Title: getAccountList 
-	 * @Description: 
-	 * @param currUser
-	 * @param groupId
-	 * @return
-	 * @throws 
-	 */
-	public List<Account> getAccountList(CurrUser currUser, String groupId) {
-		AccToGroup accToGroup = accToGroupDao.get(currUser.getGuid(), groupId);
-		if(accToGroup==null){
-			log.info("没权限访问账户组("+groupId+"),返回空集");
-			return new ArrayList<>();
-		}
-		List<Account> list = accToGroupDao.getAccounts(groupId);
-		return list;
-	}
+    /**
+     * @Title: getAccountList<br>
+     * @Description: <br>
+     * @param currUser
+     * @param groupId
+     * @return
+     */
+    public List<Account> getAccountList(CurrUser currUser, String groupId) {
+        AccToGroup accToGroup = accToGroupDao.get(currUser.getGuid(), groupId);
+        if (accToGroup == null) {
+            log.info("没权限访问账户组(" + groupId + "),返回空集");
+            return new ArrayList<>();
+        }
+        List<Account> list = accToGroupDao.getAccounts(groupId);
+        return list;
+    }
 }

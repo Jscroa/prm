@@ -6,58 +6,53 @@ import java.sql.SQLException;
 import org.springframework.dao.DataAccessException;
 
 /**
- * @Title: IBaseDao.java
- * @Package: cn.prm.server.dao
- * @Description:
- * @author yyao
- * @date 2016年10月19日 下午5:31:08
- * @version v1.0
+ * @Title: IBaseDao.java<br>
+ * @Package: cn.prm.server.dao<br>
+ * @Description: <br>
+ * @author yyao<br>
+ * @date 2016年10月19日 下午5:31:08<br>
+ * @version v1.0<br>
  * @param <T>
  */
 public interface IBaseDao<T> {
 
-	/** 
-	 * @Title: extract 
-	 * @Description: 
-	 * @param rs
-	 * @return
-	 * @throws SQLException
-	 * @throws DataAccessException
-	 * @throws 
-	 */
-	public T extract(ResultSet rs) throws SQLException, DataAccessException;
+    /**
+     * @Title: extract<br>
+     * @Description: <br>
+     * @param rs
+     * @return
+     * @throws SQLException
+     * @throws DataAccessException
+     */
+    public T extract(ResultSet rs) throws SQLException, DataAccessException;
 
-	/** 
-	 * @Title: add 
-	 * @Description: 
-	 * @param t
-	 * @throws 
-	 */
-	public void add(T t);
+    /**
+     * @Title: add<br>
+     * @Description: <br>
+     * @param t
+     */
+    public void add(T t);
 
-	/** 
-	 * @Title: delete 
-	 * @Description: 
-	 * @param id
-	 * @throws 
-	 */
-	public void delete(String id);
+    /**
+     * @Title: delete<br>
+     * @Description: <br>
+     * @param id
+     */
+    public void delete(String id);
 
-	/** 
-	 * @Title: modify 
-	 * @Description: 
-	 * @param t
-	 * @throws 
-	 */
-	public void modify(T t);
+    /**
+     * @Title: modify<br>
+     * @Description: <br>
+     * @param t
+     */
+    public void modify(T t);
 
-	/** 
-	 * @Title: get 
-	 * @Description: 
-	 * @param id
-	 * @return
-	 * @throws 
-	 */
-	public T get(String id);
+    /**
+     * @Title: get<br>
+     * @Description: <br>
+     * @param id
+     * @return
+     */
+    public T get(String id);
 
 }

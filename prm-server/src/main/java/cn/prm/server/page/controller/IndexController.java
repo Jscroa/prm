@@ -12,78 +12,70 @@ import cn.prm.server.commons.BaseController;
 import cn.prm.server.commons.MAVHelper;
 
 /**
- * @Title: IndexController.java
- * @Package: cn.prm.server.page.controller
- * @Description:
- * @author yyao
- * @date 2016年10月19日 下午5:41:38
- * @version v1.0
+ * @Title: IndexController.java<br>
+ * @Package: cn.prm.server.page.controller<br>
+ * @Description: <br>
+ * @author yyao<br>
+ * @date 2016年10月19日 下午5:41:38<br>
+ * @version v1.0<br>
  */
 @Controller
 @RequestMapping()
 public class IndexController extends BaseController {
 
-	@Autowired
-	private MAVHelper mavHelper;
+    @Autowired
+    private MAVHelper mavHelper;
 
-	/**
-	 * 
-	 * @Title: index 
-	 * @Description: 主页
-	 * @param request
-	 * @return
-	 * @throws
-	 */
-	@RequestMapping({ "", "/index" })
-	public ModelAndView index(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
-		CurrUser currUser = getCurrUser(request);
-		if (currUser == null) {
-			mav.setViewName("redirect:/login");
-			return mav;
-		}
-		mav.setViewName("index");
-		mavHelper.withUserName(mav, currUser.getName());
-		return mav;
+    /**
+     * @Title: index<br>
+     * @Description: 主页<br>
+     * @param request
+     * @return
+     */
+    @RequestMapping({ "", "/index" })
+    public ModelAndView index(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        CurrUser currUser = getCurrUser(request);
+        if (currUser == null) {
+            mav.setViewName("redirect:/login");
+            return mav;
+        }
+        mav.setViewName("index");
+        mavHelper.withUserName(mav, currUser.getName());
+        return mav;
 
-	}
+    }
 
-	/**
-	 * 
-	 * @Title: login 
-	 * @Description: 登陆
-	 * @return
-	 * @throws
-	 */
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
+    /**
+     * @Title: login<br>
+     * @Description: 登陆<br>
+     * @return
+     */
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
 
-	/**
-	 * 
-	 * @Title: logout 
-	 * @Description: 注销
-	 * @param request
-	 * @return
-	 * @throws
-	 */
-	@RequestMapping("/logout")
-	public String logout(HttpServletRequest request) {
-		clearCurrUser(request);
-		return "redirect:/";
-	}
+    /**
+     * @Title: logout<br>
+     * @Description: 注销<br>
+     * @param request
+     * @return
+     */
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        clearCurrUser(request);
+        return "redirect:/";
+    }
 
-	/**
-	 * 
-	 * @Title: register 
-	 * @Description: 注册
-	 * @return
-	 * @throws
-	 */
-	@RequestMapping("/register")
-	public String register() {
-		return "register";
-	}
+    /**
+     * @Title: register<br>
+     * @Description: 注册<br>
+     * @return
+     */
+    @RequestMapping("/register")
+    public String register() {
+        return "register";
+    }
 
 }

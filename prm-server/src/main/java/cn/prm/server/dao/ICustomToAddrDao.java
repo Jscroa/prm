@@ -6,22 +6,21 @@ import cn.prm.server.entity.Address;
 import cn.prm.server.entity.CustomToAddr;
 
 /**
- * @Title: ICustomToAddrDao.java
- * @Package: cn.prm.server.dao
- * @Description:
- * @author yyao
- * @date 2016年10月19日 下午5:31:45
- * @version v1.0
+ * @Title: ICustomToAddrDao.java<br>
+ * @Package: cn.prm.server.dao<br>
+ * @Description: <br>
+ * @author yyao<br>
+ * @date 2016年10月19日 下午5:31:45<br>
+ * @version v1.0<br>
  */
 public interface ICustomToAddrDao extends IBaseDao<CustomToAddr> {
-	
-	/** 
-	 * @Title: getAddresses 
-	 * @Description: 
-	 * @param customId
-	 * @return
-	 * @throws 
-	 */
-	public List<Address> getAddresses(String customId);
-	
+
+    /**
+     * @Title: getAddresses<br>
+     * @Description: <br>
+     * @param customId
+     * @return
+     */
+    public List<Address> getAddresses(String customId);
+
 }

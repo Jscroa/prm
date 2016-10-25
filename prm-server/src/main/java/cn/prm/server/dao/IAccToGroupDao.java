@@ -7,40 +7,37 @@ import cn.prm.server.entity.AccToGroup;
 import cn.prm.server.entity.Account;
 
 /**
- * @Title: IAccToGroupDao.java
- * @Package: cn.prm.server.dao
- * @Description:
- * @author yyao
- * @date 2016年10月19日 下午5:30:44
- * @version v1.0
+ * @Title: IAccToGroupDao.java<br>
+ * @Package: cn.prm.server.dao<br>
+ * @Description: <br>
+ * @author yyao<br>
+ * @date 2016年10月19日 下午5:30:44<br>
+ * @version v1.0<br>
  */
 public interface IAccToGroupDao extends IBaseDao<AccToGroup> {
-	
-	/** 
-	 * @Title: getGroups 
-	 * @Description: 
-	 * @param accId
-	 * @return
-	 * @throws 
-	 */
-	public List<AccGroup> getGroups(String accId);
-	
-	/** 
-	 * @Title: getAccounts 
-	 * @Description: 
-	 * @param groupId
-	 * @return
-	 * @throws 
-	 */
-	public List<Account> getAccounts(String groupId);
-	
-	/** 
-	 * @Title: get 
-	 * @Description: 
-	 * @param accId
-	 * @param groupId
-	 * @return
-	 * @throws 
-	 */
-	public AccToGroup get(String accId,String groupId);
+
+    /**
+     * @Title: getGroups<br>
+     * @Description: <br>
+     * @param accId
+     * @return
+     */
+    public List<AccGroup> getGroups(String accId);
+
+    /**
+     * @Title: getAccounts<br>
+     * @Description: <br>
+     * @param groupId
+     * @return
+     */
+    public List<Account> getAccounts(String groupId);
+
+    /**
+     * @Title: get<br>
+     * @Description: <br>
+     * @param accId
+     * @param groupId
+     * @return
+     */
+    public AccToGroup get(String accId, String groupId);
 }
