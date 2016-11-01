@@ -8,6 +8,22 @@
 <%@include file="/WEB-INF/jsp/components/base.jsp"%>
 
 <style type="text/css">
+
+.bs-callout+.bs-callout {
+	margin-top: -5px;
+}
+
+.bs-callout-danger {
+	border-left-color: #d9534f;
+}
+
+.bs-callout {
+	padding: 20px;
+	margin: 20px 0;
+	border: 1px solid #eee;
+	border-left-width: 5px;
+	border-radius: 3px;
+}
 </style>
 
 <title>PRM</title>
@@ -17,15 +33,28 @@
 	<div class="container">
 		<!-- <div class="container-fluid"> -->
 		<div class="jumbotron">
-			<h1>Hello!</h1>
-			<p>This is the index page!</p>
-			<p>
-				<a href="/test.jsp"><small>test</small></a>
-			</p>
-			<p>
-				<a href="/test_baidumap.jsp"><small>test baidu map</small></a>
-			</p>
-			<button class="btn btn-default" onclick="initCountry();">初始化国家</button>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h1>Hello!</h1>
+						<p>This is the index page!</p>
+					</div>
+					<div class="col-md-6">
+						<p>
+							<a href="/test.jsp"><small>test</small></a>
+						</p>
+						<p>
+							<a href="/test_baidumap.jsp"><small>test baidu map</small></a>
+						</p>
+						<p>
+							<a href="/test_metronic.jsp"><small>test metronic</small></a>
+						</p>
+						<button class="btn btn-primary" onclick="initCountry();">初始化国家</button>
+					</div>
+				</div>
+			</div>
+
+
 		</div>
 	</div>
 </body>

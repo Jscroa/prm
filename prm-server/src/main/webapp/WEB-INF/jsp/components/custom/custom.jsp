@@ -182,11 +182,11 @@
 	});
 </script>
 
-
+<!-- 
 <legend id="theme-legend" class="text-default">
 	<span class="glyphicon glyphicon-tags">&nbsp;</span>客户管理
 </legend>
-
+ -->
 <div class="btn-toolbar" role="toolbar" id="custom-table-toolbar">
 	<!-- <div class="btn-group" role="group"> -->
 		<button class="btn btn-primary" data-toggle="modal"

@@ -7,7 +7,7 @@
 
 <%@include file="/WEB-INF/jsp/components/base.jsp"%>
 
-<title>PRM</title>
+<title>PRM - 消息</title>
 </head>
 <body>
 	<div>
@@ -16,6 +16,6 @@
 			$('#nav_message').addClass('active');
 		</script>
 	</div>
-	<div class="container-fluid">消息</div>
+	<div class="container">消息</div>
 </body>
 </html>

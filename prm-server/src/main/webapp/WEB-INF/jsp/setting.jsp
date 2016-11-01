@@ -10,7 +10,7 @@
 <style type="text/css">
 </style>
 
-<title>PRM</title>
+<title>PRM - 系统设置</title>
 </head>
 <body>
 	<div>
@@ -19,6 +19,6 @@
 			$('#nav_setting').addClass('active');
 		</script>
 	</div>
-	<div class="container-fluid">系统设置</div>
+	<div class="container">系统设置</div>
 </body>
 </html>

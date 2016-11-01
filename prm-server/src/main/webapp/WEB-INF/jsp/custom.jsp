@@ -27,7 +27,7 @@
 }
 </style>
 
-<title>PRM</title>
+<title>PRM - 客户管理</title>
 </head>
 <body>
 	<div>
@@ -36,7 +36,7 @@
 			$('#nav_custom').addClass('active');
 		</script>
 	</div>
-	<div class="container-fluid">
+	<div class="container">
 		<%@include file="/WEB-INF/jsp/components/custom/custom.jsp"%>
 	</div>
 </body>

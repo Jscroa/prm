@@ -18,13 +18,12 @@
 <style type="text/css">
 /* 
 body {
-	background: url("/img/bg.jpg") no-repeat;
+	background: url("/img/paper.jpg") no-repeat;
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
 }
  */
-
 .panel-heading {
 	/* font-weight: bold; */
 	font-size: x-large;

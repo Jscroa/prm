@@ -13,7 +13,7 @@
 <style type="text/css">
 </style>
 
-<title>PRM</title>
+<title>PRM - 订单管理</title>
 </head>
 <body>
 	<div>
@@ -22,35 +22,6 @@
 			$('#nav_order').addClass('active');
 		</script>
 	</div>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-2">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#all" data-toggle="tab">全部</a></li>
-					<li><a href="#paid" data-toggle="tab">已付款</a></li>
-					<li><a href="#unpay" data-toggle="tab">未付款</a></li>
-				</ul>
-			</div>
-			<div class="col-md-10">
-				<div class="container-fluid tab-content">
-					<div id="all" class="tab-pane fade in active">
-						<div>
-							<legend id="theme-legend">全部</legend>
-						</div>
-					</div>
-					<div id="paid" class="tab-pane fade">
-						<div>
-							<legend id="theme-legend">已付款</legend>
-						</div>
-					</div>
-					<div id="unpay" class="tab-pane fade">
-						<div>
-							<legend id="theme-legend">未付款</legend>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="container">订单管理</div>
 </body>
 </html>
