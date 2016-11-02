@@ -17,15 +17,32 @@
 <script src="/js/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="/js/bs-config.js"></script>
 <style type="text/css">
-.table thead tr {
+/* .table thead tr {
 	background-color: #494949;
 	color: #CCCCCC;
 }
 
 .table thead tr :HOVER {
 	color: #FFFFFF;
-}
+} */
 </style>
+
+<script type="text/javascript">
+function showPage(page){
+    $.get(page,function(data){
+        $('#page_container').html(data);
+    });
+}
+function showIndexPage(){
+    showPage('custom/customIndex');
+}
+function showAddressPage(custId){
+    showPage('custom/customAddress?custId='+custId);
+}
+$(function(){
+    showIndexPage();
+});
+</script>
 
 <title>PRM - 客户管理</title>
 </head>
@@ -36,8 +53,8 @@
 			$('#nav_custom').addClass('active');
 		</script>
 	</div>
-	<div class="container">
-		<%@include file="/WEB-INF/jsp/components/custom/custom.jsp"%>
+	<div class="container" id="page_container">
+		<%-- <%@include file="custom_table.jsp"%> --%>
 	</div>
 </body>
 </html>

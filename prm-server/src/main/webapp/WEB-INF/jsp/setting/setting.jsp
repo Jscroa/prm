@@ -9,16 +9,29 @@
 
 <style type="text/css">
 </style>
-
-<title>PRM - 个人中心</title>
+<script type="text/javascript">
+function showPage(page){
+    $.get(page,function(data){
+        $('#page_container').html(data);
+    });
+}
+function showIndexPage(){
+    showPage('setting/settingIndex');
+}
+$(function(){
+    showIndexPage();
+});
+</script>
+<title>PRM - 系统设置</title>
 </head>
 <body>
 	<div>
 		<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
 		<script type="text/javascript">
-			$('#nav_center').addClass('active');
+			$('#nav_setting').addClass('active');
 		</script>
 	</div>
-	<div class="container">个人中心</div>
+	<div class="container" id="page_container">
+	</div>
 </body>
 </html>

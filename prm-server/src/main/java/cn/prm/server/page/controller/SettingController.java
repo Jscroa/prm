@@ -31,7 +31,7 @@ public class SettingController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping({ "", "/index" })
+    @RequestMapping("")
     public ModelAndView index(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
         CurrUser currUser = getCurrUser(request);
@@ -39,8 +39,20 @@ public class SettingController extends BaseController {
             mav.setViewName("redirect:/login");
             return mav;
         }
-        mav.setViewName("setting");
+        mav.setViewName("setting/setting");
         mavHelper.withUserName(mav, currUser.getName());
+        return mav;
+    }
+    
+    /** 
+     * @Title: settingIndex<br>
+     * @Description: <br>
+     * @return
+     */
+    @RequestMapping("settingIndex")
+    public ModelAndView settingIndex(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("setting/setting_index");
         return mav;
     }
 }

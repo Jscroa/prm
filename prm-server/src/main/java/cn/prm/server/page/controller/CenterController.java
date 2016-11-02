@@ -31,7 +31,7 @@ public class CenterController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping({ "", "/index" })
+    @RequestMapping("")
     public ModelAndView index(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
         CurrUser currUser = getCurrUser(request);
@@ -39,8 +39,20 @@ public class CenterController extends BaseController {
             mav.setViewName("redirect:/login");
             return mav;
         }
-        mav.setViewName("center");
+        mav.setViewName("center/center");
         mavHelper.withUserName(mav, currUser.getName());
+        return mav;
+    }
+    
+    /** 
+     * @Title: centerIndex<br>
+     * @Description: <br>
+     * @return
+     */
+    @RequestMapping("centerIndex")
+    public ModelAndView centerIndex(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("center/center_index");
         return mav;
     }
 }

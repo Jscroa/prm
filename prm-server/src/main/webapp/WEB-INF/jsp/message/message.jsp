@@ -9,16 +9,28 @@
 
 <style type="text/css">
 </style>
-
-<title>PRM - 系统设置</title>
+<script type="text/javascript">
+function showPage(page){
+    $.get(page,function(data){
+        $('#page_container').html(data);
+    });
+}
+function showIndexPage(){
+    showPage('message/messageIndex');
+}
+$(function(){
+    showIndexPage();
+});
+</script>
+<title>PRM - 消息</title>
 </head>
 <body>
 	<div>
 		<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
 		<script type="text/javascript">
-			$('#nav_setting').addClass('active');
+			$('#nav_message').addClass('active');
 		</script>
 	</div>
-	<div class="container">系统设置</div>
+	<div class="container" id="page_container"></div>
 </body>
 </html>

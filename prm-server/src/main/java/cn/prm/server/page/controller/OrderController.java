@@ -32,7 +32,7 @@ public class OrderController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping({ "", "/index" })
+    @RequestMapping("")
     public ModelAndView index(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
         CurrUser currUser = getCurrUser(request);
@@ -40,9 +40,21 @@ public class OrderController extends BaseController {
             mav.setViewName("redirect:/login");
             return mav;
         }
-        mav.setViewName("order");
+        mav.setViewName("order/order");
         mavHelper.withUserName(mav, currUser.getName());
         return mav;
     }
 
+    /** 
+     * @Title: orderIndex<br>
+     * @Description: <br>
+     * @return
+     */
+    @RequestMapping("orderIndex")
+    public ModelAndView orderIndex(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("order/order_index");
+        return mav;
+    }
+    
 }

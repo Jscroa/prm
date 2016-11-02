@@ -7,15 +7,31 @@
 
 <%@include file="/WEB-INF/jsp/components/base.jsp"%>
 
-<title>PRM - 消息</title>
+
+<style type="text/css">
+</style>
+<script type="text/javascript">
+function showPage(page){
+    $.get(page,function(data){
+        $('#page_container').html(data);
+    });
+}
+function showIndexPage(){
+    showPage('center/centerIndex');
+}
+$(function(){
+    showIndexPage();
+});
+</script>
+<title>PRM - 个人中心</title>
 </head>
 <body>
 	<div>
 		<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
 		<script type="text/javascript">
-			$('#nav_message').addClass('active');
+			$('#nav_center').addClass('active');
 		</script>
 	</div>
-	<div class="container">消息</div>
+	<div class="container" id="page_container"></div>
 </body>
 </html>

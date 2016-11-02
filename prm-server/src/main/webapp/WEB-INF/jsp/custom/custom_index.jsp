@@ -55,15 +55,14 @@
 				formatter : function(value, row, index) {
 
 					return [
-							'<button class="btn btn-primary btn-sm" onclick="modifyCustom('
-									+ value + ')">',
+							'<button class="btn btn-primary btn-sm" onclick="modifyCustom(\'' + value + '\')">',
 							'<span class="glyphicon glyphicon-map-marker">',
 							'</span>',
 							'&nbsp;地址管理',
 							'</button>',
 							'&nbsp;&nbsp;',
-							'<button class="btn btn-primary btn-sm" onclick="modifyCustom('
-									+ value + ')">',
+							'<button class="btn btn-primary btn-sm" onclick="modifyCustom(\''
+									+ value + '\')">',
 							'<span class="glyphicon glyphicon-edit">',
 							'</span>', '&nbsp;编辑',
 							'</button>' ].join('');
@@ -166,7 +165,8 @@
 	}
 
 	function modifyCustom(value) {
-
+	    toastr.info('编辑客户，ID：<br/><small>'+value+'</small>');
+	    showAddressPage(value);
 	}
 
 	function saveCustom() {
@@ -182,25 +182,25 @@
 	});
 </script>
 
-<!-- 
-<legend id="theme-legend" class="text-default">
-	<span class="glyphicon glyphicon-tags">&nbsp;</span>客户管理
-</legend>
- -->
+<ol class="breadcrumb">
+	<li><a href="/"><span class="glyphicon glyphicon-plane"></span></a></li>
+	<li class="active">客户管理</li>
+</ol>
+
 <div class="btn-toolbar" role="toolbar" id="custom-table-toolbar">
 	<!-- <div class="btn-group" role="group"> -->
-		<button class="btn btn-primary" data-toggle="modal"
-			onclick="clickAdd();">
-			<span class="glyphicon glyphicon-plus"></span>&nbsp;添加
-		</button>
-		<button class="btn btn-danger" onclick="delCustoms()">
-			<span class="glyphicon glyphicon-minus"></span>&nbsp;删除
-		</button>
+	<button class="btn btn-primary" data-toggle="modal"
+		onclick="clickAdd();">
+		<span class="glyphicon glyphicon-plus"></span>&nbsp;添加
+	</button>
+	<button class="btn btn-danger" onclick="delCustoms()">
+		<span class="glyphicon glyphicon-minus"></span>&nbsp;删除
+	</button>
 	<!-- </div> -->
 	<div id="select-control-group" class="btn-group" role="group"></div>
 </div>
 
-<table id="custom_table" class="table"></table>
+<table id="custom_table" class="table table-condensed"></table>
 
 <!-- 添加窗口 -->
 <div class="modal fade" id="dia-custom" tabindex="-1" role="dialog"

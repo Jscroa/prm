@@ -31,7 +31,7 @@ public class MessageController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping({ "", "/index" })
+    @RequestMapping("")
     public ModelAndView index(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
         CurrUser currUser = getCurrUser(request);
@@ -39,8 +39,20 @@ public class MessageController extends BaseController {
             mav.setViewName("redirect:/login");
             return mav;
         }
-        mav.setViewName("message");
+        mav.setViewName("message/message");
         mavHelper.withUserName(mav, currUser.getName());
+        return mav;
+    }
+    
+    /** 
+     * @Title: messageIndex<br>
+     * @Description: <br>
+     * @return
+     */
+    @RequestMapping("messageIndex")
+    public ModelAndView messageIndex(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("message/message_index");
         return mav;
     }
 }

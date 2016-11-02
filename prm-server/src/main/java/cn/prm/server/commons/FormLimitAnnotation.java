@@ -19,7 +19,7 @@ import cn.prm.server.bean.FormLimit;
 /**
  * @Title: FormLimitAnnotation.java<br>
  * @Package: cn.prm.server.commons<br>
- * @Description: <br>
+ * @Description: 为form中需要检查的字段添加的注解<br>
  * @author yyao<br>
  * @date 2016年10月20日 上午10:31:09<br>
  * @version v1.0<br>
@@ -65,10 +65,6 @@ public @interface FormLimitAnnotation {
                     int minLength = (int) minLengthMethod.invoke(anno, null);
                     int maxLength = (int) maxLengthMethod.invoke(anno, null);
                     CharSupport charCheck = (CharSupport) charCheckMethod.invoke(anno, null);
-                    System.out.println(field.getName() + "-> ");
-                    System.out.println("minLength: " + minLength);
-                    System.out.println("maxLength: " + maxLength);
-                    System.out.println("charCheck: " + charCheck.name());
                     FormLimit formLimit = new FormLimit();
                     formLimit.setMinLength(minLength);
                     formLimit.setMaxLength(maxLength);

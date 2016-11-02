@@ -8,7 +8,6 @@
 <%@include file="/WEB-INF/jsp/components/base.jsp"%>
 
 <style type="text/css">
-
 .bs-callout+.bs-callout {
 	margin-top: -5px;
 }
@@ -40,15 +39,11 @@
 						<p>This is the index page!</p>
 					</div>
 					<div class="col-md-6">
-						<p>
-							<a href="/test.jsp"><small>test</small></a>
-						</p>
-						<p>
-							<a href="/test_baidumap.jsp"><small>test baidu map</small></a>
-						</p>
-						<p>
-							<a href="/test_metronic.jsp"><small>test metronic</small></a>
-						</p>
+						<ul>
+							<li><a href="/test.jsp">test</a></li>
+							<li><a href="/test_baidumap.jsp">test baidu map</a></li>
+							<li><a href="/test_metronic.jsp">test metronic</a></li>
+						</ul>
 						<button class="btn btn-primary" onclick="initCountry();">初始化国家</button>
 					</div>
 				</div>

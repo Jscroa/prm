@@ -10,9 +10,20 @@
 <link href="/css/bootstrap-table.css" rel="stylesheet">
 <script src="/js/bootstrap-table.js"></script>
 
-<style type="text/css">
-</style>
-
+<script type="text/javascript">
+function showPage(page){
+    $.get(page,function(data){
+        $('#page_container').html(data);
+        $('#page_container').fadeIn(slow);
+    });
+}
+function showIndexPage(){
+    showPage('order/orderIndex');
+}
+$(function(){
+    showIndexPage();
+});
+</script>
 <title>PRM - 订单管理</title>
 </head>
 <body>
@@ -22,6 +33,6 @@
 			$('#nav_order').addClass('active');
 		</script>
 	</div>
-	<div class="container">订单管理</div>
+	<div class="container" id="page_container"></div>
 </body>
 </html>

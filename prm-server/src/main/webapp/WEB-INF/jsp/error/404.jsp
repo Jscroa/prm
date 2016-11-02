@@ -16,7 +16,7 @@
 </head>
 <body class="jumbotron">
 	<div class="container">
-		<h1>404 Not Found!</h1>
+		<h1>404! Page Not Found!</h1>
 		<p>
 			<a class="btn btn-link btn-lg" href="/" role="button">返回首页</a>
 		</p>
