@@ -19,7 +19,9 @@ public class ApplicationConfigurer extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/error")
                 .excludePathPatterns("/api/user/login").excludePathPatterns("/api/user/logout")
                 .excludePathPatterns("/api/user/register").excludePathPatterns("/login").excludePathPatterns("/logout")
-                .excludePathPatterns("/register");
+                .excludePathPatterns("/register")
+                .excludePathPatterns("/custom/customAddress")
+                .excludePathPatterns("/api/**");
         super.addInterceptors(registry);
     }
 }

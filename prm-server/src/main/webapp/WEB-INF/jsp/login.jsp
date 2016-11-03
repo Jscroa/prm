@@ -41,7 +41,7 @@ body {
 <body>
 
 
-	<div class="container-flush" style="margin-top: 5%">
+	<div class="container" style="margin-top: 5%">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 
