@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.BaseController;
 import cn.prm.server.commons.Constants.RESPONSE_CODE;
+import cn.prm.server.dto.AddressDto;
 import cn.prm.server.dto.BaseDto;
 import cn.prm.server.dto.CustomDto;
+import cn.prm.server.dto.ListDto;
 import cn.prm.server.dto.PageDto;
 import cn.prm.server.exception.BusinessException;
+import cn.prm.server.exception.PermissionException;
 import cn.prm.server.form.CustomForm;
 import cn.prm.server.form.PageBaseForm;
 import cn.prm.server.service.CustomService;
@@ -103,6 +106,35 @@ public class CustomApiController extends BaseController {
             }
             customService.delete(currUser, id);
             return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "删除成功");
+        }
+        catch (BusinessException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
+        }
+    }
+    
+    /** 
+     * @Title: addressList<br>
+     * @Description: 管理某客户的地址<br>
+     * @param request
+     * @param custId
+     * @return
+     */
+    @RequestMapping("/addressList")
+    public Object addressList(HttpServletRequest request,String custId){
+        
+        try {
+            CurrUser currUser = getCurrUser(request);
+            if (currUser == null) {
+                return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
+            }
+            ListDto<AddressDto> list = customService.getCustomAddrs(currUser, custId);
+            list.setCode(RESPONSE_CODE.CODE_SUCCESS);
+            return list;
+        }
+        catch (PermissionException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
         }
         catch (BusinessException e) {
             e.printStackTrace();

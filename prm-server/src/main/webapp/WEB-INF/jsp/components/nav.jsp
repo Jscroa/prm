@@ -12,8 +12,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/" style="font-style: oblique;">&nbsp;PRM
-				机票预订管理系统</a>
+			<a class="navbar-brand" href="/" style="font-style: oblique;">PRM&nbsp;机票预订管理系统</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -28,8 +27,8 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%
-					String userName = (String) request.getAttribute("userName");
-					if ((userName != null) && (!"".equals(userName))) {
+				    String userName = (String) request.getAttribute("userName");
+				    if ((userName != null) && (!"".equals(userName))) {
 				%>
 
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -40,7 +39,7 @@
 						<li><a href="/logout">注销</a></li>
 					</ul></li>
 				<%
-					}
+				    }
 				%>
 
 			</ul>

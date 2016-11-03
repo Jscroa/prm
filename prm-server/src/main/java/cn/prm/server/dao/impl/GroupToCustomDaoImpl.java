@@ -158,4 +158,18 @@ public class GroupToCustomDaoImpl implements IGroupToCustomDao {
         }
         return 0;
     }
+
+    @Override
+    public List<String> checkCustomOwn(String accId, String customId) {
+        String sql = "select gc.custom_id as custom_id from t_acc_to_group as ag join t_group_to_custom as gc on ag.group_id=gc.group_id where ag.acc_id=? and gc.custom_id=?;";
+        List<String> list = jdbcTemplate.query(sql, new Object[]{accId,customId},new RowMapper<String>(){
+
+            @Override
+            public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getString("custom_id");
+            }
+            
+        });
+        return list;
+    }
 }

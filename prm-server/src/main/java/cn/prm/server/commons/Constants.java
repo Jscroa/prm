@@ -25,7 +25,7 @@ public class Constants {
     public static class SESSION {
 
         /**
-         * @field LOGIN_USER :
+         * @field LOGIN_USER : 登录的用户
          */
         public static final String LOGIN_USER = "cn.prm.server.commons.Constants.SESSION.LOGIN_USER";
     }
@@ -40,17 +40,21 @@ public class Constants {
      */
     public static class RESPONSE_CODE {
         /**
-         * @field CODE_SUCCESS :
+         * @field CODE_SUCCESS : 成功
          */
         public static final int CODE_SUCCESS    = 100;
         /**
-         * @field CODE_FAILURE :
+         * @field CODE_FAILURE : 失败
          */
         public static final int CODE_FAILURE    = 200;
         /**
-         * @field CODE_NEED_LOGIN :
+         * @field CODE_NEED_LOGIN : 需要登录
          */
         public static final int CODE_NEED_LOGIN = 300;
+        /**
+         * @field CODE_PERMISSION_DENIED : 权限不足
+         */
+        public static final int CODE_PERMISSION_DENIED = 400;
 
     }
 
@@ -64,11 +68,11 @@ public class Constants {
      */
     public static class DB_STATUS {
         /**
-         * @field STATUS_ACTIVE :
+         * @field STATUS_ACTIVE : 激活
          */
         public static final int STATUS_ACTIVE   = 100;
         /**
-         * @field STATUS_INACTIVE :
+         * @field STATUS_INACTIVE : 未激活
          */
         public static final int STATUS_INACTIVE = 200;
     }
@@ -83,7 +87,7 @@ public class Constants {
      */
     public static class MAV_KEYS {
         /**
-         * @field USER_NAME :
+         * @field USER_NAME : 用户名
          */
         public static final String USER_NAME = "userName";
     }
@@ -99,19 +103,19 @@ public class Constants {
     public static enum CONTACT_TYPE {
 
         /**
-         * @field Phone :
+         * @field Phone : 手机
          */
         Phone("手机", 1001),
         /**
-         * @field Email :
+         * @field Email : 邮箱
          */
         Email("邮箱", 1002),
         /**
-         * @field WeiXin :
+         * @field WeiXin : 微信
          */
         WeiXin("微信", 1003),
         /**
-         * @field QQ :
+         * @field QQ : QQ
          */
         QQ("QQ", 1004);
 

@@ -12,6 +12,7 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/toastr.min.js"></script>
+<script src="/js/bootbox.min.js"></script>
 
 <!-- 自定义 -->
 <script src="/js/ng-config.js"></script>

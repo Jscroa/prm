@@ -32,4 +32,13 @@ public interface IGroupToCustomDao extends IBaseDao<GroupToCustom> {
      * @return
      */
     public int getCustomCount();
+    
+    /** 
+     * @Title: checkCustomOwn<br>
+     * @Description: <br>
+     * @param accId
+     * @param customId
+     * @return
+     */
+    public List<String> checkCustomOwn(String accId,String customId);
 }

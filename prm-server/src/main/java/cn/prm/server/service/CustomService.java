@@ -17,6 +17,7 @@ import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.Constants;
 import cn.prm.server.commons.Constants.CONTACT_TYPE;
 import cn.prm.server.commons.Constants.DB_STATUS;
+import cn.prm.server.commons.UUIDUtil;
 import cn.prm.server.dao.IAccToGroupDao;
 import cn.prm.server.dao.IAddressDao;
 import cn.prm.server.dao.IContactDao;
@@ -24,8 +25,9 @@ import cn.prm.server.dao.ICustomDao;
 import cn.prm.server.dao.ICustomToAddrDao;
 import cn.prm.server.dao.ICustomToContactDao;
 import cn.prm.server.dao.IGroupToCustomDao;
-import cn.prm.server.commons.UUIDUtil;
+import cn.prm.server.dto.AddressDto;
 import cn.prm.server.dto.CustomDto;
+import cn.prm.server.dto.ListDto;
 import cn.prm.server.dto.PageDto;
 import cn.prm.server.entity.AccGroup;
 import cn.prm.server.entity.Address;
@@ -35,6 +37,7 @@ import cn.prm.server.entity.CustomToAddr;
 import cn.prm.server.entity.CustomToContact;
 import cn.prm.server.entity.GroupToCustom;
 import cn.prm.server.exception.BusinessException;
+import cn.prm.server.exception.PermissionException;
 import cn.prm.server.form.CustomForm;
 
 /**
@@ -68,11 +71,11 @@ public class CustomService {
     /**
      * @Title: getPrivateCustoms<br>
      * @Description: <br>
-     * @param currUser
-     * @param search
-     * @param order
-     * @param offset
-     * @param limit
+     * @param currUser 当前登录的用户
+     * @param search 查询参数
+     * @param order 排序参数
+     * @param offset 偏移量
+     * @param limit 每页显示数量
      * @return
      * @throws BusinessException
      */
@@ -135,8 +138,8 @@ public class CustomService {
     /**
      * @Title: addPrivateCustom<br>
      * @Description: <br>
-     * @param currUser
-     * @param form
+     * @param currUser 当前登录的用户
+     * @param form 新建客户表单
      * @throws BusinessException
      */
     @Transactional
@@ -343,8 +346,8 @@ public class CustomService {
     /**
      * @Title: delete<br>
      * @Description: <br>
-     * @param currUser
-     * @param id
+     * @param currUser 当前登录的用户
+     * @param id 客户id
      * @throws BusinessException
      */
     public void delete(CurrUser currUser, String id) throws BusinessException {
@@ -365,4 +368,52 @@ public class CustomService {
         customDao.modify(custom);
     }
 
+    /** 
+     * @Title: pCheckCustomOwnner<br>
+     * @Description: 客户所有权权限检查<br>
+     * @param currUser 当前登录的用户
+     * @param id 客户id
+     * @throws BusinessException 
+     */
+    public void pCheckCustomOwnner(CurrUser currUser, String id) throws BusinessException{
+        if (id == null || "".equals(id)) {
+            throw new BusinessException("未指定客户");
+        }
+        Custom custom = customDao.get(id);
+        if(custom==null){
+            throw new BusinessException("没有此客户");
+        }
+        if(custom.getStatus()!=DB_STATUS.STATUS_ACTIVE){
+            throw new BusinessException("此客户已经被删除");
+        }
+        List<String> ids = groupToCustomDao.checkCustomOwn(currUser.getGuid(), id);
+        if(ids==null || ids.size()==0){
+            throw new PermissionException("无法编辑此客户");
+        }
+    }
+    
+    /** 
+     * @Title: getCustomAddrs<br>
+     * @Description: <br>
+     * @param currUser
+     * @param id
+     * @return 
+     * @throws PermissionException
+     * @throws BusinessException
+     */
+    public ListDto<AddressDto> getCustomAddrs(CurrUser currUser, String id) throws PermissionException,BusinessException{
+        pCheckCustomOwnner(currUser, id);
+        List<Address> addrs = customToAddrDao.getAddresses(id);
+        List<AddressDto> dtos = new ArrayList<>();
+        for(Address addr: addrs){
+            AddressDto dto = new AddressDto();
+            dto.setId(addr.getGuid());
+            dto.setAddr(addr.getStdName());
+            dtos.add(dto);
+        }
+        ListDto<AddressDto> list = new ListDto<>();
+        list.setRows(dtos);
+        return list;
+    }
+    
 }

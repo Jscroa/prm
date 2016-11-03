@@ -9,3 +9,8 @@ body {
 table{
 	background: #FFFFFF;
 }
+
+.breadcrumb{
+	background-color: transparent;
+	border-radius: 0px; 
+}

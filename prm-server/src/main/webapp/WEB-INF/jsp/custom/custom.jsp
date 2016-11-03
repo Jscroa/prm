@@ -36,8 +36,17 @@ function showPage(page){
 function showIndexPage(){
     showPage('custom/customIndex');
 }
-function showAddressPage(custId){
-    showPage('custom/customAddress?custId='+custId);
+function showAddressPage(custId,custName){
+    /* showPage('custom/customAddress?custId='+custId); */
+    $.get('custom/customAddress?custId='+custId,function(data){
+        
+        bootbox.dialog({
+            title:'地址管理&nbsp;-&nbsp;'+custName,
+            message:data,
+            closeButton: true
+        });
+    });
+    
 }
 $(function(){
     showIndexPage();

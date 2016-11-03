@@ -14,7 +14,7 @@ function TableConfig(url, toolbar, columns) {
     this.sidePagination = 'server'; // 服务端分页
     this.showColumns = true; // 开启选择显示列
     this.smartDisplay = true; // 智能显示
-    this.clickToSelect = false; // 单击行选中
+    this.clickToSelect = true; // 单击行选中
     this.rowStyle = function(row, index) { // 隔行换色
         var strclass = '';
         if (index % 2 == 0) {

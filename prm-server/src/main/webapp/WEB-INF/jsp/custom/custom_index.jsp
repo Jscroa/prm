@@ -55,7 +55,7 @@
 				formatter : function(value, row, index) {
 
 					return [
-							'<button class="btn btn-primary btn-sm" onclick="modifyCustom(\'' + value + '\')">',
+							'<button class="btn btn-primary btn-sm" onclick="customAddress(\'' + value + '\',\''+row.name+'\')">',
 							'<span class="glyphicon glyphicon-map-marker">',
 							'</span>',
 							'&nbsp;地址管理',
@@ -117,16 +117,32 @@
 			toastr.warning('未选中任何数据');
 			return;
 		}
-		if (!confirm('确定删除选中的' + selects.length + '条数据？')) {
-			return;
-		}
-		var ids = new Array();
-		for ( var i in selects) {
-			var select = selects[i];
-			ids[i] = select.id;
+		bootbox.confirm({
+		    title:'确认删除',
+		    message:'确定删除选中的' + selects.length + '条数据？',
+		    buttons:{
+		        confirm:{
+		            label:'确认删除',
+		            className:'btn-danger'
+		        },
+		        cancel:{
+		            label:'取消',
+		            className:'btn-default'
+		        }
+		    },
+		    callback:function(result){
+		        if(result){
+		            var ids = new Array();
+		    		for ( var i in selects) {
+		    			var select = selects[i];
+		    			ids[i] = select.id;
 
-		}
-		delCustom(ids, 0);
+		    		}
+		    		delCustom(ids, 0);
+		        }
+		    }
+		});
+
 	}
 	// 递归删除
 	function delCustom(ids, index) {
@@ -164,9 +180,12 @@
 		}
 	}
 
+	function customAddress(value,name) {
+	    showAddressPage(value,name);
+	}
+	
 	function modifyCustom(value) {
-	    toastr.info('编辑客户，ID：<br/><small>'+value+'</small>');
-	    showAddressPage(value);
+	    toastr.info('编辑：'+value);
 	}
 
 	function saveCustom() {
