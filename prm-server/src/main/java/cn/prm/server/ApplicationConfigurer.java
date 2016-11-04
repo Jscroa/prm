@@ -16,12 +16,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class ApplicationConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/error")
+        // 配置页面接口相关的拦截器
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/error/**")
+                .excludePathPatterns("/login").excludePathPatterns("/logout").excludePathPatterns("/register")
+                .excludePathPatterns("/custom/customAddress").excludePathPatterns("/fragment/**").excludePathPatterns("/api/**");
+        // 有部分接口介于页面和json数据之间（返回页面，但不能重定向到登录页，某些内嵌页面用到），这个怎么做还有待商榷，暂定不经过拦截器
+        // 配置json数据相关的拦截器
+        registry.addInterceptor(new ApiLoginInterceptor()).addPathPatterns("/api/**")
                 .excludePathPatterns("/api/user/login").excludePathPatterns("/api/user/logout")
-                .excludePathPatterns("/api/user/register").excludePathPatterns("/login").excludePathPatterns("/logout")
-                .excludePathPatterns("/register")
-                .excludePathPatterns("/custom/customAddress")
-                .excludePathPatterns("/api/**");
+                .excludePathPatterns("/api/user/register");
         super.addInterceptors(registry);
     }
 }

@@ -1,4 +1,10 @@
+/**
+ * 
+ */
 package cn.prm.server;
+
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,32 +16,35 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.prm.server.bean.CurrUser;
+import cn.prm.server.commons.Constants.RESPONSE_CODE;
 import cn.prm.server.commons.Constants.SESSION;
+import cn.prm.server.dto.BaseDto;
 
 /**
- * @Title: LoginInterceptor.java<br>
+ * @Title: ApiLoginInterceptor.java<br>
  * @Package: cn.prm.server<br>
  * @Description: <br>
  * @author yyao<br>
- * @date 2016年10月19日 下午5:39:55<br>
+ * @date 2016年11月4日 上午10:07:44<br>
  * @version v1.0<br>
  */
-public class LoginInterceptor implements HandlerInterceptor {
+public class ApiLoginInterceptor implements HandlerInterceptor {
 
     /**
      * 
      */
-    private static final Logger log = LoggerFactory.getLogger(LoginInterceptor.class);
-
+    private static final Logger log = LoggerFactory.getLogger(ApiLoginInterceptor.class);
+    
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
         HttpSession session = request.getSession(false);
         CurrUser currUser = null;
         if (session != null) {
             currUser = (CurrUser) session.getAttribute(SESSION.LOGIN_USER);
         }
         if (currUser == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("/error/api/noLogin");
             return false;
         }
         else {
@@ -44,14 +53,13 @@ public class LoginInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
-            throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+            ModelAndView modelAndView) throws Exception {
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
-
     }
 
 }

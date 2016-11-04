@@ -57,17 +57,4 @@ public class CustomController extends BaseController {
         return mav;
     }
     
-    /** 
-     * @Title: customAddress<br>
-     * @Description: <br>
-     * @param custId
-     * @return
-     */
-    @RequestMapping("customAddress")
-    public ModelAndView customAddress(String custId){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("custom/custom_address");
-        mav.addObject("custId", custId);
-        return mav;
-    }
 }
