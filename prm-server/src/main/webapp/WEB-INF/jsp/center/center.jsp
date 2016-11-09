@@ -32,6 +32,6 @@ $(function(){
 			$('#nav_center').addClass('active');
 		</script>
 	</div>
-	<div class="container" id="page_container"></div>
+	<div class="container mainland" id="page_container"></div>
 </body>
 </html>

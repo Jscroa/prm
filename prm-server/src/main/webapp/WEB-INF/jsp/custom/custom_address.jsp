@@ -6,13 +6,13 @@
 		if (rows) {
 			if (rows.length > 0) {
 				var temp = '';
-				for(var j=0;j<100;j++){
+				//for(var j=0;j<100;j++){
 					for (var i = 0; i < rows.length; i++) {
 						/* temp += '<p>' + rows[i].id + ': ' + rows[i].addr + '</p>'; */
 						temp += [ 
 						          '<div class="panel panel-info">',
 						          '<div class="panel-heading">',
-						          '地址'+(j+1),
+						          '地址',
 						          '</div>',
 						          '<div class="panel-body">',
 						          '<p>',
@@ -24,7 +24,7 @@
 					}
 					
 					//<div class="panel-heading">Panel heading without title</div>
-				}
+				//}
 				$('#address_list').html(temp);
 			} else {
 				$('#address_list').html('<p>没有地址</p>');
@@ -60,10 +60,4 @@
 		});
 	});
 </script>
-
-<!-- <ol class="breadcrumb">
-	<li><a href="/"><span class="glyphicon glyphicon-plane"></span></a></li>
-	<li><a href="/custom">客户管理</a></li>
-	<li class="active">地址管理</li>
-</ol> -->
 <div id="address_list"></div>

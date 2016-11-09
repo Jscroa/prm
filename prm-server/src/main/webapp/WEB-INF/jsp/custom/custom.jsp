@@ -42,6 +42,7 @@ function showAddressPage(custId,custName){
         bootbox.dialog({
             title:'地址管理&nbsp;-&nbsp;'+custName,
             message:data,
+            size: 'large',
             closeButton: true
         });
     });
@@ -61,7 +62,7 @@ $(function(){
 			$('#nav_custom').addClass('active');
 		</script>
 	</div>
-	<div class="container" id="page_container">
+	<div class="container mainland" id="page_container">
 		<%-- <%@include file="custom_table.jsp"%> --%>
 	</div>
 </body>

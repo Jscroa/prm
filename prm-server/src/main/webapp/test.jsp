@@ -93,7 +93,7 @@ $(function(){
 	
 </script>
 <body>
-<div class="container">
+<div class="container mainland">
 	<h1>test</h1>
 	
 	<fieldset>

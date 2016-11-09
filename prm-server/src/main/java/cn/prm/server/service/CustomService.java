@@ -98,7 +98,7 @@ public class CustomService {
             throw new BusinessException("数据错误");
         }
         // 私有用户组的客户
-        List<Custom> customs = groupToCustomDao.getCustoms(group.getGuid(), search, offset, limit);
+        List<Custom> customs = groupToCustomDao.getCustoms(group.getGuid(), offset, limit);
         int total = groupToCustomDao.getCustomCount();
         List<CustomDto> dtos = new ArrayList<>();
         for (Custom custom : customs) {
