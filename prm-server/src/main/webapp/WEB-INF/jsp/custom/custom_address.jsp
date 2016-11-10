@@ -7,12 +7,7 @@
             if (rows.length > 0) {
                 var temp = '';
                 for (var i = 0; i < rows.length; i++) {
-                    temp += [ '<div class="panel panel-info">',
-                            '<div class="panel-heading">', '地址', '</div>',
-                            '<div class="panel-body">', '<p>', rows[i].addr,
-                            '</p>',
-
-                            '</div>', '</div>' ].join('');
+                    temp += getAddressItem(rows[i]);
                 }
                 $('#address_list').html(temp);
             } else {
@@ -48,5 +43,13 @@
             }
         });
     });
+    
+    function getAddressItem(addr){
+        return [ '<div class="panel panel-primary">',
+                 /* '<div class="panel-heading">', '地址', '</div>', */
+                 '<div class="panel-body">', '<p>', addr.addr,
+                 '</p>',
+                 '</div>', '</div>' ].join('');
+    }
 </script>
 <div id="address_list"></div>
