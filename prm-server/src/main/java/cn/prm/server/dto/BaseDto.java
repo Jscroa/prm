@@ -3,7 +3,7 @@ package cn.prm.server.dto;
 /**
  * @Title: BaseDto.java<br>
  * @Package: cn.prm.server.dto<br>
- * @Description: <br>
+ * @Description: 作为一个base，或者错误信息返回<br>
  * @author yyao<br>
  * @date 2016年10月19日 下午5:32:27<br>
  * @version v1.0<br>
@@ -18,6 +18,16 @@ public class BaseDto {
      */
     public BaseDto() {
         super();
+    }
+
+    /** 
+     * Title: <br>
+     * Description: <br>
+     * @param code 
+     */
+    public BaseDto(int code) {
+        super();
+        this.code = code;
     }
 
     /** 

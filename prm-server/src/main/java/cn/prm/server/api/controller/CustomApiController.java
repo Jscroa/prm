@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.BaseController;
 import cn.prm.server.commons.Constants.RESPONSE_CODE;
-import cn.prm.server.dto.AddressDto;
 import cn.prm.server.dto.BaseDto;
-import cn.prm.server.dto.CustomDto;
 import cn.prm.server.dto.ListDto;
 import cn.prm.server.dto.PageDto;
+import cn.prm.server.dto.bean.AddressDto;
+import cn.prm.server.dto.bean.BeanDto;
+import cn.prm.server.dto.bean.CustomDto;
 import cn.prm.server.exception.BusinessException;
 import cn.prm.server.exception.PermissionException;
 import cn.prm.server.form.CustomForm;
@@ -60,6 +61,29 @@ public class CustomApiController extends BaseController {
                     form.getOffset(), form.getLimit());
             page.setCode(RESPONSE_CODE.CODE_SUCCESS);
             return page;
+        }
+        catch (BusinessException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
+        }
+    }
+    
+    /** 
+     * @Title: getCustom<br>
+     * @Description: 获取客户信息，姓名，联系方式等等(编辑用)<br>
+     * @param request
+     * @param custId
+     * @return
+     */
+    @RequestMapping("/getCustom")
+    public Object getCustom(HttpServletRequest request, String custId){
+        try {
+            CurrUser currUser = getCurrUser(request);
+            if (currUser == null) {
+                return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
+            }
+            CustomDto customDto = customService.getCustom(currUser, custId);
+            return new BeanDto<CustomDto>(customDto);
         }
         catch (BusinessException e) {
             e.printStackTrace();

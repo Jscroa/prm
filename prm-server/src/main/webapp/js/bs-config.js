@@ -13,8 +13,8 @@ function TableConfig(url, toolbar, columns) {
     this.showRefresh = false; // 刷新按钮
     this.sidePagination = 'server'; // 服务端分页
     this.showColumns = false; // 开启选择显示列
-    this.smartDisplay = true; // 智能显示
-    this.clickToSelect = true; // 单击行选中
+    this.smartDisplay = false; // 智能显示
+    this.clickToSelect = false; // 单击行选中
     this.rowStyle = function(row, index) { // 隔行换色
         var strclass = '';
         if (index % 2 == 0) {
@@ -60,3 +60,35 @@ toastr.options = {
     "showMethod" : "fadeIn",
     "hideMethod" : "fadeOut"
 };
+
+// 表单数据快速填充
+function loadData(obj){
+    var key,value,tagName,type,arr;
+    for(x in obj){
+        key = x;
+        value = obj[x];
+        
+        $("[name='"+key+"'],[name='"+key+"[]']").each(function(){
+            tagName = $(this)[0].tagName;
+            type = $(this).attr('type');
+            if(tagName=='INPUT'){
+                if(type=='radio'){
+                    $(this).attr('checked',$(this).val()==value);
+                }else if(type=='checkbox'){
+                    arr = value.split(',');
+                    for(var i =0;i<arr.length;i++){
+                        if($(this).val()==arr[i]){
+                            $(this).attr('checked',true);
+                            break;
+                        }
+                    }
+                }else{
+                    $(this).val(value);
+                }
+            }else if(tagName=='SELECT' || tagName=='TEXTAREA'){
+                $(this).val(value);
+            }
+            
+        });
+    }
+}

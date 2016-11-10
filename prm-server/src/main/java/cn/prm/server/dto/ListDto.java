@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @Title: ListDto.java<br>
  * @Package: cn.prm.server.dto<br>
- * @Description: <br>
+ * @Description: 列表形式的DTO<br>
  * @author yyao<br>
  * @date 2016年10月19日 下午5:32:57<br>
  * @version v1.0<br>

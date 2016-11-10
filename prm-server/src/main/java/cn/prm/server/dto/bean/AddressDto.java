@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cn.prm.server.dto;
+package cn.prm.server.dto.bean;
 
 /**
  * @Title: AddressDto.java<br>

@@ -1,4 +1,4 @@
-package cn.prm.server.dto;
+package cn.prm.server.dto.bean;
 
 /**
  * @Title: CountryDto.java<br>

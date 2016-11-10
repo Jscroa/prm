@@ -57,7 +57,7 @@
                         formatter : function(value, row, index) {
 
                             return [
-                                    '<button class="btn btn-primary btn-sm" onclick="customAddress(\''
+                                    '<button class="btn btn-link btn-sm" onclick="customAddress(\''
                                             + value + '\',\'' + row.name
                                             + '\')">',
                                     '<span class="glyphicon glyphicon-map-marker">',
@@ -65,8 +65,7 @@
                                     '&nbsp;地址管理',
                                     '</button>',
                                     '&nbsp;&nbsp;',
-                                    '<button class="btn btn-primary btn-sm" onclick="clickModify(\''
-                                            + value + '\')">',
+                                    '<button class="btn btn-link btn-sm" data-loading-text="加载中" onclick="clickModify(this,\'' + value + '\')">',
                                     '<span class="glyphicon glyphicon-edit">',
                                     '</span>', '&nbsp;编辑', '</button>' ]
                                     .join('');
@@ -83,7 +82,7 @@
             '<form class="form-horizontal" name="custom_form" id="custom_form" onSubmit="return false;">',
             '<div class="form-group">',
             '<label for="inputName" class="col-sm-3 control-label">',
-            '姓名：',
+            '<span style="color:red;">*</span>&nbsp;姓名：',
             '</label>',
             '<div class="col-sm-9">',
             '<input type="text" name="name" class="form-control" placeholder="Name" id="inputName" required>',
@@ -95,11 +94,13 @@
             '</label>',
             '<div class="col-sm-9">',
             '<div class="radio">',
-            '<label>',
-            '<input type="radio" name="sex" id="inputSex" value="true" checked />',
+            '<label class="radio-inline">',
+            '<input type="radio" name="sex" id="inputSex" value="1" checked />',
             '男',
-            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
-            '<input type="radio" name="sex" id="inputSex" value="false" />',
+            '</label>',
+            '&nbsp;',
+            '<label class="radio-inline">',
+            '<input type="radio" name="sex" id="inputSex" value="0" />',
             '女',
             '</label>',
             '</div>',
@@ -138,14 +139,6 @@
             '</div>',
             '</div>',
             '<div class="form-group">',
-            '<label for="inputAddr" class="col-sm-3 control-label">',
-            '地址：',
-            '</label>',
-            '<div class="col-sm-9">',
-            '<input type="text" name="addr" class="form-control" placeholder="Address" id="inputAddr" required>',
-            '</div>',
-            '</div>',
-            '<div class="form-group">',
             '<label for="inputBirthday" class="col-sm-3 control-label">',
             '出生年月：',
             '</label>',
@@ -161,55 +154,89 @@
             '</div>',
             '<div class="form-group">',
             '<div class="col-sm-6">',
-            '<button id="cancelButton" type="button" class="form-control btn btn-default">',
+            '<button id="cancelButton" type="button" class="form-control btn btn-link">',
             '取消',
             '</button>',
             '</div>',
             '<div class="col-sm-6">',
-            '<button id="confirmButton" type="button" class="form-control btn btn-primary">',
+            '<button id="confirmButton" type="button" data-loading-text="加载中" class="form-control btn btn-primary">',
             '确定', '</button>', '</div>', '</div>', '</form>' ].join('');
 
     // 点击添加
     function clickAdd() {
         var dlg = bootbox.dialog({
-            title : '添加客户',
+            title : '<strong>添加客户</strong>',
             message : customForm,
-            size : 'large',
+            /* size : 'large', */
             closeButton : true
         });
+        initDatepicker();
         $('#cancelButton').click(function() {
             dlg.modal('hide');
         });
         $('#confirmButton').click(function() {
-            addCustom(dlg);
+            addCustom(dlg,this);
         });
     }
 
     // 点击修改
-    function clickModify(id) {
-        var dlg = bootbox.dialog({
-            title : '编辑客户',
-            message : customForm,
-            size : 'large',
-            closeButton : true
+    function clickModify(btn,id) {
+        $(btn).button('loading');
+        $.ajax({
+            url:'/api/custom/getCustom',
+            type : 'post',
+            dataType : 'json',
+            data:{
+                custId:id
+            },
+            success : function(data) {
+                $(btn).button('reset');
+                if(data){
+                    if (data.code == 100) { // 请求成功
+                        var dlg = bootbox.dialog({
+                            title : '<strong>编辑客户</strong>',
+                            message : customForm,
+                            /* size : 'large', */
+                            closeButton : true
+                        });
+                        initDatepicker();
+                        loadData(data.t);
+                        $('#cancelButton').click(function() {
+                            dlg.modal('hide');
+                        });
+                        $('#confirmButton').click(function() {
+                            modifyCustom(dlg,id);
+                        });
+                        
+                        
+                    } else {
+                        toastr.warning(data.code + ':' + data.msg);
+                    }
+                } else {
+                    // 未响应
+                    toastr.warning('服务器未响应!');
+                }
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                $(btn).button('reset');
+                toastr.error(XMLHttpRequest.status);
+            }
         });
-        $('#cancelButton').click(function() {
-            dlg.modal('hide');
-        });
-        $('#confirmButton').click(function() {
-            modifyCustom(dlg);
-        });
+        
     }
 	
     // 添加客户
-    function addCustom(dlg) {
+    function addCustom(dlg,confirmBtn) {
+        $(confirmBtn).button('loading');
         $('#custom_form').ajaxSubmit({
             url : '/api/custom/add',
             type : 'post',
-            async : false,
+            /* async : false, */
             dataType : 'json',
             data : $("#form1").serialize(),
             success : function(data) {
+                $(confirmBtn).button('reset');
+                $(confirmBtn).attr("disabled","");
                 if (data) {
                     if (data.code == 100) {
                         toastr.success('添加成功');
@@ -223,9 +250,11 @@
                 }
             },
             error : function(XMLHttpRequest, textStatus, errorThrown) {
+                $(confirmBtn).button('reset');
                 toastr.error(XMLHttpRequest.status);
             }
         });
+        $(confirmBtn).attr("disabled","disabled");
     }
 
     // 批量删除
@@ -289,7 +318,8 @@
                         }
                     } else {
                         // 未响应
-                        toastr.warning('id -> ' + ids[index] + ' 未响应!');
+                        //toastr.warning('id -> ' + ids[index] + ' 未响应!');
+                        toastr.warning('服务器未响应，编号为&nbsp;'+ids[index]+'&nbsp;的客户删除失败！');
                     }
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -305,16 +335,19 @@
     }
 
     // 编辑客户
-    function modifyCustom(dlg) {
-        toastr.info('编辑');
+    function modifyCustom(dlg,id) {
+        toastr.info('编辑'+id);
     }
-
-    $(function() {
-        controller.loadData();
+    
+    function initDatepicker(){
         $('.datepicker').datepicker({
             language : "zh-CN",
             format : "yyyy年mm月dd日"
         });
+    }
+
+    $(function() {
+        controller.loadData();
     });
 </script>
 

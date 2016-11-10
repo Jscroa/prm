@@ -23,7 +23,7 @@ public class CustomForm {
     private String  email;
     private String  qq;
     private String  weixin;
-    private String  addr;
+//    private String  addr;
 
     /**
      * @return the name
@@ -130,18 +130,4 @@ public class CustomForm {
         this.weixin = weixin;
     }
 
-    /**
-     * @return the addr
-     */
-    public String getAddr() {
-        return addr;
-    }
-
-    /**
-     * @param addr
-     *            the addr to set
-     */
-    public void setAddr(String addr) {
-        this.addr = addr;
-    }
 }

@@ -25,10 +25,10 @@ import cn.prm.server.dao.ICustomDao;
 import cn.prm.server.dao.ICustomToAddrDao;
 import cn.prm.server.dao.ICustomToContactDao;
 import cn.prm.server.dao.IGroupToCustomDao;
-import cn.prm.server.dto.AddressDto;
-import cn.prm.server.dto.CustomDto;
 import cn.prm.server.dto.ListDto;
 import cn.prm.server.dto.PageDto;
+import cn.prm.server.dto.bean.AddressDto;
+import cn.prm.server.dto.bean.CustomDto;
 import cn.prm.server.entity.AccGroup;
 import cn.prm.server.entity.Address;
 import cn.prm.server.entity.Contact;
@@ -146,7 +146,7 @@ public class CustomService {
     public void addPrivateCustom(CurrUser currUser, CustomForm form) throws BusinessException {
 
         if (form.getName() == null || "".equals(form.getName())) {
-            throw new BusinessException("请输入客户名字");
+            throw new BusinessException("请输入姓名");
         }
 
         Timestamp now = new Timestamp(System.currentTimeMillis());
@@ -317,30 +317,30 @@ public class CustomService {
         }
 
         // 关联地址
-        if (form.getAddr() != null && !"".equals(form.getAddr())) {
-            String addr = form.getAddr();
-            String addrId = UUIDUtil.randomUUID();
-            Address address = new Address();
-            address.setGuid(addrId);
-            address.setStdName(addr);
-            address.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-            address.setCreateTime(now);
-            address.setModifyTime(now);
-            address.setCreateUser(currUser.getGuid());
-            address.setModifyUser(currUser.getGuid());
-            addressDao.add(address);
-
-            CustomToAddr customToAddr = new CustomToAddr();
-            customToAddr.setGuid(UUIDUtil.randomUUID());
-            customToAddr.setCustomId(customId);
-            customToAddr.setAddrId(addrId);
-            customToAddr.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-            customToAddr.setCreateTime(now);
-            customToAddr.setModifyTime(now);
-            customToAddr.setCreateUser(currUser.getGuid());
-            customToAddr.setModifyUser(currUser.getGuid());
-            customToAddrDao.add(customToAddr);
-        }
+//        if (form.getAddr() != null && !"".equals(form.getAddr())) {
+//            String addr = form.getAddr();
+//            String addrId = UUIDUtil.randomUUID();
+//            Address address = new Address();
+//            address.setGuid(addrId);
+//            address.setStdName(addr);
+//            address.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+//            address.setCreateTime(now);
+//            address.setModifyTime(now);
+//            address.setCreateUser(currUser.getGuid());
+//            address.setModifyUser(currUser.getGuid());
+//            addressDao.add(address);
+//
+//            CustomToAddr customToAddr = new CustomToAddr();
+//            customToAddr.setGuid(UUIDUtil.randomUUID());
+//            customToAddr.setCustomId(customId);
+//            customToAddr.setAddrId(addrId);
+//            customToAddr.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+//            customToAddr.setCreateTime(now);
+//            customToAddr.setModifyTime(now);
+//            customToAddr.setCreateUser(currUser.getGuid());
+//            customToAddr.setModifyUser(currUser.getGuid());
+//            customToAddrDao.add(customToAddr);
+//        }
     }
 
     /**
@@ -414,6 +414,51 @@ public class CustomService {
         ListDto<AddressDto> list = new ListDto<>();
         list.setRows(dtos);
         return list;
+    }
+    
+    /** 
+     * @Title: getCustom<br>
+     * @Description: <br>
+     * @param currUser
+     * @param custId
+     * @return 
+     * @throws BusinessException 
+     */
+    public CustomDto getCustom(CurrUser currUser,String custId) throws BusinessException{
+        if(custId==null || "".equals(custId)){
+            throw new BusinessException("参数不完整");
+        }
+        //TODO 验证当前用户有没有权限查看客户
+        
+        Custom custom = customDao.get(custId);
+        CustomDto customDto = new CustomDto();
+        customDto.setId(custId);
+        customDto.setName(custom.getStdName());
+        customDto.setSex(custom.getSex());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+        if(custom.getBirthday()!=null){
+            customDto.setBirthday(sdf.format(custom.getBirthday()));
+        }
+        List<Contact> contacts = customToContactDao.getContacts(custId);
+        if(contacts!=null){
+            for (Contact contact : contacts) {
+                if(contact.getStatus()==DB_STATUS.STATUS_ACTIVE){
+                    if(contact.getStdCode()==CONTACT_TYPE.Phone.getCode()){
+                        customDto.setPhone(contact.getStdName());
+                    }
+                    if(contact.getStdCode()==CONTACT_TYPE.Email.getCode()){
+                        customDto.setEmail(contact.getStdName());
+                    }
+                    if(contact.getStdCode()==CONTACT_TYPE.WeiXin.getCode()){
+                        customDto.setWeixin(contact.getStdName());
+                    }
+                    if(contact.getStdCode()==CONTACT_TYPE.QQ.getCode()){
+                        customDto.setQq(contact.getStdName());
+                    }
+                }
+            }
+        }
+        return customDto;
     }
     
 }

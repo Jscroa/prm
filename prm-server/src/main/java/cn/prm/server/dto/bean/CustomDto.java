@@ -1,4 +1,4 @@
-package cn.prm.server.dto;
+package cn.prm.server.dto.bean;
 
 /**
  * @Title: CustomDto.java<br>
@@ -12,10 +12,12 @@ public class CustomDto {
 
     private String id;
     private String name;
+    private Boolean sex;
     private String phone;
     private String email;
     private String weixin;
     private String qq;
+    private String  birthday;
 
     /**
      * @return the id
@@ -45,6 +47,20 @@ public class CustomDto {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the sex
+     */
+    public Boolean getSex() {
+        return sex;
+    }
+
+    /**
+     * @param sex the sex to set
+     */
+    public void setSex(Boolean sex) {
+        this.sex = sex;
     }
 
     /**
@@ -105,6 +121,20 @@ public class CustomDto {
      */
     public void setQq(String qq) {
         this.qq = qq;
+    }
+
+    /**
+     * @return the birthday
+     */
+    public String getBirthday() {
+        return birthday;
+    }
+
+    /**
+     * @param birthday the birthday to set
+     */
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
 }

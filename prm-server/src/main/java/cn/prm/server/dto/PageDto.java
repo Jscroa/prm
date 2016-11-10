@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @Title: PageDto.java<br>
  * @Package: cn.prm.server.dto<br>
- * @Description: <br>
+ * @Description: 带上分页参数的DTO<br>
  * @author yyao<br>
  * @date 2016年10月19日 下午5:33:17<br>
  * @version v1.0<br>

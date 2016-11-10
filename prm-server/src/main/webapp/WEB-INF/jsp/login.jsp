@@ -77,8 +77,8 @@ body {
 
 							<div class="form-group">
 								<div class="col-sm-6">
-									<button class="form-control btn btn-success"
-										ng-click="login();">登&nbsp;&nbsp;录</button>
+									<button class="form-control btn btn-success" data-loading-text="登录中..."
+										ng-click="login($event);">登&nbsp;&nbsp;录</button>
 								</div>
 								<div class="col-sm-6">
 									<a class="form-control btn btn-default" href="/register"
@@ -127,15 +127,18 @@ body {
 					return;
 				}
 			};
-			$scope.login = function() {
+			$scope.login = function($event) {
+			    $($event.target).button('loading');
 				$scope.check();
 				if ($scope.error || $scope.incomplete) {
+				    $($event.target).button('reset');
 					return;
 				}
 				$http.post('/api/user/login', {
 					email : $scope.email,
 					password : $scope.password
 				}).success(function(data) {
+				    $($event.target).button('reset');
 					if (data) {
 						if (data.code == 100) {
 							window.location.href = '/';
@@ -149,6 +152,7 @@ body {
 						$scope.checkMsg = '服务器未响应';
 					}
 				}).error(function(){
+				    $($event.target).button('reset');
 					$scope.error = true;
 					$scope.checkMsg = '服务器发生错误';
 				});

@@ -40,7 +40,7 @@ function showAddressPage(custId,custName){
     /* showPage('custom/customAddress?custId='+custId); */
     $.get('custom/customAddress?custId='+custId,function(data){
         bootbox.dialog({
-            title:'地址管理&nbsp;-&nbsp;'+custName,
+            title:'<strong>地址管理</strong>&nbsp;&nbsp;'+custName,
             message:data,
             size: 'large',
             closeButton: true
@@ -63,7 +63,7 @@ $(function(){
 		</script>
 	</div>
 	<div class="container mainland" id="page_container">
-		<%-- <%@include file="custom_table.jsp"%> --%>
+		<%-- <%@include file="custom_index.jsp"%> --%>
 	</div>
 </body>
 </html>
