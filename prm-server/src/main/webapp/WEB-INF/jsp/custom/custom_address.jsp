@@ -44,6 +44,7 @@
         });
     });
     
+    // 地址item
     function getAddressItem(addr){
         return [ '<div class="panel panel-primary">',
                  /* '<div class="panel-heading">', '地址', '</div>', */

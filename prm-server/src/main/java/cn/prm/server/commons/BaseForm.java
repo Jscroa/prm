@@ -25,7 +25,7 @@ public abstract class BaseForm {
 
     /**
      * @Title: checkFields<br>
-     * @Description: <br>
+     * @Description: 检查form的字段长度<br>
      * @throws BusinessException
      */
     public void checkFields() throws BusinessException {

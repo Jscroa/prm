@@ -1,18 +1,42 @@
 body {
 	font-family: "microsoft yahei", "Times New Roman", "ËÎÌו", Times, serif;
 	background-color: #EEEEEE;
-	/* background-image:url(/img/2c761da4303eccca7d9bfc8d73a40077cfbc9f651fe0-svPkdZ_fw658.png); */ 
+	/* background-image:url(/img/2c761da4303eccca7d9bfc8d73a40077cfbc9f651fe0-svPkdZ_fw658.png); */
+}
+
+.form-control, .panel, .input-group .datepicker, .input-group .input-group-addon
+	{
+	border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
 }
 
 .mainland {
 	background: #FFFFFF;
 }
 
-table{
+.table {
 	background: #FFFFFF;
 }
 
-.breadcrumb{
+.bootstrap-table>.fixed-table-container, .bootstrap-table>.fixed-table-container>.fixed-table-body>.table,
+	.bootstrap-table>.fixed-table-container>.fixed-table-body>.table>thead>tr>th,
+	.bootstrap-table>.fixed-table-container>.fixed-table-body>.table>tbody>tr>td
+	{
+	border-left: none;
+	border-bottom: none;
+	border-top: none;
+	border: none;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th,
+	.table>thead>tr>td, .table>thead>tr>th {
+	vertical-align: middle;
+}
+
+.breadcrumb {
 	background-color: transparent;
-	border-radius: 0px; 
+	border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
 }

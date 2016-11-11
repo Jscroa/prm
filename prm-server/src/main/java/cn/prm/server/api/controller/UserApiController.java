@@ -44,6 +44,10 @@ public class UserApiController extends BaseController {
     @RequestMapping("/login")
     public Object login(HttpServletRequest request, UserLoginForm form) {
         try {
+            if(form==null) {
+                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "请求失败");
+            }
+            form.checkFields();
             log.info("email:" + form.getEmail() + " 准备登陆");
             CurrUser currUser = userService.login(form);
             setCurrUser(request, currUser);
@@ -78,6 +82,10 @@ public class UserApiController extends BaseController {
     @RequestMapping("/register")
     public Object register(HttpServletRequest request, UserRegisterForm form) {
         try {
+            if(form==null) {
+                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "请求失败");
+            }
+            form.checkFields();
             CurrUser currUser = userService.register(form);
             setCurrUser(request, currUser);
             log.info(currUser.getName() + "(" + currUser.getGuid() + ") 注销成功");

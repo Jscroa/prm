@@ -1,5 +1,9 @@
 package cn.prm.server.form;
 
+import cn.prm.server.commons.BaseForm;
+import cn.prm.server.commons.FormLimitAnnotation;
+import cn.prm.server.commons.FormLimitAnnotation.CharSupport;
+
 /**
  * @Title: UserRegisterForm.java<br>
  * @Package: cn.prm.server.form<br>
@@ -8,11 +12,15 @@ package cn.prm.server.form;
  * @date 2016年10月19日 下午5:39:12<br>
  * @version v1.0<br>
  */
-public class UserRegisterForm {
+public class UserRegisterForm extends BaseForm {
 
+    @FormLimitAnnotation(minLength = 2, maxLength = 20, charCheck = CharSupport.AllChar)
     private String userName;
+    @FormLimitAnnotation(minLength = 2, maxLength = 20, charCheck = CharSupport.Email)
     private String email;
+    @FormLimitAnnotation(minLength = 2, maxLength = 20, charCheck = CharSupport.Password)
     private String password;
+    @FormLimitAnnotation(minLength = 2, maxLength = 20, charCheck = CharSupport.OnlyNumber)
     private String phone;
 
     /**

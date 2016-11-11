@@ -10,12 +10,12 @@
                         checkbox : true, // 使用复选框
                         field : 'state',
                         align : 'center',
-                        valign : 'middle'
+                        valign:'middle'
                     },
                     {
                         title : '姓名',
                         field : 'name',
-                        align : 'left',
+                        align : 'center',
                         valign : 'middle',
                         formatter : function(value, row, index) {
                             return value;
@@ -30,19 +30,19 @@
                     {
                         title : 'QQ',
                         field : 'qq',
-                        align : 'left',
+                        align : 'center',
                         valign : 'middle'
                     },
                     {
                         title : '微信',
                         field : 'weixin',
-                        align : 'left',
+                        align : 'center',
                         valign : 'middle'
                     },
                     {
                         title : '邮箱',
                         field : 'email',
-                        align : 'left',
+                        align : 'center',
                         valign : 'middle',
                         formatter : function(value, row, index) {
                             var str = '<a href="#">' + value + '</a>';
@@ -65,7 +65,8 @@
                                     '&nbsp;地址管理',
                                     '</button>',
                                     '&nbsp;&nbsp;',
-                                    '<button class="btn btn-link btn-sm" data-loading-text="加载中" onclick="clickModify(this,\'' + value + '\')">',
+                                    '<button class="btn btn-link btn-sm" data-loading-text="加载中" onclick="clickModify(this,\''
+                                            + value + '\')">',
                                     '<span class="glyphicon glyphicon-edit">',
                                     '</span>', '&nbsp;编辑', '</button>' ]
                                     .join('');
@@ -154,7 +155,7 @@
             '</div>',
             '<div class="form-group">',
             '<div class="col-sm-6">',
-            '<button id="cancelButton" type="button" class="form-control btn btn-link">',
+            '<button id="cancelButton" type="button" class="form-control btn btn-default">',
             '取消',
             '</button>',
             '</div>',
@@ -175,23 +176,23 @@
             dlg.modal('hide');
         });
         $('#confirmButton').click(function() {
-            addCustom(dlg,this);
+            addCustom(dlg, this);
         });
     }
 
     // 点击修改
-    function clickModify(btn,id) {
+    function clickModify(btn, id) {
         $(btn).button('loading');
         $.ajax({
-            url:'/api/custom/getCustom',
+            url : '/api/custom/getCustom',
             type : 'post',
             dataType : 'json',
-            data:{
-                custId:id
+            data : {
+                custId : id
             },
             success : function(data) {
                 $(btn).button('reset');
-                if(data){
+                if (data) {
                     if (data.code == 100) { // 请求成功
                         var dlg = bootbox.dialog({
                             title : '<strong>编辑客户</strong>',
@@ -205,10 +206,8 @@
                             dlg.modal('hide');
                         });
                         $('#confirmButton').click(function() {
-                            modifyCustom(dlg,id);
+                            modifyCustom(dlg, this, id);
                         });
-                        
-                        
                     } else {
                         toastr.warning(data.code + ':' + data.msg);
                     }
@@ -222,21 +221,20 @@
                 toastr.error(XMLHttpRequest.status);
             }
         });
-        
+
     }
-	
+
     // 添加客户
-    function addCustom(dlg,confirmBtn) {
+    function addCustom(dlg, confirmBtn) {
         $(confirmBtn).button('loading');
         $('#custom_form').ajaxSubmit({
             url : '/api/custom/add',
             type : 'post',
             /* async : false, */
             dataType : 'json',
-            data : $("#form1").serialize(),
+            data : $("#custom_form").serialize(),
             success : function(data) {
                 $(confirmBtn).button('reset');
-                $(confirmBtn).attr("disabled","");
                 if (data) {
                     if (data.code == 100) {
                         toastr.success('添加成功');
@@ -254,7 +252,7 @@
                 toastr.error(XMLHttpRequest.status);
             }
         });
-        $(confirmBtn).attr("disabled","disabled");
+        $(confirmBtn).attr("disabled", "disabled");
     }
 
     // 批量删除
@@ -291,7 +289,7 @@
         });
 
     }
-    
+
     // 递归删除
     function delCustom(ids, index) {
         if (index < 0 || ids.length <= index) {
@@ -319,7 +317,8 @@
                     } else {
                         // 未响应
                         //toastr.warning('id -> ' + ids[index] + ' 未响应!');
-                        toastr.warning('服务器未响应，编号为&nbsp;'+ids[index]+'&nbsp;的客户删除失败！');
+                        toastr.warning('服务器未响应，编号为&nbsp;' + ids[index]
+                                + '&nbsp;的客户删除失败！');
                     }
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -335,11 +334,39 @@
     }
 
     // 编辑客户
-    function modifyCustom(dlg,id) {
-        toastr.info('编辑'+id);
+    function modifyCustom(dlg, confirmBtn, id) {
+        $(confirmBtn).button('loading');
+        toastr.info('编辑' + id);
+        $.ajax({
+            url : '/api/custom/modify?custId='+id,
+            type : 'post',
+            dataType : 'json',
+            data : $("#custom_form").serialize(),
+            success : function(data) {
+                $(confirmBtn).button('reset');
+                if (data) {
+                    if (data.code == 100) {
+                        toastr.success('修改成功');
+                        dlg.modal('hide');
+                        $('#custom_table').bootstrapTable('refresh');
+                    } else {
+                        toastr.warning(data.code + ':' + data.msg);
+                    }
+                } else {
+                    // 未响应
+                    //toastr.warning('id -> ' + ids[index] + ' 未响应!');
+                    toastr.warning('服务器未响应，编号为&nbsp;' + ids[index]
+                            + '&nbsp;的客户删除失败！');
+                }
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                $(confirmBtn).button('reset');
+                toastr.error(XMLHttpRequest.status);
+            }
+        });
     }
-    
-    function initDatepicker(){
+
+    function initDatepicker() {
         $('.datepicker').datepicker({
             language : "zh-CN",
             format : "yyyy年mm月dd日"

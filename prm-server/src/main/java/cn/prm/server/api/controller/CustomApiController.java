@@ -67,8 +67,8 @@ public class CustomApiController extends BaseController {
             return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
         }
     }
-    
-    /** 
+
+    /**
      * @Title: getCustom<br>
      * @Description: 获取客户信息，姓名，联系方式等等(编辑用)<br>
      * @param request
@@ -76,7 +76,7 @@ public class CustomApiController extends BaseController {
      * @return
      */
     @RequestMapping("/getCustom")
-    public Object getCustom(HttpServletRequest request, String custId){
+    public Object getCustom(HttpServletRequest request, String custId) {
         try {
             CurrUser currUser = getCurrUser(request);
             if (currUser == null) {
@@ -105,6 +105,7 @@ public class CustomApiController extends BaseController {
             if (currUser == null) {
                 return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
             }
+            form.checkFields();
             customService.addPrivateCustom(currUser, form);
             return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "添加成功");
         }
@@ -131,13 +132,46 @@ public class CustomApiController extends BaseController {
             customService.delete(currUser, id);
             return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "删除成功");
         }
+        catch (PermissionException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
+        }
         catch (BusinessException e) {
             e.printStackTrace();
             return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
         }
     }
-    
+
     /** 
+     * @Title: modify<br>
+     * @Description: 编辑客户<br>
+     * @param request
+     * @param custId 
+     * @param form
+     * @return
+     */
+    @RequestMapping("/modify")
+    public Object modify(HttpServletRequest request, String custId, CustomForm form) {
+        try{
+            CurrUser currUser = getCurrUser(request);
+            if (currUser == null) {
+                return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
+            }
+            form.checkFields();
+            customService.modify(currUser, custId, form);
+            return new BaseDto(RESPONSE_CODE.CODE_SUCCESS,"修改成功");
+        }catch (PermissionException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
+        }
+        catch (BusinessException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
+        }
+        
+    }
+
+    /**
      * @Title: addressList<br>
      * @Description: 管理某客户的地址<br>
      * @param request
@@ -145,8 +179,8 @@ public class CustomApiController extends BaseController {
      * @return
      */
     @RequestMapping("/addressList")
-    public Object addressList(HttpServletRequest request,String custId){
-        
+    public Object addressList(HttpServletRequest request, String custId) {
+
         try {
             CurrUser currUser = getCurrUser(request);
             if (currUser == null) {
@@ -158,7 +192,7 @@ public class CustomApiController extends BaseController {
         }
         catch (PermissionException e) {
             e.printStackTrace();
-            return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
+            return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
         }
         catch (BusinessException e) {
             e.printStackTrace();

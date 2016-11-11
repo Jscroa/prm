@@ -369,6 +369,218 @@ public class CustomService {
     }
 
     /** 
+     * @Title: modify<br>
+     * @Description: <br>
+     * @param currUser
+     * @param custId 
+     * @param form
+     * @throws PermissionException 
+     * @throws BusinessException 
+     */
+    @Transactional
+    public void modify(CurrUser currUser, String custId, CustomForm form) throws PermissionException,BusinessException{
+        if(form==null) {
+            throw new BusinessException("参数不完整");
+        }
+        pCheckCustomOwnner(currUser,custId);
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        Custom custom = customDao.get(custId);
+        custom.setStdName(form.getName());
+        custom.setSex(form.getSex());
+        //custom.setBirthday(form.getBirthday());
+        Date birthday = null;
+        String birthdayStr = form.getBirthday();
+        if (birthdayStr != null && !"".equals(birthdayStr)) {
+            try {
+                java.util.Date bir = new SimpleDateFormat("yyyy年MM月dd日").parse(form.getBirthday());
+                birthday = new Date(bir.getTime());
+            }
+            catch (ParseException e) {
+                throw new BusinessException("出生年月格式错误");
+            }
+        }
+        custom.setBirthday(birthday);
+        custom.setModifyTime(now);
+        custom.setModifyUser(currUser.getGuid());
+        customDao.modify(custom);
+        // 以下 联系方式修改
+        List<Contact> contacts = customToContactDao.getContacts(custId);
+        // 修改phone
+        {
+            String phone = form.getPhone();
+            boolean flag = false; // 标记原数据库有无phone记录
+            for (Contact contact : contacts) {
+                if(contact.getStdCode()==CONTACT_TYPE.Phone.getCode()){
+                    flag = true;
+                    // 有记录，修改
+                    contact.setStdName(phone);
+                    contact.setModifyTime(now);
+                    contact.setModifyUser(currUser.getGuid());
+                    contactDao.modify(contact);
+                    break;
+                }
+            }
+            if(!flag){ // 原记录中没有phone，新增
+                if (phone != null && !"".equals(phone)) {
+                    // 联系方式表
+                    String contactId = UUIDUtil.randomUUID();
+                    Contact contact = new Contact();
+                    contact.setGuid(contactId);
+                    contact.setStdName(phone);
+                    contact.setStdCode(CONTACT_TYPE.Phone.getCode());
+                    contact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+                    contact.setCreateTime(now);
+                    contact.setModifyTime(now);
+                    contact.setCreateUser(currUser.getGuid());
+                    contact.setModifyUser(currUser.getGuid());
+                    contactDao.add(contact);
+
+                    // 客户与联系方式关联表
+                    CustomToContact customToContact = new CustomToContact();
+                    customToContact.setGuid(UUIDUtil.randomUUID());
+                    customToContact.setCustomId(custId);
+                    customToContact.setContactId(contactId);
+                    customToContact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+                    customToContact.setCreateTime(now);
+                    customToContact.setModifyTime(now);
+                    customToContact.setCreateUser(currUser.getGuid());
+                    customToContact.setModifyUser(currUser.getGuid());
+                    customToContactDao.add(customToContact);
+                }
+            }
+        }
+        
+        {
+            String email = form.getEmail();
+            boolean flag = false; // 标记原数据库有无phone记录
+            for (Contact contact : contacts) {
+                if(contact.getStdCode()==CONTACT_TYPE.Email.getCode()){
+                    flag = true;
+                    // 有记录，修改
+                    contact.setStdName(email);
+                    contact.setModifyTime(now);
+                    contact.setModifyUser(currUser.getGuid());
+                    contactDao.modify(contact);
+                    break;
+                }
+            }
+            if(!flag){ // 原记录中没有phone，新增
+                if (email != null && !"".equals(email)) {
+                    if (!email.contains("@")) {
+                        throw new BusinessException("不是正确的邮箱");
+                    }
+                    String contactId = UUIDUtil.randomUUID();
+                    Contact contact = new Contact();
+                    contact.setGuid(contactId);
+                    contact.setStdName(email);
+                    contact.setStdCode(CONTACT_TYPE.Email.getCode());
+                    contact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+                    contact.setCreateTime(now);
+                    contact.setModifyTime(now);
+                    contact.setCreateUser(currUser.getGuid());
+                    contact.setModifyUser(currUser.getGuid());
+                    contactDao.add(contact);
+
+                    CustomToContact customToContact = new CustomToContact();
+                    customToContact.setGuid(UUIDUtil.randomUUID());
+                    customToContact.setCustomId(custId);
+                    customToContact.setContactId(contactId);
+                    customToContact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+                    customToContact.setCreateTime(now);
+                    customToContact.setModifyTime(now);
+                    customToContact.setCreateUser(currUser.getGuid());
+                    customToContact.setModifyUser(currUser.getGuid());
+                    customToContactDao.add(customToContact);
+                }
+            }
+        }
+        
+        {
+            String qq = form.getQq();
+            boolean flag = false; // 标记原数据库有无phone记录
+            for (Contact contact : contacts) {
+                if(contact.getStdCode()==CONTACT_TYPE.QQ.getCode()){
+                    flag = true;
+                    // 有记录，修改
+                    contact.setStdName(qq);
+                    contact.setModifyTime(now);
+                    contact.setModifyUser(currUser.getGuid());
+                    contactDao.modify(contact);
+                    break;
+                }
+            }
+            if(!flag){ // 原记录中没有phone，新增
+                if (form.getQq() != null && !"".equals(form.getQq())) {
+                    String contactId = UUIDUtil.randomUUID();
+                    Contact contact = new Contact();
+                    contact.setGuid(contactId);
+                    contact.setStdName(qq);
+                    contact.setStdCode(CONTACT_TYPE.QQ.getCode());
+                    contact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+                    contact.setCreateTime(now);
+                    contact.setModifyTime(now);
+                    contact.setCreateUser(currUser.getGuid());
+                    contact.setModifyUser(currUser.getGuid());
+                    contactDao.add(contact);
+
+                    CustomToContact customToContact = new CustomToContact();
+                    customToContact.setGuid(UUIDUtil.randomUUID());
+                    customToContact.setCustomId(custId);
+                    customToContact.setContactId(contactId);
+                    customToContact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+                    customToContact.setCreateTime(now);
+                    customToContact.setModifyTime(now);
+                    customToContact.setCreateUser(currUser.getGuid());
+                    customToContact.setModifyUser(currUser.getGuid());
+                    customToContactDao.add(customToContact);
+                }
+            }
+        }
+        
+        {
+            String weixin = form.getWeixin();
+            boolean flag = false; // 标记原数据库有无phone记录
+            for (Contact contact : contacts) {
+                if(contact.getStdCode()==CONTACT_TYPE.WeiXin.getCode()){
+                    flag = true;
+                    // 有记录，修改
+                    contact.setStdName(weixin);
+                    contact.setModifyTime(now);
+                    contact.setModifyUser(currUser.getGuid());
+                    contactDao.modify(contact);
+                    break;
+                }
+            }
+            if(!flag){ // 原记录中没有phone，新增
+                if (form.getWeixin() != null && !"".equals(form.getWeixin())) {
+                    String contactId = UUIDUtil.randomUUID();
+                    Contact contact = new Contact();
+                    contact.setGuid(contactId);
+                    contact.setStdName(weixin);
+                    contact.setStdCode(CONTACT_TYPE.WeiXin.getCode());
+                    contact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+                    contact.setCreateTime(now);
+                    contact.setModifyTime(now);
+                    contact.setCreateUser(currUser.getGuid());
+                    contact.setModifyUser(currUser.getGuid());
+                    contactDao.add(contact);
+
+                    CustomToContact customToContact = new CustomToContact();
+                    customToContact.setGuid(UUIDUtil.randomUUID());
+                    customToContact.setCustomId(custId);
+                    customToContact.setContactId(contactId);
+                    customToContact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+                    customToContact.setCreateTime(now);
+                    customToContact.setModifyTime(now);
+                    customToContact.setCreateUser(currUser.getGuid());
+                    customToContact.setModifyUser(currUser.getGuid());
+                    customToContactDao.add(customToContact);
+                }
+            }
+        }
+    }
+    
+    /** 
      * @Title: pCheckCustomOwnner<br>
      * @Description: 客户所有权权限检查<br>
      * @param currUser 当前登录的用户
@@ -388,7 +600,7 @@ public class CustomService {
         }
         List<String> ids = groupToCustomDao.checkCustomOwn(currUser.getGuid(), id);
         if(ids==null || ids.size()==0){
-            throw new PermissionException("无法编辑此客户");
+            throw new PermissionException("您无权操作此客户");
         }
     }
     
@@ -422,13 +634,14 @@ public class CustomService {
      * @param currUser
      * @param custId
      * @return 
+     * @throws PermissionException 
      * @throws BusinessException 
      */
-    public CustomDto getCustom(CurrUser currUser,String custId) throws BusinessException{
+    public CustomDto getCustom(CurrUser currUser,String custId) throws PermissionException,BusinessException{
         if(custId==null || "".equals(custId)){
             throw new BusinessException("参数不完整");
         }
-        //TODO 验证当前用户有没有权限查看客户
+        pCheckCustomOwnner(currUser,custId);
         
         Custom custom = customDao.get(custId);
         CustomDto customDto = new CustomDto();

@@ -1,5 +1,6 @@
 package cn.prm.server.form;
 
+import cn.prm.server.commons.BaseForm;
 import cn.prm.server.commons.FormLimitAnnotation;
 import cn.prm.server.commons.FormLimitAnnotation.CharSupport;
 
@@ -11,7 +12,7 @@ import cn.prm.server.commons.FormLimitAnnotation.CharSupport;
  * @date 2016年10月19日 下午5:38:18<br>
  * @version v1.0<br>
  */
-public class CountryForm {
+public class CountryForm extends BaseForm {
 
     @FormLimitAnnotation(minLength = 1, maxLength = 20, charCheck = CharSupport.AllChar)
     private String stdName;
