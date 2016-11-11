@@ -33,7 +33,6 @@ body {
 	background-color: red;
 	color: red;
 }
-
 </style>
 
 <title>PRM</title>
@@ -47,9 +46,7 @@ body {
 
 				<div class="panel panel-default" ng-app="loginApp"
 					ng-controller="loginCtrl">
-					<div class="panel-heading">
-						快速登录&nbsp;PRM
-					</div>
+					<div class="panel-heading">快速登录&nbsp;PRM</div>
 					<div class="panel-body">
 						<div class="alert alert-danger" ng-show="error || incomplete"
 							role="alert">
@@ -69,23 +66,23 @@ body {
 							<div class="form-group">
 								<label for="inputPassword" class="col-sm-3 control-label">密码：</label>
 								<div class="col-sm-9">
-									<input type="password" name="password"
-										class="form-control" placeholder="Password"
-										ng-model="password" id="inputPassword" required />
+									<input type="password" name="password" class="form-control"
+										placeholder="Password" ng-model="password" id="inputPassword"
+										required />
 								</div>
 							</div>
 
 							<div class="form-group">
 								<div class="col-sm-6">
-									<button class="form-control btn btn-success" data-loading-text="登录中..."
-										ng-click="login($event);">登&nbsp;&nbsp;录</button>
+									<button class="form-control btn btn-success"
+										data-loading-text="登录中..." ng-click="login($event);">登&nbsp;&nbsp;录</button>
 								</div>
 								<div class="col-sm-6">
 									<a class="form-control btn btn-default" href="/register"
 										role="button">注册新账号</a>
 								</div>
 							</div>
-							
+
 						</form>
 					</div>
 				</div>

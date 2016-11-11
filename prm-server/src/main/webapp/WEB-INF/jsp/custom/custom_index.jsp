@@ -7,6 +7,15 @@
             '#custom-table-toolbar',
             [
                     {
+                        title : '',
+                        field : 'rowNum',
+                        align : 'center',
+                        valign : 'middle',
+                        formatter : function(value, row, index) {
+                            return index+1;
+                        }
+                    },
+                    {
                         checkbox : true, // 使用复选框
                         field : 'state',
                         align : 'center',
@@ -24,7 +33,7 @@
                     {
                         title : '手机',
                         field : 'phone',
-                        align : 'left',
+                        align : 'center',
                         valign : 'middle'
                     },
                     {
@@ -57,7 +66,7 @@
                         formatter : function(value, row, index) {
 
                             return [
-                                    '<button class="btn btn-link btn-sm" onclick="customAddress(\''
+                                    '<button class="btn btn-default btn-sm" onclick="customAddress(\''
                                             + value + '\',\'' + row.name
                                             + '\')">',
                                     '<span class="glyphicon glyphicon-map-marker">',
@@ -65,7 +74,7 @@
                                     '&nbsp;地址管理',
                                     '</button>',
                                     '&nbsp;&nbsp;',
-                                    '<button class="btn btn-link btn-sm" data-loading-text="加载中" onclick="clickModify(this,\''
+                                    '<button class="btn btn-default btn-sm" data-loading-text="加载中" onclick="clickModify(this,\''
                                             + value + '\')">',
                                     '<span class="glyphicon glyphicon-edit">',
                                     '</span>', '&nbsp;编辑', '</button>' ]
@@ -78,6 +87,20 @@
             $('#custom_table').bootstrapTable(_customTableConfig);
         }
     };
+    
+    function exp(){
+        $("#custom_table").tableExport({
+            headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
+            footers: true,                     // (Boolean), display table footers (th/td elements) in the <tfoot>
+            formats: ["xls", "csv", "txt"],    // (String[]), filetypes for the export
+            fileName: "客户",                    // (id, String), filename for the downloaded file
+            bootstrap: true,                   // (Boolean), style buttons using bootstrap
+            position: "top",                 // (top, bottom), position of the caption element relative to table
+            ignoreRows: null,                  // (Number, Number[]), row indices to exclude from the exported file
+            ignoreCols: null,                   // (Number, Number[]), column indices to exclude from the exported file
+            ignoreCSS: ".tableexport-ignore"   // (selector, selector[]), selector(s) to exclude from the exported file
+        });
+    }
 
     var customForm = [
             '<form class="form-horizontal" name="custom_form" id="custom_form" onSubmit="return false;">',
@@ -166,7 +189,7 @@
     // 点击添加
     function clickAdd() {
         var dlg = bootbox.dialog({
-            title : '<strong>添加客户</strong>',
+            title : '<strong>新增客户</strong>',
             message : customForm,
             /* size : 'large', */
             closeButton : true
@@ -264,7 +287,7 @@
         }
         bootbox.confirm({
             title : '确认删除',
-            message : '确定删除选中的' + selects.length + '条数据？',
+            message : '确定删除选中的&nbsp;<strong class="text-danger">' + selects.length + '</strong>&nbsp;条数据？',
             buttons : {
                 confirm : {
                     label : '确认删除',

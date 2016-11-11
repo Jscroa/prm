@@ -24,9 +24,10 @@ body {
 	background-attachment: fixed;
 }
  */
- body {
- 	background: #EEEEEE;
- }
+body {
+	background: #EEEEEE;
+}
+
 .panel-heading {
 	/* font-weight: bold; */
 	font-size: x-large;
@@ -48,9 +49,7 @@ body {
 
 				<div class="panel panel-default" ng-app="registerApp"
 					ng-controller="registerCtrl">
-					<div class="panel-heading">
-						快速注册&nbsp;PRM
-					</div>
+					<div class="panel-heading">快速注册&nbsp;PRM</div>
 					<div class="panel-body">
 						<div class="alert alert-danger" ng-show="error || incomplete"
 							role="alert">
@@ -105,15 +104,15 @@ body {
 
 							<div class="form-group">
 								<div class="col-sm-6">
-									<button class=" form-control btn btn-success" data-loading-text="注册中..."
-										ng-click="register($event);">确认提交</button>
+									<button class=" form-control btn btn-success"
+										data-loading-text="注册中..." ng-click="register($event);">确认提交</button>
 								</div>
 								<div class="col-sm-6">
 									<a class="form-control btn btn-default" href="/login"
 										role="button">登&nbsp;&nbsp;陆</a>
 								</div>
 							</div>
-							
+
 						</form>
 					</div>
 				</div>

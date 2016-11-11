@@ -35,6 +35,7 @@ function TableConfig(url, toolbar, columns) {
                 'rows' : res.rows
             };
         } else {
+            toastr.warning(data.code + ':' + data.msg);
             return {
                 'page' : 0,
                 'total' : 0,

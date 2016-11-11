@@ -130,7 +130,7 @@ public class GroupToCustomDaoImpl implements IGroupToCustomDao {
 
     @Override
     public List<Custom> getCustoms(String groupId, int offset, int limit) {
-String sql = "select SQL_CALC_FOUND_ROWS t2.* from t_group_to_custom t1 left join t_custom t2 on t2.guid=t1.custom_id where t1.group_id=? and t1.status=? and t2.status=? order by t2.modify_time limit ?,?";
+String sql = "select SQL_CALC_FOUND_ROWS t2.* from t_group_to_custom t1 left join t_custom t2 on t2.guid=t1.custom_id where t1.group_id=? and t1.status=? and t2.status=? order by t2.create_time limit ?,?";
         
         List<Custom> list = jdbcTemplate.query(sql,
                 new Object[] { groupId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, offset, limit },

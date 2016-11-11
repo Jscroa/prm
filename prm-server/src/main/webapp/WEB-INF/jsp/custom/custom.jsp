@@ -10,22 +10,13 @@
 <link href="/css/bootstrap-table.css" rel="stylesheet">
 <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
+
 <script src="/js/jquery.form.js"></script>
 <script src="/js/bootstrap-table.js"></script>
 <script src="/js/bootstrap-table-zh-CN.js"></script>
 <script src="/js/bootstrap-datepicker.min.js"></script>
 <script src="/js/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="/js/bs-config.js"></script>
-<style type="text/css">
-/* .table thead tr {
-	background-color: #494949;
-	color: #CCCCCC;
-}
-
-.table thead tr :HOVER {
-	color: #FFFFFF;
-} */
-</style>
 
 <script type="text/javascript">
 function showPage(page){
