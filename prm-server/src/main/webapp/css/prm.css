@@ -34,10 +34,6 @@ body {
 	vertical-align: middle;
 }
 
-.table tbody tr :HOVER {
-	background-color: #E0F0F0;
-}
-
 .breadcrumb {
 	background-color: transparent;
 	border-radius: 0px;

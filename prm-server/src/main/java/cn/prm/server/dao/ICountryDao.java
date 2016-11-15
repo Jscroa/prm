@@ -15,11 +15,9 @@ import cn.prm.server.entity.Country;
 public interface ICountryDao extends IBaseDao<Country> {
 
     /**
-     * @Title: getByStatus<br>
+     * @Title: getAll<br>
      * @Description: <br>
-     * @param status
-     * @param order
      * @return
      */
-    List<Country> getByStatus(int status, String order);
+    List<Country> getAll();
 }

@@ -21,6 +21,6 @@ public interface ICustomToContactDao extends IBaseDao<CustomToContact> {
      * @param customId
      * @return
      */
-    public List<Contact> getContacts(String customId);
+    List<Contact> getContacts(String customId);
 
 }

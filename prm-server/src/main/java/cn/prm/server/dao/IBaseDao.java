@@ -24,35 +24,35 @@ public interface IBaseDao<T> {
      * @throws SQLException
      * @throws DataAccessException
      */
-    public T extract(ResultSet rs) throws SQLException, DataAccessException;
+    T extract(ResultSet rs) throws SQLException, DataAccessException;
 
     /**
      * @Title: add<br>
-     * @Description: <br>
+     * @Description: 增<br>
      * @param t
      */
-    public void add(T t);
+    void add(T t);
 
     /**
      * @Title: delete<br>
-     * @Description: <br>
+     * @Description: 删<br>
      * @param id
      */
-    public void delete(String id);
+    void delete(String id);
 
     /**
      * @Title: modify<br>
-     * @Description: <br>
+     * @Description: 改<br>
      * @param t
      */
-    public void modify(T t);
+    void modify(T t);
 
     /**
      * @Title: get<br>
-     * @Description: <br>
+     * @Description: 查<br>
      * @param id
      * @return
      */
-    public T get(String id);
+    T get(String id);
 
 }

@@ -23,14 +23,14 @@ public interface IGroupToCustomDao extends IBaseDao<GroupToCustom> {
      * @param limit
      * @return
      */
-    public List<Custom> getCustoms(String groupId, int offset, int limit);
+    List<Custom> getCustoms(String groupId, int offset, int limit);
 
     /**
      * @Title: getCustomCount<br>
      * @Description: <br>
      * @return
      */
-    public int getCustomCount();
+    int getCustomCount();
     
     /** 
      * @Title: checkCustomOwn<br>
@@ -39,5 +39,5 @@ public interface IGroupToCustomDao extends IBaseDao<GroupToCustom> {
      * @param customId
      * @return
      */
-    public List<String> checkCustomOwn(String accId,String customId);
+    List<String> checkCustomOwn(String accId,String customId);
 }

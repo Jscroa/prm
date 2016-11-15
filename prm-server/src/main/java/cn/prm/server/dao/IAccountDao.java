@@ -16,26 +16,26 @@ public interface IAccountDao extends IBaseDao<Account> {
 
     /**
      * @Title: find<br>
-     * @Description: <br>
+     * @Description: 根据email和密码获取账户信息，登录时候用<br>
      * @param email
      * @param pwd
      * @return
      */
-    public List<Account> find(String email, String pwd);
+    List<Account> find(String email, String pwd);
 
     /**
      * @Title: findByEmail<br>
-     * @Description: <br>
+     * @Description: 根据email获取账户信息<br>
      * @param email
      * @return
      */
-    public List<Account> findByEmail(String email);
+    List<Account> findByEmail(String email);
 
     /**
      * @Title: findByPhone<br>
-     * @Description: <br>
+     * @Description: 根据手机号获取账户信息<br>
      * @param phone
      * @return
      */
-    public List<Account> findByPhone(String phone);
+    List<Account> findByPhone(String phone);
 }

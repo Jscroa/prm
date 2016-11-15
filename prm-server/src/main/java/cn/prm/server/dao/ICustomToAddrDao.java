@@ -21,6 +21,6 @@ public interface ICustomToAddrDao extends IBaseDao<CustomToAddr> {
      * @param customId
      * @return
      */
-    public List<Address> getAddresses(String customId);
+    List<Address> getAddresses(String customId);
 
 }

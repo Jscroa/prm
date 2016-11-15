@@ -408,11 +408,11 @@
 
 <div class="btn-toolbar" role="toolbar" id="custom-table-toolbar">
 	<!-- <div class="btn-group" role="group"> -->
-	<button class="btn btn-primary" data-toggle="modal"
+	<button class="btn btn-default" data-toggle="modal"
 		onclick="clickAdd();">
 		<span class="glyphicon glyphicon-plus"></span>&nbsp;添加
 	</button>
-	<button class="btn btn-danger" onclick="delCustoms()">
+	<button class="btn btn-default" onclick="delCustoms()">
 		<span class="glyphicon glyphicon-minus"></span>&nbsp;删除
 	</button>
 	<!-- </div> -->

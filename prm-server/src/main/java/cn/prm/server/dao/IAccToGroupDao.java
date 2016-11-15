@@ -22,7 +22,7 @@ public interface IAccToGroupDao extends IBaseDao<AccToGroup> {
      * @param accId
      * @return
      */
-    public List<AccGroup> getGroups(String accId);
+    List<AccGroup> getGroups(String accId);
 
     /**
      * @Title: getAccounts<br>
@@ -30,7 +30,7 @@ public interface IAccToGroupDao extends IBaseDao<AccToGroup> {
      * @param groupId
      * @return
      */
-    public List<Account> getAccounts(String groupId);
+    List<Account> getAccounts(String groupId);
 
     /**
      * @Title: get<br>
@@ -39,5 +39,5 @@ public interface IAccToGroupDao extends IBaseDao<AccToGroup> {
      * @param groupId
      * @return
      */
-    public AccToGroup get(String accId, String groupId);
+    AccToGroup get(String accId, String groupId);
 }

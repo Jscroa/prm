@@ -46,7 +46,7 @@
     
     // 地址item
     function getAddressItem(addr){
-        return [ '<div class="panel panel-primary">',
+        return [ '<div class="panel panel-default">',
                  /* '<div class="panel-heading">', '地址', '</div>', */
                  '<div class="panel-body">', '<p>', addr.addr,
                  '</p>',
@@ -54,3 +54,6 @@
     }
 </script>
 <div id="address_list"></div>
+<div id="address_add">
+
+</div>

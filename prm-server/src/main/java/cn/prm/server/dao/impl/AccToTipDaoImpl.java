@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package cn.prm.server.dao.impl;
 
 import java.sql.PreparedStatement;
@@ -12,46 +15,45 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import cn.prm.server.commons.Constants.DB_STATUS;
-import cn.prm.server.dao.ICountryDao;
-import cn.prm.server.entity.Country;
+import cn.prm.server.dao.IAccToTipDao;
+import cn.prm.server.entity.AccToTip;
 
 /**
- * @Title: CountryDaoImpl.java<br>
+ * @Title: AccToTipDaoImpl.java<br>
  * @Package: cn.prm.server.dao.impl<br>
  * @Description: <br>
  * @author yyao<br>
- * @date 2016年10月19日 下午5:29:41<br>
+ * @date 2016年11月14日 下午5:23:59<br>
  * @version v1.0<br>
  */
 @Repository
-public class CountryDaoImpl implements ICountryDao {
+public class AccToTipDaoImpl implements IAccToTipDao {
 
-    private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time,en_name,cn_name";
+    private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time,acc_id,tip_id";
 
     @Autowired
     JdbcTemplate                jdbcTemplate;
 
     @Override
-    public Country extract(ResultSet rs) throws SQLException, DataAccessException {
-        Country country = new Country();
-        country.setGuid(rs.getString("guid"));
-        country.setStdName(rs.getString("std_name"));
-        country.setStdCode(rs.getInt("std_code"));
-        country.setStatus(rs.getInt("status"));
-        country.setMemo(rs.getString("memo"));
-        country.setCreateUser(rs.getString("create_user"));
-        country.setModifyUser(rs.getString("modify_user"));
-        country.setCreateTime(rs.getTimestamp("create_time"));
-        country.setModifyTime(rs.getTimestamp("modify_time"));
-        country.setEnName(rs.getString("en_name"));
-        country.setCnName(rs.getString("cn_name"));
-        return country;
+    public AccToTip extract(ResultSet rs) throws SQLException, DataAccessException {
+        AccToTip accToTip = new AccToTip();
+        accToTip.setGuid(rs.getString("guid"));
+        accToTip.setStdName(rs.getString("std_name"));
+        accToTip.setStdCode(rs.getInt("std_code"));
+        accToTip.setStatus(rs.getInt("status"));
+        accToTip.setMemo(rs.getString("memo"));
+        accToTip.setCreateUser(rs.getString("create_user"));
+        accToTip.setModifyUser(rs.getString("modify_user"));
+        accToTip.setCreateTime(rs.getTimestamp("create_time"));
+        accToTip.setModifyTime(rs.getTimestamp("modify_time"));
+        accToTip.setAccId(rs.getString("acc_id"));
+        accToTip.setTipId(rs.getString("tip_id"));
+        return accToTip;
     }
 
     @Override
-    public void add(final Country t) {
-        String sql = "insert into t_country(" + COLS + ") values(?,?,?,?,?,?,?,?,?,?,?)";
+    public void add(final AccToTip t) {
+        String sql = "insert into t_acc_to_tip(" + COLS + ") values(?,?,?,?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
             @Override
@@ -65,8 +67,8 @@ public class CountryDaoImpl implements ICountryDao {
                 ps.setString(7, t.getModifyUser());
                 ps.setTimestamp(8, t.getCreateTime());
                 ps.setTimestamp(9, t.getModifyTime());
-                ps.setString(10, t.getEnName());
-                ps.setString(11, t.getCnName());
+                ps.setString(10, t.getAccId());
+                ps.setString(11, t.getTipId());
             }
 
         });
@@ -74,7 +76,7 @@ public class CountryDaoImpl implements ICountryDao {
 
     @Override
     public void delete(final String id) {
-        String sql = "delete from t_country where guid=?";
+        String sql = "delete from t_acc_to_tip where guid=?";
         jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
             @Override
@@ -86,8 +88,8 @@ public class CountryDaoImpl implements ICountryDao {
     }
 
     @Override
-    public void modify(final Country t) {
-        String sql = "update t_country set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,en_name=?,cn_name=? where guid=?";
+    public void modify(final AccToTip t) {
+        String sql = "update t_acc_to_tip set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,acc_id=?,tip_id=? where guid=?";
         jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
             @Override
@@ -100,20 +102,20 @@ public class CountryDaoImpl implements ICountryDao {
                 ps.setString(6, t.getModifyUser());
                 ps.setTimestamp(7, t.getCreateTime());
                 ps.setTimestamp(8, t.getModifyTime());
-                ps.setString(9, t.getEnName());
-                ps.setString(10, t.getCnName());
+                ps.setString(9, t.getAccId());
+                ps.setString(10, t.getTipId());
                 ps.setString(11, t.getGuid());
             }
         });
     }
 
     @Override
-    public Country get(String id) {
-        String sql = "select " + COLS + " from t_country where guid=?";
-        List<Country> list = jdbcTemplate.query(sql, new Object[] { id }, new RowMapper<Country>() {
+    public AccToTip get(String id) {
+        String sql = "select " + COLS + " from t_acc_to_tip where guid=?";
+        List<AccToTip> list = jdbcTemplate.query(sql, new Object[] { id }, new RowMapper<AccToTip>() {
 
             @Override
-            public Country mapRow(ResultSet rs, int rowNum) throws SQLException {
+            public AccToTip mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return extract(rs);
             }
         });
@@ -121,19 +123,6 @@ public class CountryDaoImpl implements ICountryDao {
             return list.get(0);
         }
         return null;
-    }
-
-    @Override
-    public List<Country> getAll() {
-        String sql = "select " + COLS + " from t_country where status=? order by en_name asc";
-        List<Country> list = jdbcTemplate.query(sql, new Object[] { DB_STATUS.STATUS_ACTIVE }, new RowMapper<Country>() {
-
-            @Override
-            public Country mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return extract(rs);
-            }
-        });
-        return list;
     }
 
 }

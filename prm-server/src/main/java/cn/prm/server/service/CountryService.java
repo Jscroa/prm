@@ -82,7 +82,7 @@ public class CountryService {
      * @return
      */
     public ListDto<CountryDto> getAll() {
-        List<Country> countries = countryDao.getByStatus(DB_STATUS.STATUS_ACTIVE, "en_name asc");
+        List<Country> countries = countryDao.getAll();
         ListDto<CountryDto> list = new ListDto<>();
         if (countries == null || countries.size() == 0) {
             return list;
