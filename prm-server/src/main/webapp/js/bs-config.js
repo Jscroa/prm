@@ -64,7 +64,10 @@ toastr.options = {
     "hideMethod" : "fadeOut"
 };
 
-// 表单数据快速填充
+/**
+ * 表单数据快速填充
+ * @param obj 数据
+ */
 function loadData(obj){
     var key,value,tagName,type,arr;
     for(x in obj){

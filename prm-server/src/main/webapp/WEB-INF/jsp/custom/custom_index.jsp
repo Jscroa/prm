@@ -82,8 +82,6 @@
                         }
                     } ]);
 
-
-
     var customForm = [
             '<form class="form-horizontal" name="custom_form" id="custom_form" onSubmit="return false;">',
             '<div class="form-group">',
@@ -170,94 +168,39 @@
 
     // 点击添加
     function clickAdd() {
-        var dlg = bootbox.dialog({
-            title : '<strong>新增客户</strong>',
-            message : customForm,
-            /* size : 'large', */
-            closeButton : true
+        showCustomAddDlg({
+            success:function(){
+                $('#custom_table').bootstrapTable('refresh');
+            },
+            warning:function(msg){
+                toastr.warning(msg);
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+                toastr.error(XMLHttpRequest.status);
+            }
         });
-        initDatepicker();
-        $('#cancelButton').click(function() {
-            dlg.modal('hide');
-        });
-        $('#confirmButton').click(function() {
-            addCustom(dlg, this);
-        });
+
     }
 
     // 点击修改
     function clickModify(btn, id) {
         $(btn).button('loading');
-        $.ajax({
-            url : '/api/custom/getCustom',
-            type : 'post',
-            dataType : 'json',
-            data : {
-                custId : id
-            },
-            success : function(data) {
+        showCustomModifyDlg(id,{
+            success:function(){
                 $(btn).button('reset');
-                if (data) {
-                    if (data.code == 100) { // 请求成功
-                        var dlg = bootbox.dialog({
-                            title : '<strong>编辑客户</strong>',
-                            message : customForm,
-                            /* size : 'large', */
-                            closeButton : true
-                        });
-                        initDatepicker();
-                        loadData(data.t);
-                        $('#cancelButton').click(function() {
-                            dlg.modal('hide');
-                        });
-                        $('#confirmButton').click(function() {
-                            modifyCustom(dlg, this, id);
-                        });
-                    } else {
-                        toastr.warning(data.code + ':' + data.msg);
-                    }
-                } else {
-                    // 未响应
-                    toastr.warning('服务器未响应!');
-                }
+                $('#custom_table').bootstrapTable('refresh');
             },
-            error : function(XMLHttpRequest, textStatus, errorThrown) {
+            warning:function(msg){
+                $(btn).button('reset');
+                toastr.warning(msg);
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
                 $(btn).button('reset');
                 toastr.error(XMLHttpRequest.status);
             }
         });
+        
 
-    }
-
-    // 添加客户
-    function addCustom(dlg, confirmBtn) {
-        $(confirmBtn).button('loading');
-        $('#custom_form').ajaxSubmit({
-            url : '/api/custom/add',
-            type : 'post',
-            /* async : false, */
-            dataType : 'json',
-            data : $("#custom_form").serialize(),
-            success : function(data) {
-                $(confirmBtn).button('reset');
-                if (data) {
-                    if (data.code == 100) {
-                        toastr.success('添加成功');
-                        dlg.modal('hide');
-                        $('#custom_table').bootstrapTable('refresh');
-                    } else {
-                        toastr.warning(data.code + ':' + data.msg);
-                    }
-                } else {
-                    toastr.warning('服务器未响应');
-                }
-            },
-            error : function(XMLHttpRequest, textStatus, errorThrown) {
-                $(confirmBtn).button('reset');
-                toastr.error(XMLHttpRequest.status);
-            }
-        });
-        $(confirmBtn).attr("disabled", "disabled");
     }
 
     // 批量删除
@@ -336,46 +279,6 @@
     // 客户地址管理
     function customAddress(value, name) {
         showAddressPage(value, name);
-    }
-
-    // 编辑客户
-    function modifyCustom(dlg, confirmBtn, id) {
-        $(confirmBtn).button('loading');
-        toastr.info('编辑' + id);
-        $.ajax({
-            url : '/api/custom/modify?custId='+id,
-            type : 'post',
-            dataType : 'json',
-            data : $("#custom_form").serialize(),
-            success : function(data) {
-                $(confirmBtn).button('reset');
-                if (data) {
-                    if (data.code == 100) {
-                        toastr.success('修改成功');
-                        dlg.modal('hide');
-                        $('#custom_table').bootstrapTable('refresh');
-                    } else {
-                        toastr.warning(data.code + ':' + data.msg);
-                    }
-                } else {
-                    // 未响应
-                    //toastr.warning('id -> ' + ids[index] + ' 未响应!');
-                    toastr.warning('服务器未响应，编号为&nbsp;' + ids[index]
-                            + '&nbsp;的客户删除失败！');
-                }
-            },
-            error : function(XMLHttpRequest, textStatus, errorThrown) {
-                $(confirmBtn).button('reset');
-                toastr.error(XMLHttpRequest.status);
-            }
-        });
-    }
-
-    function initDatepicker() {
-        $('.datepicker').datepicker({
-            language : "zh-CN",
-            format : "yyyy年mm月dd日"
-        });
     }
 
     $(function() {
