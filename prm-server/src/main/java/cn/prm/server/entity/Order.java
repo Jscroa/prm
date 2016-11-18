@@ -22,6 +22,7 @@ public class Order extends BaseEntity implements Serializable {
 
     private String            customId;
     private String            orderType;
+    private String            address;
     private Double            price;
 
     /**
@@ -55,6 +56,21 @@ public class Order extends BaseEntity implements Serializable {
     }
 
     /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address
+     *            the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    /**
      * @return the price
      */
     public Double getPrice() {
@@ -62,43 +78,11 @@ public class Order extends BaseEntity implements Serializable {
     }
 
     /**
-     * @param price the price to set
+     * @param price
+     *            the price to set
      */
     public void setPrice(Double price) {
         this.price = price;
-    }
-    
-    /**
-     * @Title: Order.java<br>
-     * @Package: cn.prm.server.entity<br>
-     * @Description: <br>
-     * @author yyao<br>
-     * @date 2016年11月15日 下午3:48:01<br>
-     * @version v1.0<br>
-     */
-    public static class OrderWithPay extends Order{
-
-        /**
-         * @field serialVersionUID : 
-         */
-        private static final long serialVersionUID = -7169685493308072886L;
-        
-        private Boolean isPay;
-
-        /**
-         * @return the isPay
-         */
-        public Boolean getIsPay() {
-            return isPay;
-        }
-
-        /**
-         * @param isPay the isPay to set
-         */
-        public void setIsPay(Boolean isPay) {
-            this.isPay = isPay;
-        }
-        
     }
 
 }

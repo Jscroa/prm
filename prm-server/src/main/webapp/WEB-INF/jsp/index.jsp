@@ -43,6 +43,7 @@
 							<li><a href="/test.jsp">test</a></li>
 							<li><a href="/test_baidumap.jsp">test baidu map</a></li>
 							<li><a href="/test_metronic.jsp">test metronic</a></li>
+							<li><a href="/test_loader.jsp">test loader</a></li>
 						</ul>
 						<button class="btn btn-primary" onclick="initCountry();">初始化国家</button>
 					</div>

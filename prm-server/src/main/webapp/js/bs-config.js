@@ -14,18 +14,20 @@ function TableConfig(url, toolbar, columns) {
     this.sidePagination = 'server'; // 服务端分页
     this.showColumns = false; // 开启选择显示列
     this.smartDisplay = false; // 智能显示
+    this.undefinedText = '';
+    this.striped = true;
     this.clickToSelect = false; // 单击行选中
-    this.rowStyle = function(row, index) { // 隔行换色
-        var strclass = '';
-        if (index % 2 == 0) {
-            strclass = 'info';
-        } else {
-            strclass = '';
-        }
-        return {
-            classes : '' // 不变色
-        };
-    };
+//    this.rowStyle = function(row, index) { // 隔行换色
+//        var strclass = '';
+//        if (index % 2 == 0) {
+//            strclass = 'info';
+//        } else {
+//            strclass = '';
+//        }
+//        return {
+//            classes : '' // 不变色
+//        };
+//    };
 
     this.responseHandler = function(res) { // 返回处理
         if (res.code == 100) {

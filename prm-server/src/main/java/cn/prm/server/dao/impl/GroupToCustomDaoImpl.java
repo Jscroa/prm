@@ -126,12 +126,11 @@ public class GroupToCustomDaoImpl implements IGroupToCustomDao {
         }
         return null;
     }
-    
 
     @Override
     public List<Custom> getCustoms(String groupId, int offset, int limit) {
-String sql = "select SQL_CALC_FOUND_ROWS t2.* from t_group_to_custom t1 left join t_custom t2 on t2.guid=t1.custom_id where t1.group_id=? and t1.status=? and t2.status=? order by t2.create_time limit ?,?";
-        
+        String sql = "select SQL_CALC_FOUND_ROWS t2.* from t_group_to_custom t1 left join t_custom t2 on t2.guid=t1.custom_id where t1.group_id=? and t1.status=? and t2.status=? order by t2.create_time limit ?,?";
+
         List<Custom> list = jdbcTemplate.query(sql,
                 new Object[] { groupId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, offset, limit },
                 new RowMapper<Custom>() {
@@ -161,17 +160,4 @@ String sql = "select SQL_CALC_FOUND_ROWS t2.* from t_group_to_custom t1 left joi
         return 0;
     }
 
-    @Override
-    public List<String> checkCustomOwn(String accId, String customId) {
-        String sql = "select gc.custom_id as custom_id from t_acc_to_group as ag join t_group_to_custom as gc on ag.group_id=gc.group_id where ag.acc_id=? and gc.custom_id=?;";
-        List<String> list = jdbcTemplate.query(sql, new Object[]{accId,customId},new RowMapper<String>(){
-
-            @Override
-            public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return rs.getString("custom_id");
-            }
-            
-        });
-        return list;
-    }
 }

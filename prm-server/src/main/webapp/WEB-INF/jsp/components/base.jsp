@@ -7,6 +7,9 @@
 <link href="/css/prm.css" rel="stylesheet">
 <link href="/css/prm-nav.css" rel="stylesheet">
 <link href="/css/toastr.min.css" rel="stylesheet">
+<link href="/css/animate.css" rel="stylesheet">
+<link href="/css/loader.css" rel="stylesheet">
+<!-- <link href="/css/style.css" rel="stylesheet"> -->
 
 <!-- js -->
 <script src="/js/jquery.min.js"></script>

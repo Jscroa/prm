@@ -8,13 +8,20 @@
 <%@include file="/WEB-INF/jsp/components/base.jsp"%>
 
 <link href="/css/bootstrap-table.css" rel="stylesheet">
+<link href="/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
+
+<script src="/js/jquery.form.js"></script>
 <script src="/js/bootstrap-table.js"></script>
+<script src="/js/bootstrap-table-zh-CN.js"></script>
+<script src="/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="/js/bs-config.js"></script>
 
 <script type="text/javascript">
 function showPage(page){
     $.get(page,function(data){
         $('#page_container').html(data);
-        $('#page_container').fadeIn(slow);
     });
 }
 function showIndexPage(){

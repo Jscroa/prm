@@ -15,10 +15,8 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import cn.prm.server.commons.Constants.DB_STATUS;
 import cn.prm.server.dao.IOrderDao;
 import cn.prm.server.entity.Order;
-import cn.prm.server.entity.Order.OrderWithPay;
 
 /**
  * @Title: OrderDaoImpl.java<br>
@@ -31,7 +29,7 @@ import cn.prm.server.entity.Order.OrderWithPay;
 @Repository
 public class OrderDaoImpl implements IOrderDao {
 
-    private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time,custom_id,order_type,price";
+    private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time,custom_id,order_type,address,price";
 
     @Autowired
     JdbcTemplate                jdbcTemplate;
@@ -50,13 +48,14 @@ public class OrderDaoImpl implements IOrderDao {
         order.setModifyTime(rs.getTimestamp("modify_time"));
         order.setCustomId(rs.getString("custom_id"));
         order.setOrderType(rs.getString("order_type"));
+        order.setAddress(rs.getString("address"));
         order.setPrice(rs.getDouble("price"));
         return order;
     }
 
     @Override
     public void add(final Order t) {
-        String sql = "insert into t_order(" + COLS + ") values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into t_order(" + COLS + ") values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
             @Override
@@ -72,7 +71,8 @@ public class OrderDaoImpl implements IOrderDao {
                 ps.setTimestamp(9, t.getModifyTime());
                 ps.setString(10, t.getCustomId());
                 ps.setString(11, t.getOrderType());
-                ps.setDouble(12, t.getPrice());
+                ps.setString(12, t.getAddress());
+                ps.setDouble(13, t.getPrice());
             }
 
         });
@@ -93,7 +93,7 @@ public class OrderDaoImpl implements IOrderDao {
 
     @Override
     public void modify(final Order t) {
-        String sql = "update t_order set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,custom_id=?,order_type=?,price=? where guid=?";
+        String sql = "update t_order set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,custom_id=?,order_type=?,address=?,price=? where guid=?";
         jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
             @Override
@@ -108,8 +108,9 @@ public class OrderDaoImpl implements IOrderDao {
                 ps.setTimestamp(8, t.getModifyTime());
                 ps.setString(9, t.getCustomId());
                 ps.setString(10, t.getOrderType());
-                ps.setDouble(11, t.getPrice());
-                ps.setString(12, t.getGuid());
+                ps.setString(11, t.getAddress());
+                ps.setDouble(12, t.getPrice());
+                ps.setString(13, t.getGuid());
 
             }
         });
@@ -131,109 +132,4 @@ public class OrderDaoImpl implements IOrderDao {
         return null;
     }
 
-    @Override
-    public List<OrderWithPay> getOrders(String accountId, int offset, int limit) {
-        String sql = "select SQL_CALC_FOUND_ROWS t5.*,t6.status as pay_status from t_acc_to_group as t1 join t_acc_group as t2 on t1.group_id=t2.guid join t_group_to_custom as t3 on t2.guid=t3.group_id join t_custom as t4 on t3.custom_id=t4.guid join t_order as t5 on t4.guid=t5.custom_id join t_payment as t6 on t5.guid=t6.order_id where t1.acc_id=? and t1.status=? and t2.status=? and t3.status=? and t4.status=? and t5.status=? order by t5.create_time desc limit ?,?";
-        List<OrderWithPay> list = jdbcTemplate.query(sql,
-                new Object[] { accountId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE,
-                        DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, offset, limit },
-                new RowMapper<OrderWithPay>() {
-
-                    @Override
-                    public OrderWithPay mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        OrderWithPay orderWithPay = new OrderWithPay();
-                        orderWithPay.setGuid(rs.getString("guid"));
-                        orderWithPay.setStdName(rs.getString("std_name"));
-                        orderWithPay.setStdCode(rs.getInt("std_code"));
-                        orderWithPay.setStatus(rs.getInt("status"));
-                        orderWithPay.setMemo(rs.getString("memo"));
-                        orderWithPay.setCreateUser(rs.getString("create_user"));
-                        orderWithPay.setModifyUser(rs.getString("modify_user"));
-                        orderWithPay.setCreateTime(rs.getTimestamp("create_time"));
-                        orderWithPay.setModifyTime(rs.getTimestamp("modify_time"));
-                        orderWithPay.setCustomId(rs.getString("custom_id"));
-                        orderWithPay.setOrderType(rs.getString("order_type"));
-                        orderWithPay.setPrice(rs.getDouble("price"));
-                        orderWithPay.setIsPay(rs.getInt("pay_status") == DB_STATUS.STATUS_ACTIVE);
-                        return orderWithPay;
-                    }
-                });
-        return list;
-    }
-
-    @Override
-    public List<OrderWithPay> getPayedOrders(String accountId, int offset, int limit) {
-        String sql = "select SQL_CALC_FOUND_ROWS t5.*,t6.status as pay_status from t_acc_to_group as t1 join t_acc_group as t2 on t1.group_id=t2.guid join t_group_to_custom as t3 on t2.guid=t3.group_id join t_custom as t4 on t3.custom_id=t4.guid join t_order as t5 on t4.guid=t5.custom_id join t_payment as t6 on t5.guid=t6.order_id where t1.acc_id=? and t1.status=? and t2.status=? and t3.status=? and t4.status=? and t5.status=? and t6.status=? order by t5.create_time desc limit ?,?";
-        List<OrderWithPay> list = jdbcTemplate.query(sql,
-                new Object[] { accountId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE,
-                        DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, offset, limit },
-                new RowMapper<OrderWithPay>() {
-
-                    @Override
-                    public OrderWithPay mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        OrderWithPay orderWithPay = new OrderWithPay();
-                        orderWithPay.setGuid(rs.getString("guid"));
-                        orderWithPay.setStdName(rs.getString("std_name"));
-                        orderWithPay.setStdCode(rs.getInt("std_code"));
-                        orderWithPay.setStatus(rs.getInt("status"));
-                        orderWithPay.setMemo(rs.getString("memo"));
-                        orderWithPay.setCreateUser(rs.getString("create_user"));
-                        orderWithPay.setModifyUser(rs.getString("modify_user"));
-                        orderWithPay.setCreateTime(rs.getTimestamp("create_time"));
-                        orderWithPay.setModifyTime(rs.getTimestamp("modify_time"));
-                        orderWithPay.setCustomId(rs.getString("custom_id"));
-                        orderWithPay.setOrderType(rs.getString("order_type"));
-                        orderWithPay.setPrice(rs.getDouble("price"));
-                        orderWithPay.setIsPay(rs.getInt("pay_status") == DB_STATUS.STATUS_ACTIVE);
-                        return orderWithPay;
-                    }
-                });
-        return list;
-    }
-
-    @Override
-    public List<OrderWithPay> getUnPayedOrders(String accountId, int offset, int limit) {
-        String sql = "select SQL_CALC_FOUND_ROWS t5.*,t6.status as pay_status from t_acc_to_group as t1 join t_acc_group as t2 on t1.group_id=t2.guid join t_group_to_custom as t3 on t2.guid=t3.group_id join t_custom as t4 on t3.custom_id=t4.guid join t_order as t5 on t4.guid=t5.custom_id join t_payment as t6 on t5.guid=t6.order_id where t1.acc_id=? and t1.status=? and t2.status=? and t3.status=? and t4.status=? and t5.status=? and t6.status!=? order by t5.create_time desc limit ?,?";
-        List<OrderWithPay> list = jdbcTemplate.query(sql,
-                new Object[] { accountId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE,
-                        DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, offset, limit },
-                new RowMapper<OrderWithPay>() {
-
-                    @Override
-                    public OrderWithPay mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        OrderWithPay orderWithPay = new OrderWithPay();
-                        orderWithPay.setGuid(rs.getString("guid"));
-                        orderWithPay.setStdName(rs.getString("std_name"));
-                        orderWithPay.setStdCode(rs.getInt("std_code"));
-                        orderWithPay.setStatus(rs.getInt("status"));
-                        orderWithPay.setMemo(rs.getString("memo"));
-                        orderWithPay.setCreateUser(rs.getString("create_user"));
-                        orderWithPay.setModifyUser(rs.getString("modify_user"));
-                        orderWithPay.setCreateTime(rs.getTimestamp("create_time"));
-                        orderWithPay.setModifyTime(rs.getTimestamp("modify_time"));
-                        orderWithPay.setCustomId(rs.getString("custom_id"));
-                        orderWithPay.setOrderType(rs.getString("order_type"));
-                        orderWithPay.setPrice(rs.getDouble("price"));
-                        orderWithPay.setIsPay(rs.getInt("pay_status") == DB_STATUS.STATUS_ACTIVE);
-                        return orderWithPay;
-                    }
-                });
-        return list;
-    }
-
-    @Override
-    public int getOrderCount() {
-        String sql = "select FOUND_ROWS()";
-        List<Integer> list = jdbcTemplate.query(sql, new RowMapper<Integer>() {
-
-            @Override
-            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return rs.getInt(1);
-            }
-        });
-        if (list != null && list.size() == 1) {
-            return list.get(0);
-        }
-        return 0;
-    }
 }

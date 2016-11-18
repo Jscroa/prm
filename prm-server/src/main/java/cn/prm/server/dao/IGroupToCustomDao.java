@@ -15,7 +15,7 @@ import cn.prm.server.entity.GroupToCustom;
  */
 public interface IGroupToCustomDao extends IBaseDao<GroupToCustom> {
 
-    /** 
+    /**
      * @Title: getCustoms<br>
      * @Description: <br>
      * @param groupId
@@ -31,13 +31,5 @@ public interface IGroupToCustomDao extends IBaseDao<GroupToCustom> {
      * @return
      */
     int getCustomCount();
-    
-    /** 
-     * @Title: checkCustomOwn<br>
-     * @Description: <br>
-     * @param accId
-     * @param customId
-     * @return
-     */
-    List<String> checkCustomOwn(String accId,String customId);
+
 }

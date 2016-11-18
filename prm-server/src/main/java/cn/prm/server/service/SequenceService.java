@@ -104,10 +104,4 @@ public class SequenceService {
         return sequence.getSeqValue();
     }
     
-//    private Sequence initSeq(CurrUser currUser,String seqName){
-//        Sequence sequence = new Sequence();
-//        sequence.setGuid(UUIDUtil.randomUUID());
-//        sequence.setStatus(DB_STATUS.STATUS_ACTIVE);
-//        sequence.setCreateTime(createTime);
-//    }
 }

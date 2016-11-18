@@ -82,25 +82,7 @@
                         }
                     } ]);
 
-    var controller = {
-        loadData : function() {
-            $('#custom_table').bootstrapTable(_customTableConfig);
-        }
-    };
-    
-    function exp(){
-        $("#custom_table").tableExport({
-            headings: true,                    // (Boolean), display table headings (th/td elements) in the <thead>
-            footers: true,                     // (Boolean), display table footers (th/td elements) in the <tfoot>
-            formats: ["xls", "csv", "txt"],    // (String[]), filetypes for the export
-            fileName: "客户",                    // (id, String), filename for the downloaded file
-            bootstrap: true,                   // (Boolean), style buttons using bootstrap
-            position: "top",                 // (top, bottom), position of the caption element relative to table
-            ignoreRows: null,                  // (Number, Number[]), row indices to exclude from the exported file
-            ignoreCols: null,                   // (Number, Number[]), column indices to exclude from the exported file
-            ignoreCSS: ".tableexport-ignore"   // (selector, selector[]), selector(s) to exclude from the exported file
-        });
-    }
+
 
     var customForm = [
             '<form class="form-horizontal" name="custom_form" id="custom_form" onSubmit="return false;">',
@@ -330,7 +312,7 @@
                     if (data) {
                         if (data.code == 100) {
                             // 成功
-                            toastr.success('id -> ' + ids[index] + ' 删除成功!');
+                            // toastr.success('id -> ' + ids[index] + ' 删除成功!');
                             delCustom(ids, index + 1);
                         } else {
                             toastr.warning(data.code + ':' + data.msg);
@@ -339,7 +321,7 @@
                         }
                     } else {
                         // 未响应
-                        //toastr.warning('id -> ' + ids[index] + ' 未响应!');
+                        // toastr.warning('id -> ' + ids[index] + ' 未响应!');
                         toastr.warning('服务器未响应，编号为&nbsp;' + ids[index]
                                 + '&nbsp;的客户删除失败！');
                     }
@@ -397,7 +379,7 @@
     }
 
     $(function() {
-        controller.loadData();
+        $('#custom_table').bootstrapTable(_customTableConfig);
     });
 </script>
 
@@ -408,11 +390,11 @@
 
 <div class="btn-toolbar" role="toolbar" id="custom-table-toolbar">
 	<!-- <div class="btn-group" role="group"> -->
-	<button class="btn btn-default" data-toggle="modal"
+	<button class="btn btn-primary" data-toggle="modal"
 		onclick="clickAdd();">
 		<span class="glyphicon glyphicon-plus"></span>&nbsp;添加
 	</button>
-	<button class="btn btn-default" onclick="delCustoms()">
+	<button class="btn btn-danger" onclick="delCustoms()">
 		<span class="glyphicon glyphicon-minus"></span>&nbsp;删除
 	</button>
 	<!-- </div> -->

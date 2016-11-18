@@ -17,13 +17,13 @@ import cn.prm.server.entity.Passenger;
  * @version v1.0<br>
  */
 public interface ICustomToPassengerDao extends IBaseDao<CustomToPassenger> {
-    
-    /** 
+
+    /**
      * @Title: getPassengers<br>
      * @Description: <br>
      * @param customId
      * @return
      */
     List<Passenger> getPassengers(String customId);
-    
+
 }

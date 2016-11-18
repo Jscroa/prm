@@ -25,6 +25,7 @@ import cn.prm.server.dao.ICustomDao;
 import cn.prm.server.dao.ICustomToAddrDao;
 import cn.prm.server.dao.ICustomToContactDao;
 import cn.prm.server.dao.IGroupToCustomDao;
+import cn.prm.server.dso.ICustomDso;
 import cn.prm.server.dto.ListDto;
 import cn.prm.server.dto.PageDto;
 import cn.prm.server.dto.bean.AddressDto;
@@ -67,6 +68,8 @@ public class CustomService {
     IAddressDao                 addressDao;
     @Autowired
     ICustomToAddrDao            customToAddrDao;
+    @Autowired
+    ICustomDso customDso;
 
     /**
      * @Title: getPrivateCustoms<br>
@@ -598,7 +601,7 @@ public class CustomService {
         if(custom.getStatus()!=DB_STATUS.STATUS_ACTIVE){
             throw new BusinessException("此客户已经被删除");
         }
-        List<String> ids = groupToCustomDao.checkCustomOwn(currUser.getGuid(), id);
+        List<String> ids = customDso.checkCustomOwn(currUser.getGuid(), id);
         if(ids==null || ids.size()==0){
             throw new PermissionException("您无权操作此客户");
         }
