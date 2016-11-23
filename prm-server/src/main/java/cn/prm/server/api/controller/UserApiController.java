@@ -88,8 +88,8 @@ public class UserApiController extends BaseController {
             form.checkFields();
             CurrUser currUser = userService.register(form);
             setCurrUser(request, currUser);
-            log.info(currUser.getName() + "(" + currUser.getGuid() + ") 注销成功");
-            return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "注销成功");
+            log.info(currUser.getName() + "(" + currUser.getGuid() + ") 注册成功");
+            return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "注册成功");
         }
         catch (BusinessException e) {
             return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
