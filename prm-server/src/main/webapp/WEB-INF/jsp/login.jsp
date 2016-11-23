@@ -46,7 +46,7 @@ body {
 
 				<div class="panel panel-default" ng-app="loginApp"
 					ng-controller="loginCtrl">
-					<div class="panel-heading">快速登录&nbsp;PRM</div>
+					<div class="panel-heading">快速登录</div>
 					<div class="panel-body">
 						<div class="alert alert-danger" ng-show="error || incomplete"
 							role="alert">
@@ -79,7 +79,7 @@ body {
 								</div>
 								<div class="col-sm-6">
 									<a class="form-control btn btn-default" href="/register"
-										role="button">注册新账号</a>
+										role="button">注册新用户</a>
 								</div>
 							</div>
 

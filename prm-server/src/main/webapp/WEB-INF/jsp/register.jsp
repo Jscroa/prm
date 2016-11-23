@@ -49,7 +49,7 @@ body {
 
 				<div class="panel panel-default" ng-app="registerApp"
 					ng-controller="registerCtrl">
-					<div class="panel-heading">快速注册&nbsp;PRM</div>
+					<div class="panel-heading">注册</div>
 					<div class="panel-body">
 						<div class="alert alert-danger" ng-show="error || incomplete"
 							role="alert">

@@ -19,7 +19,6 @@ import cn.prm.server.dto.PageDto;
 import cn.prm.server.dto.bean.OrderDto;
 import cn.prm.server.exception.BusinessException;
 import cn.prm.server.form.OrderPageForm;
-import cn.prm.server.form.PageBaseForm;
 import cn.prm.server.service.OrderService;
 
 /**
@@ -64,4 +63,26 @@ public class OrderApiController extends BaseController {
         }
 
     }
+    
+    /** 
+     * @Title: add<br>
+     * @Description: 新建一个订单<br>
+     * @param request
+     * @return
+     */
+    public Object add(HttpServletRequest request){
+        try {
+            CurrUser currUser = getCurrUser(request);
+            if (currUser == null) {
+                return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
+            }
+            orderService.getOrders(currUser, "", "", "", 0, 00);
+            return null;
+        }
+        catch (BusinessException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
+        }
+    }
+    
 }
