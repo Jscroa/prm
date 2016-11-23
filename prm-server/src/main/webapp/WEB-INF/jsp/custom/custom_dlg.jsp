@@ -141,6 +141,7 @@
                             loadData(data.t);
                             $('#cancelButton').click(function() {
                                 dlg.modal('hide');
+                                obj.cancel();
                             });
                             $('#confirmButton').click(function() {
                                 //                                            modifyCustom(dlg, this, id);

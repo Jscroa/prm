@@ -36,7 +36,8 @@
 				<div class="row">
 					<div class="col-md-6">
 						<h1>Hello!</h1>
-						<p>This is the index page!</p>
+						<p>Bootstrap is the world’s most popular framework for building responsive, mobile-first sites and applications. Inside you’ll find high quality HTML, CSS, and JavaScript to make starting any project easier than ever.</p>
+						<p>An overview of Bootstrap, including how to download and use it, some basic templates and examples, and more.</p>
 					</div>
 					<div class="col-md-6">
 						<ul>

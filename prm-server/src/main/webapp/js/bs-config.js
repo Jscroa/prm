@@ -1,4 +1,6 @@
-// 表格配置
+/**
+ * 表格配置
+ */
 function TableConfig(url, toolbar, columns) {
     this.url = url;
     this.columns = columns;
@@ -15,7 +17,7 @@ function TableConfig(url, toolbar, columns) {
     this.showColumns = false; // 开启选择显示列
     this.smartDisplay = false; // 智能显示
     this.undefinedText = '';
-    this.striped = true;
+    this.pageSize = 20;
     this.clickToSelect = false; // 单击行选中
 //    this.rowStyle = function(row, index) { // 隔行换色
 //        var strclass = '';

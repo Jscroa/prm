@@ -186,6 +186,9 @@
     function clickModify(btn, id) {
         $(btn).button('loading');
         showCustomModifyDlg(id,{
+        	cancel:function(){
+        		$(btn).button('reset');
+        	},
             success:function(){
                 $(btn).button('reset');
                 $('#custom_table').bootstrapTable('refresh');

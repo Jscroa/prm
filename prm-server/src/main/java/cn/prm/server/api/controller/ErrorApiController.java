@@ -27,7 +27,7 @@ public class ErrorApiController {
      * @Description: 未登录信息以json的形式返回<br>
      * @return
      */
-    @RequestMapping("noLogin")
+    @RequestMapping("/noLogin")
     @ResponseBody
     public Object noLogin(){
         return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
