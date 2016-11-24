@@ -40,6 +40,6 @@ $(function(){
 			$('#nav_order').addClass('active');
 		</script>
 	</div>
-	<div class="container mainland" id="page_container"></div>
+	<div class="container-flush mainland" id="page_container"></div>
 </body>
 </html>

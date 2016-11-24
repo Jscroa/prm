@@ -107,7 +107,7 @@ public class AccGroupDaoImpl implements IAccGroupDao {
     public AccGroup get(String id) {
         String sql = "select " + COLS + " from t_acc_group where guid=?";
 
-        List<AccGroup> list = jdbcTemplate.query(sql, new Object[] { id, Constants.DB_STATUS.STATUS_ACTIVE },
+        List<AccGroup> list = jdbcTemplate.query(sql, new Object[] { id },
                 new RowMapper<AccGroup>() {
 
                     @Override

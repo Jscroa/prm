@@ -60,12 +60,6 @@ public class CustomApiController extends BaseController {
             PageDto<CustomDto> page = customService.getPrivateCustoms(currUser, form.getSearch(), form.getOrder(),
                     form.getOffset(), form.getLimit());
             page.setCode(RESPONSE_CODE.CODE_SUCCESS);
-            try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
             return page;
         }
         catch (BusinessException e) {

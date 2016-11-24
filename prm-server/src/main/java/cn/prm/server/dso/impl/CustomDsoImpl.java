@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import cn.prm.server.commons.Constants.DB_STATUS;
 import cn.prm.server.dso.ICustomDso;
 
 /**
@@ -30,8 +31,8 @@ public class CustomDsoImpl implements ICustomDso {
 
     @Override
     public List<String> checkCustomOwn(String accId, String customId) {
-        String sql = "select gc.custom_id as custom_id from t_acc_to_group as ag join t_group_to_custom as gc on ag.group_id=gc.group_id where ag.acc_id=? and gc.custom_id=?;";
-        List<String> list = jdbcTemplate.query(sql, new Object[] { accId, customId }, new RowMapper<String>() {
+        String sql = "select t4.guid as custom_id from t_acc_to_group as t1 join t_acc_group as t2 on t1.group_id=t2.guid join t_group_to_custom as t3 on t2.guid=t3.group_id join t_custom as t4 on t3.custom_id=t4.guid where t1.acc_id=? and t4.guid=? and t1.status=? and t2.status=? and t3.status=? and t4.status=?";
+        List<String> list = jdbcTemplate.query(sql, new Object[] { accId, customId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE }, new RowMapper<String>() {
 
             @Override
             public String mapRow(ResultSet rs, int rowNum) throws SQLException {

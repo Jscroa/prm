@@ -135,7 +135,7 @@ public class AccToGroupDaoImpl implements IAccToGroupDao {
 
     @Override
     public List<AccGroup> getGroups(String accId) {
-        String sql = "select t2.* from t_acc_to_group t1 left join t_acc_group t2 on t2.guid=t1.group_id where t1.acc_id=? and t1.status=? and t2.status=?";
+        String sql = "select t2.* from t_acc_to_group t1 join t_acc_group t2 on t2.guid=t1.group_id where t1.acc_id=? and t1.status=? and t2.status=?";
         List<AccGroup> list = jdbcTemplate.query(sql,
                 new Object[] { accId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE }, new RowMapper<AccGroup>() {
 

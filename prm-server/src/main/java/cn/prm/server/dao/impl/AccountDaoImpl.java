@@ -122,7 +122,7 @@ public class AccountDaoImpl implements IAccountDao {
     public Account get(String id) {
         String sql = "select " + COLS + " from t_account where guid=?";
 
-        List<Account> list = jdbcTemplate.query(sql, new Object[] { id, Constants.DB_STATUS.STATUS_ACTIVE },
+        List<Account> list = jdbcTemplate.query(sql, new Object[] { id },
                 new RowMapper<Account>() {
 
                     @Override

@@ -14,5 +14,12 @@ import cn.prm.server.entity.OrderItem;
  * @version v1.0<br>
  */
 public interface IOrderItemDao extends IBaseDao<OrderItem> {
-
+    
+    /** 
+     * @Title: getByOrderId<br>
+     * @Description: <br>
+     * @param orderId
+     * @return
+     */
+    OrderItem getByOrderId(String orderId);
 }

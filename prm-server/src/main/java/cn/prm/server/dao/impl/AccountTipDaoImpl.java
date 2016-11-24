@@ -105,7 +105,7 @@ public class AccountTipDaoImpl implements IAccountTipDao {
     public AccountTip get(String id) {
         String sql = "select " + COLS + " from t_acc_tip where guid=?";
 
-        List<AccountTip> list = jdbcTemplate.query(sql, new Object[] { id, Constants.DB_STATUS.STATUS_ACTIVE },
+        List<AccountTip> list = jdbcTemplate.query(sql, new Object[] { id },
                 new RowMapper<AccountTip>() {
 
                     @Override

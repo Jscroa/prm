@@ -144,4 +144,21 @@ public class OrderItemDaoImpl implements IOrderItemDao {
         return null;
     }
 
+    @Override
+    public OrderItem getByOrderId(String orderId) {
+        String sql = "select " + COLS + " from t_order_item where order_id=?";
+        List<OrderItem> list = jdbcTemplate.query(sql, new Object[] { orderId }, new RowMapper<OrderItem>() {
+
+            @Override
+            public OrderItem mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return extract(rs);
+            }
+        });
+        if (list != null && list.size() == 1) {
+            return list.get(0);
+        }
+        return null;
+    }
+    
+
 }
