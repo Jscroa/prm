@@ -25,7 +25,7 @@ public abstract class BaseForm {
 
     /**
      * @Title: checkFields<br>
-     * @Description: 检查form的字段长度<br>
+     * @Description: 检查form的字段长度，需要手动调用，暂未想出比较理想的解决方案<br>
      * @throws BusinessException
      */
     public void checkFields() throws BusinessException {

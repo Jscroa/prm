@@ -8,7 +8,7 @@ import cn.prm.server.commons.FormLimitAnnotation.CharSupport;
 /**
  * @Title: FormLimit.java<br>
  * @Package: cn.prm.server.bean<br>
- * @Description: <br>
+ * @Description: form字段限制<br>
  * @author yyao<br>
  * @date 2016年10月20日 下午1:50:25<br>
  * @version v1.0<br>

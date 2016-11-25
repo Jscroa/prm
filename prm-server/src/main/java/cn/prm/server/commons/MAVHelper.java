@@ -8,7 +8,7 @@ import cn.prm.server.commons.Constants.MAV_KEYS;
 /**
  * @Title: MAVHelper.java<br>
  * @Package: cn.prm.server.commons<br>
- * @Description: <br>
+ * @Description: ModelAndView帮助类<br>
  * @author yyao<br>
  * @date 2016年10月19日 下午5:28:32<br>
  * @version v1.0<br>

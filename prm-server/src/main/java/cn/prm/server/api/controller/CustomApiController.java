@@ -207,7 +207,7 @@ public class CustomApiController extends BaseController {
     
     /** 
      * @Title: addAddress<br>
-     * @Description: <br>
+     * @Description: 在客户下添加地址<br>
      * @param request
      * @param customId
      * @param addrStr
@@ -252,7 +252,7 @@ public class CustomApiController extends BaseController {
     
     /** 
      * @Title: delAddress<br>
-     * @Description: <br>
+     * @Description: 删除地址<br>
      * @param request
      * @param addrId
      * @return

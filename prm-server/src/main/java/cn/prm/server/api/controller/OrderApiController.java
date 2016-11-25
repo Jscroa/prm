@@ -41,7 +41,7 @@ public class OrderApiController extends BaseController {
 
     /**
      * @Title: list<br>
-     * @Description: <br>
+     * @Description: 订单列表<br>
      * @param request
      * @param form
      * @return
@@ -77,6 +77,7 @@ public class OrderApiController extends BaseController {
             if (currUser == null) {
                 return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
             }
+            // TODO 新建订单流程未定
             orderService.getOrders(currUser, "", "", "", 0, 00);
             return null;
         }

@@ -12,29 +12,31 @@ public class BaseDto {
     private int    code;
     private String msg;
 
-    /** 
+    /**
      * Title: <br>
-     * Description: <br> 
+     * Description: <br>
      */
     public BaseDto() {
         super();
     }
 
-    /** 
+    /**
      * Title: <br>
      * Description: <br>
-     * @param code 
+     * 
+     * @param code
      */
     public BaseDto(int code) {
         super();
         this.code = code;
     }
 
-    /** 
+    /**
      * Title: <br>
      * Description: <br>
+     * 
      * @param code
-     * @param msg 
+     * @param msg
      */
     public BaseDto(int code, String msg) {
         super();

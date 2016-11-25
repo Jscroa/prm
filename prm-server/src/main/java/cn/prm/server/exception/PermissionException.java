@@ -6,7 +6,7 @@ package cn.prm.server.exception;
 /**
  * @Title: PermissionException.java<br>
  * @Package: cn.prm.server.exception<br>
- * @Description: <br>
+ * @Description: 权限不足异常<br>
  * @author yyao<br>
  * @date 2016年11月3日 下午1:59:07<br>
  * @version v1.0<br>

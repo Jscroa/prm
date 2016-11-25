@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @Title: NavTree.java<br>
  * @Package: cn.prm.server.bean<br>
- * @Description: 导航栏树结构<br>
+ * @Description: 导航栏树结构 废弃<br>
  * @author yyao<br>
  * @date 2016年10月19日 下午6:19:11<br>
  * @version v1.0<br>

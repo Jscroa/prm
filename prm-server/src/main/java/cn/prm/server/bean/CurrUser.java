@@ -3,7 +3,7 @@ package cn.prm.server.bean;
 /**
  * @Title: CurrUser.java<br>
  * @Package: cn.prm.server.bean<br>
- * @Description: <br>
+ * @Description: 当前登录的用户 Session中存的此对象<br>
  * @author yyao<br>
  * @date 2016年10月19日 下午5:20:31<br>
  * @version v1.0<br>

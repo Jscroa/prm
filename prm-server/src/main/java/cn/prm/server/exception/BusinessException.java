@@ -3,7 +3,7 @@ package cn.prm.server.exception;
 /**
  * @Title: BusinessException.java<br>
  * @Package: cn.prm.server.exception<br>
- * @Description: <br>
+ * @Description: 业务异常<br>
  * @author yyao<br>
  * @date 2016年10月19日 下午5:37:41<br>
  * @version v1.0<br>
