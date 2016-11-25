@@ -56,6 +56,7 @@ public class CustomApiController extends BaseController {
                 return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
             }
 
+            // 检查form字段是否合格
             form.checkFields();
 
             PageDto<CustomDto> page = customService.getPrivateCustoms(currUser, form.getSearch(), form.getOrder(),
@@ -110,6 +111,7 @@ public class CustomApiController extends BaseController {
             if (currUser == null) {
                 return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
             }
+            // 检查form字段是否合格
             form.checkFields();
             customService.addPrivateCustom(currUser, form);
             return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "添加成功");

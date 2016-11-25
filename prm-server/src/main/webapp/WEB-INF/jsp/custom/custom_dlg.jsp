@@ -111,7 +111,7 @@
                 dlg.modal('hide');
             });
             $('#confirmButton').click(function() {
-                addCustom(dlg, this);
+                addCustom(dlg, this, obj);
             });
         }
 
