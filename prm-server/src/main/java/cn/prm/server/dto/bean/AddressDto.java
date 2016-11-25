@@ -14,6 +14,7 @@ package cn.prm.server.dto.bean;
 public class AddressDto {
 
     private String id;
+    private String tip;
     private String addr;
 
     /**
@@ -32,6 +33,21 @@ public class AddressDto {
     }
 
     /**
+     * @return the tip
+     */
+    public String getTip() {
+        return tip;
+    }
+
+    /**
+     * @param tip
+     *            the tip to set
+     */
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+
+    /**
      * @return the addr
      */
     public String getAddr() {
@@ -45,4 +61,5 @@ public class AddressDto {
     public void setAddr(String addr) {
         this.addr = addr;
     }
+
 }

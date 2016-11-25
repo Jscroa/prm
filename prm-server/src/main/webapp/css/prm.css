@@ -4,12 +4,11 @@ body {
 	/* background-image:url(/img/2c761da4303eccca7d9bfc8d73a40077cfbc9f651fe0-svPkdZ_fw658.png); */
 }
 
-/* .form-control, .panel, .input-group .datepicker, .input-group .input-group-addon
-	{
+.panel {
 	border-radius: 0px;
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
-} */
+}
 
 .mainland {
 	background: #FFFFFF;

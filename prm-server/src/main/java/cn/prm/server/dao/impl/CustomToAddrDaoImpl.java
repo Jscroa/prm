@@ -143,4 +143,17 @@ public class CustomToAddrDaoImpl implements ICustomToAddrDao {
         return list;
     }
 
+    @Override
+    public List<CustomToAddr> getbyAddrId(String addrId) {
+        String sql = "select " + COLS + " from t_custom_to_addr where addr_id=?";
+        List<CustomToAddr> list = jdbcTemplate.query(sql, new Object[] { addrId }, new RowMapper<CustomToAddr>() {
+
+            @Override
+            public CustomToAddr mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return extract(rs);
+            }
+        });
+        return list;
+    }
+
 }

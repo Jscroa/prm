@@ -23,4 +23,13 @@ public interface ICustomDso {
      * @return
      */
     List<String> checkCustomOwn(String accId, String customId);
+    
+    /** 
+     * @Title: checkAddressOwn<br>
+     * @Description: <br>
+     * @param accId
+     * @param addressId
+     * @return
+     */
+    List<String> checkAddressOwn(String accId,String addressId);
 }

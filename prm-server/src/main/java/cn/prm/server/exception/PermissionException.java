@@ -11,7 +11,7 @@ package cn.prm.server.exception;
  * @date 2016年11月3日 下午1:59:07<br>
  * @version v1.0<br>
  */
-public class PermissionException extends BusinessException {
+public class PermissionException extends Exception {
 
     /**
      * 

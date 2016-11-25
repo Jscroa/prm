@@ -129,6 +129,7 @@
                     custId : id
                 },
                 success : function(data) {
+                    obj.loadOk();
                     if (data) {
                         if (data.code == 100) { // 请求成功
                             var dlg = bootbox.dialog({
@@ -141,7 +142,6 @@
                             loadData(data.t);
                             $('#cancelButton').click(function() {
                                 dlg.modal('hide');
-                                obj.cancel();
                             });
                             $('#confirmButton').click(function() {
                                 //                                            modifyCustom(dlg, this, id);
@@ -156,8 +156,7 @@
                     }
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown) {
-                    $(btn).button('reset');
-                    obj.error(XMLHttpRequest, textStatus, errorThrown);
+                    obj.loadError(XMLHttpRequest, textStatus, errorThrown);
                 }
             });
         }

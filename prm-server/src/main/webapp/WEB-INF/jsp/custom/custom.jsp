@@ -9,6 +9,7 @@
 
 <link href="/css/bootstrap-table.css" rel="stylesheet">
 <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="/css/animate.css" rel="stylesheet">
 
 
 <script src="/js/jquery.form.js"></script>
@@ -36,7 +37,8 @@ function showAddressPage(custId,custName){
             title:'<strong>地址管理</strong>&nbsp;&nbsp;'+custName,
             message:data,
             size: 'large',
-            closeButton: true
+            closeButton: true,
+            backdrop: true
         });
     });
 	

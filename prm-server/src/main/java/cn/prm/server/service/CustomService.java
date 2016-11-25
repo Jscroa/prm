@@ -352,18 +352,15 @@ public class CustomService {
      * @param currUser 当前登录的用户
      * @param id 客户id
      * @throws BusinessException
+     * @throws PermissionException 
      */
-    public void delete(CurrUser currUser, String id) throws BusinessException {
+    public void delete(CurrUser currUser, String id) throws BusinessException, PermissionException {
         if (id == null || "".equals(id)) {
             throw new BusinessException("未指定要删除的客户");
         }
+        
+        pCheckCustomOwnner(currUser, id);
         Custom custom = customDao.get(id);
-        if (custom == null) {
-            throw new BusinessException("没有此客户");
-        }
-        if (custom.getStatus() == DB_STATUS.STATUS_INACTIVE) {
-            throw new BusinessException("该客户已删除");
-        }
         Timestamp now = new Timestamp(System.currentTimeMillis());
         custom.setStatus(DB_STATUS.STATUS_INACTIVE);
         custom.setModifyTime(now);
@@ -589,8 +586,9 @@ public class CustomService {
      * @param currUser 当前登录的用户
      * @param id 客户id
      * @throws BusinessException 
+     * @throws PermissionException 
      */
-    public void pCheckCustomOwnner(CurrUser currUser, String id) throws BusinessException{
+    public void pCheckCustomOwnner(CurrUser currUser, String id) throws BusinessException, PermissionException{
         if (id == null || "".equals(id)) {
             throw new BusinessException("未指定客户");
         }
@@ -602,6 +600,31 @@ public class CustomService {
             throw new BusinessException("此客户已经被删除");
         }
         List<String> ids = customDso.checkCustomOwn(currUser.getGuid(), id);
+        if(ids==null || ids.size()==0){
+            throw new PermissionException("您无权操作此客户");
+        }
+    }
+    
+    /** 
+     * @Title: pCheckAddressOwnner<br>
+     * @Description: <br>
+     * @param currUser
+     * @param id
+     * @throws BusinessException
+     * @throws PermissionException 
+     */
+    public void pCheckAddressOwnner(CurrUser currUser, String id) throws BusinessException, PermissionException{
+        if (id == null || "".equals(id)) {
+            throw new BusinessException("未指定地址");
+        }
+        Address address = addressDao.get(id);
+        if(address==null){
+            throw new BusinessException("没有此地址");
+        }
+        if(address.getStatus()!=DB_STATUS.STATUS_ACTIVE){
+            throw new BusinessException("此地址已经被删除");
+        }
+        List<String> ids = customDso.checkAddressOwn(currUser.getGuid(), id);
         if(ids==null || ids.size()==0){
             throw new PermissionException("您无权操作此客户");
         }
@@ -623,12 +646,84 @@ public class CustomService {
         for(Address addr: addrs){
             AddressDto dto = new AddressDto();
             dto.setId(addr.getGuid());
-            dto.setAddr(addr.getStdName());
+            dto.setTip(addr.getStdName());
+            dto.setAddr(addr.getMemo());
             dtos.add(dto);
         }
         ListDto<AddressDto> list = new ListDto<>();
         list.setRows(dtos);
         return list;
+    }
+    
+    /** 
+     * @Title: addAddress<br>
+     * @Description: <br>
+     * @param currUser
+     * @param customId 
+     * @param tip
+     * @param addr
+     * @throws PermissionException 
+     * @throws BusinessException
+     */
+    public void addAddress(CurrUser currUser,String customId, String tip,String addr) throws PermissionException,BusinessException {
+        // 先检查编辑客户的权限才能在该客户下添加地址
+        pCheckCustomOwnner(currUser, customId);
+        
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+
+        String addrId = UUIDUtil.randomUUID();
+        Address address = new Address();
+        address.setGuid(addrId);
+        address.setStdName(tip);
+        address.setMemo(addr);
+        address.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+        address.setCreateTime(now);
+        address.setModifyTime(now);
+        address.setCreateUser(currUser.getGuid());
+        address.setModifyUser(currUser.getGuid());
+        addressDao.add(address);
+
+        CustomToAddr customToAddr = new CustomToAddr();
+        customToAddr.setGuid(UUIDUtil.randomUUID());
+        customToAddr.setCustomId(customId);
+        customToAddr.setAddrId(addrId);
+        customToAddr.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
+        customToAddr.setCreateTime(now);
+        customToAddr.setModifyTime(now);
+        customToAddr.setCreateUser(currUser.getGuid());
+        customToAddr.setModifyUser(currUser.getGuid());
+        customToAddrDao.add(customToAddr);
+    }
+    
+    /** 
+     * @Title: delAddress<br>
+     * @Description: <br>
+     * @param currUser
+     * @param addrId
+     * @throws PermissionException 
+     * @throws BusinessException 
+     */
+    public void delAddress(CurrUser currUser, String addrId) throws BusinessException, PermissionException{
+     // 先检查地址的权限才能删除地址
+        pCheckAddressOwnner(currUser, addrId);
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        Address address = addressDao.get(addrId);
+        if(address==null){
+            throw new BusinessException("该地址不存在");
+        }
+        address.setStatus(DB_STATUS.STATUS_INACTIVE);
+        address.setModifyTime(now);
+        address.setModifyUser(currUser.getGuid());
+        addressDao.modify(address);
+        List<CustomToAddr> customToAddrs = customToAddrDao.getbyAddrId(addrId);
+        if(customToAddrs!=null){
+            for (CustomToAddr customToAddr : customToAddrs) {
+                customToAddr.setStatus(DB_STATUS.STATUS_INACTIVE);
+                customToAddr.setModifyTime(now);
+                customToAddr.setModifyUser(currUser.getGuid());
+                customToAddrDao.modify(customToAddr);
+            }
+        }
     }
     
     /** 

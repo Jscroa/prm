@@ -89,6 +89,10 @@ public class CustomApiController extends BaseController {
             e.printStackTrace();
             return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
         }
+        catch (PermissionException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
+        }
     }
 
     /**
@@ -132,13 +136,13 @@ public class CustomApiController extends BaseController {
             customService.delete(currUser, id);
             return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "删除成功");
         }
-        catch (PermissionException e) {
-            e.printStackTrace();
-            return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
-        }
         catch (BusinessException e) {
             e.printStackTrace();
             return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
+        }
+        catch (PermissionException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
         }
     }
 
@@ -190,13 +194,88 @@ public class CustomApiController extends BaseController {
             list.setCode(RESPONSE_CODE.CODE_SUCCESS);
             return list;
         }
+        catch (BusinessException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
+        }
         catch (PermissionException e) {
             e.printStackTrace();
             return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
         }
+    }
+    
+    /** 
+     * @Title: addAddress<br>
+     * @Description: <br>
+     * @param request
+     * @param customId
+     * @param addrStr
+     * @return
+     */
+    @RequestMapping("/addAddress")
+    public Object addAddress(HttpServletRequest request,String customId,String addrStr){
+        
+        try {
+            CurrUser currUser = getCurrUser(request);
+            if (currUser == null) {
+                return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
+            }
+            if(addrStr==null || "".equals(addrStr)){
+                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "参数不完整");
+            }
+            String tip = null;
+            String addr = null;
+            if(addrStr.contains("##")){
+                String[] arr = addrStr.split("##");
+                tip = arr[0];
+                addr = arr[1];
+            } else {
+                addr = addrStr;
+            }
+            if(addr==null || "".equals(addr)){
+                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "参数不完整");
+            }
+            customService.addAddress(currUser, customId, tip, addr);
+            return new BaseDto(RESPONSE_CODE.CODE_SUCCESS,"添加成功");
+        }
         catch (BusinessException e) {
             e.printStackTrace();
             return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
+        }
+        catch (PermissionException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
+        }
+        
+    }
+    
+    /** 
+     * @Title: delAddress<br>
+     * @Description: <br>
+     * @param request
+     * @param addrId
+     * @return
+     */
+    @RequestMapping("/delAddress")
+    public Object delAddress(HttpServletRequest request, String addrId){
+        try {
+            CurrUser currUser = getCurrUser(request);
+            if (currUser == null) {
+                return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
+            }
+            if (addrId==null || "".equals(addrId)) {
+                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "参数不完整");
+            }
+            customService.delAddress(currUser, addrId);
+            return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "删除成功");
+        }
+        catch (BusinessException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
+        }
+        catch (PermissionException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
         }
     }
 

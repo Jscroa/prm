@@ -12,14 +12,14 @@
                         align : 'center',
                         valign : 'middle',
                         formatter : function(value, row, index) {
-                            return index+1;
+                            return index + 1;
                         }
                     },
                     {
                         checkbox : true, // 使用复选框
                         field : 'state',
                         align : 'center',
-                        valign:'middle'
+                        valign : 'middle'
                     },
                     {
                         title : '姓名',
@@ -169,40 +169,42 @@
     // 点击添加
     function clickAdd() {
         showCustomAddDlg({
-            success:function(){
+            success : function() {
                 $('#custom_table').bootstrapTable('refresh');
             },
-            warning:function(msg){
+            warning : function(msg) {
                 toastr.warning(msg);
             },
-            error:function(XMLHttpRequest, textStatus, errorThrown){
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
                 toastr.error(XMLHttpRequest.status);
             }
         });
 
     }
 
-    // 点击修改
+    // 点击编辑
     function clickModify(btn, id) {
         $(btn).button('loading');
-        showCustomModifyDlg(id,{
-        	cancel:function(){
-        		$(btn).button('reset');
-        	},
-            success:function(){
+        showCustomModifyDlg(id, {
+            loadOk: function(){
+                $(btn).button('reset');
+            },
+            loadError: function(XMLHttpRequest, textStatus, errorThrown){
+                $(btn).button('reset');
+            },
+            success : function() {
                 $(btn).button('reset');
                 $('#custom_table').bootstrapTable('refresh');
             },
-            warning:function(msg){
+            warning : function(msg) {
                 $(btn).button('reset');
                 toastr.warning(msg);
             },
-            error:function(XMLHttpRequest, textStatus, errorThrown){
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
                 $(btn).button('reset');
                 toastr.error(XMLHttpRequest.status);
             }
         });
-        
 
     }
 
@@ -215,7 +217,8 @@
         }
         bootbox.confirm({
             title : '确认删除',
-            message : '确定删除选中的&nbsp;<strong class="text-danger">' + selects.length + '</strong>&nbsp;条数据？',
+            message : '确定删除选中的&nbsp;<strong class="text-danger">'
+                    + selects.length + '</strong>&nbsp;条数据？',
             buttons : {
                 confirm : {
                     label : '确认删除',
@@ -244,7 +247,7 @@
     // 递归删除
     function delCustom(ids, index) {
         if (index < 0 || ids.length <= index) {
-            toastr.success('ok');
+            toastr.success('删除完毕');
             $('#custom_table').bootstrapTable('refresh');
         } else {
             $.ajax({
