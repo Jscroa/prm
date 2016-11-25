@@ -27,6 +27,8 @@ import cn.prm.server.exception.BusinessException;
  */
 @Service(value = "orderService")
 public class OrderService {
+    
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(OrderService.class);
     
     @Autowired

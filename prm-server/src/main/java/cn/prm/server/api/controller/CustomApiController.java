@@ -35,6 +35,7 @@ import cn.prm.server.service.CustomService;
 @RequestMapping("/api/custom")
 public class CustomApiController extends BaseController {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(CustomApiController.class);
 
     @Autowired

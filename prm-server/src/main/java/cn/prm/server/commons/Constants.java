@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import cn.prm.server.entity.Sequence;
-
 /**
  * @Title: Constants.java<br>
  * @Package: cn.prm.server.commons<br>

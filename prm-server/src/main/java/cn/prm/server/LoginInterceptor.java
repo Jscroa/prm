@@ -22,9 +22,7 @@ import cn.prm.server.commons.Constants.SESSION;
  */
 public class LoginInterceptor implements HandlerInterceptor {
 
-    /**
-     * 
-     */
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(LoginInterceptor.class);
 
     @Override

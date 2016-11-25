@@ -19,10 +19,13 @@
                 }
                 $('#address_list').html(temp);
             } else {
-                $('#address_list').html('<div class="alert alert-danger" role="alert">没有地址</div>');
+                $('#address_list')
+                        .html(
+                                '<div class="alert alert-danger" role="alert">没有地址</div>');
             }
         } else {
-            $('#address_list').html('<div class="alert alert-danger" role="alert">没有地址</div>');
+            $('#address_list').html(
+                    '<div class="alert alert-danger" role="alert">没有地址</div>');
         }
     }
 

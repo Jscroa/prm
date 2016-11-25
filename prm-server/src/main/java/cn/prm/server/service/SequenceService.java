@@ -28,6 +28,7 @@ import cn.prm.server.exception.BusinessException;
 @Service(value = "sequenceService")
 public class SequenceService {
     
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(SequenceService.class);
     
     @Autowired

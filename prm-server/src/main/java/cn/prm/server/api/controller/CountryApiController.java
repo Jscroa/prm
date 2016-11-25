@@ -30,6 +30,7 @@ import cn.prm.server.service.CountryService;
 @RequestMapping("/api/country")
 public class CountryApiController extends BaseController {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(CountryApiController.class);
 
     @Autowired

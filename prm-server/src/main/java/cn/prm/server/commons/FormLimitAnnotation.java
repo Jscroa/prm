@@ -58,13 +58,13 @@ public @interface FormLimitAnnotation {
             for (Field field : fields) {
                 if (field.isAnnotationPresent(FormLimitAnnotation.class)) {
                     Annotation anno = field.getAnnotation(FormLimitAnnotation.class);
-                    Method minLengthMethod = anno.getClass().getDeclaredMethod("minLength", null);
-                    Method maxLengthMethod = anno.getClass().getDeclaredMethod("maxLength", null);
-                    Method charCheckMethod = anno.getClass().getDeclaredMethod("charCheck", null);
+                    Method minLengthMethod = anno.getClass().getDeclaredMethod("minLength");
+                    Method maxLengthMethod = anno.getClass().getDeclaredMethod("maxLength");
+                    Method charCheckMethod = anno.getClass().getDeclaredMethod("charCheck");
 
-                    int minLength = (int) minLengthMethod.invoke(anno, null);
-                    int maxLength = (int) maxLengthMethod.invoke(anno, null);
-                    CharSupport charCheck = (CharSupport) charCheckMethod.invoke(anno, null);
+                    int minLength = (int) minLengthMethod.invoke(anno);
+                    int maxLength = (int) maxLengthMethod.invoke(anno);
+                    CharSupport charCheck = (CharSupport) charCheckMethod.invoke(anno);
                     FormLimit formLimit = new FormLimit();
                     formLimit.setMinLength(minLength);
                     formLimit.setMaxLength(maxLength);

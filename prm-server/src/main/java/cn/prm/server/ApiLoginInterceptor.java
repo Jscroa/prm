@@ -3,9 +3,6 @@
  */
 package cn.prm.server;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,9 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.prm.server.bean.CurrUser;
-import cn.prm.server.commons.Constants.RESPONSE_CODE;
 import cn.prm.server.commons.Constants.SESSION;
-import cn.prm.server.dto.BaseDto;
 
 /**
  * @Title: ApiLoginInterceptor.java<br>
@@ -30,9 +25,7 @@ import cn.prm.server.dto.BaseDto;
  */
 public class ApiLoginInterceptor implements HandlerInterceptor {
 
-    /**
-     * 
-     */
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(ApiLoginInterceptor.class);
     
     @Override

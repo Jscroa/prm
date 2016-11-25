@@ -186,10 +186,10 @@
     function clickModify(btn, id) {
         $(btn).button('loading');
         showCustomModifyDlg(id, {
-            loadOk: function(){
+            loadOk : function() {
                 $(btn).button('reset');
             },
-            loadError: function(XMLHttpRequest, textStatus, errorThrown){
+            loadError : function(XMLHttpRequest, textStatus, errorThrown) {
                 $(btn).button('reset');
             },
             success : function() {
@@ -298,7 +298,6 @@
 </ol>
 
 <div class="btn-toolbar" role="toolbar" id="custom-table-toolbar">
-	<!-- <div class="btn-group" role="group"> -->
 	<button class="btn btn-primary" data-toggle="modal"
 		onclick="clickAdd();">
 		<span class="glyphicon glyphicon-plus"></span>&nbsp;添加
@@ -306,8 +305,7 @@
 	<button class="btn btn-danger" onclick="delCustoms()">
 		<span class="glyphicon glyphicon-minus"></span>&nbsp;删除
 	</button>
-	<!-- </div> -->
-	<div id="select-control-group" class="btn-group" role="group"></div>
+
 </div>
 
 <table id="custom_table" class="table table-condensed"></table>

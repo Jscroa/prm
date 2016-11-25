@@ -33,6 +33,7 @@ import cn.prm.server.service.OrderService;
 @RequestMapping("/api/order")
 public class OrderApiController extends BaseController {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(OrderApiController.class);
 
     @Autowired

@@ -1,7 +1,5 @@
 package cn.prm.server.dto;
 
-import java.util.List;
-
 /**
  * @Title: PageDto.java<br>
  * @Package: cn.prm.server.dto<br>

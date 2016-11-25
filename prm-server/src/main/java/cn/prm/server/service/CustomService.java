@@ -52,6 +52,7 @@ import cn.prm.server.form.CustomForm;
 @Service(value = "customService")
 public class CustomService {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(CustomService.class);
 
     @Autowired

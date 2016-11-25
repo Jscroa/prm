@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import cn.prm.server.commons.Constants;
 import cn.prm.server.dao.IAccGroupDao;
 import cn.prm.server.entity.AccGroup;
 

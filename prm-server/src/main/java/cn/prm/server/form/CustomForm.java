@@ -1,7 +1,5 @@
 package cn.prm.server.form;
 
-import java.sql.Date;
-
 import cn.prm.server.commons.BaseForm;
 import cn.prm.server.commons.FormLimitAnnotation;
 import cn.prm.server.commons.FormLimitAnnotation.CharSupport;

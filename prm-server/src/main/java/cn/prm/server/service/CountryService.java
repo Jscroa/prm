@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.Constants;
-import cn.prm.server.commons.Constants.DB_STATUS;
 import cn.prm.server.commons.UUIDUtil;
 import cn.prm.server.dao.ICountryDao;
 import cn.prm.server.dto.ListDto;
@@ -31,6 +30,7 @@ import cn.prm.server.form.CountryForm;
 @Service(value = "countryService")
 public class CountryService {
 
+    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(CountryService.class);
 
     @Autowired
