@@ -32,6 +32,6 @@ $(function(){
 			$('#nav_center').addClass('active');
 		</script>
 	</div>
-	<div class="container-flush mainland" id="page_container"></div>
+	<%@include file="/WEB-INF/jsp/components/page_container.jsp"%>
 </body>
 </html>

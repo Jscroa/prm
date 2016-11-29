@@ -11,7 +11,7 @@ function TableConfig(url, toolbar, columns) {
     this.pagination = true; // 分页
     this.pageList = [ 10, 20, 50, 100 ];
     this.singleSelect = false; // 非单选
-    this.search = false; // 搜索框
+    this.search = true; // 搜索框
     this.showRefresh = false; // 刷新按钮
     this.sidePagination = 'server'; // 服务端分页
     this.showColumns = false; // 开启选择显示列

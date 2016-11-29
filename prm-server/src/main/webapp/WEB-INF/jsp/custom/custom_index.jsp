@@ -81,7 +81,7 @@
                                     .join('');
                         }
                     } ]);
-
+/* 
     var customForm = [
             '<form class="form-horizontal" name="custom_form" id="custom_form" onSubmit="return false;">',
             '<div class="form-group">',
@@ -165,7 +165,7 @@
             '<div class="col-sm-6">',
             '<button id="confirmButton" type="button" data-loading-text="加载中" class="form-control btn btn-primary">',
             '确定', '</button>', '</div>', '</div>', '</form>' ].join('');
-
+ */
     // 点击添加
     function clickAdd() {
         showCustomAddDlg({

@@ -57,8 +57,6 @@ $(function(){
 			$('#nav_custom').addClass('active');
 		</script>
 	</div>
-	<div class="container-flush mainland" id="page_container">
-		<%-- <%@include file="custom_index.jsp"%> --%>
-	</div>
+	<%@include file="/WEB-INF/jsp/components/page_container.jsp"%>
 </body>
 </html>

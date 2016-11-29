@@ -10,9 +10,9 @@ use prm;
 
 -- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: prm
+-- Host: yyaos.club    Database: prm
 -- ------------------------------------------------------
--- Server version	5.7.13
+-- Server version 5.5.47-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -54,6 +54,40 @@ CREATE TABLE `t_acc_group` (
 LOCK TABLES `t_acc_group` WRITE;
 /*!40000 ALTER TABLE `t_acc_group` DISABLE KEYS */;
 /*!40000 ALTER TABLE `t_acc_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_acc_msg`
+--
+
+DROP TABLE IF EXISTS `t_acc_msg`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_acc_msg` (
+  `guid` varchar(45) NOT NULL,
+  `std_name` varchar(45) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `memo` varchar(200) DEFAULT NULL,
+  `create_user` varchar(45) DEFAULT NULL,
+  `modify_user` varchar(45) DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT NULL,
+  `modify_time` timestamp NULL DEFAULT NULL,
+  `acc_id` varchar(45) DEFAULT NULL,
+  `msg_type` varchar(45) DEFAULT NULL,
+  `content` varchar(200) DEFAULT NULL,
+  `is_read` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`guid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='账户消息表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_acc_msg`
+--
+
+LOCK TABLES `t_acc_msg` WRITE;
+/*!40000 ALTER TABLE `t_acc_msg` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_acc_msg` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -116,40 +150,6 @@ CREATE TABLE `t_acc_to_group` (
 LOCK TABLES `t_acc_to_group` WRITE;
 /*!40000 ALTER TABLE `t_acc_to_group` DISABLE KEYS */;
 /*!40000 ALTER TABLE `t_acc_to_group` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `t_acc_to_msg`
---
-
-DROP TABLE IF EXISTS `t_acc_to_msg`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_acc_to_msg` (
-  `guid` varchar(45) NOT NULL,
-  `std_name` varchar(45) DEFAULT NULL,
-  `std_code` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `memo` varchar(200) DEFAULT NULL,
-  `create_user` varchar(45) DEFAULT NULL,
-  `modify_user` varchar(45) DEFAULT NULL,
-  `create_time` timestamp NULL DEFAULT NULL,
-  `modify_time` timestamp NULL DEFAULT NULL,
-  `acc_id` varchar(45) DEFAULT NULL,
-  `msg_type` varchar(45) DEFAULT NULL,
-  `content` varchar(200) DEFAULT NULL,
-  `is_read` tinyint(4) DEFAULT NULL,
-  PRIMARY KEY (`guid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='账户消息表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_acc_to_msg`
---
-
-LOCK TABLES `t_acc_to_msg` WRITE;
-/*!40000 ALTER TABLE `t_acc_to_msg` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_acc_to_msg` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -270,6 +270,11 @@ CREATE TABLE `t_contact` (
   `modify_user` varchar(45) DEFAULT NULL,
   `create_time` timestamp NULL DEFAULT NULL,
   `modify_time` timestamp NULL DEFAULT NULL,
+  `custom_id` varchar(45) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `qq` varchar(45) DEFAULT NULL,
+  `weixin` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='联系方式表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -507,6 +512,40 @@ LOCK TABLES `t_msg_type` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `t_order`
+--
+
+DROP TABLE IF EXISTS `t_order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_order` (
+  `guid` varchar(45) NOT NULL,
+  `std_name` varchar(45) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `memo` varchar(200) DEFAULT NULL,
+  `create_user` varchar(45) DEFAULT NULL,
+  `modify_user` varchar(45) DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT NULL,
+  `modify_time` timestamp NULL DEFAULT NULL,
+  `custom_id` varchar(45) DEFAULT NULL,
+  `order_type` varchar(45) DEFAULT NULL,
+  `address` varchar(45) DEFAULT NULL,
+  `price` decimal(18,2) DEFAULT NULL,
+  PRIMARY KEY (`guid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单主表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_order`
+--
+
+LOCK TABLES `t_order` WRITE;
+/*!40000 ALTER TABLE `t_order` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_order` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `t_order_item`
 --
 
@@ -525,6 +564,12 @@ CREATE TABLE `t_order_item` (
   `modify_time` timestamp NULL DEFAULT NULL,
   `order_id` varchar(45) DEFAULT NULL,
   `passenger_id` varchar(45) DEFAULT NULL,
+  `addr_from` varchar(45) DEFAULT NULL,
+  `addr_to` varchar(45) DEFAULT NULL,
+  `trip_type` int(11) DEFAULT NULL,
+  `go_time` timestamp NULL DEFAULT NULL,
+  `return_time` timestamp NULL DEFAULT NULL,
+  `price` decimal(18,2) DEFAULT NULL,
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单子表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -600,6 +645,76 @@ LOCK TABLES `t_passenger` WRITE;
 /*!40000 ALTER TABLE `t_passenger` DISABLE KEYS */;
 /*!40000 ALTER TABLE `t_passenger` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `t_payment`
+--
+
+DROP TABLE IF EXISTS `t_payment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_payment` (
+  `guid` varchar(45) NOT NULL,
+  `std_name` varchar(45) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `memo` varchar(200) DEFAULT NULL,
+  `create_user` varchar(45) DEFAULT NULL,
+  `modify_user` varchar(45) DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT NULL,
+  `modify_time` timestamp NULL DEFAULT NULL,
+  `order_id` varchar(45) DEFAULT NULL,
+  `drawee` varchar(45) DEFAULT NULL,
+  `payee` varchar(45) DEFAULT NULL,
+  `price` decimal(18,2) DEFAULT NULL,
+  PRIMARY KEY (`guid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='支付记录表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_payment`
+--
+
+LOCK TABLES `t_payment` WRITE;
+/*!40000 ALTER TABLE `t_payment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_payment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_sequence`
+--
+
+DROP TABLE IF EXISTS `t_sequence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_sequence` (
+  `guid` varchar(45) NOT NULL,
+  `std_name` varchar(45) DEFAULT NULL,
+  `std_code` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `memo` varchar(200) DEFAULT NULL,
+  `create_user` varchar(45) DEFAULT NULL,
+  `modify_user` varchar(45) DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT NULL,
+  `modify_time` timestamp NULL DEFAULT NULL,
+  `seq_key` varchar(45) NOT NULL,
+  `seq_value` int(11) DEFAULT '0',
+  `min_value` int(11) DEFAULT '0',
+  `max_value` int(11) DEFAULT '99999999',
+  `increment` int(11) DEFAULT '1',
+  PRIMARY KEY (`guid`),
+  UNIQUE KEY `seq_key_UNIQUE` (`seq_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='序列表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_sequence`
+--
+
+LOCK TABLES `t_sequence` WRITE;
+/*!40000 ALTER TABLE `t_sequence` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_sequence` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -610,4 +725,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-08 14:57:43
+-- Dump completed on 2016-11-29 18:23:57

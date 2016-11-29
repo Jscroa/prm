@@ -5,6 +5,9 @@ package cn.prm.server.dso;
 
 import java.util.List;
 
+import cn.prm.server.dto.bean.CustomDto;
+import cn.prm.server.entity.Custom;
+
 /**
  * @Title: ICustomDso.java<br>
  * @Package: cn.prm.server.dso<br>
@@ -15,6 +18,34 @@ import java.util.List;
  */
 public interface ICustomDso {
 
+    /** 
+     * @Title: getCustoms<br>
+     * @Description: <br>
+     * @param groupId
+     * @param offset
+     * @param limit
+     * @return
+     */
+    List<CustomDto> getCustoms(String groupId, int offset, int limit);
+    
+    /** 
+     * @Title: getCustoms<br>
+     * @Description: <br>
+     * @param groupId
+     * @param search
+     * @param offset
+     * @param limit
+     * @return
+     */
+    List<CustomDto> getCustoms(String groupId, String search, int offset, int limit);
+    
+    /** 
+     * @Title: getCustomCount<br>
+     * @Description: <br>
+     * @return
+     */
+    int getCustomCount();
+    
     /**
      * @Title: checkCustomOwn<br>
      * @Description: <br>

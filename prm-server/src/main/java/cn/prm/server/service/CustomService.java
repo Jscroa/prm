@@ -23,7 +23,6 @@ import cn.prm.server.dao.IAddressDao;
 import cn.prm.server.dao.IContactDao;
 import cn.prm.server.dao.ICustomDao;
 import cn.prm.server.dao.ICustomToAddrDao;
-import cn.prm.server.dao.ICustomToContactDao;
 import cn.prm.server.dao.IGroupToCustomDao;
 import cn.prm.server.dso.ICustomDso;
 import cn.prm.server.dto.ListDto;
@@ -59,8 +58,6 @@ public class CustomService {
     ICustomDao                  customDao;
     @Autowired
     IContactDao                 contactDao;
-    @Autowired
-    ICustomToContactDao         customToContactDao;
     @Autowired
     IAccToGroupDao              accToGroupDao;
     @Autowired
@@ -101,36 +98,13 @@ public class CustomService {
         if (group == null) {
             throw new BusinessException("数据错误");
         }
-        // 私有用户组的客户
-        List<Custom> customs = groupToCustomDao.getCustoms(group.getGuid(), offset, limit);
-        int total = groupToCustomDao.getCustomCount();
         List<CustomDto> dtos = new ArrayList<>();
-        for (Custom custom : customs) {
-            CustomDto dto = new CustomDto();
-            dto.setId(custom.getGuid());
-            dto.setName(custom.getStdName());
-            // 获取联系方式列表
-            List<Contact> contacts = customToContactDao.getContacts(custom.getGuid());
-
-            if (contacts != null && contacts.size() > 0) {
-                for (Contact contact : contacts) {
-                    if (contact.getStdCode() == CONTACT_TYPE.Phone.getCode()) {
-                        dto.setPhone(contact.getStdName());
-                    }
-                    else if (contact.getStdCode() == CONTACT_TYPE.Email.getCode()) {
-                        dto.setEmail(contact.getStdName());
-                    }
-                    else if (contact.getStdCode() == CONTACT_TYPE.WeiXin.getCode()) {
-                        dto.setWeixin(contact.getStdName());
-                    }
-                    else if (contact.getStdCode() == CONTACT_TYPE.QQ.getCode()) {
-                        dto.setQq(contact.getStdName());
-                    }
-                }
-            }
-
-            dtos.add(dto);
+        if(search==null || "".equals(search)){
+            dtos = customDso.getCustoms(group.getGuid(), offset, limit);
+        }else{
+            dtos = customDso.getCustoms(group.getGuid(), "%"+search+"%", offset, limit);
         }
+        int total = customDso.getCustomCount();
 
         PageDto<CustomDto> page = new PageDto<>();
         page.setRows(dtos);
@@ -160,7 +134,7 @@ public class CustomService {
         custom.setGuid(customId);
         custom.setStdName(form.getName());
         custom.setSex(form.getSex());
-
+        
         Date birthday = null;
         String birthdayStr = form.getBirthday();
         if (birthdayStr != null && !"".equals(birthdayStr)) {
@@ -206,145 +180,20 @@ public class CustomService {
         groupToCustom.setModifyUser(currUser.getGuid());
         groupToCustomDao.add(groupToCustom);
 
-        // 关联联系方式(手机)
-        if (form.getPhone() != null && !"".equals(form.getPhone())) {
-            // 联系方式表
-            String contactId = UUIDUtil.randomUUID();
-            Contact contact = new Contact();
-            contact.setGuid(contactId);
-            contact.setStdName(form.getPhone());
-            contact.setStdCode(CONTACT_TYPE.Phone.getCode());
-            contact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-            contact.setCreateTime(now);
-            contact.setModifyTime(now);
-            contact.setCreateUser(currUser.getGuid());
-            contact.setModifyUser(currUser.getGuid());
-            contactDao.add(contact);
-
-            // 客户与联系方式关联表
-            CustomToContact customToContact = new CustomToContact();
-            customToContact.setGuid(UUIDUtil.randomUUID());
-            customToContact.setCustomId(customId);
-            customToContact.setContactId(contactId);
-            customToContact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-            customToContact.setCreateTime(now);
-            customToContact.setModifyTime(now);
-            customToContact.setCreateUser(currUser.getGuid());
-            customToContact.setModifyUser(currUser.getGuid());
-            customToContactDao.add(customToContact);
-        }
-
-        // 关联联系方式(邮箱)
-        if (form.getEmail() != null && !"".equals(form.getEmail())) {
-            String email = form.getEmail();
-            if (!email.contains("@")) {
-                throw new BusinessException("不是正确的邮箱");
-            }
-            String contactId = UUIDUtil.randomUUID();
-            Contact contact = new Contact();
-            contact.setGuid(contactId);
-            contact.setStdName(email);
-            contact.setStdCode(CONTACT_TYPE.Email.getCode());
-            contact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-            contact.setCreateTime(now);
-            contact.setModifyTime(now);
-            contact.setCreateUser(currUser.getGuid());
-            contact.setModifyUser(currUser.getGuid());
-            contactDao.add(contact);
-
-            CustomToContact customToContact = new CustomToContact();
-            customToContact.setGuid(UUIDUtil.randomUUID());
-            customToContact.setCustomId(customId);
-            customToContact.setContactId(contactId);
-            customToContact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-            customToContact.setCreateTime(now);
-            customToContact.setModifyTime(now);
-            customToContact.setCreateUser(currUser.getGuid());
-            customToContact.setModifyUser(currUser.getGuid());
-            customToContactDao.add(customToContact);
-        }
-
-        // 关联联系方式(QQ)
-        if (form.getQq() != null && !"".equals(form.getQq())) {
-            String qq = form.getQq();
-
-            String contactId = UUIDUtil.randomUUID();
-            Contact contact = new Contact();
-            contact.setGuid(contactId);
-            contact.setStdName(qq);
-            contact.setStdCode(CONTACT_TYPE.QQ.getCode());
-            contact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-            contact.setCreateTime(now);
-            contact.setModifyTime(now);
-            contact.setCreateUser(currUser.getGuid());
-            contact.setModifyUser(currUser.getGuid());
-            contactDao.add(contact);
-
-            CustomToContact customToContact = new CustomToContact();
-            customToContact.setGuid(UUIDUtil.randomUUID());
-            customToContact.setCustomId(customId);
-            customToContact.setContactId(contactId);
-            customToContact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-            customToContact.setCreateTime(now);
-            customToContact.setModifyTime(now);
-            customToContact.setCreateUser(currUser.getGuid());
-            customToContact.setModifyUser(currUser.getGuid());
-            customToContactDao.add(customToContact);
-        }
-
-        // 关联联系方式(微信)
-        if (form.getWeixin() != null && !"".equals(form.getWeixin())) {
-            String weixin = form.getWeixin();
-
-            String contactId = UUIDUtil.randomUUID();
-            Contact contact = new Contact();
-            contact.setGuid(contactId);
-            contact.setStdName(weixin);
-            contact.setStdCode(CONTACT_TYPE.WeiXin.getCode());
-            contact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-            contact.setCreateTime(now);
-            contact.setModifyTime(now);
-            contact.setCreateUser(currUser.getGuid());
-            contact.setModifyUser(currUser.getGuid());
-            contactDao.add(contact);
-
-            CustomToContact customToContact = new CustomToContact();
-            customToContact.setGuid(UUIDUtil.randomUUID());
-            customToContact.setCustomId(customId);
-            customToContact.setContactId(contactId);
-            customToContact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-            customToContact.setCreateTime(now);
-            customToContact.setModifyTime(now);
-            customToContact.setCreateUser(currUser.getGuid());
-            customToContact.setModifyUser(currUser.getGuid());
-            customToContactDao.add(customToContact);
-        }
-
-        // 关联地址
-//        if (form.getAddr() != null && !"".equals(form.getAddr())) {
-//            String addr = form.getAddr();
-//            String addrId = UUIDUtil.randomUUID();
-//            Address address = new Address();
-//            address.setGuid(addrId);
-//            address.setStdName(addr);
-//            address.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-//            address.setCreateTime(now);
-//            address.setModifyTime(now);
-//            address.setCreateUser(currUser.getGuid());
-//            address.setModifyUser(currUser.getGuid());
-//            addressDao.add(address);
-//
-//            CustomToAddr customToAddr = new CustomToAddr();
-//            customToAddr.setGuid(UUIDUtil.randomUUID());
-//            customToAddr.setCustomId(customId);
-//            customToAddr.setAddrId(addrId);
-//            customToAddr.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-//            customToAddr.setCreateTime(now);
-//            customToAddr.setModifyTime(now);
-//            customToAddr.setCreateUser(currUser.getGuid());
-//            customToAddr.setModifyUser(currUser.getGuid());
-//            customToAddrDao.add(customToAddr);
-//        }
+        Contact contact = new Contact();
+        contact.setGuid(UUIDUtil.randomUUID());
+        contact.setCustomId(customId);
+        contact.setPhone(form.getPhone());
+        contact.setEmail(form.getEmail());
+        contact.setQq(form.getQq());
+        contact.setWeixin(form.getWeixin());
+        contact.setStatus(DB_STATUS.STATUS_ACTIVE);
+        contact.setCreateTime(now);
+        contact.setModifyTime(now);
+        contact.setCreateUser(currUser.getGuid());
+        contact.setModifyUser(currUser.getGuid());
+        contactDao.add(contact);
+        
     }
 
     /**
@@ -405,180 +254,18 @@ public class CustomService {
         custom.setModifyUser(currUser.getGuid());
         customDao.modify(custom);
         // 以下 联系方式修改
-        List<Contact> contacts = customToContactDao.getContacts(custId);
-        // 修改phone
-        {
-            String phone = form.getPhone();
-            boolean flag = false; // 标记原数据库有无phone记录
-            for (Contact contact : contacts) {
-                if(contact.getStdCode()==CONTACT_TYPE.Phone.getCode()){
-                    flag = true;
-                    // 有记录，修改
-                    contact.setStdName(phone);
-                    contact.setModifyTime(now);
-                    contact.setModifyUser(currUser.getGuid());
-                    contactDao.modify(contact);
-                    break;
-                }
-            }
-            if(!flag){ // 原记录中没有phone，新增
-                if (phone != null && !"".equals(phone)) {
-                    // 联系方式表
-                    String contactId = UUIDUtil.randomUUID();
-                    Contact contact = new Contact();
-                    contact.setGuid(contactId);
-                    contact.setStdName(phone);
-                    contact.setStdCode(CONTACT_TYPE.Phone.getCode());
-                    contact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-                    contact.setCreateTime(now);
-                    contact.setModifyTime(now);
-                    contact.setCreateUser(currUser.getGuid());
-                    contact.setModifyUser(currUser.getGuid());
-                    contactDao.add(contact);
-
-                    // 客户与联系方式关联表
-                    CustomToContact customToContact = new CustomToContact();
-                    customToContact.setGuid(UUIDUtil.randomUUID());
-                    customToContact.setCustomId(custId);
-                    customToContact.setContactId(contactId);
-                    customToContact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-                    customToContact.setCreateTime(now);
-                    customToContact.setModifyTime(now);
-                    customToContact.setCreateUser(currUser.getGuid());
-                    customToContact.setModifyUser(currUser.getGuid());
-                    customToContactDao.add(customToContact);
-                }
-            }
+        List<Contact> contacts = contactDao.getByCustomId(custId);
+        if(contacts.isEmpty() || contacts.size() != 1) {
+            throw new BusinessException("该客户数据有误，建议删除后重新添加。");
         }
-        
-        {
-            String email = form.getEmail();
-            boolean flag = false; // 标记原数据库有无phone记录
-            for (Contact contact : contacts) {
-                if(contact.getStdCode()==CONTACT_TYPE.Email.getCode()){
-                    flag = true;
-                    // 有记录，修改
-                    contact.setStdName(email);
-                    contact.setModifyTime(now);
-                    contact.setModifyUser(currUser.getGuid());
-                    contactDao.modify(contact);
-                    break;
-                }
-            }
-            if(!flag){ // 原记录中没有phone，新增
-                if (email != null && !"".equals(email)) {
-                    if (!email.contains("@")) {
-                        throw new BusinessException("不是正确的邮箱");
-                    }
-                    String contactId = UUIDUtil.randomUUID();
-                    Contact contact = new Contact();
-                    contact.setGuid(contactId);
-                    contact.setStdName(email);
-                    contact.setStdCode(CONTACT_TYPE.Email.getCode());
-                    contact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-                    contact.setCreateTime(now);
-                    contact.setModifyTime(now);
-                    contact.setCreateUser(currUser.getGuid());
-                    contact.setModifyUser(currUser.getGuid());
-                    contactDao.add(contact);
-
-                    CustomToContact customToContact = new CustomToContact();
-                    customToContact.setGuid(UUIDUtil.randomUUID());
-                    customToContact.setCustomId(custId);
-                    customToContact.setContactId(contactId);
-                    customToContact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-                    customToContact.setCreateTime(now);
-                    customToContact.setModifyTime(now);
-                    customToContact.setCreateUser(currUser.getGuid());
-                    customToContact.setModifyUser(currUser.getGuid());
-                    customToContactDao.add(customToContact);
-                }
-            }
-        }
-        
-        {
-            String qq = form.getQq();
-            boolean flag = false; // 标记原数据库有无phone记录
-            for (Contact contact : contacts) {
-                if(contact.getStdCode()==CONTACT_TYPE.QQ.getCode()){
-                    flag = true;
-                    // 有记录，修改
-                    contact.setStdName(qq);
-                    contact.setModifyTime(now);
-                    contact.setModifyUser(currUser.getGuid());
-                    contactDao.modify(contact);
-                    break;
-                }
-            }
-            if(!flag){ // 原记录中没有phone，新增
-                if (form.getQq() != null && !"".equals(form.getQq())) {
-                    String contactId = UUIDUtil.randomUUID();
-                    Contact contact = new Contact();
-                    contact.setGuid(contactId);
-                    contact.setStdName(qq);
-                    contact.setStdCode(CONTACT_TYPE.QQ.getCode());
-                    contact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-                    contact.setCreateTime(now);
-                    contact.setModifyTime(now);
-                    contact.setCreateUser(currUser.getGuid());
-                    contact.setModifyUser(currUser.getGuid());
-                    contactDao.add(contact);
-
-                    CustomToContact customToContact = new CustomToContact();
-                    customToContact.setGuid(UUIDUtil.randomUUID());
-                    customToContact.setCustomId(custId);
-                    customToContact.setContactId(contactId);
-                    customToContact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-                    customToContact.setCreateTime(now);
-                    customToContact.setModifyTime(now);
-                    customToContact.setCreateUser(currUser.getGuid());
-                    customToContact.setModifyUser(currUser.getGuid());
-                    customToContactDao.add(customToContact);
-                }
-            }
-        }
-        
-        {
-            String weixin = form.getWeixin();
-            boolean flag = false; // 标记原数据库有无phone记录
-            for (Contact contact : contacts) {
-                if(contact.getStdCode()==CONTACT_TYPE.WeiXin.getCode()){
-                    flag = true;
-                    // 有记录，修改
-                    contact.setStdName(weixin);
-                    contact.setModifyTime(now);
-                    contact.setModifyUser(currUser.getGuid());
-                    contactDao.modify(contact);
-                    break;
-                }
-            }
-            if(!flag){ // 原记录中没有phone，新增
-                if (form.getWeixin() != null && !"".equals(form.getWeixin())) {
-                    String contactId = UUIDUtil.randomUUID();
-                    Contact contact = new Contact();
-                    contact.setGuid(contactId);
-                    contact.setStdName(weixin);
-                    contact.setStdCode(CONTACT_TYPE.WeiXin.getCode());
-                    contact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-                    contact.setCreateTime(now);
-                    contact.setModifyTime(now);
-                    contact.setCreateUser(currUser.getGuid());
-                    contact.setModifyUser(currUser.getGuid());
-                    contactDao.add(contact);
-
-                    CustomToContact customToContact = new CustomToContact();
-                    customToContact.setGuid(UUIDUtil.randomUUID());
-                    customToContact.setCustomId(custId);
-                    customToContact.setContactId(contactId);
-                    customToContact.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
-                    customToContact.setCreateTime(now);
-                    customToContact.setModifyTime(now);
-                    customToContact.setCreateUser(currUser.getGuid());
-                    customToContact.setModifyUser(currUser.getGuid());
-                    customToContactDao.add(customToContact);
-                }
-            }
-        }
+        Contact contact = contacts.get(0);
+        contact.setPhone(form.getPhone());
+        contact.setEmail(form.getEmail());
+        contact.setQq(form.getQq());
+        contact.setWeixin(form.getWeixin());
+        contact.setModifyTime(now);
+        contact.setModifyUser(currUser.getGuid());
+        contactDao.modify(contact);
     }
     
     /** 
@@ -751,25 +438,15 @@ public class CustomService {
         if(custom.getBirthday()!=null){
             customDto.setBirthday(sdf.format(custom.getBirthday()));
         }
-        List<Contact> contacts = customToContactDao.getContacts(custId);
-        if(contacts!=null){
-            for (Contact contact : contacts) {
-                if(contact.getStatus()==DB_STATUS.STATUS_ACTIVE){
-                    if(contact.getStdCode()==CONTACT_TYPE.Phone.getCode()){
-                        customDto.setPhone(contact.getStdName());
-                    }
-                    if(contact.getStdCode()==CONTACT_TYPE.Email.getCode()){
-                        customDto.setEmail(contact.getStdName());
-                    }
-                    if(contact.getStdCode()==CONTACT_TYPE.WeiXin.getCode()){
-                        customDto.setWeixin(contact.getStdName());
-                    }
-                    if(contact.getStdCode()==CONTACT_TYPE.QQ.getCode()){
-                        customDto.setQq(contact.getStdName());
-                    }
-                }
-            }
+        List<Contact> contacts = contactDao.getByCustomId(custId);
+        if(contacts.isEmpty() || contacts.size() != 1) {
+            throw new BusinessException("该客户数据有误，建议删除后重新添加。");
         }
+        Contact contact = contacts.get(0);
+        customDto.setPhone(contact.getPhone());
+        customDto.setEmail(contact.getEmail());
+        customDto.setQq(contact.getQq());
+        customDto.setWeixin(contact.getWeixin());
         return customDto;
     }
     

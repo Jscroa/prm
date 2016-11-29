@@ -127,37 +127,55 @@ public class GroupToCustomDaoImpl implements IGroupToCustomDao {
         return null;
     }
 
-    @Override
-    public List<Custom> getCustoms(String groupId, int offset, int limit) {
-        String sql = "select SQL_CALC_FOUND_ROWS t2.* from t_group_to_custom t1 left join t_custom t2 on t2.guid=t1.custom_id where t1.group_id=? and t1.status=? and t2.status=? order by t2.create_time limit ?,?";
-
-        List<Custom> list = jdbcTemplate.query(sql,
-                new Object[] { groupId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, offset, limit },
-                new RowMapper<Custom>() {
-
-                    @Override
-                    public Custom mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        return customDao.extract(rs);
-                    }
-
-                });
-        return list;
-    }
-
-    @Override
-    public int getCustomCount() {
-        String sql = "select FOUND_ROWS()";
-        List<Integer> list = jdbcTemplate.query(sql, new RowMapper<Integer>() {
-
-            @Override
-            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return rs.getInt(1);
-            }
-        });
-        if (list != null && list.size() == 1) {
-            return list.get(0);
-        }
-        return 0;
-    }
+//    @Override
+//    public List<Custom> getCustoms(String groupId, int offset, int limit) {
+//        String sql = "select SQL_CALC_FOUND_ROWS t2.* from t_group_to_custom t1 left join t_custom t2 on t2.guid=t1.custom_id where t1.group_id=? and t1.status=? and t2.status=? order by t2.create_time limit ?,?";
+//
+//        List<Custom> list = jdbcTemplate.query(sql,
+//                new Object[] { groupId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, offset, limit },
+//                new RowMapper<Custom>() {
+//
+//                    @Override
+//                    public Custom mapRow(ResultSet rs, int rowNum) throws SQLException {
+//                        return customDao.extract(rs);
+//                    }
+//
+//                });
+//        return list;
+//    }
+//    
+//    @Override
+//    public List<Custom> getCustoms(String groupId, String search, int offset, int limit) {
+//        // TODO 数据库设计问题 无法做到模糊查询查询联系方式??
+//        String sql = "select SQL_CALC_FOUND_ROWS t2.* from t_group_to_custom t1 left join t_custom t2 on t2.guid=t1.custom_id where t1.group_id=? and t1.status=? and t2.status=? order by t2.create_time limit ?,?";
+//
+//        List<Custom> list = jdbcTemplate.query(sql,
+//                new Object[] { groupId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, offset, limit },
+//                new RowMapper<Custom>() {
+//
+//                    @Override
+//                    public Custom mapRow(ResultSet rs, int rowNum) throws SQLException {
+//                        return customDao.extract(rs);
+//                    }
+//
+//                });
+//        return list;
+//    }
+//
+//    @Override
+//    public int getCustomCount() {
+//        String sql = "select FOUND_ROWS()";
+//        List<Integer> list = jdbcTemplate.query(sql, new RowMapper<Integer>() {
+//
+//            @Override
+//            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+//                return rs.getInt(1);
+//            }
+//        });
+//        if (list != null && list.size() == 1) {
+//            return list.get(0);
+//        }
+//        return 0;
+//    }
 
 }

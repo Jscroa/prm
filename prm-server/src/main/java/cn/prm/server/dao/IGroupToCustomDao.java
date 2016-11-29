@@ -15,21 +15,32 @@ import cn.prm.server.entity.GroupToCustom;
  */
 public interface IGroupToCustomDao extends IBaseDao<GroupToCustom> {
 
-    /**
-     * @Title: getCustoms<br>
-     * @Description: <br>
-     * @param groupId
-     * @param offset
-     * @param limit
-     * @return
-     */
-    List<Custom> getCustoms(String groupId, int offset, int limit);
-
-    /**
-     * @Title: getCustomCount<br>
-     * @Description: <br>
-     * @return
-     */
-    int getCustomCount();
+//    /**
+//     * @Title: getCustoms<br>
+//     * @Description: <br>
+//     * @param groupId
+//     * @param offset
+//     * @param limit
+//     * @return
+//     */
+//    List<Custom> getCustoms(String groupId, int offset, int limit);
+//    
+//    /** 
+//     * @Title: getCustoms<br>
+//     * @Description: <br>
+//     * @param groupId
+//     * @param search
+//     * @param offset
+//     * @param limit
+//     * @return
+//     */
+//    List<Custom> getCustoms(String groupId, String search, int offset, int limit);
+//
+//    /**
+//     * @Title: getCustomCount<br>
+//     * @Description: <br>
+//     * @return
+//     */
+//    int getCustomCount();
 
 }

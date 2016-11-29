@@ -1,5 +1,7 @@
 package cn.prm.server.dao;
 
+import java.util.List;
+
 import cn.prm.server.entity.Contact;
 
 /**
@@ -12,4 +14,12 @@ import cn.prm.server.entity.Contact;
  */
 public interface IContactDao extends IBaseDao<Contact> {
 
+    /** 
+     * @Title: getByCustomId<br>
+     * @Description: <br>
+     * @param customId
+     * @return
+     */
+    List<Contact> getByCustomId(String customId);
+    
 }

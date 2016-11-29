@@ -26,7 +26,7 @@ import cn.prm.server.entity.Contact;
 @Repository
 public class ContactDaoImpl implements IContactDao {
 
-    private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time";
+    private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time,custom_id,phone,email,qq,weixin";
 
     @Autowired
     JdbcTemplate                jdbcTemplate;
@@ -43,12 +43,17 @@ public class ContactDaoImpl implements IContactDao {
         contact.setModifyUser(rs.getString("modify_user"));
         contact.setCreateTime(rs.getTimestamp("create_time"));
         contact.setModifyTime(rs.getTimestamp("modify_time"));
+        contact.setCustomId(rs.getString("custom_id"));
+        contact.setPhone(rs.getString("phone"));
+        contact.setEmail(rs.getString("email"));
+        contact.setQq(rs.getString("qq"));
+        contact.setWeixin(rs.getString("weixin"));
         return contact;
     }
 
     @Override
     public void add(final Contact t) {
-        String sql = "insert into t_contact(" + COLS + ") values(?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into t_contact(" + COLS + ") values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
             @Override
@@ -62,6 +67,11 @@ public class ContactDaoImpl implements IContactDao {
                 ps.setString(7, t.getModifyUser());
                 ps.setTimestamp(8, t.getCreateTime());
                 ps.setTimestamp(9, t.getModifyTime());
+                ps.setString(10, t.getCustomId());
+                ps.setString(11, t.getPhone());
+                ps.setString(12, t.getEmail());
+                ps.setString(13, t.getQq());
+                ps.setString(14, t.getWeixin());
             }
 
         });
@@ -82,7 +92,7 @@ public class ContactDaoImpl implements IContactDao {
 
     @Override
     public void modify(final Contact t) {
-        String sql = "update t_contact set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=? where guid=?";
+        String sql = "update t_contact set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,custom_id=?,phone=?,email=?,qq=?,weixin=? where guid=?";
         jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
             @Override
@@ -95,7 +105,12 @@ public class ContactDaoImpl implements IContactDao {
                 ps.setString(6, t.getModifyUser());
                 ps.setTimestamp(7, t.getCreateTime());
                 ps.setTimestamp(8, t.getModifyTime());
-                ps.setString(9, t.getGuid());
+                ps.setString(9, t.getCustomId());
+                ps.setString(10, t.getPhone());
+                ps.setString(11, t.getEmail());
+                ps.setString(12, t.getQq());
+                ps.setString(13, t.getWeixin());
+                ps.setString(14, t.getGuid());
             }
         });
     }
@@ -114,6 +129,19 @@ public class ContactDaoImpl implements IContactDao {
             return list.get(0);
         }
         return null;
+    }
+
+    @Override
+    public List<Contact> getByCustomId(String customId) {
+        String sql = "select " + COLS + " from t_contact where custom_id=?";
+        List<Contact> list = jdbcTemplate.query(sql, new Object[] { customId }, new RowMapper<Contact>() {
+
+            @Override
+            public Contact mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return extract(rs);
+            }
+        });
+        return list;
     }
 
 }

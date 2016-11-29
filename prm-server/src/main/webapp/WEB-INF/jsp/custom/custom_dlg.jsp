@@ -111,7 +111,7 @@
                 dlg.modal('hide');
             });
             $('#confirmButton').click(function() {
-                addCustom(dlg, this);
+                addCustom(dlg, this, obj);
             });
         }
 
@@ -134,7 +134,7 @@
                         if (data.code == 100) { // 请求成功
                             var dlg = bootbox.dialog({
                                 title : '<strong>编辑客户</strong>',
-                                message : customForm,
+                                message : custom_form_html_str,
                                 /* size : 'large', */
                                 closeButton : true
                             });
