@@ -6,7 +6,6 @@ package cn.prm.server.dso;
 import java.util.List;
 
 import cn.prm.server.dto.bean.CustomDto;
-import cn.prm.server.entity.Custom;
 
 /**
  * @Title: ICustomDso.java<br>

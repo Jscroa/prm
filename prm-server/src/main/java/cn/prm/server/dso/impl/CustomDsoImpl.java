@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
 import cn.prm.server.commons.Constants.DB_STATUS;
 import cn.prm.server.dso.ICustomDso;
 import cn.prm.server.dto.bean.CustomDto;
-import cn.prm.server.entity.Custom;
 
 /**
  * @Title: CustomDsoImpl.java<br>

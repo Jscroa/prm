@@ -13,6 +13,7 @@ import cn.prm.server.commons.FormLimitAnnotation.CharSupport;
  * @version v1.0<br>
  */
 public class UserLoginForm extends BaseForm {
+    
     @FormLimitAnnotation(minLength = 2, maxLength = 20, charCheck = CharSupport.Email)
     private String email;
     @FormLimitAnnotation(minLength = 2, maxLength = 20, charCheck = CharSupport.Password)

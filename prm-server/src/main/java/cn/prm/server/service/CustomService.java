@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.prm.server.bean.CurrUser;
 import cn.prm.server.commons.Constants;
-import cn.prm.server.commons.Constants.CONTACT_TYPE;
 import cn.prm.server.commons.Constants.DB_STATUS;
 import cn.prm.server.commons.UUIDUtil;
 import cn.prm.server.dao.IAccToGroupDao;
@@ -34,7 +33,6 @@ import cn.prm.server.entity.Address;
 import cn.prm.server.entity.Contact;
 import cn.prm.server.entity.Custom;
 import cn.prm.server.entity.CustomToAddr;
-import cn.prm.server.entity.CustomToContact;
 import cn.prm.server.entity.GroupToCustom;
 import cn.prm.server.exception.BusinessException;
 import cn.prm.server.exception.PermissionException;

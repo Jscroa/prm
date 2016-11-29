@@ -15,5 +15,4 @@ import cn.prm.server.entity.Order;
  */
 public interface IOrderDao extends IBaseDao<Order> {
     
-    
 }
