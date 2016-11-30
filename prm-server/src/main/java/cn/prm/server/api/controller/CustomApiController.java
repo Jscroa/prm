@@ -62,6 +62,13 @@ public class CustomApiController extends BaseController {
             PageDto<CustomDto> page = customService.getPrivateCustoms(currUser, form.getSearch(), form.getOrder(),
                     form.getOffset(), form.getLimit());
             page.setCode(RESPONSE_CODE.CODE_SUCCESS);
+            try {
+                Thread.sleep(5000);
+            }
+            catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             return page;
         }
         catch (BusinessException e) {
@@ -231,15 +238,21 @@ public class CustomApiController extends BaseController {
             if(addrStr.contains("##")){
                 String[] arr = addrStr.split("##");
                 tip = arr[0];
+                if(tip.length()>10){
+                    return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "地址标签过长，建议10个字以内。");
+                }
                 addr = arr[1];
             } else {
                 addr = addrStr;
             }
             if(addr==null || "".equals(addr)){
-                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "参数不完整");
+                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "参数不完整。");
+            }
+            if(addr.length()>200){
+                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "地址过长，建议200个字以内。");
             }
             customService.addAddress(currUser, customId, tip, addr);
-            return new BaseDto(RESPONSE_CODE.CODE_SUCCESS,"添加成功");
+            return new BaseDto(RESPONSE_CODE.CODE_SUCCESS,"添加成功。");
         }
         catch (BusinessException e) {
             e.printStackTrace();

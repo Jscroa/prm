@@ -24,6 +24,17 @@ body {
 	background-attachment: fixed;
 }
  */
+/* body {
+	background-image:
+		url(/img/2c761da4303eccca7d9bfc8d73a40077cfbc9f651fe0-svPkdZ_fw658.png);
+} */
+
+.panel {
+	-moz-box-shadow: 0px 0px 100px #999999;
+	-webkit-box-shadow: 0px 0px 100px #999999;
+	box-shadow: 0px 0px 100px #999999;
+}
+
 .panel-heading {
 	/* font-weight: bold; */
 	font-size: x-large;
@@ -95,66 +106,66 @@ body {
 
 
 	<script type="text/javascript">
-		angular.module('loginApp', [], function($httpProvider) {
-			ngHttpConfig($httpProvider);
-		}).controller('loginCtrl', function($scope, $http) {
-			$scope.email = '';
-			$scope.password = '';
+        angular.module('loginApp', [], function($httpProvider) {
+            ngHttpConfig($httpProvider);
+        }).controller('loginCtrl', function($scope, $http) {
+            $scope.email = '';
+            $scope.password = '';
 
-			$scope.checkMsg = '';
-			$scope.error = false;
-			$scope.incomplete = false;
+            $scope.checkMsg = '';
+            $scope.error = false;
+            $scope.incomplete = false;
 
-			$scope.check = function() {
-				$scope.error = false;
-				$scope.incomplete = false;
-				if (!$scope.email) {
-					$scope.incomplete = true;
-					$scope.checkMsg = '邮箱格式不正确';
-					return;
-				}
-				if (!$scope.password) {
-					$scope.incomplete = true;
-					$scope.checkMsg = '密码不能为空';
-					return;
-				}
-				if ($scope.login_form.email.$invalid) {
-					$scope.error = true;
-					$scope.checkMsg = '不是正确的邮箱格式';
-					return;
-				}
-			};
-			$scope.login = function($event) {
-			    $($event.target).button('loading');
-				$scope.check();
-				if ($scope.error || $scope.incomplete) {
-				    $($event.target).button('reset');
-					return;
-				}
-				$http.post('/api/user/login', {
-					email : $scope.email,
-					password : $scope.password
-				}).success(function(data) {
-				    $($event.target).button('reset');
-					if (data) {
-						if (data.code == 100) {
-							window.location.href = '/';
-							return;
-						} else {
-							$scope.error = true;
-							$scope.checkMsg = data.msg;
-						}
-					} else {
-						$scope.error = true;
-						$scope.checkMsg = '服务器未响应';
-					}
-				}).error(function(){
-				    $($event.target).button('reset');
-					$scope.error = true;
-					$scope.checkMsg = '服务器发生错误';
-				});
-			};
-		});
-	</script>
+            $scope.check = function() {
+                $scope.error = false;
+                $scope.incomplete = false;
+                if (!$scope.email) {
+                    $scope.incomplete = true;
+                    $scope.checkMsg = '邮箱格式不正确';
+                    return;
+                }
+                if (!$scope.password) {
+                    $scope.incomplete = true;
+                    $scope.checkMsg = '密码不能为空';
+                    return;
+                }
+                if ($scope.login_form.email.$invalid) {
+                    $scope.error = true;
+                    $scope.checkMsg = '不是正确的邮箱格式';
+                    return;
+                }
+            };
+            $scope.login = function($event) {
+                $($event.target).button('loading');
+                $scope.check();
+                if ($scope.error || $scope.incomplete) {
+                    $($event.target).button('reset');
+                    return;
+                }
+                $http.post('/api/user/login', {
+                    email : $scope.email,
+                    password : $scope.password
+                }).success(function(data) {
+                    $($event.target).button('reset');
+                    if (data) {
+                        if (data.code == 100) {
+                            window.location.href = '/';
+                            return;
+                        } else {
+                            $scope.error = true;
+                            $scope.checkMsg = data.msg;
+                        }
+                    } else {
+                        $scope.error = true;
+                        $scope.checkMsg = '服务器未响应';
+                    }
+                }).error(function() {
+                    $($event.target).button('reset');
+                    $scope.error = true;
+                    $scope.checkMsg = '服务器发生错误';
+                });
+            };
+        });
+    </script>
 </body>
 </html>

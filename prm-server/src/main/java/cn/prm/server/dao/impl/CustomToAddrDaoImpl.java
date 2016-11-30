@@ -130,7 +130,7 @@ public class CustomToAddrDaoImpl implements ICustomToAddrDao {
 
     @Override
     public List<Address> getAddresses(String customId) {
-        String sql = "select t2.* from t_custom_to_addr t1 left join t_address t2 on t2.guid=t1.addr_id where t1.custom_id=? and t1.status=? and t2.status=?";
+        String sql = "select t2.* from t_custom_to_addr t1 left join t_address t2 on t2.guid=t1.addr_id where t1.custom_id=? and t1.status=? and t2.status=? order by t2.std_name desc,t2.create_time";
         List<Address> list = jdbcTemplate.query(sql,
                 new Object[] { customId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE }, new RowMapper<Address>() {
 

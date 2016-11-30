@@ -6,7 +6,8 @@
 }
 
 .panel-addr:HOVER {
-	border-color: #A0A0A0;
+	border-color: #cccccc;
+	background-color: #eeeeee;
 }
 </style>
 <script type="text/javascript">
@@ -61,11 +62,15 @@
 
     // 地址item
     function getAddressItem(addr) {
+        var tip = '地址...';
+        if(addr.tip && addr.tip!=''){
+            tip = addr.tip;
+        }
         return [
                 '<div class="col-md-6 panel panel-addr">',
                 '<div class="panel-body">',
-                '<span style="color:#A0C0C0;">',
-                addr.tip,
+                '<span class="badge">',
+                tip,
                 '</span>',
                 '<button type="button" onclick="delAddr(\''
                         + addr.id
@@ -164,7 +169,8 @@
 									type="button" data-loading-text="正在添加">确定添加</button>
 							</span>
 						</div>
-						<span class="help-block">格式： "标签##地址" 若不设置标签，直接写地址也行。</span>
+						<span class="help-block">格式： "标签##地址" 若不设置标签，直接写地址也行。<br><strong>注：</strong> 标签不超过10字，地址不超过200字。</span>
+						
 					</div>
 				</div>
 			</div>

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.prm.server.bean.CurrUser;
@@ -68,6 +69,38 @@ public class CustomController extends BaseController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("custom/custom_address");
         mav.addObject("custId", custId);
+        return mav;
+    }
+    
+    /** 
+     * @Title: passenger<br>
+     * @Description: <br>
+     * @param request
+     * @param custId 
+     * @return
+     */
+    @RequestMapping("passenger")
+    public ModelAndView passenger(HttpServletRequest request,@RequestParam(required=true) String custId){
+        ModelAndView mav = new ModelAndView();
+        CurrUser currUser = getCurrUser(request);
+        if (currUser == null) {
+            mav.setViewName("redirect:/login");
+            return mav;
+        }
+        mav.setViewName("custom/passenger");
+        mavHelper.withUserName(mav, currUser.getName());
+        return mav;
+    }
+    
+    /** 
+     * @Title: passengerIndex<br>
+     * @Description: <br>
+     * @return
+     */
+    @RequestMapping("passengerIndex")
+    public ModelAndView passengerIndex(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("custom/passenger_index");
         return mav;
     }
     

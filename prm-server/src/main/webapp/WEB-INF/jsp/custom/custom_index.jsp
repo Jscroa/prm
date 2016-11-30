@@ -66,106 +66,24 @@
                         formatter : function(value, row, index) {
 
                             return [
+                                    '<button class="btn btn-primary btn-sm" data-loading-text="加载中" onclick="clickModify(this,\''
+                                            + value
+                                            + '\')"><span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</button>',
+
+                                    '&nbsp;',
+
                                     '<button class="btn btn-default btn-sm" onclick="customAddress(\''
                                             + value + '\',\'' + row.name
-                                            + '\')">',
-                                    '<span class="glyphicon glyphicon-map-marker">',
-                                    '</span>',
-                                    '&nbsp;地址管理',
-                                    '</button>',
-                                    '&nbsp;&nbsp;',
-                                    '<button class="btn btn-default btn-sm" data-loading-text="加载中" onclick="clickModify(this,\''
-                                            + value + '\')">',
-                                    '<span class="glyphicon glyphicon-edit">',
-                                    '</span>', '&nbsp;编辑', '</button>' ]
+                                            + '\')">地址</button>',
+
+                                    '&nbsp;',
+
+                                    '<a class="btn btn-link btn-sm" href="/custom/passenger?custId='+value+'">管理乘客</a>' ]
                                     .join('');
+
                         }
                     } ]);
-/* 
-    var customForm = [
-            '<form class="form-horizontal" name="custom_form" id="custom_form" onSubmit="return false;">',
-            '<div class="form-group">',
-            '<label for="inputName" class="col-sm-3 control-label">',
-            '<span style="color:red;">*</span>&nbsp;姓名：',
-            '</label>',
-            '<div class="col-sm-9">',
-            '<input type="text" name="name" class="form-control" placeholder="Name" id="inputName" required>',
-            '</div>',
-            '</div>',
-            '<div class="form-group">',
-            '<label for="inputSex" class="col-sm-3 control-label">',
-            '性别：',
-            '</label>',
-            '<div class="col-sm-9">',
-            '<div class="radio">',
-            '<label class="radio-inline">',
-            '<input type="radio" name="sex" id="inputSex" value="1" checked />',
-            '男',
-            '</label>',
-            '&nbsp;',
-            '<label class="radio-inline">',
-            '<input type="radio" name="sex" id="inputSex" value="0" />',
-            '女',
-            '</label>',
-            '</div>',
-            '</div>',
-            '</div>',
-            '<div class="form-group">',
-            '<label for="inputPhone" class="col-sm-3 control-label">',
-            '手机：',
-            '</label>',
-            '<div class="col-sm-9">',
-            '<input type="text" name="phone" class="form-control" placeholder="Phone" id="inputPhone" required>',
-            '</div>',
-            '</div>',
-            '<div class="form-group">',
-            '<label for="inputEmail" class="col-sm-3 control-label">',
-            '邮箱：',
-            '</label>',
-            '<div class="col-sm-9">',
-            '<input type="text" name="email" class="form-control" placeholder="Email" id="inputEmail" required>',
-            '</div>',
-            '</div>',
-            '<div class="form-group">',
-            '<label for="inputQQ" class="col-sm-3 control-label">',
-            'QQ：',
-            '</label>',
-            '<div class="col-sm-9">',
-            '<input type="text" name="qq" class="form-control" placeholder="QQ" id="inputQQ" required>',
-            '</div>',
-            '</div>',
-            '<div class="form-group">',
-            '<label for="inputWeiXin" class="col-sm-3 control-label">',
-            '微信：',
-            '</label>',
-            '<div class="col-sm-9">',
-            '<input type="text" name="weixin" class="form-control" placeholder="WeiXin" id="inputWeiXin" required>',
-            '</div>',
-            '</div>',
-            '<div class="form-group">',
-            '<label for="inputBirthday" class="col-sm-3 control-label">',
-            '出生年月：',
-            '</label>',
-            '<div class="col-sm-9">',
-            '<div class="input-group">',
-            '<input name="birthday" class="datepicker form-control" placeholder="Birthday" id="inputBirthday" required> ',
-            '<span class="input-group-addon" id="basic-addon1">',
-            '<span class="glyphicon glyphicon-calendar">',
-            '</span>',
-            '</span>',
-            '</div>',
-            '</div>',
-            '</div>',
-            '<div class="form-group">',
-            '<div class="col-sm-6">',
-            '<button id="cancelButton" type="button" class="form-control btn btn-default">',
-            '取消',
-            '</button>',
-            '</div>',
-            '<div class="col-sm-6">',
-            '<button id="confirmButton" type="button" data-loading-text="加载中" class="form-control btn btn-primary">',
-            '确定', '</button>', '</div>', '</div>', '</form>' ].join('');
- */
+    
     // 点击添加
     function clickAdd() {
         showCustomAddDlg({
@@ -285,6 +203,12 @@
     // 客户地址管理
     function customAddress(value, name) {
         showAddressPage(value, name);
+    }
+    
+    // 乘客管理
+    function customPassenger(value){
+        // TODO 跳到乘客管理页面
+        window.open('/custom/passenger?custId='+value);
     }
 
     $(function() {

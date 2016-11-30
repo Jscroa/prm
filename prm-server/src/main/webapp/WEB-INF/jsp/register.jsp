@@ -24,8 +24,15 @@ body {
 	background-attachment: fixed;
 }
  */
-body {
-	background: #EEEEEE;
+/* body {
+	background-image:
+		url(/img/2c761da4303eccca7d9bfc8d73a40077cfbc9f651fe0-svPkdZ_fw658.png);
+} */
+
+.panel {
+	-moz-box-shadow: 0px 0px 100px #999999;
+	-webkit-box-shadow: 0px 0px 100px #999999;
+	box-shadow: 0px 0px 100px #999999;
 }
 
 .panel-heading {
