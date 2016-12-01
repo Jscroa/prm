@@ -5,20 +5,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<%@include file="/WEB-INF/jsp/components/base.jsp"%>
 
 <link href="/css/bootstrap-table.css" rel="stylesheet">
 <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet">
-<link href="/css/animate.css" rel="stylesheet">
 
-
+<%@include file="/WEB-INF/jsp/components/base.jsp"%>
 <script src="/js/jquery.form.js"></script>
 <script src="/js/bootstrap-table.js"></script>
 <script src="/js/bootstrap-table-zh-CN.js"></script>
+<script src="/js/bootstrap-table-export.js"></script>
+<script src="/js/tableExport.js"></script>
 <script src="/js/bootstrap-datepicker.min.js"></script>
 <script src="/js/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="/js/bs-config.js"></script>
-
 <%@include file="/WEB-INF/jsp/custom/custom_dlg.jsp"%>
 
 <script type="text/javascript">

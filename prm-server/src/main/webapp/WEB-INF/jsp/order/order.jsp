@@ -5,12 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<%@include file="/WEB-INF/jsp/components/base.jsp"%>
-
 <link href="/css/bootstrap-table.css" rel="stylesheet">
 <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
-
+<%@include file="/WEB-INF/jsp/components/base.jsp"%>
 <script src="/js/jquery.form.js"></script>
 <script src="/js/bootstrap-table.js"></script>
 <script src="/js/bootstrap-table-zh-CN.js"></script>

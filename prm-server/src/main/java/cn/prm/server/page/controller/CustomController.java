@@ -64,6 +64,7 @@ public class CustomController extends BaseController {
      * @param custId
      * @return
      */
+    @Deprecated
     @RequestMapping("customAddress")
     public ModelAndView customAddress(String custId){
         ModelAndView mav = new ModelAndView();
@@ -101,6 +102,38 @@ public class CustomController extends BaseController {
     public ModelAndView passengerIndex(){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("custom/passenger_index");
+        return mav;
+    }
+    
+    /** 
+     * @Title: address<br>
+     * @Description: <br>
+     * @param request
+     * @param custId
+     * @return
+     */
+    @RequestMapping("address")
+    public ModelAndView address(HttpServletRequest request,@RequestParam(required=true) String custId){
+        ModelAndView mav = new ModelAndView();
+        CurrUser currUser = getCurrUser(request);
+        if (currUser == null) {
+            mav.setViewName("redirect:/login");
+            return mav;
+        }
+        mav.setViewName("custom/address");
+        mavHelper.withUserName(mav, currUser.getName());
+        return mav;
+    }
+    
+    /** 
+     * @Title: addressIndex<br>
+     * @Description: <br>
+     * @return
+     */
+    @RequestMapping("addressIndex")
+    public ModelAndView addressIndex(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("custom/address_index");
         return mav;
     }
     

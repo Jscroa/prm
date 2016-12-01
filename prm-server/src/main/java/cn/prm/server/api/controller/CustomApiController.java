@@ -58,18 +58,16 @@ public class CustomApiController extends BaseController {
 
             // 检查form字段是否合格
             form.checkFields();
-
-            PageDto<CustomDto> page = customService.getPrivateCustoms(currUser, form.getSearch(), form.getOrder(),
-                    form.getOffset(), form.getLimit());
-            page.setCode(RESPONSE_CODE.CODE_SUCCESS);
-            try {
-                Thread.sleep(5000);
+            if(form.getLimit()>0){
+                PageDto<CustomDto> page = customService.getPrivateCustoms(currUser, form.getSearch(), form.getOrder(),
+                        form.getOffset(), form.getLimit());
+                page.setCode(RESPONSE_CODE.CODE_SUCCESS);
+                return page;
+            }else{
+                ListDto<CustomDto> list = customService.getPrivateCustoms(currUser, form.getSearch(), form.getOrder());
+                list.setCode(RESPONSE_CODE.CODE_SUCCESS);
+                return list;
             }
-            catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            return page;
         }
         catch (BusinessException e) {
             e.printStackTrace();

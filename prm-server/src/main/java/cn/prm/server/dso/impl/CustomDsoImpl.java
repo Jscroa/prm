@@ -31,6 +31,56 @@ public class CustomDsoImpl implements ICustomDso {
     JdbcTemplate jdbcTemplate;
 
     @Override
+    public List<CustomDto> getCustoms(String groupId) {
+        String sql = "select t2.*,t3.phone as phone,t3.email as email,t3.qq as qq,t3.weixin as weixin from t_group_to_custom t1 join t_custom t2 on t2.guid=t1.custom_id join t_contact as t3 on t2.guid=t3.custom_id where t1.group_id=? and t1.status=? and t2.status=? and t3.status=? order by t2.create_time";
+
+        List<CustomDto> list = jdbcTemplate.query(sql,
+                new Object[] { groupId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE },
+                new RowMapper<CustomDto>() {
+
+                    @Override
+                    public CustomDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        CustomDto customDto = new CustomDto();
+                        customDto.setId(rs.getString("guid"));
+                        customDto.setName(rs.getString("std_name"));
+                        customDto.setSex(rs.getBoolean("sex"));
+                        customDto.setPhone(rs.getString("phone"));
+                        customDto.setEmail(rs.getString("email"));
+                        customDto.setQq(rs.getString("qq"));
+                        customDto.setWeixin(rs.getString("weixin"));
+                        return customDto;
+                    }
+
+                });
+        return list;
+    }
+
+    @Override
+    public List<CustomDto> getCustoms(String groupId, String search) {
+        String sql = "select t2.*,t3.phone as phone,t3.email as email,t3.qq as qq,t3.weixin as weixin from t_group_to_custom t1 join t_custom t2 on t2.guid=t1.custom_id join t_contact as t3 on t2.guid=t3.custom_id where t1.group_id=? and (t2.std_name like ? or t3.phone like ? or t3.email like ? or t3.qq like ? or t3.weixin like ?) and t1.status=? and t2.status=? and t3.status=? order by t2.create_time";
+
+        List<CustomDto> list = jdbcTemplate.query(sql,
+                new Object[] { groupId, search, search, search, search, search, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE },
+                new RowMapper<CustomDto>() {
+
+                    @Override
+                    public CustomDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        CustomDto customDto = new CustomDto();
+                        customDto.setId(rs.getString("guid"));
+                        customDto.setName(rs.getString("std_name"));
+                        customDto.setSex(rs.getBoolean("sex"));
+                        customDto.setPhone(rs.getString("phone"));
+                        customDto.setEmail(rs.getString("email"));
+                        customDto.setQq(rs.getString("qq"));
+                        customDto.setWeixin(rs.getString("weixin"));
+                        return customDto;
+                    }
+
+                });
+        return list;
+    }
+    
+    @Override
     public List<CustomDto> getCustoms(String groupId, int offset, int limit) {
         String sql = "select SQL_CALC_FOUND_ROWS t2.*,t3.phone as phone,t3.email as email,t3.qq as qq,t3.weixin as weixin from t_group_to_custom t1 join t_custom t2 on t2.guid=t1.custom_id join t_contact as t3 on t2.guid=t3.custom_id where t1.group_id=? and t1.status=? and t2.status=? and t3.status=? order by t2.create_time limit ?,?";
 

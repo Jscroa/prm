@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+<link rel="shortcut icon" href="/prm.ico">
 <!-- css -->
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/prm.css" rel="stylesheet">
@@ -30,9 +30,9 @@ body {
 } */
 
 .panel {
-	-moz-box-shadow: 0px 0px 100px #999999;
-	-webkit-box-shadow: 0px 0px 100px #999999;
-	box-shadow: 0px 0px 100px #999999;
+	-moz-box-shadow: 0px 0px 100px #000000;
+	-webkit-box-shadow: 0px 0px 100px #000000;
+	box-shadow: 0px 0px 100px #000000;
 }
 
 .panel-heading {

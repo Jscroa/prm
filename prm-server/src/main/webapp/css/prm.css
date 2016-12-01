@@ -1,20 +1,28 @@
-/* body {
-	font-family: "microsoft yahei", "Times New Roman", "ËÎÌו", Times, serif;
-	background-color: #EEEEEE;
-	background-image:url(/img/2c761da4303eccca7d9bfc8d73a40077cfbc9f651fe0-svPkdZ_fw658.png);
+
+
+
+
+
+
+
+
+
+
+
+body {
+	/* font-family: "microsoft yahei", "Times New Roman", "ËÎÌו", Times, serif; */
+	
+	background-color: #cccccc;
+	background-image: url(http://www.transparenttextures.com/patterns/3px-tile.png);
+
 }
 
-.panel {
-	border-radius: 0px;
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-}
-*/
 .mainland {
 	background: #FFFFFF;
 	padding-left: 10px;
 	padding-right: 10px;
 }
+
 /*
 .table {
 	background: #FFFFFF;

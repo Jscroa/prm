@@ -7,19 +7,20 @@
             '#custom-table-toolbar',
             [
                     {
-                        title : '',
+                        checkbox : true, // 使用复选框
+                        field : 'state',
+                        align : 'center',
+                        valign : 'middle',
+                        visible : true
+                    },
+                    {
+                        title : '序号',
                         field : 'rowNum',
                         align : 'center',
                         valign : 'middle',
                         formatter : function(value, row, index) {
                             return index + 1;
                         }
-                    },
-                    {
-                        checkbox : true, // 使用复选框
-                        field : 'state',
-                        align : 'center',
-                        valign : 'middle'
                     },
                     {
                         title : '姓名',
@@ -72,13 +73,11 @@
 
                                     '&nbsp;',
 
-                                    '<button class="btn btn-default btn-sm" onclick="customAddress(\''
-                                            + value + '\',\'' + row.name
-                                            + '\')">地址</button>',
+                                    '<a class="btn btn-link btn-sm" href="/custom/address?custId='+value+'">地址</a>',
 
                                     '&nbsp;',
 
-                                    '<a class="btn btn-link btn-sm" href="/custom/passenger?custId='+value+'">管理乘客</a>' ]
+                                    '<a class="btn btn-link btn-sm" href="/custom/passenger?custId='+value+'">乘客</a>' ]
                                     .join('');
 
                         }

@@ -4,6 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+body {
+	/* font-family: "microsoft yahei", "Times New Roman", "宋体", Times, serif; */
+	background-color: #cccccc;
+	background-image: url(http://www.transparenttextures.com/patterns/3px-tile.png);
+
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
