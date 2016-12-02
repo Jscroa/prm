@@ -14,7 +14,6 @@ import cn.prm.server.commons.Constants.RESPONSE_CODE;
 import cn.prm.server.dto.BaseDto;
 import cn.prm.server.dto.ListDto;
 import cn.prm.server.dto.PageDto;
-import cn.prm.server.dto.bean.AddressDto;
 import cn.prm.server.dto.bean.BeanDto;
 import cn.prm.server.dto.bean.CustomDto;
 import cn.prm.server.exception.BusinessException;
@@ -181,116 +180,6 @@ public class CustomApiController extends BaseController {
             return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
         }
         
-    }
-
-    /**
-     * @Title: addressList<br>
-     * @Description: 管理某客户的地址<br>
-     * @param request
-     * @param custId
-     * @return
-     */
-    @RequestMapping("/addressList")
-    public Object addressList(HttpServletRequest request, String custId) {
-
-        try {
-            CurrUser currUser = getCurrUser(request);
-            if (currUser == null) {
-                return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
-            }
-            ListDto<AddressDto> list = customService.getCustomAddrs(currUser, custId);
-            list.setCode(RESPONSE_CODE.CODE_SUCCESS);
-            return list;
-        }
-        catch (BusinessException e) {
-            e.printStackTrace();
-            return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
-        }
-        catch (PermissionException e) {
-            e.printStackTrace();
-            return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
-        }
-    }
-    
-    /** 
-     * @Title: addAddress<br>
-     * @Description: 在客户下添加地址<br>
-     * @param request
-     * @param customId
-     * @param addrStr
-     * @return
-     */
-    @RequestMapping("/addAddress")
-    public Object addAddress(HttpServletRequest request,String customId,String addrStr){
-        
-        try {
-            CurrUser currUser = getCurrUser(request);
-            if (currUser == null) {
-                return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
-            }
-            if(addrStr==null || "".equals(addrStr)){
-                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "参数不完整");
-            }
-            String tip = null;
-            String addr = null;
-            if(addrStr.contains("##")){
-                String[] arr = addrStr.split("##");
-                tip = arr[0];
-                if(tip.length()>10){
-                    return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "地址标签过长，建议10个字以内。");
-                }
-                addr = arr[1];
-            } else {
-                addr = addrStr;
-            }
-            if(addr==null || "".equals(addr)){
-                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "参数不完整。");
-            }
-            if(addr.length()>200){
-                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "地址过长，建议200个字以内。");
-            }
-            customService.addAddress(currUser, customId, tip, addr);
-            return new BaseDto(RESPONSE_CODE.CODE_SUCCESS,"添加成功。");
-        }
-        catch (BusinessException e) {
-            e.printStackTrace();
-            return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
-        }
-        catch (PermissionException e) {
-            e.printStackTrace();
-            return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
-        }
-        
-    }
-    
-    /** 
-     * @Title: delAddress<br>
-     * @Description: 删除地址<br>
-     * @param request
-     * @param addrId
-     * @return
-     */
-    @RequestMapping("/delAddress")
-    public Object delAddress(HttpServletRequest request, String addrId){
-        try {
-            CurrUser currUser = getCurrUser(request);
-            if (currUser == null) {
-                return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
-            }
-            if (addrId==null || "".equals(addrId)) {
-                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "参数不完整");
-            }
-            customService.delAddress(currUser, addrId);
-            return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "删除成功");
-        }
-        catch (BusinessException e) {
-            e.printStackTrace();
-            return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
-        }
-        catch (PermissionException e) {
-            e.printStackTrace();
-            return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
-        }
     }
 
 }

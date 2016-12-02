@@ -2,54 +2,60 @@
 	pageEncoding="utf-8"%>
 
 <script type="text/javascript">
-    var _orderTableConfig = new TableConfig('/api/order/list',
-            '#order-table-toolbar', [ {
-                title : '',
-                field : 'rowNum',
-                align : 'center',
-                valign : 'middle',
-                formatter : function(value, row, index) {
-                    return index + 1;
-                }
-            }, {
-                checkbox : true, // 使用复选框
-                field : 'state',
-                align : 'center',
-                valign : 'middle'
-            }, {
-                title : '订单号',
-                field : 'orderNum',
-                align : 'center',
-                valign : 'middle',
-                formatter : function(value, row, index) {
-                    return value;
-                }
-            }, {
-                title : '客户姓名',
-                field : 'customName',
-                align : 'center',
-                valign : 'middle'
-            }, {
-                title : '地址',
-                field : 'addressStr',
-                align : 'center',
-                valign : 'middle'
-            }, {
-                title : '下单时间',
-                field : 'orderTime',
-                align : 'center',
-                valign : 'middle'
-            }, {
-                title : '金额',
-                field : 'price',
-                align : 'center',
-                valign : 'middle'
-            }, {
-                title : '状态',
-                field : 'isPay',
-                align : 'center',
-                valign : 'middle'
-            } ]);
+    var _orderTableConfig = {
+        toolbar : '#order-table-toolbar',
+        url : '/api/order/list',
+        columns : [ {
+            title : '',
+            field : 'rowNum',
+            align : 'center',
+            valign : 'middle',
+            formatter : function(value, row, index) {
+                return index + 1;
+            }
+        }, {
+            checkbox : true, // 使用复选框
+            field : 'state',
+            align : 'center',
+            valign : 'middle'
+        }, {
+            title : '订单号',
+            field : 'orderNum',
+            align : 'center',
+            valign : 'middle'
+        }, {
+            title : '客户姓名',
+            field : 'customName',
+            align : 'center',
+            valign : 'middle'
+        }, {
+            title : '地址',
+            field : 'addressStr',
+            align : 'center',
+            valign : 'middle'
+        }, {
+            title : '下单时间',
+            field : 'orderTime',
+            align : 'center',
+            valign : 'middle'
+        }, {
+            title : '金额',
+            field : 'price',
+            align : 'center',
+            valign : 'middle'
+        }, {
+            title : '状态',
+            field : 'isPay',
+            align : 'center',
+            valign : 'middle'
+        }, {
+            title : '操作',
+            field : 'id',
+            halign : 'center',
+            align : 'right',
+            valign : 'middle'
+        } ]
+    };
 
     function orderOptionChanged() {
         var value = $('#orderOptionGroup input[name="orderOptions"]:checked')
@@ -94,10 +100,12 @@
 <div class="btn-toolbar" role="toolbar" id="order-table-toolbar">
 	<button class="btn btn-primary" data-toggle="modal"
 		onclick="clickAdd();">
-		<!-- <span class="glyphicon glyphicon-plus"></span>&nbsp; -->添加
+		<!-- <span class="glyphicon glyphicon-plus"></span>&nbsp; -->
+		添加
 	</button>
 	<button class="btn btn-danger" onclick="delCustoms()">
-		<!-- <span class="glyphicon glyphicon-minus"></span>&nbsp; -->删除
+		<!-- <span class="glyphicon glyphicon-minus"></span>&nbsp; -->
+		删除
 	</button>
 
 

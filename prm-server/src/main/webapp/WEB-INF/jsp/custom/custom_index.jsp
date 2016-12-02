@@ -2,87 +2,92 @@
 	pageEncoding="utf-8"%>
 
 <script type="text/javascript">
-    var _customTableConfig = new TableConfig(
-            '/api/custom/list',
-            '#custom-table-toolbar',
-            [
-                    {
-                        checkbox : true, // 使用复选框
-                        field : 'state',
-                        align : 'center',
-                        valign : 'middle',
-                        visible : true
-                    },
-                    {
-                        title : '序号',
-                        field : 'rowNum',
-                        align : 'center',
-                        valign : 'middle',
-                        formatter : function(value, row, index) {
-                            return index + 1;
-                        }
-                    },
-                    {
-                        title : '姓名',
-                        field : 'name',
-                        align : 'center',
-                        valign : 'middle',
-                        formatter : function(value, row, index) {
-                            return value;
-                        }
-                    },
-                    {
-                        title : '手机',
-                        field : 'phone',
-                        align : 'center',
-                        valign : 'middle'
-                    },
-                    {
-                        title : 'QQ',
-                        field : 'qq',
-                        align : 'center',
-                        valign : 'middle'
-                    },
-                    {
-                        title : '微信',
-                        field : 'weixin',
-                        align : 'center',
-                        valign : 'middle'
-                    },
-                    {
-                        title : '邮箱',
-                        field : 'email',
-                        align : 'center',
-                        valign : 'middle',
-                        formatter : function(value, row, index) {
-                            var str = '<a href="#">' + value + '</a>';
-                            return value;
-                        }
-                    },
-                    {
-                        title : '操作',
-                        field : 'id',
-                        align : 'center',
-                        valign : 'middle',
-                        formatter : function(value, row, index) {
+    var _customTableConfig = {
+        toolbar : '#custom-table-toolbar',
+        url : '/api/custom/list',
+        columns : [
+                {
+                    checkbox : true, // 使用复选框
+                    field : 'state',
+                    align : 'center',
+                    valign : 'middle',
+                    visible : true
+                },
+                {
+                    title : '序号',
+                    field : 'rowNum',
+                    align : 'center',
+                    valign : 'middle',
+                    formatter : function(value, row, index) {
+                        return index + 1;
+                    }
+                },
+                {
+                    title : '姓名',
+                    field : 'name',
+                    align : 'center',
+                    valign : 'middle',
+                    formatter : function(value, row, index) {
+                        return value;
+                    }
+                },
+                {
+                    title : '手机',
+                    field : 'phone',
+                    align : 'center',
+                    valign : 'middle'
+                },
+                {
+                    title : 'QQ',
+                    field : 'qq',
+                    align : 'center',
+                    valign : 'middle'
+                },
+                {
+                    title : '微信',
+                    field : 'weixin',
+                    align : 'center',
+                    valign : 'middle'
+                },
+                {
+                    title : '邮箱',
+                    field : 'email',
+                    align : 'center',
+                    valign : 'middle',
+                    formatter : function(value, row, index) {
+                        var str = '<a href="#">' + value + '</a>';
+                        return value;
+                    }
+                },
+                {
+                    title : '操作',
+                    field : 'id',
+                    halign : 'center',
+                    align : 'right',
+                    valign : 'middle',
+                    formatter : function(value, row, index) {
 
-                            return [
-                                    '<button class="btn btn-primary btn-sm" data-loading-text="加载中" onclick="clickModify(this,\''
-                                            + value
-                                            + '\')"><span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</button>',
+                        return [
+                                '<button class="btn btn-primary btn-sm" data-loading-text="加载中" onclick="clickModify(this,\''
+                                        + value
+                                        + '\')"><span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</button>',
 
-                                    '&nbsp;',
+                                '&nbsp;',
 
-                                    '<a class="btn btn-link btn-sm" href="/custom/address?custId='+value+'">地址</a>',
+                                '<a class="btn btn-link btn-sm" href="/custom/address?custId='
+                                        + value + '">地址</a>',
 
-                                    '&nbsp;',
+                                '&nbsp;',
 
-                                    '<a class="btn btn-link btn-sm" href="/custom/passenger?custId='+value+'">乘客</a>' ]
-                                    .join('');
+                                '<a class="btn btn-link btn-sm" href="/custom/passenger?custId='
+                                        + value + '">乘客</a>' ].join('');
 
-                        }
-                    } ]);
-    
+                    }
+                } ]
+        
+
+    };
+
     // 点击添加
     function clickAdd() {
         showCustomAddDlg({
@@ -203,15 +208,15 @@
     function customAddress(value, name) {
         showAddressPage(value, name);
     }
-    
+
     // 乘客管理
-    function customPassenger(value){
+    function customPassenger(value) {
         // TODO 跳到乘客管理页面
-        window.open('/custom/passenger?custId='+value);
+        window.open('/custom/passenger?custId=' + value);
     }
 
     $(function() {
-        $('#custom_table').bootstrapTable(_customTableConfig);
+        $('#custom_table').prmTable(_customTableConfig);
     });
 </script>
 
