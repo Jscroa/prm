@@ -5,20 +5,20 @@
     var _orderTableConfig = {
         toolbar : '#order-table-toolbar',
         url : '/api/order/list',
-        columns : [ {
-            title : '',
+        columns : [{
+            checkbox : true, // 使用复选框
+            field : 'state',
+            align : 'center',
+            valign : 'middle'
+        }, {
+            title : '序号',
             field : 'rowNum',
             align : 'center',
             valign : 'middle',
             formatter : function(value, row, index) {
                 return index + 1;
             }
-        }, {
-            checkbox : true, // 使用复选框
-            field : 'state',
-            align : 'center',
-            valign : 'middle'
-        }, {
+        },  {
             title : '订单号',
             field : 'orderNum',
             align : 'center',
@@ -82,7 +82,7 @@
 </script>
 
 <ol class="breadcrumb">
-	<li><a href="/"><span class="glyphicon glyphicon-plane"></span></a></li>
+	<li><a href="/"><span class="glyphicon glyphicon-send"></span></a></li>
 	<li class="active">订单管理</li>
 </ol>
 <div class="btn-group" id="orderOptionGroup" data-toggle="buttons">

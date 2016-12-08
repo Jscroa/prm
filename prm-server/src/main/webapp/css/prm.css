@@ -1,20 +1,8 @@
-
-
-
-
-
-
-
-
-
-
-
 body {
 	/* font-family: "microsoft yahei", "Times New Roman", "ËÎÌו", Times, serif; */
-	
-	background-color: #cccccc;
-	background-image: url(http://www.transparenttextures.com/patterns/3px-tile.png);
-
+	background-color: #ffffff;
+background-image: url("https://www.transparenttextures.com/patterns/diagmonds.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 .mainland {
@@ -22,12 +10,7 @@ body {
 	padding-left: 10px;
 	padding-right: 10px;
 }
-
-/*
-.table {
-	background: #FFFFFF;
-}
-*/
+/* 
 .bootstrap-table>.fixed-table-container, .bootstrap-table>.fixed-table-container>.fixed-table-body>.table,
 	.bootstrap-table>.fixed-table-container>.fixed-table-body>.table>thead>tr>th,
 	.bootstrap-table>.fixed-table-container>.fixed-table-body>.table>tbody>tr>td
@@ -35,9 +18,9 @@ body {
 	border-left: none;
 	border-bottom: none;
 	border-top: none;
-	border: none;
+	border-right: none;
 }
-
+ */
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th,
 	.table>thead>tr>td, .table>thead>tr>th {
 	vertical-align: middle;

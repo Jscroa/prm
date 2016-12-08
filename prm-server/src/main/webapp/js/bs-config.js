@@ -13,7 +13,8 @@
             smartDisplay : true, // 智能显示
             showToggle : false,
             undefinedText : '',
-            pageSize : 20,
+            pageSize : 10,
+            
             clickToSelect : false, // 单击行选中
             showExport : true,
             exportDataType : 'all',

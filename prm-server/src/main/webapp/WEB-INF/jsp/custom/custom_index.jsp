@@ -63,7 +63,7 @@
                     title : '操作',
                     field : 'id',
                     halign : 'center',
-                    align : 'right',
+                    align : 'center',
                     valign : 'middle',
                     formatter : function(value, row, index) {
 
@@ -221,7 +221,7 @@
 </script>
 
 <ol class="breadcrumb">
-	<li><a href="/"><span class="glyphicon glyphicon-plane"></span></a></li>
+	<li><a href="/"><span class="glyphicon glyphicon-send"></span></a></li>
 	<li class="active">客户管理</li>
 </ol>
 
