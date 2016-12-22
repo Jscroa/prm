@@ -165,10 +165,6 @@ body {
 		</div>
 	</div>
 
-
-
-
-	
-    <script type="text/javascript" color="255,0,0" opacity='0.7' zIndex="-2" count="99" src="/js/canvas-nest.min.js"></script>
+    <script type="text/javascript" color="255,0,0" opacity='0.8' zIndex="-2" count="299" src="/js/canvas-nest.min.js"></script>
 </body>
 </html>
