@@ -1,24 +1,8 @@
 body {
 	
-animation:change 10s linear 0s infinite;
-background-image: url("https://www.transparenttextures.com/patterns/gplay.png");
+	background-color: #ffffff;
+	background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-dark.png");
 
-}
-
-@keyframes change{
-	0%{
-		background-color:#6180a1;
-	}
-	50%{
-		background-color:#888888;
-	}
-	100% {
-		background-color:#6180a1;
-	}
-}
-
-.breadcrumb{
-	background-color: transparent;
 }
 .mainland {
 	background: #FFFFFF;

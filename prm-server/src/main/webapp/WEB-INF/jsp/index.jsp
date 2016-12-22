@@ -46,6 +46,7 @@
 							<li><a href="/test_metronic.jsp">test metronic</a></li>
 							<li><a href="/test_loader.jsp">test loader</a></li>
 							<li><a href="/test_print.jsp">test print</a></li>
+							<li><a href="/test_canvas_nest.jsp">test_canvas_nest</a></li>
 						</ul>
 						<button class="btn btn-primary" onclick="initCountry();">初始化国家</button>
 					</div>
@@ -55,6 +56,7 @@
 
 		</div>
 	</div>
+	<script type="text/javascript" color="255,0,0" opacity='0.8' zIndex="-2" count="299" src="/js/canvas-nest.min.js"></script>
 </body>
 <script type="text/javascript">
 function initCountry(){

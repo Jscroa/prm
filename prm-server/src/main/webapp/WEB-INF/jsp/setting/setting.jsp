@@ -32,5 +32,6 @@ $(function(){
 		</script>
 	</div>
 	<%@include file="/WEB-INF/jsp/components/page_container.jsp"%>
+	
 </body>
 </html>

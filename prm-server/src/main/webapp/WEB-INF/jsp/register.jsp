@@ -46,94 +46,7 @@ body {
 }
 </style>
 
-<title>PRM</title>
-</head>
-<body>
-
-	<div class="container" style="margin-top: 5%">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-
-				<div class="panel panel-default" ng-app="registerApp"
-					ng-controller="registerCtrl">
-					<div class="panel-heading">注册</div>
-					<div class="panel-body">
-						<div class="alert alert-danger" ng-show="error || incomplete"
-							role="alert">
-							<p>
-								<strong>错误：</strong>{{checkMsg}}
-							</p>
-						</div>
-						<form class="form-horizontal" name="register_form"
-							onSubmit="return false;">
-							<div class="form-group">
-								<label for="inputUserName" class="col-sm-3 control-label">账户名：</label>
-								<div class="col-sm-9">
-									<input name="userName" class="form-control"
-										placeholder="User Name" ng-model="userName" id="inputUserName"
-										required>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="inputEmail" class="col-sm-3 control-label">邮箱：</label>
-								<div class="col-sm-9">
-									<input type="email" name="email" class="form-control"
-										placeholder="Email" ng-model="email" id="inputEmail" required>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="inputPassword" class="col-sm-3 control-label">密码：</label>
-								<div class="col-sm-9">
-									<input type="password" name="password" class="form-control"
-										placeholder="Password" ng-model="password" id="inputPassword"
-										required>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="inputPassword2" class="col-sm-3 control-label">确认密码：</label>
-								<div class="col-sm-9">
-									<input type="password" name="password2" class="form-control"
-										placeholder="Password Confirm" ng-model="password2"
-										id="inputPassword2" required>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="inputPhone" class="col-sm-3 control-label">手机：</label>
-								<div class="col-sm-9">
-									<input name="phone" class="form-control" placeholder="Phone"
-										ng-model="phone" id="inputPhone" required>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<div class="col-sm-6">
-									<button class=" form-control btn btn-success"
-										data-loading-text="注册中..." ng-click="register($event);">确认提交</button>
-								</div>
-								<div class="col-sm-6">
-									<a class="form-control btn btn-default" href="/login"
-										role="button">登&nbsp;&nbsp;陆</a>
-								</div>
-							</div>
-
-						</form>
-					</div>
-				</div>
-
-
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-	<script type="text/javascript">
+<script type="text/javascript">
 		angular.module('registerApp', [], function($httpProvider) {
 			ngHttpConfig($httpProvider);
 		}).controller('registerCtrl', function($scope, $http) {
@@ -223,5 +136,95 @@ body {
 			};
 		});
 	</script>
+
+<title>PRM</title>
+</head>
+<body>
+
+	<div class="container" style="margin-top: 5%">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<div class="panel panel-default" ng-app="registerApp"
+					ng-controller="registerCtrl">
+					<div class="panel-heading">注册</div>
+					<div class="panel-body">
+						<div class="alert alert-danger" ng-show="error || incomplete"
+							role="alert">
+							<p>
+								<strong>错误：</strong>{{checkMsg}}
+							</p>
+						</div>
+						<form class="form-horizontal" name="register_form"
+							onSubmit="return false;">
+							<div class="form-group">
+								<label for="inputUserName" class="col-sm-3 control-label">账户名：</label>
+								<div class="col-sm-9">
+									<input name="userName" class="form-control"
+										placeholder="User Name" ng-model="userName" id="inputUserName"
+										required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputEmail" class="col-sm-3 control-label">邮箱：</label>
+								<div class="col-sm-9">
+									<input type="email" name="email" class="form-control"
+										placeholder="Email" ng-model="email" id="inputEmail" required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputPassword" class="col-sm-3 control-label">密码：</label>
+								<div class="col-sm-9">
+									<input type="password" name="password" class="form-control"
+										placeholder="Password" ng-model="password" id="inputPassword"
+										required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputPassword2" class="col-sm-3 control-label">确认密码：</label>
+								<div class="col-sm-9">
+									<input type="password" name="password2" class="form-control"
+										placeholder="Password Confirm" ng-model="password2"
+										id="inputPassword2" required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputPhone" class="col-sm-3 control-label">手机：</label>
+								<div class="col-sm-9">
+									<input name="phone" class="form-control" placeholder="Phone"
+										ng-model="phone" id="inputPhone" required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-6">
+									<button class=" form-control btn btn-success"
+										data-loading-text="注册中..." ng-click="register($event);">确认提交</button>
+								</div>
+								<div class="col-sm-6">
+									<a class="form-control btn btn-default" href="/login"
+										role="button">登&nbsp;&nbsp;陆</a>
+								</div>
+							</div>
+
+						</form>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	
+	<script type="text/javascript" color="255,0,0" opacity='0.7' zIndex="-2" count="99" src="/js/canvas-nest.min.js"></script>
 </body>
 </html>
