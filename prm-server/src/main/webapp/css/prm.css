@@ -1,10 +1,25 @@
 body {
-	/* font-family: "microsoft yahei", "Times New Roman", "ËÎÌו", Times, serif; */
-	background-color: #ffffff;
-background-image: url("https://www.transparenttextures.com/patterns/diagmonds.png");
-/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+	
+animation:change 10s linear 0s infinite;
+background-image: url("https://www.transparenttextures.com/patterns/gplay.png");
+
 }
 
+@keyframes change{
+	0%{
+		background-color:#6180a1;
+	}
+	50%{
+		background-color:#888888;
+	}
+	100% {
+		background-color:#6180a1;
+	}
+}
+
+.breadcrumb{
+	background-color: transparent;
+}
 .mainland {
 	background: #FFFFFF;
 	padding-left: 10px;

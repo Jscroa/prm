@@ -2,47 +2,47 @@
 	border-radius: 0px;
 	/* margin-bottom: 0px; */
 	border: 0px solid transparent;
-	-moz-box-shadow: 0px 0px 10px #999999;
-	-webkit-box-shadow: 0px 0px 10px #999999;
-	box-shadow: 0px 0px 10px #999999;
-	filter: alpha(opacity = 75); /*支持 IE 浏览器*/
-	-moz-opacity: 0.75; /*支持 FireFox 浏览器*/
-	opacity: 0.75; /*支持 Chrome, Opera, Safari 等浏览器*/
+	-moz-box-shadow: 0px 0px 50px #000000;
+	-webkit-box-shadow: 0px 0px 50px #000000;
+	box-shadow: 0px 0px 50px #000000;
+	filter: alpha(opacity = 70); /*支持 IE 浏览器*/
+	-moz-opacity: 0.70; /*支持 FireFox 浏览器*/
+	opacity: 0.70; /*支持 Chrome, Opera, Safari 等浏览器*/
 }
 
 .navbar-inverse {
 	border-radius: 0px;
 	margin-bottom: 0px;
 	border: 0px solid transparent;
-	-moz-box-shadow: 0px 0px 10px #999999;
-	-webkit-box-shadow: 0px 0px 10px #999999;
-	box-shadow: 0px 0px 10px #999999;
-	filter: alpha(opacity = 75); /*支持 IE 浏览器*/
-	-moz-opacity: 0.75; /*支持 FireFox 浏览器*/
-	opacity: 0.75; /*支持 Chrome, Opera, Safari 等浏览器*/
+	-moz-box-shadow: 0px 0px 50px #000000;
+	-webkit-box-shadow: 0px 0px 50px #000000;
+	box-shadow: 0px 0px 50px #000000;
+	filter: alpha(opacity = 70); /*支持 IE 浏览器*/
+	-moz-opacity: 0.70; /*支持 FireFox 浏览器*/
+	opacity: 0.70; /*支持 Chrome, Opera, Safari 等浏览器*/
 }
 
 .navbar-inverse .navbar-nav>.active>a {
 	/* font-weight:bold; */
-	
 }
 
 .navbar-inverse .navbar-nav>.active>a:focus {
 	/* font-weight:bold; */
-	
 }
 
 .navbar-inverse .navbar-nav>.active>a:hover {
 	/* font-weight:bold; */
-	
 }
 
 .navbar-inverse .navbar-nav>li>a {
 	/* font-weight:bold; */
-	
 }
 
 .navbar-inverse .navbar-nav>li>a:hover {
 	/* font-weight:bold; */
 	
+	-webkit-animation-name: rubberBand;
+	-webkit-animation-duration: 1s;
+	animation-name: rubberBand;
+	animation-duration: 1s;
 }
