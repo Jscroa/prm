@@ -56,6 +56,22 @@
             valign : 'middle'
         } ]
     };
+    
+    // 点击添加
+    function clickAdd() {
+    	showOrderAddDlg({
+            success : function() {
+                $('#order_table').bootstrapTable('refresh');
+            },
+            warning : function(msg) {
+                toastr.warning(msg);
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                toastr.error(XMLHttpRequest.status);
+            }
+        });
+
+    }
 
     function orderOptionChanged() {
         var value = $('#orderOptionGroup input[name="orderOptions"]:checked')
