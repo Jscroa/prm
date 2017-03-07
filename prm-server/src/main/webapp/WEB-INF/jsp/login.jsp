@@ -16,24 +16,23 @@
 <script src="/js/ng-config.js"></script>
 
 <style type="text/css">
-/* 
-body {
+/* body {
 	background: url("/img/paper.jpg") no-repeat;
 	background-size: cover;
 	background-position: center;
 	background-attachment: fixed;
-}
- */
+} */
+
 /* body {
 	background-image:
 		url(/img/2c761da4303eccca7d9bfc8d73a40077cfbc9f651fe0-svPkdZ_fw658.png);
 } */
 
-.panel {
+/* .panel {
 	-moz-box-shadow: 0px 0px 100px #000000;
 	-webkit-box-shadow: 0px 0px 100px #000000;
 	box-shadow: 0px 0px 100px #000000;
-}
+} */
 
 .panel-heading {
 	/* font-weight: bold; */
@@ -165,6 +164,6 @@ body {
 		</div>
 	</div>
 
-    <script type="text/javascript" color="255,0,0" opacity='0.8' zIndex="-2" count="299" src="/js/canvas-nest.min.js"></script>
+    <script type="text/javascript" color="255,0,0" opacity='0.8' zIndex="-2" count="99" src="/js/canvas-nest.min.js"></script>
 </body>
 </html>

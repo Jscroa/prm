@@ -17,8 +17,11 @@ import cn.prm.server.commons.Constants.RESPONSE_CODE;
 import cn.prm.server.dto.BaseDto;
 import cn.prm.server.dto.ListDto;
 import cn.prm.server.dto.bean.AddressDto;
+import cn.prm.server.dto.bean.BeanDto;
 import cn.prm.server.exception.BusinessException;
 import cn.prm.server.exception.PermissionException;
+import cn.prm.server.form.AddressForm;
+import cn.prm.server.form.CustomForm;
 import cn.prm.server.service.AddressService;
 
 /**
@@ -69,44 +72,21 @@ public class AddressApiController extends BaseController{
     }
     
     /** 
-     * @Title: add<br>
-     * @Description: 在客户下添加地址<br>
+     * @Title: getAddress<br>
+     * @Description: <br>
      * @param request
-     * @param customId
-     * @param addrStr
+     * @param addrId
      * @return
      */
-    @RequestMapping("/add")
-    public Object add(HttpServletRequest request,String customId,String addrStr){
-        
-        try {
-            CurrUser currUser = getCurrUser(request);
-            if (currUser == null) {
-                return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
-            }
-            if(addrStr==null || "".equals(addrStr)){
-                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "参数不完整");
-            }
-            String tip = null;
-            String addr = null;
-            if(addrStr.contains("##")){
-                String[] arr = addrStr.split("##");
-                tip = arr[0];
-                if(tip.length()>10){
-                    return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "地址标签过长，建议10个字以内。");
-                }
-                addr = arr[1];
-            } else {
-                addr = addrStr;
-            }
-            if(addr==null || "".equals(addr)){
-                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "参数不完整。");
-            }
-            if(addr.length()>200){
-                return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "地址过长，建议200个字以内。");
-            }
-            addressService.addAddress(currUser, customId, tip, addr);
-            return new BaseDto(RESPONSE_CODE.CODE_SUCCESS,"添加成功。");
+    @RequestMapping("/getAddress")
+    public Object getAddress(HttpServletRequest request,String addrId) {
+        try{
+        CurrUser currUser = getCurrUser(request);
+        if(currUser == null){
+            return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN,"您还未登录");
+        }
+        AddressDto addressDto = addressService.getAddress(currUser, addrId);
+        return new BeanDto<AddressDto>(addressDto);
         }
         catch (BusinessException e) {
             e.printStackTrace();
@@ -116,7 +96,32 @@ public class AddressApiController extends BaseController{
             e.printStackTrace();
             return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
         }
-        
+    }
+    
+    /** 
+     * @Title: add<br>
+     * @Description: <br>
+     * @param request
+     * @param form
+     * @return
+     */
+    @RequestMapping("/add")
+    public Object add(HttpServletRequest request, AddressForm form){
+        try{
+            CurrUser currUser = getCurrUser(request);
+            if(currUser==null){ return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN,"您还未登录"); }
+            form.checkFields();
+            addressService.AddAddress(currUser, form);
+            return new BaseDto(RESPONSE_CODE.CODE_SUCCESS,"添加成功");
+        }
+        catch (BusinessException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
+        }
+        catch (PermissionException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
+        }
     }
     
     /** 
@@ -149,4 +154,32 @@ public class AddressApiController extends BaseController{
         }
     }
 
+    /** 
+     * @Title: modify<br>
+     * @Description: <br>
+     * @param request
+     * @param addrId
+     * @param form
+     * @return
+     */
+    @RequestMapping("/modify")
+    public Object modify(HttpServletRequest request, String addrId, AddressForm form) {
+        try{
+            CurrUser currUser = getCurrUser(request);
+            if (currUser == null) {
+                return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
+            }
+            form.checkFields();
+            addressService.modify(currUser, addrId, form);
+            return new BaseDto(RESPONSE_CODE.CODE_SUCCESS,"修改成功");
+        }catch (PermissionException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_PERMISSION_DENIED, e.getMessage());
+        }
+        catch (BusinessException e) {
+            e.printStackTrace();
+            return new BaseDto(RESPONSE_CODE.CODE_FAILURE, e.getMessage());
+        }
+    }
+    
 }

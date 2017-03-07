@@ -3,7 +3,10 @@
  */
 package cn.prm.server.service;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +26,13 @@ import cn.prm.server.commons.Constants.DB_STATUS;
 import cn.prm.server.dto.ListDto;
 import cn.prm.server.dto.bean.AddressDto;
 import cn.prm.server.entity.Address;
+import cn.prm.server.entity.Contact;
+import cn.prm.server.entity.Custom;
 import cn.prm.server.entity.CustomToAddr;
 import cn.prm.server.exception.BusinessException;
 import cn.prm.server.exception.PermissionException;
+import cn.prm.server.form.AddressForm;
+import cn.prm.server.form.CustomForm;
 
 /**
  * @Title: AddressService.java<br>
@@ -104,28 +111,26 @@ public class AddressService {
         return list;
     }
 
-    /**
-     * @Title: addAddress<br>
+    
+    /** 
+     * @Title: AddAddress<br>
      * @Description: <br>
      * @param currUser
-     * @param customId
-     * @param tip
-     * @param addr
-     * @throws PermissionException
-     * @throws BusinessException
+     * @param form
+     * @throws PermissionException 
+     * @throws BusinessException 
      */
-    public void addAddress(CurrUser currUser, String customId, String tip, String addr)
-            throws PermissionException, BusinessException {
-        // 先检查编辑客户的权限才能在该客户下添加地址
-        customService.pCheckCustomOwnner(currUser, customId);
+    public void AddAddress(CurrUser currUser,AddressForm form) throws PermissionException, BusinessException{
+     // 先检查编辑客户的权限才能在该客户下添加地址
+        customService.pCheckCustomOwnner(currUser, form.getCustomId());
 
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
         String addrId = UUIDUtil.randomUUID();
         Address address = new Address();
         address.setGuid(addrId);
-        address.setStdName(tip);
-        address.setMemo(addr);
+        address.setStdName(form.getTip());
+        address.setMemo(form.getAddr());
         address.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
         address.setCreateTime(now);
         address.setModifyTime(now);
@@ -135,7 +140,7 @@ public class AddressService {
 
         CustomToAddr customToAddr = new CustomToAddr();
         customToAddr.setGuid(UUIDUtil.randomUUID());
-        customToAddr.setCustomId(customId);
+        customToAddr.setCustomId(form.getCustomId());
         customToAddr.setAddrId(addrId);
         customToAddr.setStatus(Constants.DB_STATUS.STATUS_ACTIVE);
         customToAddr.setCreateTime(now);
@@ -176,5 +181,50 @@ public class AddressService {
         }
     }
 
+    /** 
+     * @Title: getAddress<br>
+     * @Description: <br>
+     * @param currUser
+     * @param addrId
+     * @return
+     * @throws PermissionException
+     * @throws BusinessException
+     */
+    public AddressDto getAddress(CurrUser currUser, String addrId) throws PermissionException, BusinessException {
+        if (addrId == null || "".equals(addrId)) {
+            throw new BusinessException("参数不完整");
+        }
+        pCheckAddressOwnner(currUser, addrId);
+        Address address = addressDao.get(addrId);
+        AddressDto addressDto = new AddressDto();
+        addressDto.setId(address.getGuid());
+        addressDto.setTip(address.getStdName());
+        addressDto.setAddr(address.getMemo());
+        return addressDto;
+    }
+    
+    /** 
+     * @Title: modify<br>
+     * @Description: <br>
+     * @param currUser
+     * @param addrId
+     * @param form
+     * @throws PermissionException
+     * @throws BusinessException
+     */
+    public void modify(CurrUser currUser, String addrId, AddressForm form)
+            throws PermissionException, BusinessException {
+        if (form == null) {
+            throw new BusinessException("参数不完整");
+        }
+        pCheckAddressOwnner(currUser, addrId);
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        Address address = addressDao.get(addrId);
+        address.setStdName(form.getTip());
+        address.setMemo(form.getAddr());
+        address.setModifyTime(now);
+        address.setModifyUser(currUser.getGuid());
+        addressDao.modify(address);
+    }
     
 }

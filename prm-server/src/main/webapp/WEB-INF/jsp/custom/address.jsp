@@ -19,28 +19,31 @@
 <script src="/js/bootstrap-datepicker.min.js"></script>
 <script src="/js/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="/js/bs-config.js"></script>
+<%@include file="/WEB-INF/jsp/custom/address_dlg.jsp"%>
 
 <script type="text/javascript">
-function showPage(page){
-    $.get(page,function(data){
-        $('#page_container').html(data);
+    function showPage(page) {
+        $.get(page, function(data) {
+            $('#page_container').html(data);
+        });
+    }
+    
+    function showIndexPage() {
+        showPage('addressIndex');
+    }
+    
+    $(function() {
+        showIndexPage();
     });
-}
-function showIndexPage(){
-    showPage('addressIndex');
-}
-$(function(){
-    showIndexPage();
-});
 </script>
 <title>PRM - 地址管理</title>
 </head>
 <body>
-<div>
+	<div>
 		<%@include file="/WEB-INF/jsp/components/nav.jsp"%>
 		<script type="text/javascript">
-			$('#nav_custom').addClass('active');
-		</script>
+            $('#nav_custom').addClass('active');
+        </script>
 	</div>
 	<%@include file="/WEB-INF/jsp/components/page_container.jsp"%>
 </body>

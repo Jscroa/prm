@@ -8,7 +8,7 @@
 <style type="text/css">  
 html{height:100%}  
 body{height:100%;margin:0px;padding:0px}  
-#map_container{height:50%}  
+#map_container{height:100%}  
 </style>  
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=OAMZeV6BXarRLpiTOFPWeqO8P5nmvK1G"></script>
 </head>

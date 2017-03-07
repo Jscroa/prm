@@ -169,7 +169,7 @@
          */
         function addCustom(dlg, confirmBtn, obj) {
             $(confirmBtn).button('loading');
-            $('#custom_form').ajaxSubmit({
+            $.ajax({
                 url : '/api/custom/add',
                 type : 'post',
                 /* async : false, */
@@ -220,8 +220,8 @@
                     if (data) {
                         if (data.code == 100) {
                             dlg.modal('hide');
-                            //                                        toastr.success('修改成功');
-                            //                                        $('#custom_table').bootstrapTable('refresh');
+                            // toastr.success('修改成功');
+                            // $('#custom_table').bootstrapTable('refresh');
                             obj.success();
                         } else {
                             obj.warning(data.code + ':' + data.msg);
