@@ -20,6 +20,7 @@ public class Passenger extends BaseEntity implements Serializable {
     private String            customId;
     private String            countryId;
     private String            idCard;
+    private Boolean           sex;
 
     /**
      * @return the customId
@@ -65,4 +66,19 @@ public class Passenger extends BaseEntity implements Serializable {
     public void setIdCard(String idCard) {
         this.idCard = idCard;
     }
+
+    /**
+     * @return the sex
+     */
+    public Boolean getSex() {
+        return sex;
+    }
+
+    /**
+     * @param sex the sex to set
+     */
+    public void setSex(Boolean sex) {
+        this.sex = sex;
+    }
+    
 }

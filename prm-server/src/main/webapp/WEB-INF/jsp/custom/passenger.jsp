@@ -15,6 +15,7 @@
 <script src="/js/bootstrap-datepicker.min.js"></script>
 <script src="/js/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="/js/bs-config.js"></script>
+<%@include file="/WEB-INF/jsp/custom/passenger_dlg.jsp"%>
 
 <script type="text/javascript">
 function showPage(page){

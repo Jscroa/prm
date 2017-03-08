@@ -26,4 +26,11 @@ public interface ICustomToPassengerDao extends IBaseDao<CustomToPassenger> {
      */
     List<Passenger> getPassengers(String customId);
 
+    /** 
+     * @Title: getByPsgId<br>
+     * @Description: <br>
+     * @param psgId
+     * @return
+     */
+    List<CustomToPassenger> getByPsgId(String psgId);
 }

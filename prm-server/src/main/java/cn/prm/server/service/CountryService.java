@@ -44,6 +44,7 @@ public class CountryService {
      * @throws BusinessException
      */
     public void createCountry(CurrUser currUser, CountryForm form) throws BusinessException {
+        log.info("S创建国家");
         String stdName = form.getStdName();
         String enName = form.getEnName();
         String cnName = form.getCnName();
@@ -82,6 +83,7 @@ public class CountryService {
      * @return
      */
     public ListDto<CountryDto> getAll() {
+        log.info("获取国家列表");
         List<Country> countries = countryDao.getAll();
         ListDto<CountryDto> list = new ListDto<>();
         if (countries == null || countries.size() == 0) {

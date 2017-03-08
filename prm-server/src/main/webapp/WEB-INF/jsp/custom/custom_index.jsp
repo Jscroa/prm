@@ -68,7 +68,7 @@
                     formatter : function(value, row, index) {
 
                         return [
-                                '<button class="btn btn-primary btn-sm" data-loading-text="加载中" onclick="clickModify(this,\''
+                                '<button class="btn btn-default btn-sm" data-loading-text="加载中" onclick="clickModify(this,\''
                                         + value
                                         + '\')"><span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</button>',
 
@@ -224,7 +224,7 @@
 	<li><a href="/"><span class="glyphicon glyphicon-send"></span></a></li>
 	<li class="active">客户管理</li>
 </ol>
-
+<h4 id="index-title">客户 <small></small></h4>
 <div class="btn-toolbar" role="toolbar" id="custom-table-toolbar">
 	<button class="btn btn-primary" data-toggle="modal"
 		onclick="clickAdd();">

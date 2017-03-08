@@ -173,4 +173,18 @@ public class CustomDsoImpl implements ICustomDso {
         });
         return list;
     }
+
+    @Override
+    public List<String> checkPassengerOwn(String accId, String passengerId) {
+        String sql = "select t6.guid as psg_id from t_acc_to_group as t1 join t_acc_group as t2 on t1.group_id=t2.guid join t_group_to_custom as t3 on t2.guid=t3.group_id join t_custom as t4 on t3.custom_id=t4.guid join t_custom_to_psg as t5 on t4.guid=t5.custom_id join t_passenger as t6 on t5.passenger_id=t6.guid where t1.acc_id=? and t6.guid=? and t1.status=? and t2.status=? and t3.status=? and t4.status=? and t5.status=? and t6.status=?";
+        List<String> list = jdbcTemplate.query(sql, new Object[] { accId, passengerId, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE, DB_STATUS.STATUS_ACTIVE }, new RowMapper<String>() {
+
+            @Override
+            public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getString("psg_id");
+            }
+
+        });
+        return list;
+    }
 }

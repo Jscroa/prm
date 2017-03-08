@@ -78,6 +78,7 @@ public class CustomService {
      */
     public ListDto<CustomDto> getPrivateCustoms(CurrUser currUser, String search, String order)
             throws BusinessException {
+        log.info("获取私有客户（所有）");
         // 获取当前登录账号的用户组
         List<AccGroup> groups = accToGroupDao.getGroups(currUser.getGuid());
         if (groups == null || groups.size() == 0) {
@@ -125,6 +126,7 @@ public class CustomService {
      */
     public PageDto<CustomDto> getPrivateCustoms(CurrUser currUser, String search, String order, int offset, int limit)
             throws BusinessException {
+        log.info("获取私有客户（分页）");
         // 获取当前登录账号的用户组
         List<AccGroup> groups = accToGroupDao.getGroups(currUser.getGuid());
         if (groups == null || groups.size() == 0) {
@@ -168,7 +170,7 @@ public class CustomService {
      */
     @Transactional
     public void addPrivateCustom(CurrUser currUser, CustomForm form) throws BusinessException {
-
+        log.info("添加私有客户");
         if (form.getName() == null || "".equals(form.getName())) {
             throw new BusinessException("请输入姓名");
         }
@@ -253,6 +255,7 @@ public class CustomService {
      * @throws PermissionException
      */
     public void delete(CurrUser currUser, String id) throws BusinessException, PermissionException {
+        log.info("删除客户");
         if (id == null || "".equals(id)) {
             throw new BusinessException("未指定要删除的客户");
         }
@@ -278,6 +281,7 @@ public class CustomService {
     @Transactional
     public void modify(CurrUser currUser, String custId, CustomForm form)
             throws PermissionException, BusinessException {
+        log.info("编辑客户");
         if (form == null) {
             throw new BusinessException("参数不完整");
         }
@@ -328,6 +332,7 @@ public class CustomService {
      * @throws PermissionException
      */
     public void pCheckCustomOwnner(CurrUser currUser, String id) throws BusinessException, PermissionException {
+        log.info("检查客户权限");
         if (id == null || "".equals(id)) {
             throw new BusinessException("未指定客户");
         }
@@ -354,6 +359,7 @@ public class CustomService {
      * @throws BusinessException
      */
     public CustomDto getCustom(CurrUser currUser, String custId) throws PermissionException, BusinessException {
+        log.info("获取客户");
         if (custId == null || "".equals(custId)) {
             throw new BusinessException("参数不完整");
         }

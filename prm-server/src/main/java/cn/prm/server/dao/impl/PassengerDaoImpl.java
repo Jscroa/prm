@@ -29,7 +29,7 @@ import cn.prm.server.entity.Passenger;
 @Repository
 public class PassengerDaoImpl implements IPassengerDao {
 
-    private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time,custom_id,country_id,id_card";
+    private static final String COLS = "guid,std_name,std_code,status,memo,create_user,modify_user,create_time,modify_time,country_id,id_card,sex";
 
     @Autowired
     JdbcTemplate                jdbcTemplate;
@@ -46,9 +46,9 @@ public class PassengerDaoImpl implements IPassengerDao {
         passenger.setModifyUser(rs.getString("modify_user"));
         passenger.setCreateTime(rs.getTimestamp("create_time"));
         passenger.setModifyTime(rs.getTimestamp("modify_time"));
-        passenger.setCustomId(rs.getString("custom_id"));
         passenger.setCountryId(rs.getString("country_id"));
         passenger.setIdCard(rs.getString("id_card"));
+        passenger.setSex(rs.getBoolean("sex"));
         return passenger;
     }
 
@@ -68,9 +68,9 @@ public class PassengerDaoImpl implements IPassengerDao {
                 ps.setString(7, t.getModifyUser());
                 ps.setTimestamp(8, t.getCreateTime());
                 ps.setTimestamp(9, t.getModifyTime());
-                ps.setString(10, t.getCustomId());
-                ps.setString(11, t.getCountryId());
-                ps.setString(12, t.getIdCard());
+                ps.setString(10, t.getCountryId());
+                ps.setString(11, t.getIdCard());
+                ps.setBoolean(12, t.getSex());
             }
 
         });
@@ -91,7 +91,7 @@ public class PassengerDaoImpl implements IPassengerDao {
 
     @Override
     public void modify(final Passenger t) {
-        String sql = "update t_passenger set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,custom_id=?,country_id=?,id_card=? where guid=?";
+        String sql = "update t_passenger set std_name=?,std_code=?,status=?,memo=?,create_user=?,modify_user=?,create_time=?,modify_time=?,country_id=?,id_card=?,sex=? where guid=?";
         jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
             @Override
@@ -104,9 +104,9 @@ public class PassengerDaoImpl implements IPassengerDao {
                 ps.setString(6, t.getModifyUser());
                 ps.setTimestamp(7, t.getCreateTime());
                 ps.setTimestamp(8, t.getModifyTime());
-                ps.setString(9, t.getCustomId());
-                ps.setString(10, t.getCountryId());
-                ps.setString(11, t.getIdCard());
+                ps.setString(9, t.getCountryId());
+                ps.setString(10, t.getIdCard());
+                ps.setBoolean(11, t.getSex());
                 ps.setString(12, t.getGuid());
             }
         });

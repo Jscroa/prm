@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import cn.prm.server.commons.Constants.DB_STATUS;
 import cn.prm.server.dao.ICustomToPassengerDao;
 import cn.prm.server.dao.IPassengerDao;
+import cn.prm.server.entity.CustomToAddr;
 import cn.prm.server.entity.CustomToPassenger;
 import cn.prm.server.entity.Passenger;
 
@@ -145,4 +146,17 @@ public class CustomToPassengerDaoImpl implements ICustomToPassengerDao {
         return list;
     }
 
+    @Override
+    public List<CustomToPassenger> getByPsgId(String psgId) {
+        String sql = "select " + COLS + " from t_custom_to_psg where passenger_id=?";
+        List<CustomToPassenger> list = jdbcTemplate.query(sql, new Object[] { psgId }, new RowMapper<CustomToPassenger>() {
+
+            @Override
+            public CustomToPassenger mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return extract(rs);
+            }
+        });
+        return list;
+    }
+    
 }

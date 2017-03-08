@@ -19,7 +19,7 @@ public class AddressForm extends BaseForm {
 
     @FormLimitAnnotation(charCheck = CharSupport.LetterAndNumber)
     private String customId;
-    @FormLimitAnnotation(minLength = 2, maxLength = 200, charCheck = CharSupport.AllChar)
+    @FormLimitAnnotation(maxLength = 10, charCheck = CharSupport.AllChar)
     private String tip;
     @FormLimitAnnotation(minLength = 2, maxLength = 200, charCheck = CharSupport.AllChar)
     private String addr;

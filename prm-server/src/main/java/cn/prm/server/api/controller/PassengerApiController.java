@@ -16,47 +16,46 @@ import cn.prm.server.commons.BaseController;
 import cn.prm.server.commons.Constants.RESPONSE_CODE;
 import cn.prm.server.dto.BaseDto;
 import cn.prm.server.dto.ListDto;
-import cn.prm.server.dto.bean.AddressDto;
 import cn.prm.server.dto.bean.BeanDto;
+import cn.prm.server.dto.bean.PassengerDto;
 import cn.prm.server.exception.BusinessException;
 import cn.prm.server.exception.PermissionException;
-import cn.prm.server.form.AddressForm;
-import cn.prm.server.service.AddressService;
+import cn.prm.server.form.PassengerForm;
+import cn.prm.server.service.PassengerService;
 
 /**
- * @Title: AddressApiController.java<br>
+ * @Title: PassengerApiController.java<br>
  * @Package: cn.prm.server.api.controller<br>
  * @Description: <br>
  * @author yyao<br>
- * @date 2016年12月2日 上午11:24:29<br>
+ * @date 2017年3月8日 上午11:22:26<br>
  * @version v1.0<br>
  */
 @RestController
-@RequestMapping("/api/address")
-public class AddressApiController extends BaseController {
+@RequestMapping("/api/passenger")
+public class PassengerApiController extends BaseController {
 
     @SuppressWarnings("unused")
-    private static final Logger log = LoggerFactory.getLogger(AddressApiController.class);
+    private static final Logger log = LoggerFactory.getLogger(PassengerApiController.class);
 
     @Autowired
-    AddressService              addressService;
+    PassengerService            passengerService;
 
     /**
      * @Title: list<br>
-     * @Description: 某客户的地址列表<br>
+     * @Description: <br>
      * @param request
      * @param custId
      * @return
      */
     @RequestMapping("/list")
     public Object list(HttpServletRequest request, String custId) {
-
         try {
             CurrUser currUser = getCurrUser(request);
             if (currUser == null) {
                 return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
             }
-            ListDto<AddressDto> list = addressService.getCustomAddrs(currUser, custId);
+            ListDto<PassengerDto> list = passengerService.getCustomPsgs(currUser, custId);
             list.setCode(RESPONSE_CODE.CODE_SUCCESS);
             return list;
         }
@@ -71,21 +70,21 @@ public class AddressApiController extends BaseController {
     }
 
     /**
-     * @Title: getAddress<br>
+     * @Title: getPassenger<br>
      * @Description: <br>
      * @param request
-     * @param addrId
+     * @param psgId
      * @return
      */
-    @RequestMapping("/getAddress")
-    public Object getAddress(HttpServletRequest request, String addrId) {
+    @RequestMapping("/getPassenger")
+    public Object getPassenger(HttpServletRequest request, String psgId) {
         try {
             CurrUser currUser = getCurrUser(request);
             if (currUser == null) {
                 return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
             }
-            AddressDto addressDto = addressService.getAddress(currUser, addrId);
-            return new BeanDto<AddressDto>(addressDto);
+            PassengerDto passengerDto = passengerService.getPassenger(currUser, psgId);
+            return new BeanDto<PassengerDto>(passengerDto);
         }
         catch (BusinessException e) {
             e.printStackTrace();
@@ -105,14 +104,14 @@ public class AddressApiController extends BaseController {
      * @return
      */
     @RequestMapping("/add")
-    public Object add(HttpServletRequest request, AddressForm form) {
+    public Object add(HttpServletRequest request, PassengerForm form) {
         try {
             CurrUser currUser = getCurrUser(request);
             if (currUser == null) {
                 return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
             }
             form.checkFields();
-            addressService.addAddress(currUser, form);
+            passengerService.add(currUser, form);
             return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "添加成功");
         }
         catch (BusinessException e) {
@@ -127,22 +126,22 @@ public class AddressApiController extends BaseController {
 
     /**
      * @Title: del<br>
-     * @Description: 删除地址<br>
+     * @Description: <br>
      * @param request
-     * @param addrId
+     * @param psgId
      * @return
      */
     @RequestMapping("/del")
-    public Object del(HttpServletRequest request, String addrId) {
+    public Object del(HttpServletRequest request, String psgId) {
         try {
             CurrUser currUser = getCurrUser(request);
             if (currUser == null) {
                 return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
             }
-            if (addrId == null || "".equals(addrId)) {
+            if (psgId == null || "".equals(psgId)) {
                 return new BaseDto(RESPONSE_CODE.CODE_FAILURE, "参数不完整");
             }
-            addressService.delAddress(currUser, addrId);
+            passengerService.delPassenger(currUser, psgId);
             return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "删除成功");
         }
         catch (BusinessException e) {
@@ -159,19 +158,19 @@ public class AddressApiController extends BaseController {
      * @Title: modify<br>
      * @Description: <br>
      * @param request
-     * @param addrId
+     * @param psgId
      * @param form
      * @return
      */
     @RequestMapping("/modify")
-    public Object modify(HttpServletRequest request, String addrId, AddressForm form) {
+    public Object modify(HttpServletRequest request, String psgId, PassengerForm form) {
         try {
             CurrUser currUser = getCurrUser(request);
             if (currUser == null) {
                 return new BaseDto(RESPONSE_CODE.CODE_NEED_LOGIN, "您还未登录");
             }
             form.checkFields();
-            addressService.modify(currUser, addrId, form);
+            passengerService.modify(currUser, psgId, form);
             return new BaseDto(RESPONSE_CODE.CODE_SUCCESS, "修改成功");
         }
         catch (PermissionException e) {

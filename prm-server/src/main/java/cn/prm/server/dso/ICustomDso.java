@@ -79,4 +79,13 @@ public interface ICustomDso {
      * @return
      */
     List<String> checkAddressOwn(String accId,String addressId);
+    
+    /** 
+     * @Title: checkPassengerOwn<br>
+     * @Description: <br>
+     * @param accId
+     * @param passengerId
+     * @return
+     */
+    List<String> checkPassengerOwn(String accId,String passengerId);
 }

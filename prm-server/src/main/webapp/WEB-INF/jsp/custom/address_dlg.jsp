@@ -5,14 +5,14 @@
 <body>
 	<script type="text/javascript">
 		var address_form_html_str = [
-				'<form class="form-horizontal" name="custom_form" id="address_form" onSubmit="return false;">',
+				'<form class="form-horizontal" name="address_form" id="address_form" onSubmit="return false;">',
 				
 				'<div class="form-group">',
                 '<label for="inputName" class="col-sm-3 control-label">',
-                '<span style="color:red;">*</span>&nbsp;标签：',
+                '标签：',
                 '</label>',
                 '<div class="col-sm-9">',
-                '<input type="text" name="tip" class="form-control" placeholder="Name" id="inputName" required>',
+                '<input type="text" name="tip" class="form-control" placeholder="Tip" id="inputName" required>',
                 '</div>',
                 '</div>',
 				
@@ -21,7 +21,7 @@
                 '<span style="color:red;">*</span>&nbsp;地址：',
                 '</label>',
                 '<div class="col-sm-9">',
-                '<input type="text" name="addr" class="form-control" placeholder="Name" id="inputName" required>',
+                '<input type="text" name="addr" class="form-control" placeholder="Address" id="inputName" required>',
                 '</div>',
                 '</div>',
 				

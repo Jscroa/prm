@@ -47,6 +47,7 @@ public class AccGroupService {
      */
     public void createGroup(CurrUser currUser, AccGroupForm form) throws BusinessException {
         String groupName = form.getGroupName();
+        log.info("S创建组 -> " + groupName);
         if (groupName == null || "".equals(groupName)) {
             throw new BusinessException("组名不能为空");
         }
@@ -83,6 +84,7 @@ public class AccGroupService {
      * @throws BusinessException
      */
     public void addAcc(CurrUser currUser, String groupId, List<String> accIds) throws BusinessException {
+        log.info("S账户组中添加账户 -> ");
         if (groupId == null || "".equals(groupId)) {
             throw new BusinessException("未指定账户组");
         }
@@ -91,6 +93,7 @@ public class AccGroupService {
         }
         Timestamp now = new Timestamp(System.currentTimeMillis());
         for (int i = 0; i < accIds.size(); i++) {
+            log.info("    "+accIds.get(i));
             AccToGroup accToGroup = new AccToGroup();
             accToGroup.setGuid(UUIDUtil.randomUUID());
             accToGroup.setAccId(accIds.get(i));
@@ -111,6 +114,7 @@ public class AccGroupService {
      * @return
      */
     public List<AccGroup> getGroupList(CurrUser currUser) {
+        log.info("S获取账户的组列表");
         List<AccGroup> list = accToGroupDao.getGroups(currUser.getGuid());
         return list;
     }
@@ -123,6 +127,7 @@ public class AccGroupService {
      * @return
      */
     public List<Account> getAccountList(CurrUser currUser, String groupId) {
+        log.info("S获取组中账户列表 -> "+groupId);
         AccToGroup accToGroup = accToGroupDao.get(currUser.getGuid(), groupId);
         if (accToGroup == null) {
             log.info("没权限访问账户组(" + groupId + "),返回空集");

@@ -1,38 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<style>
-.panel-addr {
-	margin-bottom: 0px;
-}
-
-.panel-addr {
-	background-color: transparent;
-}
-
-.panel-addr:HOVER {
-	background-color: #eeeeee;
-	-moz-box-shadow: 0px 0px 5px #aaaaaa;
-	-webkit-box-shadow: 0px 0px 5px #aaaaaa;
-	box-shadow: 0px 0px 5px #aaaaaa;
-}
-
-.panel-addr>.panel-body::BEFORE {
-	font-size: 12px;
-	font-weight: 700;
-	color: #959595;
-	content: "地址：";
-}
-</style>
 <script type="text/javascript">
     function getUrlParam(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
         var r = window.location.search.substr(1).match(reg); //匹配目标参数
-        if (r != null){
+        if (r != null) {
             return unescape(r[2]);
         }
         return null; //返回参数值
     }
-    
+
     var custId = getUrlParam('custId');
 
     var _addressTableConfig = {
@@ -44,54 +21,59 @@
         showColumns : false,
         showExport : false,
         cardView : false,
-        columns : [{
-            checkbox : true, // 使用复选框
-            field : 'state',
-            align : 'center',
-            valign : 'middle',
-            visible : true
-        },{
-            title : '序号',
-            field : 'rowNum',
-            align : 'center',
-            valign : 'middle',
-            formatter : function(value, row, index) {
-                return index + 1;
-            }
-        },{
-            title : '标签',
-            field : 'tip',
-            align : 'left',
-            valign : 'middle',
-            formatter : function(value, row, index) {
-                return '<span class="badge">' + row.tip + '</span>';
-            }
-        },{
-            title : '地址',
-            field : 'addr',
-            align : 'left',
-            valign : 'middle',
-            formatter : function(value, row, index) {
-                return row.addr;
-            }
-        },{
-            title : '操作',
-            field : 'id',
-            halign : 'center',
-            align : 'center',
-            valign : 'middle',
-            formatter : function(value, row, index) {
+        columns : [
+                {
+                    checkbox : true, // 使用复选框
+                    field : 'state',
+                    align : 'center',
+                    valign : 'middle',
+                    visible : true
+                },
+                {
+                    title : '序号',
+                    field : 'rowNum',
+                    align : 'center',
+                    valign : 'middle',
+                    formatter : function(value, row, index) {
+                        return index + 1;
+                    }
+                },
+                {
+                    title : '标签',
+                    field : 'tip',
+                    align : 'left',
+                    valign : 'middle',
+                    formatter : function(value, row, index) {
+                        return '<span class="badge">' + row.tip + '</span>';
+                    }
+                },
+                {
+                    title : '地址',
+                    field : 'addr',
+                    align : 'left',
+                    valign : 'middle',
+                    formatter : function(value, row, index) {
+                        return row.addr;
+                    }
+                },
+                {
+                    title : '操作',
+                    field : 'id',
+                    halign : 'center',
+                    align : 'center',
+                    valign : 'middle',
+                    formatter : function(value, row, index) {
 
-                return [
-                        '<button class="btn btn-primary btn-sm" data-loading-text="加载中" onclick="clickModify(this,\''
+                        return [ '<button class="btn btn-default btn-sm" data-loading-text="加载中" onclick="clickModify(this,\''
                                 + value
-                                + '\')"><span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</button>'].join('');
+                                + '\')"><span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</button>' ]
+                                .join('');
 
-            }
-        }]
+                    }
+                } ]
     };
-    
-    function clickAdd(){
+
+    function clickAdd() {
         showAddressAddDlg({
             success : function() {
                 $('#address_table').bootstrapTable('refresh');
@@ -104,7 +86,7 @@
             }
         });
     }
-    
+
     function clickModify(btn, id) {
         $(btn).button('loading');
         showAddressModifyDlg(id, {
@@ -129,8 +111,8 @@
         });
 
     }
-    
-	function getCustomName(){
+
+    function getCustomName() {
         $.ajax({
             url : '/api/custom/getCustom',
             type : 'post',
@@ -141,8 +123,9 @@
             success : function(data) {
                 if (data) {
                     if (data.code == 100) {
-                        $('#index-title small').html('<a href="#">'+data.t.name+'</a>');
-                        
+                        $('#index-title small').html(
+                                '<a href="#">' + data.t.name + '</a>');
+
                     } else {
                         toastr.warning(data.code + ':' + data.msg);
                     }
@@ -155,14 +138,14 @@
             }
         });
     }
-	
-	function delAddresses(){
-	    var selects = $('#address_table').bootstrapTable('getSelections');
-	    if (selects.length == 0) {
+
+    function delAddresses() {
+        var selects = $('#address_table').bootstrapTable('getSelections');
+        if (selects.length == 0) {
             toastr.info('未选中任何数据');
             return;
         }
-	    bootbox.confirm({
+        bootbox.confirm({
             title : '确认删除',
             message : '确定删除选中的&nbsp;<strong class="text-danger">'
                     + selects.length + '</strong>&nbsp;条数据？',
@@ -188,9 +171,9 @@
                 }
             }
         });
-	}
-	
-	function delAddress(ids, index) {
+    }
+
+    function delAddress(ids, index) {
         if (index < 0 || ids.length <= index) {
             toastr.success('删除完毕');
             $('#address_table').bootstrapTable('refresh');
@@ -226,21 +209,20 @@
             });
         }
     }
-	
+
     $(function() {
         getCustomName();
         $('#address_table').prmTable(_addressTableConfig);
     });
 </script>
-
 <ol class="breadcrumb">
 	<li><a href="/"><span class="glyphicon glyphicon-send"></span></a></li>
 	<li><a href="/custom">客户管理</a></li>
 	<li class="active">地址管理</li>
 </ol>
-
-<h4 id="index-title">客户地址 <small></small></h4>
-
+<h4 id="index-title">
+	客户地址 <small></small>
+</h4>
 <div class="btn-toolbar" role="toolbar" id="address-table-toolbar">
 	<button class="btn btn-primary" data-toggle="modal"
 		onclick="clickAdd();">
