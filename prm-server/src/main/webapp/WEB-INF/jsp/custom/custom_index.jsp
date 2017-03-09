@@ -28,7 +28,7 @@
                     align : 'center',
                     valign : 'middle',
                     formatter : function(value, row, index) {
-                        return value;
+                        return '<a href="/custom/detail?custId='+row.id+'">'+value+'</a>';
                     }
                 },
                 {
@@ -211,7 +211,7 @@
 
     // 乘客管理
     function customPassenger(value) {
-        // TODO 跳到乘客管理页面
+        // 跳到乘客管理页面
         window.open('/custom/passenger?custId=' + value);
     }
 

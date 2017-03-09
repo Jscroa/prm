@@ -59,21 +59,6 @@ public class CustomController extends BaseController {
     }
     
     /** 
-     * @Title: customAddress<br>
-     * @Description: <br>
-     * @param custId
-     * @return
-     */
-    @Deprecated
-    @RequestMapping("customAddress")
-    public ModelAndView customAddress(String custId){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("custom/custom_address");
-        mav.addObject("custId", custId);
-        return mav;
-    }
-    
-    /** 
      * @Title: passenger<br>
      * @Description: <br>
      * @param request
@@ -134,6 +119,38 @@ public class CustomController extends BaseController {
     public ModelAndView addressIndex(){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("custom/address_index");
+        return mav;
+    }
+    
+    /** 
+     * @Title: detail<br>
+     * @Description: <br>
+     * @param request
+     * @param custId
+     * @return
+     */
+    @RequestMapping("/detail")
+    public ModelAndView detail(HttpServletRequest request,@RequestParam(required=true) String custId){
+        ModelAndView mav = new ModelAndView();
+        CurrUser currUser = getCurrUser(request);
+        if (currUser == null) {
+            mav.setViewName("redirect:/login");
+            return mav;
+        }
+        mav.setViewName("custom/detail");
+        mavHelper.withUserName(mav, currUser.getName());
+        return mav;
+    }
+    
+    /** 
+     * @Title: detailIndex<br>
+     * @Description: <br>
+     * @return
+     */
+    @RequestMapping("/detailIndex")
+    public ModelAndView detailIndex(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("custom/detail_index");
         return mav;
     }
     

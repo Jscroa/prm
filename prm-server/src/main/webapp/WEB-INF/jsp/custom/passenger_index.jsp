@@ -136,7 +136,7 @@
                 if (data) {
                     if (data.code == 100) {
                         $('#index-title small').html(
-                                '<a href="#">' + data.t.name + '</a>');
+                                '<a href="/custom/detail?custId='+data.t.id+'">' + data.t.name + '</a>');
 
                     } else {
                         toastr.warning(data.code + ':' + data.msg);
