@@ -8,11 +8,17 @@ CREATE DATABASE `prm` DEFAULT CHARACTER SET utf8;
 
 use prm;
 
--- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
+
+
+
+
+
+
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: yyaos.club    Database: prm
+-- Host: 121.40.83.113    Database: prm
 -- ------------------------------------------------------
--- Server version 5.5.47-0ubuntu0.14.04.1
+-- Server version	5.5.47-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -48,15 +54,6 @@ CREATE TABLE `t_acc_group` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_acc_group`
---
-
-LOCK TABLES `t_acc_group` WRITE;
-/*!40000 ALTER TABLE `t_acc_group` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_acc_group` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t_acc_msg`
 --
 
@@ -82,15 +79,6 @@ CREATE TABLE `t_acc_msg` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_acc_msg`
---
-
-LOCK TABLES `t_acc_msg` WRITE;
-/*!40000 ALTER TABLE `t_acc_msg` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_acc_msg` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t_acc_tip`
 --
 
@@ -110,15 +98,6 @@ CREATE TABLE `t_acc_tip` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='账户标签';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_acc_tip`
---
-
-LOCK TABLES `t_acc_tip` WRITE;
-/*!40000 ALTER TABLE `t_acc_tip` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_acc_tip` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `t_acc_to_group`
@@ -144,15 +123,6 @@ CREATE TABLE `t_acc_to_group` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_acc_to_group`
---
-
-LOCK TABLES `t_acc_to_group` WRITE;
-/*!40000 ALTER TABLE `t_acc_to_group` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_acc_to_group` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t_acc_to_tip`
 --
 
@@ -174,15 +144,6 @@ CREATE TABLE `t_acc_to_tip` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='账户与标签关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_acc_to_tip`
---
-
-LOCK TABLES `t_acc_to_tip` WRITE;
-/*!40000 ALTER TABLE `t_acc_to_tip` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_acc_to_tip` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `t_account`
@@ -214,15 +175,6 @@ CREATE TABLE `t_account` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_account`
---
-
-LOCK TABLES `t_account` WRITE;
-/*!40000 ALTER TABLE `t_account` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_account` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t_address`
 --
 
@@ -243,15 +195,6 @@ CREATE TABLE `t_address` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='地址表';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_address`
---
-
-LOCK TABLES `t_address` WRITE;
-/*!40000 ALTER TABLE `t_address` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_address` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `t_contact`
@@ -280,15 +223,6 @@ CREATE TABLE `t_contact` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_contact`
---
-
-LOCK TABLES `t_contact` WRITE;
-/*!40000 ALTER TABLE `t_contact` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_contact` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t_country`
 --
 
@@ -310,15 +244,6 @@ CREATE TABLE `t_country` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='国家表';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_country`
---
-
-LOCK TABLES `t_country` WRITE;
-/*!40000 ALTER TABLE `t_country` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_country` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `t_custom`
@@ -344,15 +269,6 @@ CREATE TABLE `t_custom` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_custom`
---
-
-LOCK TABLES `t_custom` WRITE;
-/*!40000 ALTER TABLE `t_custom` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_custom` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t_custom_to_addr`
 --
 
@@ -374,15 +290,6 @@ CREATE TABLE `t_custom_to_addr` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户与地址关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_custom_to_addr`
---
-
-LOCK TABLES `t_custom_to_addr` WRITE;
-/*!40000 ALTER TABLE `t_custom_to_addr` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_custom_to_addr` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `t_custom_to_contact`
@@ -408,15 +315,6 @@ CREATE TABLE `t_custom_to_contact` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_custom_to_contact`
---
-
-LOCK TABLES `t_custom_to_contact` WRITE;
-/*!40000 ALTER TABLE `t_custom_to_contact` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_custom_to_contact` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t_custom_to_psg`
 --
 
@@ -438,15 +336,6 @@ CREATE TABLE `t_custom_to_psg` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户与乘客关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_custom_to_psg`
---
-
-LOCK TABLES `t_custom_to_psg` WRITE;
-/*!40000 ALTER TABLE `t_custom_to_psg` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_custom_to_psg` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `t_group_to_custom`
@@ -472,15 +361,6 @@ CREATE TABLE `t_group_to_custom` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_group_to_custom`
---
-
-LOCK TABLES `t_group_to_custom` WRITE;
-/*!40000 ALTER TABLE `t_group_to_custom` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_group_to_custom` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t_msg_type`
 --
 
@@ -501,15 +381,6 @@ CREATE TABLE `t_msg_type` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='消息类型表';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_msg_type`
---
-
-LOCK TABLES `t_msg_type` WRITE;
-/*!40000 ALTER TABLE `t_msg_type` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_msg_type` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `t_order`
@@ -535,15 +406,6 @@ CREATE TABLE `t_order` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单主表';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_order`
---
-
-LOCK TABLES `t_order` WRITE;
-/*!40000 ALTER TABLE `t_order` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_order` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `t_order_item`
@@ -575,15 +437,6 @@ CREATE TABLE `t_order_item` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_order_item`
---
-
-LOCK TABLES `t_order_item` WRITE;
-/*!40000 ALTER TABLE `t_order_item` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_order_item` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t_order_type`
 --
 
@@ -605,15 +458,6 @@ CREATE TABLE `t_order_type` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_order_type`
---
-
-LOCK TABLES `t_order_type` WRITE;
-/*!40000 ALTER TABLE `t_order_type` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_order_type` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t_passenger`
 --
 
@@ -630,21 +474,12 @@ CREATE TABLE `t_passenger` (
   `modify_user` varchar(45) DEFAULT NULL,
   `create_time` timestamp NULL DEFAULT NULL,
   `modify_time` timestamp NULL DEFAULT NULL,
-  `custom_id` varchar(45) DEFAULT NULL,
   `country_id` varchar(45) DEFAULT NULL,
   `id_card` varchar(45) DEFAULT NULL,
+  `sex` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='乘客表';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_passenger`
---
-
-LOCK TABLES `t_passenger` WRITE;
-/*!40000 ALTER TABLE `t_passenger` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_passenger` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `t_payment`
@@ -670,15 +505,6 @@ CREATE TABLE `t_payment` (
   PRIMARY KEY (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='支付记录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_payment`
---
-
-LOCK TABLES `t_payment` WRITE;
-/*!40000 ALTER TABLE `t_payment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_payment` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `t_sequence`
@@ -707,14 +533,6 @@ CREATE TABLE `t_sequence` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='序列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `t_sequence`
---
-
-LOCK TABLES `t_sequence` WRITE;
-/*!40000 ALTER TABLE `t_sequence` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_sequence` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -725,4 +543,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-29 18:23:57
+-- Dump completed on 2017-06-09 13:35:54

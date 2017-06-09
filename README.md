@@ -1,5 +1,5 @@
 # prm
-plane reserve manager
+plane reserve management
 -------------------
 
 ### 1 环境&工具
